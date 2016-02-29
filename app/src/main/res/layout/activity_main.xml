@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <View
+            android:id="@+id/top_line"
+            android:layout_width="fill_parent"
+            android:layout_height="4dip"
+            android:background="@color/orange"
+            android:padding="10dp"/>
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
