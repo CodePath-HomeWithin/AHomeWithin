@@ -20,7 +20,7 @@ public class LearnMoreActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.learn_more_content, null);
+        View v = getLayoutInflater().inflate(R.layout.content_learn_more, null);
         flContainer.addView(v);
     }
 

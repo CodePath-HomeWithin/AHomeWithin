@@ -24,7 +24,7 @@ public class ServicesActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.services_content, null);
+        View v = getLayoutInflater().inflate(R.layout.content_services, null);
         flContainer.addView(v);
     }
 

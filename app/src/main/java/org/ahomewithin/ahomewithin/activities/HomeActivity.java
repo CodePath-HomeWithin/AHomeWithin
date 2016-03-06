@@ -13,7 +13,7 @@ public class HomeActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.home_content, null);
+        View v = getLayoutInflater().inflate(R.layout.content_home, null);
         flContainer.addView(v);
     }
 
