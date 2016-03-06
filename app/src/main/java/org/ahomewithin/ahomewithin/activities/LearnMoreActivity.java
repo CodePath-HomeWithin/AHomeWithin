@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.learnmore;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,17 +6,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
-import org.ahomewithin.ahomewithin.MainActivity;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Recommended;
 import org.json.JSONObject;
 
 import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
 
 public class LearnMoreActivity extends MainActivity {
 

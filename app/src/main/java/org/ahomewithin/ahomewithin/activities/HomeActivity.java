@@ -1,10 +1,9 @@
-package org.ahomewithin.ahomewithin.home;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import org.ahomewithin.ahomewithin.MainActivity;
 import org.ahomewithin.ahomewithin.R;
 
 public class HomeActivity extends MainActivity {
