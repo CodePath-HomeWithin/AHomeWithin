@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,9 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.ahomewithin.ahomewithin.home.HomeActivity;
-import org.ahomewithin.ahomewithin.learnmore.LearnMoreActivity;
-import org.ahomewithin.ahomewithin.services.ServicesActivity;
+import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.activities.HomeActivity;
+import org.ahomewithin.ahomewithin.activities.LearnMoreActivity;
+import org.ahomewithin.ahomewithin.activities.ServicesActivity;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;

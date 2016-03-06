@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.services;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
-import org.ahomewithin.ahomewithin.MainActivity;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Event;
 import org.ahomewithin.ahomewithin.models.Provider;
-import org.ahomewithin.ahomewithin.models.Recommended;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class ServicesActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.services_content, null);
+        View v = getLayoutInflater().inflate(R.layout.content_services, null);
         flContainer.addView(v);
     }
 
