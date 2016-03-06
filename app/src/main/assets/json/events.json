@@ -1,0 +1,24 @@
+{"events": [
+  {
+    "id":1,
+    "name":"Event Name",
+    "url":"url",
+    "imageUrl":"imageUrl",
+    "summary":"short summmary",
+    "description":"long detailed description",
+    "address": {
+      "lines":["888 Brannan Street"],
+      "city":"San Francisco",
+      "state":"CA",
+      "zipcode":"94013"
+    },
+    "date":"03-05-2016",
+    "startTime":"hh:mm",
+    "endTime":"hh:mm",
+    "contact": {
+      "email":"email address",
+      "phone":"phone number",
+      "name":"name or person object?  simple name is easier"
+    }
+  }
+]}
