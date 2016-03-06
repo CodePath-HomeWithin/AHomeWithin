@@ -1,0 +1,13 @@
+{"recommendations": [
+  {
+    "id":1,
+    "type":"book",
+    "title":"Best Book Ever",
+    "summary":"short summmary",
+    "description":"long detailed description",
+    "sourceUrl":"url to source",
+    "thumbnailUrl":"url to thumbnail image",
+    "pictureUrl":"url to regular sized image",
+    "publishDate":"03-05-2016"
+  }
+]}
