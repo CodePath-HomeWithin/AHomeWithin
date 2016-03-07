@@ -14,4 +14,9 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="subscribe_title">Subscribe to Newsletter</string>
+    <string name="recommendations_title">Recommendations</string>
+    <string name="pro_bono_title">Pro-Bono Therapists near you</string>
+    <string name="events_title">Upcoming Events</string>
+
 </resources>
