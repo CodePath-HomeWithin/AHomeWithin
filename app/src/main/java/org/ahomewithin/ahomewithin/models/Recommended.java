@@ -79,7 +79,47 @@ public class Recommended {
         return rt;
     }
 
-/*
+    public boolean isMoreRecent(Recommended other) {
+        return publishDate.before(other.publishDate);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public RecommendedType getType() {
+        return type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    /*
     // to wrap
     Recommended item = new Recommended();
     Recommended intent = new Intent(this, MyActivity.class);

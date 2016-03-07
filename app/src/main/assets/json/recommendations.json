@@ -9,5 +9,27 @@
     "thumbnailUrl":"url to thumbnail image",
     "pictureUrl":"url to regular sized image",
     "publishDate":"03-05-2016"
+  },
+  {
+    "id":2,
+    "type":"blog",
+    "title":"Best Blog Ever",
+    "summary":"short summmary",
+    "description":"long detailed description",
+    "sourceUrl":"url to source",
+    "thumbnailUrl":"url to thumbnail image",
+    "pictureUrl":"url to regular sized image",
+    "publishDate":"02-05-2016"
+  },
+  {
+    "id":3,
+    "type":"podcast",
+    "title":"Best Podcast Ever",
+    "summary":"short summmary",
+    "description":"long detailed description",
+    "sourceUrl":"url to source",
+    "thumbnailUrl":"url to thumbnail image",
+    "pictureUrl":"url to regular sized image",
+    "publishDate":"01-05-2016"
   }
 ]}
