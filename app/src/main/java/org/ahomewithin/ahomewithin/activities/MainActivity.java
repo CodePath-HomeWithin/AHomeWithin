@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,11 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.HomeActivity;
-import org.ahomewithin.ahomewithin.activities.LearnMoreActivity;
-import org.ahomewithin.ahomewithin.activities.ServicesActivity;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         nvView = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvView);
+
+        if (!isOnline()) {
+            showSnackbar("Oops!  Please check internet connection!");
+        }
     }
 
     @Override
@@ -119,5 +124,29 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        } catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+        return false;
+    }
+
+    private void showSnackbar(String message) {
+        final Snackbar snackBar = Snackbar.make(findViewById(R.id.dlDrawer),
+                message, Snackbar.LENGTH_INDEFINITE);
+
+        snackBar.setAction("Dismiss", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackBar.dismiss();
+            }
+        });
+        snackBar.show();
     }
 }
