@@ -29,6 +29,11 @@ public class User implements Serializable {
     return phone;
   }
 
+  //Name, Email and phone of a user
+  //password is not stored; instead
+  //it's maintained as credential in Firebase
+  //Also, this is just a template, so there
+  //may be more fields coming
   String name;
   String email;
   String phone;
