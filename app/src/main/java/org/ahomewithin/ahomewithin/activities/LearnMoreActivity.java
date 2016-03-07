@@ -32,21 +32,4 @@ public class LearnMoreActivity extends MainActivity {
         }
     }
 
-    @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-        View v = super.onCreateView(parent, name, context, attrs);
-        loadRecommendations();
-        return v;
-    }
-    
-    private void loadRecommendations() {
-        try {
-            JSONObject jsonObj = AHomeWithinClient.getRecommendations(this);
-            List<Recommended> recommendations =
-                    Recommended.fromJSONArray(jsonObj.getJSONArray("recommendations"));
-            System.out.println(recommendations.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
