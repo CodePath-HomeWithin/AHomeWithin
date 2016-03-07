@@ -13,30 +13,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.HomeActivity;
-import org.ahomewithin.ahomewithin.activities.LearnMoreActivity;
-import org.ahomewithin.ahomewithin.activities.ServicesActivity;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    private DrawerLayout dlDrawer;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.dlDrawer) DrawerLayout dlDrawer;
+    @Bind(R.id.nvView) NavigationView nvView;
     ActionBarDrawerToggle drawerToggle;
-    NavigationView nvView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        dlDrawer = (DrawerLayout) findViewById(R.id.dlDrawer);
         drawerToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.drawer_open,
                         R.string.drawer_close);
         dlDrawer.setDrawerListener(drawerToggle);
 
-        nvView = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvView);
     }
 

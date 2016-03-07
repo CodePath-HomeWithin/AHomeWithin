@@ -13,13 +13,17 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class LearnMoreActivity extends MainActivity {
+    @Bind(R.id.flContent) FrameLayout flContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
 
-        FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
         View v = getLayoutInflater().inflate(R.layout.content_learn_more, null);
         flContainer.addView(v);
     }
