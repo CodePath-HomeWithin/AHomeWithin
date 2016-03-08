@@ -71,5 +71,9 @@ public class Event {
         return events;
     }
 
+    public boolean isMoreRecent(Event other) {
+        return date.before(other.date);
+    }
+
 
 }

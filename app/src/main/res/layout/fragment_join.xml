@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:id="@+id/etUserName"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/hint_user_name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:id="@+id/etPassword"
+        android:inputType="textPassword"
+        android:layout_alignLeft="@id/etUserName"
+        android:layout_alignStart="@id/etUserName"
+        android:layout_alignRight="@id/etUserName"
+        android:layout_alignEnd="@id/etUserName"
+        android:layout_below="@+id/etUserName"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/hint_password"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:id="@+id/etEmail"
+        android:inputType="textEmailAddress"
+        android:layout_alignLeft="@id/etUserName"
+        android:layout_alignStart="@id/etUserName"
+        android:layout_alignRight="@id/etUserName"
+        android:layout_alignEnd="@id/etUserName"
+        android:layout_below="@id/etPassword"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="start"
+        android:hint="@string/hint_email"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:id="@+id/etPhone"
+        android:inputType="phone"
+        android:layout_alignLeft="@id/etUserName"
+        android:layout_alignStart="@id/etUserName"
+        android:layout_alignRight="@id/etUserName"
+        android:layout_alignEnd="@id/etUserName"
+        android:layout_below="@+id/etEmail"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="start"
+        android:hint="@string/hint_phone"/>
+
+</RelativeLayout>

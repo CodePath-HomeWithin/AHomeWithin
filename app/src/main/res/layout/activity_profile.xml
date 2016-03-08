@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".user.UserActivity">
+
+    <LinearLayout
+        android:id="@+id/llToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvProfileTitle"
+        android:layout_below="@id/llToolbar"
+        android:textStyle="bold"
+        android:text="@string/your_profile"
+        android:textSize="@dimen/title_size"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
+        android:layout_below="@id/tvProfileTitle"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:layout_alignEnd="@id/tvUserName"
+        android:layout_alignLeft="@id/tvUserName"
+        android:layout_alignRight="@id/tvUserName"
+        android:layout_alignStart="@id/tvUserName"
+        android:layout_below="@id/tvUserName"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_edittext_height"
+        android:layout_alignEnd="@id/tvUserName"
+        android:layout_alignLeft="@id/tvUserName"
+        android:layout_alignRight="@id/tvUserName"
+        android:layout_alignStart="@id/tvUserName"
+        android:layout_below="@+id/tvEmail"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_alignEnd="@id/tvUserName"
+        android:layout_alignLeft="@id/tvUserName"
+        android:layout_alignRight="@id/tvUserName"
+        android:layout_alignStart="@id/tvUserName"
+        android:src="#f6e017"
+        android:text="@string/edit_profile"
+        android:textAlignment="center"/>
+
+</RelativeLayout>
