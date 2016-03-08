@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.user.UserActivity;
 
 import java.io.IOException;
 
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 nextActivityClass = LearnMoreActivity.class;
                 break;
             case R.id.account:
-                // nextActivityClass = UserActivity.class;
+                nextActivityClass = UserActivity.class;
                 break;
             case R.id.aboutUs:
                 // fragment or activity?
