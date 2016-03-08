@@ -31,7 +31,17 @@ These features will be more appealing and entertaining if we can make them visua
 As time allows, we can look into advanced features, of finding pro-bono services nearby (given location), and comments/reviews for various products.
 
 
+## Deom
+
+Note, the layout styles are not compatible with tablet view, but this tablet was the only device
+we have configured to load the maps, at the moment.  Will be fixed next time!
+
+
+<img src='http://i.imgur.com/P798p6S.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
 ##Walkthrough of user profile related functionalities, major part of which includes creating user, logging in, password reset and editting profile
 <img src='https://www.dropbox.com/s/zd1rep40gn5ag7h/walkthrough.gif?dl=0' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
