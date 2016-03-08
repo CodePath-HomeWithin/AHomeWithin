@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.MainActivity"
+    android:layout_marginBottom="16dp">
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/ivItemImage"
+
+            tools:src="@drawable/card_dummy"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:id="@+id/tvTitle"
+            tools:text="This is an example"
+            android:layout_below="@+id/ivItemImage"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:id="@+id/tvDescription"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Lorem ipsum dolor sit aemet whatever and bla bla bla"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/tvSeeMore"
+            android:layout_alignRight="@+id/tvBuy"
+            android:layout_alignEnd="@+id/tvBuy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="See more"
+            android:id="@+id/tvSeeMore"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_below="@+id/tvTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+
+            android:text="BUY"
+            android:id="@+id/tvBuy"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_dark"
+            android:layout_alignTop="@+id/tvSeeMore"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

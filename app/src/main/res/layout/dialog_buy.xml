@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:text="Introduce your card details" />
+
+    <EditText
+        android:id="@+id/etBuyerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:ems="10"
+        android:hint="Name"
+        android:maxLength="15"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/etBuyerCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:ems="10"
+        android:hint="Card number"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/etBuyerName"
+        android:layout_alignStart="@+id/etBuyerName" />
+
+    <EditText
+        android:id="@+id/etBuyerDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:hint="MM/YY"
+        android:inputType="date"
+        android:layout_below="@+id/etBuyerCardNumber"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/etBuyerCVC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/etBuyerDate"
+        android:ems="3"
+        android:hint="CVC"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/etBuyerCVC"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="34dp"
+        android:text="BUY" />
+</RelativeLayout>

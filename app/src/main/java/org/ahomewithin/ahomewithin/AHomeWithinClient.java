@@ -2,18 +2,18 @@ package org.ahomewithin.ahomewithin;
 
 import android.content.Context;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 
 /**
  * Created by barbara on 3/5/16.
  */
 public class AHomeWithinClient {
+    public static final int VIDEOS = 0;
+    public static final int CONVERSATIONS = 1;
 
     // TODO:  this is totally stubbed out -- make real async http call
     public static JSONObject getRecommendations(Context context) {
@@ -49,6 +49,31 @@ public class AHomeWithinClient {
             e.printStackTrace();
         }
         return(jsonObj);
+    }
+
+
+    // TODO:  this is totally stubbed out -- make real async http call
+    public static JSONArray getStreams(Context context, int type) {
+        JSONObject jsonObject = null;
+        JSONArray jsonArray = null;
+        try {
+            String response = loadJSONFromAsset(context, "streams.json");
+            jsonObject = new JSONObject(response);
+
+            switch (type) {
+                case VIDEOS:
+                    jsonArray = jsonObject.getJSONArray("videos");
+                    break;
+                case CONVERSATIONS:
+                    jsonArray = jsonObject.getJSONArray("conversations");
+                    break;
+                default:
+                    jsonArray = jsonObject.getJSONArray("videos");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return(jsonArray);
     }
 
     private static String loadJSONFromAsset(Context context, String filename) {

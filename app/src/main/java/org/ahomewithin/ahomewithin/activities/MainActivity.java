@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         Class nextActivityClass = null;
         switch(menuItem.getItemId()) {
             case R.id.trainingAndTools:
-                // nextActivityClass = TrainingAndTools.class;
+                nextActivityClass = StreamActivity.class;
                 break;
             case R.id.services:
                 nextActivityClass = ServicesActivity.class;
