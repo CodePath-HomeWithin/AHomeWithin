@@ -7,15 +7,20 @@ import android.webkit.WebView;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Item;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by chezlui on 07/03/16.
  */
 public class DetailActivity extends MainActivity {
 
+   // @Bind(R.id.webview) WebView myWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        ButterKnife.bind(this);
 
         Item item = (Item) getIntent().getSerializableExtra(Item.SERIALIZABLE_TAG);
         WebView myWebView = (WebView) findViewById(R.id.webview);

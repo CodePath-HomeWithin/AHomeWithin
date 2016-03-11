@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".user.UserActivity"
+            android:name=".activities.UserActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
@@ -76,7 +76,7 @@
         </activity>
 
        <activity
-            android:name=".user.ProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

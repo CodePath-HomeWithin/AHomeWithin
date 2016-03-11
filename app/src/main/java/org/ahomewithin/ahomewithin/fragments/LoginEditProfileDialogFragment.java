@@ -1,25 +1,24 @@
-package org.ahomewithin.ahomewithin.user.dialogFragment;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
 
-import org.ahomewithin.ahomewithin.user.FirebaseClient;
-import org.ahomewithin.ahomewithin.user.OnCreateUserListener;
-import org.ahomewithin.ahomewithin.user.User;
+import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.FirebaseClient;
 
 /**
  * Created by xiangyang_xiao on 3/6/16.
  */
-public class EditProfileDialogFragment extends CreateUserDialogFragment {
+public class LoginEditProfileDialogFragment extends LoginCreateUserDialogFragment {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
   }
 
-  public static EditProfileDialogFragment newInstance(
-      OnCreateUserListener listener
+  public static LoginEditProfileDialogFragment newInstance(
+      User.OnCreateUserListener listener
   ) {
-    EditProfileDialogFragment fragment = new EditProfileDialogFragment();
+    LoginEditProfileDialogFragment fragment = new LoginEditProfileDialogFragment();
     Bundle args = new Bundle();
     args.putSerializable("listener", listener);
     fragment.setArguments(args);

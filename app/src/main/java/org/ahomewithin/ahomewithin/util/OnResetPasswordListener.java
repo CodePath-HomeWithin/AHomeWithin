@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin.util;
 
 import android.content.DialogInterface;
 

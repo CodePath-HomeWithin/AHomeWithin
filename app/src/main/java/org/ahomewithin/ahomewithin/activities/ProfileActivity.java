@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,8 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.user.dialogFragment.EditProfileDialogFragment;
+import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.FirebaseClient;
+import org.ahomewithin.ahomewithin.fragments.LoginEditProfileDialogFragment;
 import org.ahomewithin.ahomewithin.util.CustomStyle;
+import org.ahomewithin.ahomewithin.util.SuccessChainListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,9 +63,9 @@ public class ProfileActivity extends AppCompatActivity {
 
   @OnClick(R.id.btnEdit)
   public void editProfile() {
-    EditProfileDialogFragment dialogFragment =
-        EditProfileDialogFragment.newInstance(
-            new OnCreateUserListener() {
+    LoginEditProfileDialogFragment dialogFragment =
+        LoginEditProfileDialogFragment.newInstance(
+            new User.OnCreateUserListener() {
               @Override
               public void onCreateUserListener(DialogInterface dialog, final User newUser, String newPassword) {
                 UserActivity.getFirebaseClient().updateUserInfo(

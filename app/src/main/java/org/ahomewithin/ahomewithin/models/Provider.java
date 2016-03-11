@@ -16,13 +16,13 @@ import java.util.ArrayList;
 public class Provider {
 
     public Address address;
-    public Person person;
+    public User user;
 
     // chapter:  name, zipcode (or city, state) (lat/lng)
     // providerId
     // address, lat/lng
     // company name, phone, email
-    // person first_name, last_name, suffix, profile
+    // user first_name, last_name, suffix, profile
 
     public Provider() {
     }
@@ -31,7 +31,7 @@ public class Provider {
         Provider provider = new Provider();
         try {
             provider.address = AddressHelper.addressFromJson(jsonObject.getJSONObject("address"));
-            provider.person = Person.fromJSON(jsonObject.getJSONObject("person"));
+            provider.user = User.fromJSON(jsonObject.getJSONObject("person"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

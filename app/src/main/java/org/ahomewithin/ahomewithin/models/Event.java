@@ -27,7 +27,7 @@ public class Event {
     public Date date;
     public String startTime;
     public String endTime;
-    // contact:  email, phone, name (person?)
+    // contact:  email, phone, name (user?)
 
     public Event() {
     }

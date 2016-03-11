@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.user.UserActivity;
 
 import java.io.IOException;
 

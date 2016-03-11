@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user.dialogFragment;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,8 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.user.OnCreateUserListener;
-import org.ahomewithin.ahomewithin.user.User;
+import org.ahomewithin.ahomewithin.models.User;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * Created by xiangyang_xiao on 3/5/16.
  */
-public class CreateUserDialogFragment extends DialogFragment {
+public class LoginCreateUserDialogFragment extends DialogFragment {
 
   @Bind(R.id.etUserName)
   EditText etUserName;
@@ -32,10 +31,10 @@ public class CreateUserDialogFragment extends DialogFragment {
   @Bind(R.id.etPhone)
   EditText etPhone;
 
-  public static CreateUserDialogFragment newInstance(
-      OnCreateUserListener listener
+  public static LoginCreateUserDialogFragment newInstance(
+      User.OnCreateUserListener listener
   ) {
-    CreateUserDialogFragment fragment = new CreateUserDialogFragment();
+    LoginCreateUserDialogFragment fragment = new LoginCreateUserDialogFragment();
     Bundle args = new Bundle();
     args.putSerializable("listener", listener);
     fragment.setArguments(args);
@@ -86,8 +85,8 @@ public class CreateUserDialogFragment extends DialogFragment {
     final AlertDialog alertDialog = (AlertDialog) getDialog();
     if (alertDialog != null) {
       Button positiveButton = alertDialog.getButton(Dialog.BUTTON_POSITIVE);
-      final OnCreateUserListener listener =
-          (OnCreateUserListener) getArguments().getSerializable("listener");
+      final User.OnCreateUserListener listener =
+          (User.OnCreateUserListener) getArguments().getSerializable("listener");
 
       positiveButton.setOnClickListener(new View.OnClickListener() {
         @Override
