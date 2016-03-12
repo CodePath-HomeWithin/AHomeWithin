@@ -3,19 +3,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/trainingAndTools"
+            android:id="@+id/miTrainingAndTools"
             android:title="@string/training_and_tools" />
         <item
-            android:id="@+id/services"
+            android:id="@+id/miMap"
+            android:title="@string/Map" />
+        <item
+            android:id="@+id/miServices"
             android:title="@string/services" />
         <item
-            android:id="@+id/learnMore"
+            android:id="@+id/miLearnMore"
             android:title="@string/learn_more" />
         <item
-            android:id="@+id/account"
+            android:id="@+id/miAccount"
             android:title="@string/account" />
         <item
-            android:id="@+id/aboutUs"
+            android:id="@+id/miAboutUs"
             android:title="@string/about_us" />
     </group>
 </menu>
