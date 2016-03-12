@@ -8,8 +8,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -23,6 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.util.MapMarkers;
 import org.ahomewithin.ahomewithin.util.PermissionUtils;
 
 public class MapActivity extends MainActivity implements
@@ -44,6 +47,7 @@ public class MapActivity extends MainActivity implements
     private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
+    private MapMarkers mMapMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class MapActivity extends MainActivity implements
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mMapMarkers = new MapMarkers(this);
     }
 
 
@@ -80,6 +86,10 @@ public class MapActivity extends MainActivity implements
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 50));
 
         enableMyLocation();
+
+        if (mMapMarkers != null) {
+            mMapMarkers.addMarkersToMap(mMap);
+        }
     }
 
     /**
@@ -140,6 +150,8 @@ public class MapActivity extends MainActivity implements
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
+
+
 
 
 

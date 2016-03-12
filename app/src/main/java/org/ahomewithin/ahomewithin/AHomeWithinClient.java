@@ -40,6 +40,18 @@ public class AHomeWithinClient {
     }
 
     // TODO:  this is totally stubbed out -- make real async http call
+    public static JSONObject getUsers(Context context) {
+        JSONObject jsonObj = null;
+        try {
+            String response = loadJSONFromAsset(context, "users.json");
+            jsonObj = new JSONObject(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return(jsonObj);
+    }
+
+    // TODO:  this is totally stubbed out -- make real async http call
     public static JSONObject getEvents(Context context) {
         JSONObject jsonObj = null;
         try {
