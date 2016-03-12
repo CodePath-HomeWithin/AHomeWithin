@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +18,13 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.user.dialogFragment.CreateUserDialogFragment;
+import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.CredentialView;
+import org.ahomewithin.ahomewithin.FirebaseClient;
+import org.ahomewithin.ahomewithin.fragments.LoginResetPasswordDialogFragment;
+import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
+import org.ahomewithin.ahomewithin.util.SuccessChainListener;
+import org.ahomewithin.ahomewithin.fragments.LoginCreateUserDialogFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -134,8 +140,8 @@ public class UserActivity extends AppCompatActivity {
 
   @OnClick(R.id.btnJoin)
   public void addNewUser() {
-    CreateUserDialogFragment fragment = CreateUserDialogFragment.newInstance(
-        new OnCreateUserListener() {
+    LoginCreateUserDialogFragment fragment = LoginCreateUserDialogFragment.newInstance(
+        new User.OnCreateUserListener() {
           @Override
           public void onCreateUserListener(DialogInterface dialog, final User user, String password) {
             firebaseClient.getNewUser(getApplicationContext(), dialog, user, password);
@@ -148,7 +154,7 @@ public class UserActivity extends AppCompatActivity {
 
   @OnClick(R.id.tvForgetPasswd)
   public void resetPassword() {
-    ResetPasswordDialogFragment fragment = ResetPasswordDialogFragment.newInstance(
+    LoginResetPasswordDialogFragment fragment = LoginResetPasswordDialogFragment.newInstance(
         new OnResetPasswordListener() {
           @Override
           public void onResetPasswordListener(DialogInterface dialog, String email) {

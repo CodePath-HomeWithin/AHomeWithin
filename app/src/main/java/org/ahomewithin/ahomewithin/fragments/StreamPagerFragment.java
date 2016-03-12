@@ -26,6 +26,11 @@ public class StreamPagerFragment extends Fragment {
 
     public static final String ARG_STREAM_TAB = "stream";
 
+    public static StreamPagerFragment newInstance() {
+        StreamPagerFragment streamFragment = new StreamPagerFragment();
+        return streamFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

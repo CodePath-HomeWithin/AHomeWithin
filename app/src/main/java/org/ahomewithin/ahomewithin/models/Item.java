@@ -21,9 +21,11 @@ public class Item implements Serializable {
     public String description;
     public String imageUrl;
     public int id;
-    public int type;
+    public int type;    // 0: videos, 1: conversation cards
     public boolean owned;
     public String contentUrl;
+    public int price;
+    public JSONObject content;  // it can be a videoUrl or a more complex JSONObject containing a complete conversation card
 
 
     public static Item fromJson(JSONObject jsonObject, int type) {

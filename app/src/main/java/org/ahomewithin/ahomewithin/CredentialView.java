@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin;
 
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;

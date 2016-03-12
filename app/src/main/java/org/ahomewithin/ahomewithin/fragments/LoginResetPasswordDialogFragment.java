@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,16 +24,16 @@ import butterknife.ButterKnife;
 /**
  * Created by xiangyang_xiao on 3/6/16.
  */
-public class ResetPasswordDialogFragment extends DialogFragment {
+public class LoginResetPasswordDialogFragment extends DialogFragment {
   @Bind(R.id.etEmail)
   EditText etEmail;
   @Bind(R.id.tilEmail)
   TextInputLayout tilEmail;
 
-  public static ResetPasswordDialogFragment newInstance(
+  public static LoginResetPasswordDialogFragment newInstance(
       OnResetPasswordListener listener
   ) {
-    ResetPasswordDialogFragment fragment = new ResetPasswordDialogFragment();
+    LoginResetPasswordDialogFragment fragment = new LoginResetPasswordDialogFragment();
     Bundle args = new Bundle();
     args.putSerializable("listener", listener);
     fragment.setArguments(args);

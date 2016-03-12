@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.user;
+package org.ahomewithin.ahomewithin;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +8,9 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+
+import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.util.SuccessChainListener;
 
 import java.util.Map;
 
