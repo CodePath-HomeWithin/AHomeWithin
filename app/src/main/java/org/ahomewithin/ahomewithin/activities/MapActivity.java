@@ -3,26 +3,28 @@ package org.ahomewithin.ahomewithin.activities;
 /**
  * Created by barbara on 3/12/16.
  */
+
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
@@ -61,12 +63,11 @@ public class MapActivity extends MainActivity implements
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mMapMarkers = new MapMarkers(this);
+        mMapMarkers = new MapMarkers(getApplicationContext());
     }
 
 
     @Override
-
     // SF location:  37.772123, -122.405293
     public void onMapReady(GoogleMap map) {
         mMap = map;
@@ -88,7 +89,7 @@ public class MapActivity extends MainActivity implements
         enableMyLocation();
 
         if (mMapMarkers != null) {
-            mMapMarkers.addMarkersToMap(mMap);
+            mMapMarkers.addMarkersToMap(mMap, getLayoutInflater());
         }
     }
 
@@ -104,6 +105,16 @@ public class MapActivity extends MainActivity implements
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+
+            // zoom map to current location, if known
+            LocationManager locationManager =
+                    (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+                mMap.animateCamera(cameraUpdate);
+            }
         }
     }
 
@@ -150,9 +161,5 @@ public class MapActivity extends MainActivity implements
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
-
-
-
-
 
 }

@@ -1,13 +1,23 @@
 package org.ahomewithin.ahomewithin.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
+import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.User;
 import org.json.JSONObject;
 
@@ -18,8 +28,39 @@ import java.util.ArrayList;
  */
 public class MapMarkers {
 
+    class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private View popup=null;
+        private LayoutInflater inflater=null;
+
+        MapInfoWindowAdapter(LayoutInflater inflater) {
+            this.inflater=inflater;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return(null);
+        }
+
+        @SuppressLint("InflateParams")
+        @Override
+        public View getInfoContents(Marker marker) {
+            if (popup == null) {
+                popup=inflater.inflate(R.layout.map_info_window, null);
+            }
+
+            TextView tv=(TextView)popup.findViewById(R.id.title);
+
+            tv.setText(marker.getTitle());
+            tv=(TextView)popup.findViewById(R.id.snippet);
+            tv.setText(marker.getSnippet());
+
+            return(popup);
+        }
+    }
+
     ArrayList<User> users;
-    
+
     public MapMarkers(Context context) {
         users = new ArrayList<User>();
         try {
@@ -31,7 +72,8 @@ public class MapMarkers {
     }
 
 
-    public void addMarkersToMap(GoogleMap map) {
+    public void addMarkersToMap(GoogleMap map, LayoutInflater inflater) {
+        map.setInfoWindowAdapter(new MapInfoWindowAdapter(inflater));
         if (users != null) {
             for(User user: users) {
                 switch(user.type) {
