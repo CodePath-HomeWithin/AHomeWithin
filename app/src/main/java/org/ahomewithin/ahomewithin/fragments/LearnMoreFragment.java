@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.activities;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.fragments.RecommendedFragment;
 
 public class LearnMoreFragment extends Fragment {
 
