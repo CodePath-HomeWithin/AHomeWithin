@@ -1,8 +1,11 @@
 package org.ahomewithin.ahomewithin.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.EventsListFragment;
@@ -10,21 +13,25 @@ import org.ahomewithin.ahomewithin.fragments.EventsListFragment;
 /**
  * Created by barbara on 3/4/16.
  */
-public class ServicesActivity extends MainActivity {
+public class ServicesFragment extends Fragment {
 
+    public static ServicesFragment newInstance() {
+        ServicesFragment servicesFragment = new ServicesFragment();
+        return servicesFragment;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.content_services, null);
-        flContainer.addView(v);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View convertView = inflater.inflate(R.layout.content_services, container, false);
 
         if (savedInstanceState == null) {
             EventsListFragment fragmentEvents = EventsListFragment.newInstance();
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .replace(R.id.flEvents, fragmentEvents).commit();
         }
+
+        return convertView;
     }
 
 

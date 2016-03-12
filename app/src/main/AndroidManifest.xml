@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true" >
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -44,22 +44,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity
-            android:name=".activities.ServicesActivity"
-            android:label="@string/services"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activities.LearnMoreActivity"
-            android:label="@string/learn_more"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
+
+
         <activity
             android:name=".activities.StreamActivity"
             android:label="@string/learn_more"

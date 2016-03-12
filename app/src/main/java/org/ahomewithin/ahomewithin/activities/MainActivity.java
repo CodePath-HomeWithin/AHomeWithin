@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
 import java.io.IOException;
 
@@ -83,31 +85,33 @@ public class MainActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         dlDrawer.closeDrawers();
 
-        Class nextActivityClass = null;
+        Fragment fragment = null;
         switch(menuItem.getItemId()) {
             case R.id.trainingAndTools:
-                nextActivityClass = StreamActivity.class;
+                fragment = StreamPagerFragment.newInstance();
                 break;
             case R.id.services:
-                nextActivityClass = ServicesActivity.class;
+                fragment = ServicesFragment.newInstance();
                 break;
             case R.id.learnMore:
-                nextActivityClass = LearnMoreActivity.class;
+                fragment = LearnMoreFragment.newInstance();
                 break;
             case R.id.account:
-                nextActivityClass = UserActivity.class;
+                Intent i = new Intent(this, UserActivity.class);
+                startActivity(i);
                 break;
             case R.id.aboutUs:
                 // fragment or activity?
                 //fragmentClass = ThirdFragment.class;
                 break;
             default:
-                nextActivityClass = HomeActivity.class;
+                fragment = HomeFragment.newInstance();
         }
 
-        if (nextActivityClass != null) {
-            Intent i = new Intent(this, nextActivityClass);
-            startActivity(i);
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(
+                    R.id.flContent, fragment).commit();
+
         }
         dlDrawer.closeDrawers();
     }
