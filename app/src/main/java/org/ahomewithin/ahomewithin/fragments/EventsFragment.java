@@ -12,10 +12,10 @@ import org.ahomewithin.ahomewithin.R;
 /**
  * Created by barbara on 3/4/16.
  */
-public class ServicesFragment extends Fragment {
+public class EventsFragment extends Fragment {
 
-    public static ServicesFragment newInstance() {
-        ServicesFragment servicesFragment = new ServicesFragment();
+    public static EventsFragment newInstance() {
+        EventsFragment servicesFragment = new EventsFragment();
         return servicesFragment;
     }
 

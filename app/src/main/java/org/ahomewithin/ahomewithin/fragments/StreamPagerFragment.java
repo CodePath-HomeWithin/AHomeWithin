@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -21,13 +22,21 @@ import butterknife.ButterKnife;
  * Created by chezlui on 06/03/16.
  */
 public class StreamPagerFragment extends Fragment {
+    public enum ViewType {
+        STORE, LIBRARY
+    }
+
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.pagerSlidingTabs) PagerSlidingTabStrip pagerSlidingTabs;
 
     public static final String ARG_STREAM_TAB = "stream";
+    private ViewType mType;
 
-    public static StreamPagerFragment newInstance() {
+    public static StreamPagerFragment newInstance(ViewType type) {
         StreamPagerFragment streamFragment = new StreamPagerFragment();
+        Bundle args = new Bundle();
+        args.putInt("type", type.ordinal());
+        streamFragment.setArguments(args);
         return streamFragment;
     }
 
@@ -35,6 +44,11 @@ public class StreamPagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        Bundle bundle = this.getArguments();
+        int typeIndex = bundle.getInt("type", ViewType.STORE.ordinal());
+        mType = ViewType.values()[typeIndex];
+
         View convertView = inflater.inflate(R.layout.content_stream_pager, container, false);
         ButterKnife.bind(this, convertView);
 

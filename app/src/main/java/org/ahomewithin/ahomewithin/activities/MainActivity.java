@@ -16,10 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
-import org.ahomewithin.ahomewithin.fragments.ServicesFragment;
+import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
 import java.io.IOException;
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+
+        HomeFragment homeFragment = HomeFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, homeFragment)
+                .commit();
 
         drawerToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.drawer_open,
                         R.string.drawer_close);
@@ -91,25 +97,21 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = null;
         switch(menuItem.getItemId()) {
-            case R.id.miTrainingAndTools:
-                fragment = StreamPagerFragment.newInstance();
+            case R.id.miLibrary:
+                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
                 break;
-            case R.id.miServices:
-                fragment = ServicesFragment.newInstance();
+            case R.id.miEvents:
+                fragment = EventsFragment.newInstance();
                 break;
             case R.id.miLearnMore:
                 fragment = LearnMoreFragment.newInstance();
                 break;
-            case R.id.miAccount:
-                Intent i = new Intent(this, UserActivity.class);
-                startActivity(i);
-                break;
-            case R.id.miMap:
-                fragment = MapFragment.newInstance();
-                break;
+//            case R.id.miAccount:
+//                Intent i = new Intent(this, UserActivity.class);
+//                startActivity(i);
+//                break;
             case R.id.miAboutUs:
-                // fragment or activity?
-                //fragmentClass = ThirdFragment.class;
+                fragment = AboutUsFragment.newInstance();
                 break;
             default:
                 fragment = HomeFragment.newInstance();
@@ -161,4 +163,29 @@ public class MainActivity extends AppCompatActivity {
         });
         snackBar.show();
     }
+
+    public void onSelectLibrary(View v) {
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("store")
+                .commit();
+    }
+
+    public void onSelectNearYou(View v) {
+        Fragment mapFragment = MapFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, mapFragment)
+                .addToBackStack("map")
+                .commit();
+    }
+
+    public void onSelectToolsAndTechniques(View v) {
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("store")
+                .commit();
+    }
+
 }
