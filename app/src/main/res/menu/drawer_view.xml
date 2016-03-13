@@ -3,20 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/miTrainingAndTools"
-            android:title="@string/training_and_tools" />
+            android:id="@+id/miLibrary"
+            android:title="@string/library" />
         <item
-            android:id="@+id/miMap"
-            android:title="@string/Map" />
-        <item
-            android:id="@+id/miServices"
-            android:title="@string/services" />
+            android:id="@+id/miEvents"
+            android:title="@string/events" />
         <item
             android:id="@+id/miLearnMore"
             android:title="@string/learn_more" />
-        <item
-            android:id="@+id/miAccount"
-            android:title="@string/account" />
         <item
             android:id="@+id/miAboutUs"
             android:title="@string/about_us" />

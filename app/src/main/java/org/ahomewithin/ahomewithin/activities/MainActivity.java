@@ -14,14 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
-import org.ahomewithin.ahomewithin.fragments.ServicesFragment;
+import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
 import java.io.IOException;
@@ -98,22 +97,19 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = null;
         switch(menuItem.getItemId()) {
-            case R.id.miTrainingAndTools:
-                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
+            case R.id.miLibrary:
+                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
                 break;
-            case R.id.miServices:
-                fragment = ServicesFragment.newInstance();
+            case R.id.miEvents:
+                fragment = EventsFragment.newInstance();
                 break;
             case R.id.miLearnMore:
                 fragment = LearnMoreFragment.newInstance();
                 break;
-            case R.id.miAccount:
-                Intent i = new Intent(this, UserActivity.class);
-                startActivity(i);
-                break;
-            case R.id.miMap:
-                fragment = MapFragment.newInstance();
-                break;
+//            case R.id.miAccount:
+//                Intent i = new Intent(this, UserActivity.class);
+//                startActivity(i);
+//                break;
             case R.id.miAboutUs:
                 fragment = AboutUsFragment.newInstance();
                 break;
