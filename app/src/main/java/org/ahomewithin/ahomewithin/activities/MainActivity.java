@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         switch(menuItem.getItemId()) {
             case R.id.miTrainingAndTools:
-                fragment = StreamPagerFragment.newInstance();
+                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
                 break;
             case R.id.miServices:
                 fragment = ServicesFragment.newInstance();
@@ -114,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = MapFragment.newInstance();
                 break;
             case R.id.miAboutUs:
-                // fragment or activity?
-                //fragmentClass = ThirdFragment.class;
+                fragment = AboutUsFragment.newInstance();
                 break;
             default:
                 fragment = HomeFragment.newInstance();
@@ -169,10 +169,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectLibrary(View v) {
-        Toast.makeText(this, "select library", Toast.LENGTH_SHORT).show();
-        HomeFragment homeFragment = HomeFragment.newInstance();
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, homeFragment)
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("store")
                 .commit();
     }
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectToolsAndTechniques(View v) {
-        Fragment streamPagerFragment = StreamPagerFragment.newInstance();
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flContent, streamPagerFragment)
                 .addToBackStack("store")
