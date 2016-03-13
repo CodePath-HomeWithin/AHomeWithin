@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by chezlui on 06/03/16.
  *
@@ -25,7 +23,8 @@ public class StreamActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flContent, new StreamPagerFragment());
+        ft.replace(R.id.flContent, new StreamPagerFragment())
+                .addToBackStack(null);
         ft.commit();
     }
 }

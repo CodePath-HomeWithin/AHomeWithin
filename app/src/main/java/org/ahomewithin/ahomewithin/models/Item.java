@@ -15,14 +15,16 @@ import java.util.ArrayList;
 // TODO Use parceler
 public class Item implements Serializable {
 
-    public static final int VIDEOS = 0;
-    public static final int CONVERSATIONS = 1;
+    public enum ITEM_TYPE {
+        VIDEOS,
+        CONVERSATIONS
+    }
 
     public static final String LOG_TAG = Item.class.getSimpleName();
     public static final String SERIALIZABLE_TAG = "item_serializable";
 
     public int id;
-    public int type;    // 0: videos, 1: conversation cards
+    public ITEM_TYPE type;    // 0: videos, 1: conversation cards
     public String title;
     public String imageUrl;
     public String description;
@@ -32,16 +34,16 @@ public class Item implements Serializable {
     public String videoUrl;
 
 
-    public static Item fromJson(JSONObject jsonObject, int type) {
+    public static Item fromJson(JSONObject jsonObject, ITEM_TYPE type) {
         Item item = new Item();
 
         try {
             item.title = jsonObject.getString("title");
-            item.imageUrl = jsonObject.getString("image");
+            item.imageUrl = jsonObject.getString("imageUrl");
             item.description = jsonObject.getString("description");
             item.id = jsonObject.getInt("id");
             item.type = type;
-            if (type == VIDEOS) {
+            if (type == ITEM_TYPE.VIDEOS) {
                 item.videoUrl = jsonObject.getJSONObject("content").getString("videoUrl");
             } else {
                 JSONObject deckCards = jsonObject.getJSONObject("content");
@@ -65,7 +67,7 @@ public class Item implements Serializable {
     }
 
 
-    public static ArrayList<Item> fromJson(JSONArray jsonArray, int type) {
+    public static ArrayList<Item> fromJson(JSONArray jsonArray, ITEM_TYPE type) {
         ArrayList<Item> itemArrayList = new ArrayList<Item>();
 
         for (int i = 0; i < jsonArray.length(); i++) {

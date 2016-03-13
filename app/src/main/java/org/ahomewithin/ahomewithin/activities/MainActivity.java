@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.HomeFragment;
+import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
+import org.ahomewithin.ahomewithin.fragments.ServicesFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
 import java.io.IOException;
@@ -109,8 +112,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(
-                    R.id.flContent, fragment).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.flContent, fragment)
+                    .commit();
 
         }
         dlDrawer.closeDrawers();

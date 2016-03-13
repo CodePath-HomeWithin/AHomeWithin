@@ -2,6 +2,7 @@ package org.ahomewithin.ahomewithin;
 
 import android.content.Context;
 
+import org.ahomewithin.ahomewithin.models.Item;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -53,7 +54,7 @@ public class AHomeWithinClient {
 
 
     // TODO:  this is totally stubbed out -- make real async http call
-    public static JSONArray getStreams(Context context, int type) {
+    public static JSONArray getStreams(Context context, Item.ITEM_TYPE type) {
         JSONObject jsonObject = null;
         JSONArray jsonArray = null;
         try {

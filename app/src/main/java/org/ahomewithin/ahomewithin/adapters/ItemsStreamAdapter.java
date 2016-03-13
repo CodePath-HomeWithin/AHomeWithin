@@ -1,7 +1,7 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.DetailActivity;
+import org.ahomewithin.ahomewithin.activities.DetailFragment;
 import org.ahomewithin.ahomewithin.models.Item;
 
 import java.util.List;
@@ -83,11 +83,12 @@ public class ItemsStreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onClick(View v) {
                 if(item.owned) {
-                    Intent intent = new Intent(mContext, DetailActivity.class);
-                    intent.putExtra(Item.SERIALIZABLE_TAG, item);
-
-                    mContext.startActivity(intent);
-
+                    ((AppCompatActivity)mContext)
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .add(R.id.flContent, DetailFragment.newInstance(item))
+                            .addToBackStack(null)
+                            .commit();
                 } else {
                     mListener.onBuy(position);
                 }

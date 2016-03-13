@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.activities;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

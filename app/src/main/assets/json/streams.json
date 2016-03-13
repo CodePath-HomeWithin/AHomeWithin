@@ -3,23 +3,28 @@
     {
       "id": 101,
       "title": "Using Images for Self Expression",
-      "image": "http://cdn.shopify.com/s/files/1/0550/4841/products/images_grande.png?v=1457292811",
+      "imageUrl": "http://cdn.shopify.com/s/files/1/0550/4841/products/images_grande.png?v=1457292811",
       "description": "Creating visual images about their lives is a safe and exciting approach that can draw young people in and help them begin to heal from traumatic experience – especially when other methods of working through their pain have failed.\n",
-      "content_url": "http://techslides.com/demos/sample-videos/small.mp4"
+      "content": {
+        "videoUrl": "http://techslides.com/demos/sample-videos/small.mp4"
+      }
     },
     {
       "id": 102,
       "title": "What is Therapy?",
-      "image": "http://cdn.shopify.com/s/files/1/0550/4841/products/whatistherapy_grande.png?v=1441766136",
+      "imageUrl": "http://cdn.shopify.com/s/files/1/0550/4841/products/whatistherapy_grande.png?v=1441766136",
       "description": "This online training (created by Dr. Toni Heineman and Loong Kwok, Psyd) provides information about different forms of psychotherapy, from individual to family to group therapies.  It includes information, for anyone who has or works with children, about what signs might suggest that therapy could be useful.",
-      "content_url": "http://techslides.com/demos/sample-videos/small.mp4"
-    },
+      "content": {
+        "videoUrl": "http://techslides.com/demos/sample-videos/small.mp4"
+      }},
     {
       "id": 103,
       "title": "School Age",
-      "image": "http://cdn.shopify.com/s/files/1/0550/4841/products/schoolage_grande.png?v=1441067896",
+      "imageUrl": "http://cdn.shopify.com/s/files/1/0550/4841/products/schoolage_grande.png?v=1441067896",
       "description": "Traumatized children usually find little pleasure in school because both learning and navigating relationships with peers and adults too often leave them feeling defeated, rather than proud.\n",
-      "content_url": "http://techslides.com/demos/sample-videos/small.mp4"
+      "content": {
+        "videoUrl": "http://techslides.com/demos/sample-videos/small.mp4"
+      }
     }
   ],
   "conversations": [
