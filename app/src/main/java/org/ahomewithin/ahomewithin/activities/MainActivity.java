@@ -18,6 +18,7 @@ import android.view.View;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
+import org.ahomewithin.ahomewithin.fragments.MapFragment;
 import org.ahomewithin.ahomewithin.fragments.ServicesFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.miMap:
-                startActivity(new Intent(this, MapActivity.class));
+                fragment = MapFragment.newInstance();
                 break;
             case R.id.miAboutUs:
                 // fragment or activity?
