@@ -18,6 +18,7 @@ import android.view.View;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
+import org.ahomewithin.ahomewithin.fragments.MapFragment;
 import org.ahomewithin.ahomewithin.fragments.ServicesFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
@@ -90,20 +91,23 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = null;
         switch(menuItem.getItemId()) {
-            case R.id.trainingAndTools:
+            case R.id.miTrainingAndTools:
                 fragment = StreamPagerFragment.newInstance();
                 break;
-            case R.id.services:
+            case R.id.miServices:
                 fragment = ServicesFragment.newInstance();
                 break;
-            case R.id.learnMore:
+            case R.id.miLearnMore:
                 fragment = LearnMoreFragment.newInstance();
                 break;
-            case R.id.account:
+            case R.id.miAccount:
                 Intent i = new Intent(this, UserActivity.class);
                 startActivity(i);
                 break;
-            case R.id.aboutUs:
+            case R.id.miMap:
+                fragment = MapFragment.newInstance();
+                break;
+            case R.id.miAboutUs:
                 // fragment or activity?
                 //fragmentClass = ThirdFragment.class;
                 break;
@@ -119,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
         dlDrawer.closeDrawers();
     }
-
-
+    
     // `onPostCreate` called when activity start-up is complete after `onStart()`
     // NOTE! Make sure to override the method with only a single `Bundle` argument
     @Override
