@@ -3,26 +3,30 @@ package org.ahomewithin.ahomewithin.activities;
 /**
  * Created by barbara on 3/12/16.
  */
+
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.Rect;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.Window;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
@@ -61,12 +65,18 @@ public class MapActivity extends MainActivity implements
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mMapMarkers = new MapMarkers(this);
+
+//        Rect displayRectangle = new Rect();
+//        this.getWindow().getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+//        View layout = inflater.inflate(R.layout.create_tweet, null);
+//        layout.setMinimumWidth((int)(displayRectangle.width() * 0.8f));
+//        layout.setMinimumHeight((int) (displayRectangle.height() * 0.8f));
+
+        mMapMarkers = new MapMarkers(getApplicationContext());
     }
 
 
     @Override
-
     // SF location:  37.772123, -122.405293
     public void onMapReady(GoogleMap map) {
         mMap = map;
@@ -83,12 +93,12 @@ public class MapActivity extends MainActivity implements
         bounds.include(new LatLng(40.351289, -124.244385));
         bounds.include(new LatLng(44.488196, -70.290656));
         bounds.include(new LatLng(49.000282, -101.37085));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 50));
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
 
         enableMyLocation();
 
         if (mMapMarkers != null) {
-            mMapMarkers.addMarkersToMap(mMap);
+            mMapMarkers.addMarkersToMap(mMap, getLayoutInflater());
         }
     }
 
@@ -104,6 +114,16 @@ public class MapActivity extends MainActivity implements
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+
+            // zoom map to current location, if known
+            LocationManager locationManager =
+                    (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11);
+                mMap.animateCamera(cameraUpdate);
+            }
         }
     }
 
@@ -150,9 +170,5 @@ public class MapActivity extends MainActivity implements
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
-
-
-
-
 
 }
