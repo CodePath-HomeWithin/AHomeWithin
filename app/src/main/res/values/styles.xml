@@ -23,4 +23,21 @@
         <item name="android:textColor">@color/turquoise</item>
     </style>
 
+
+    <style name="MapInfoWindow">
+
+    </style>
+
+    <style name="MapInfoWindow.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MapInfoWindow.Body">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
 </resources>

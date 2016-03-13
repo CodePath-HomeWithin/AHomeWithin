@@ -84,7 +84,7 @@ public class MapActivity extends MainActivity implements
         bounds.include(new LatLng(40.351289, -124.244385));
         bounds.include(new LatLng(44.488196, -70.290656));
         bounds.include(new LatLng(49.000282, -101.37085));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 50));
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
 
         enableMyLocation();
 
@@ -112,7 +112,7 @@ public class MapActivity extends MainActivity implements
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11);
                 mMap.animateCamera(cameraUpdate);
             }
         }

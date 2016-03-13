@@ -6,22 +6,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="#ff000000"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+        style="@style/MapInfoWindow.Title"/>
 
     <TextView
-        android:id="@+id/snippet"
+        android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="#ff7f7f7f"
-        android:textSize="14dp" />
+        style="@style/MapInfoWindow.Body" />
 </LinearLayout>

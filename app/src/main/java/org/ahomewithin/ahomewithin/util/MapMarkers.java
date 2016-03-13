@@ -2,12 +2,10 @@ package org.ahomewithin.ahomewithin.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -22,11 +20,15 @@ import org.ahomewithin.ahomewithin.models.User;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by barbara on 3/12/16.
  */
 public class MapMarkers {
+
+    private ArrayList<User> users;
+    private HashMap<String, User> markerMap= new HashMap<String, User>();
 
     class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
@@ -48,21 +50,53 @@ public class MapMarkers {
             if (popup == null) {
                 popup=inflater.inflate(R.layout.map_info_window, null);
             }
+            if (markerMap != null) {
+                User user = markerMap.get(marker.getId());
 
-            TextView tv=(TextView)popup.findViewById(R.id.title);
+                TextView tv=(TextView)popup.findViewById(R.id.tvTitle);
+                tv.setText(user.getFullName());
 
-            tv.setText(marker.getTitle());
-            tv=(TextView)popup.findViewById(R.id.snippet);
-            tv.setText(marker.getSnippet());
+                tv=(TextView)popup.findViewById(R.id.tvDescription);
+                tv.setText(user.getDescription());
+            }
 
             return(popup);
         }
     }
 
-    ArrayList<User> users;
 
     public MapMarkers(Context context) {
         users = new ArrayList<User>();
+        loadUsers(context);
+    }
+
+    public void addMarkersToMap(GoogleMap map, LayoutInflater inflater) {
+        map.setInfoWindowAdapter(new MapInfoWindowAdapter(inflater));
+
+        markerMap= new HashMap<String, User>();
+        if (users != null) {
+            for(User user: users) {
+                createMarkerForUser(map, user);
+            }
+        }
+    }
+
+    private void createMarkerForUser(GoogleMap map, User user) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(user.getLat(), user.getLng()));
+        switch(user.type) {
+            case SERVICE_PROVIDER:
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                break;
+            default: // COMMUNITY:
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        }
+        Marker marker = map.addMarker(markerOptions);
+        dropPinEffect(marker);
+        markerMap.put(marker.getId(), user);
+    }
+
+    private void loadUsers(Context context) {
         try {
             JSONObject response = AHomeWithinClient.getUsers(context);
             users = User.fromJSONArray(response.getJSONArray("users"));
@@ -71,36 +105,37 @@ public class MapMarkers {
         }
     }
 
+    private void dropPinEffect(final Marker marker) {
+        // Handler allows us to repeat a code block after a specified delay
+        final android.os.Handler handler = new android.os.Handler();
+        final long start = SystemClock.uptimeMillis();
+        final long duration = 1500;
 
-    public void addMarkersToMap(GoogleMap map, LayoutInflater inflater) {
-        map.setInfoWindowAdapter(new MapInfoWindowAdapter(inflater));
-        if (users != null) {
-            for(User user: users) {
-                switch(user.type) {
-                    case SERVICE_PROVIDER:
-                        markMap(map, user.getLat(), user.getLng(), user.getFullName(), "provider", BitmapDescriptorFactory.HUE_RED);
-                        break;
-                    default: // COMMUNITY:
-                        markMap(map, user.getLat(), user.getLng(), user.getFullName(), "", BitmapDescriptorFactory.HUE_AZURE);
+        // Use the bounce interpolator
+        final android.view.animation.Interpolator interpolator =
+                new BounceInterpolator();
+
+        // Animate marker with a bounce updating its position every 15ms
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                // Calculate t for bounce based on elapsed time
+                float t = Math.max(
+                        1 - interpolator.getInterpolation((float) elapsed
+                                / duration), 0);
+                // Set the anchor
+                marker.setAnchor(0.5f, 1.0f + 14 * t);
+
+                if (t > 0.0) {
+                    // Post this event again 15ms from now.
+                    handler.postDelayed(this, 15);
+                } else { // done elapsing, show window
+                    marker.showInfoWindow();
                 }
             }
-        }
+        });
     }
-
-    private void markMap(GoogleMap map, double lat, double lng, String title, String snippet, float color) {
-        try {
-            map.addMarker(new MarkerOptions()
-                    .position(new LatLng(lat, lng))
-                    .title(title)
-                    .snippet(snippet)
-                    .icon(BitmapDescriptorFactory.defaultMarker(color)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 
 
 }
