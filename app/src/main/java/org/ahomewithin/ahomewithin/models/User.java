@@ -155,6 +155,10 @@ public class User {
         return lng;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Created by xiangyang_xiao on 3/6/16.
      */

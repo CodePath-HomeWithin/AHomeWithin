@@ -1,37 +1,41 @@
-package org.ahomewithin.ahomewithin.activities;
+package org.ahomewithin.ahomewithin.fragments;
 
 /**
  * Created by barbara on 3/12/16.
  */
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.view.ViewGroup;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
 import org.ahomewithin.ahomewithin.util.PermissionUtils;
 
-public class MapActivity extends MainActivity implements
-        OnMyLocationButtonClickListener,
+public class MapFragment extends Fragment implements
+        GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback  {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        CustomMapFragment.OnMapFragmentReadyListener
+{
 
     /**
      * Request code for location permission request.
@@ -46,33 +50,40 @@ public class MapActivity extends MainActivity implements
      */
     private boolean mPermissionDenied = false;
 
+    private android.app.FragmentManager fm;
     private GoogleMap mMap;
     private MapMarkers mMapMarkers;
+    private SupportMapFragment mMapFragment;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        FrameLayout flContainer = (FrameLayout) findViewById(R.id.flContent);
-        View v = getLayoutInflater().inflate(R.layout.content_map, null);
-        flContainer.addView(v);
-
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        mMapMarkers = new MapMarkers(this);
+    public static MapFragment newInstance() {
+        return new MapFragment();
     }
 
 
-    @Override
+    // http://stackoverflow.com/questions/25051246/how-to-use-supportmapfragment-inside-a-fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.content_map, container, false);
+        mMapFragment = CustomMapFragment.newInstance();
+        getChildFragmentManager().beginTransaction().replace(R.id.flMapContainer, mMapFragment).commit();
+        mMapMarkers = new MapMarkers(getContext());
+        return v;
+    }
 
+    /*
+     * This get's called from within CustomMapFragment, which expects a
+     * CustomMapFragment.OnMapFragmentReadyListener
+     */
+    public void onMapFragmentReady() {
+        mMapFragment.getMapAsync(this);
+    }
+
+    @Override
     // SF location:  37.772123, -122.405293
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
         // MAP_TYPE_NORMAL, MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
-        map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        //map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         map.getUiSettings().setMyLocationButtonEnabled(true); // button in upper right of map
         map.getUiSettings().setZoomControlsEnabled(true);     // zoom controls in lower right of map
 
@@ -83,38 +94,47 @@ public class MapActivity extends MainActivity implements
         bounds.include(new LatLng(40.351289, -124.244385));
         bounds.include(new LatLng(44.488196, -70.290656));
         bounds.include(new LatLng(49.000282, -101.37085));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 50));
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
 
         enableMyLocation();
 
         if (mMapMarkers != null) {
-            mMapMarkers.addMarkersToMap(mMap);
+            mMapMarkers.addMarkersToMap(mMap, getActivity().getLayoutInflater());
         }
     }
 
     /**
      * Enables the My Location layer if the fine location permission has been granted.
+     * // https://gist.github.com/MariusVolkhart/618a51bb09c4fc7f86a4
      */
     private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission to access the location is missing.
-            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+            this.requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+
+            // zoom map to current location, if known
+            LocationManager locationManager =
+                    (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11);
+                mMap.animateCamera(cameraUpdate);
+            }
         }
     }
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -133,26 +153,12 @@ public class MapActivity extends MainActivity implements
         }
     }
 
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
-            showMissingPermissionError();
-            mPermissionDenied = false;
-        }
-    }
-
     /**
      * Displays a dialog with error message explaining that the location permission is missing.
      */
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
-                .newInstance(true).show(getSupportFragmentManager(), "dialog");
+                .newInstance(true).show(getActivity().getSupportFragmentManager(), "dialog");
     }
-
-
-
-
-
 }
+
