@@ -32,5 +32,9 @@
     <string name="recommendations_title">Recommendations</string>
     <string name="pro_bono_title">Pro-Bono Therapists near you</string>
     <string name="events_title">Upcoming Events</string>
+    <string name="Map">Map</string>
+    <string name="location_permission_denied">Location permission denied</string>
+    <string name="permission_required_toast">Permission Required</string>
+    <string name="permission_rationale_location">Why we need your location...</string>
 
 </resources>
