@@ -122,8 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
         dlDrawer.closeDrawers();
     }
-
-
+    
     // `onPostCreate` called when activity start-up is complete after `onStart()`
     // NOTE! Make sure to override the method with only a single `Bundle` argument
     @Override
