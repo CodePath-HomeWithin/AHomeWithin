@@ -36,5 +36,6 @@
     <string name="location_permission_denied">Location permission denied</string>
     <string name="permission_required_toast">Permission Required</string>
     <string name="permission_rationale_location">Why we need your location...</string>
+    <string name="start_chat">Start Chat</string>
 
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/MapInfoWindow">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ellipsize="end"
+        android:singleLine="true"
+        style="@style/MapInfoWindow.Title"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:layout_below="@+id/tvTitle"
+        style="@style/MapInfoWindow.Body" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnChat"
+        android:text="@string/start_chat"
+        android:layout_below="@+id/tvDescription"
+        android:layout_alignRight="@+id/tvDescription"
+        style="@style/MapInfoWindow.Button"/>
+
+
+</RelativeLayout>
