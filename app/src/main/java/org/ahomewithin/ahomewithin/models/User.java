@@ -27,7 +27,7 @@ public class User {
 
     public ArrayList<Item> purchasedItems;
     // TODO prepared for usage when needed
-    //public ArrayList<Conversation> conversations;
+    //public ArrayList<Chat> conversations;
 
     public String profile;
     public String profileUrl;

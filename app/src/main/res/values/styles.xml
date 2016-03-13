@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,5 +23,52 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/turquoise</item>
     </style>
+
+    <style name="conv_card_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/red_text_card</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+    
+    <style name="conv_card_header_titles">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/conv_text_big</item>
+    </style>
+
+    <style name="conv_card_section_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_below">@+id/linearLayoutHeader</item>
+        <item name="android:textColor">@color/red_text_card</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/conv_text_big</item>
+    </style>
+
+    <style name="conv_card_sections_body">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/conv_text_regular</item>
+    </style>
+
+    <style name="conv_card_quote_body">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/conv_text_big</item>
+    </style>
+
+    <style name="conv_card_quote_author">
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">@dimen/conv_text_regular</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
 
 </resources>
