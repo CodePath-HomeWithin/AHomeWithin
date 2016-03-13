@@ -10,7 +10,7 @@
             android:title="@string/events" />
         <item
             android:id="@+id/miLearnMore"
-            android:title="@string/learn_more" />
+            android:title="@string/recommended" />
         <item
             android:id="@+id/miAboutUs"
             android:title="@string/about_us" />
