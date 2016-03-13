@@ -14,4 +14,7 @@
 
     <dimen name="conv_text_big">20sp</dimen>
     <dimen name="conv_text_regular">16sp</dimen>
+
+    <dimen name="home_image_width">50dip</dimen>
+    <dimen name="home_image_height">50dip</dimen>
 </resources>

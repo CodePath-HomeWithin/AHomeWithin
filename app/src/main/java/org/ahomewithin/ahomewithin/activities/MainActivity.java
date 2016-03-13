@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+
+        HomeFragment homeFragment = HomeFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, homeFragment)
+                .commit();
 
         drawerToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.drawer_open,
                         R.string.drawer_close);
@@ -161,4 +167,29 @@ public class MainActivity extends AppCompatActivity {
         });
         snackBar.show();
     }
+
+    public void onSelectLibrary(View v) {
+        Toast.makeText(this, "select library", Toast.LENGTH_SHORT).show();
+        HomeFragment homeFragment = HomeFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, homeFragment)
+                .commit();
+    }
+
+    public void onSelectNearYou(View v) {
+        Fragment mapFragment = MapFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, mapFragment)
+                .addToBackStack("map")
+                .commit();
+    }
+
+    public void onSelectToolsAndTechniques(View v) {
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("store")
+                .commit();
+    }
+
 }
