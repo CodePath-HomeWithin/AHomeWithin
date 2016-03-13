@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,23 @@ public class StreamPagerFragment extends Fragment {
         Bundle bundle = this.getArguments();
         int typeIndex = bundle.getInt("type", ViewType.STORE.ordinal());
         mType = ViewType.values()[typeIndex];
+        initForType(mType);
 
         View convertView = inflater.inflate(R.layout.content_stream_pager, container, false);
         ButterKnife.bind(this, convertView);
 
         return convertView;
+    }
+
+    private void initForType(ViewType type) {
+        switch(type) {
+            case LIBRARY:
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.library);
+                break;
+            case STORE:
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.training_and_tools);
+                break;
+        }
     }
 
     @Override
