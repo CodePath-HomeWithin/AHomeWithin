@@ -105,7 +105,7 @@ public class MapMarkers {
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 break;
             default: // COMMUNITY:
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
         }
         Marker marker = map.addMarker(markerOptions);
         dropPinEffect(marker);
