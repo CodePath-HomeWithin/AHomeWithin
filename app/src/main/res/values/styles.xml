@@ -14,9 +14,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="TitleTextAppearance">
         <item name="android:textStyle">bold</item>
@@ -33,7 +33,7 @@
         <item name="android:textColor">@color/red_text_card</item>
         <item name="android:textSize">28sp</item>
     </style>
-    
+
     <style name="conv_card_header_titles">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -74,6 +74,7 @@
     <style name="HomePage">
         <item name="android:layout_margin">@dimen/map_popup_margin</item>
     </style>
+
     <style name="HomePage.Image" parent="HomePage">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
@@ -104,6 +105,33 @@
         <item name="android:padding">10dp</item>
         <item name="android:background">@color/turquoise</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="home_menu_item_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">180dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="home_menu_item_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="home_menu_title_background">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">#44000000</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
     </style>
 
 
