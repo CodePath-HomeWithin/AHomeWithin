@@ -1,12 +1,13 @@
 package org.ahomewithin.ahomewithin.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -30,37 +31,43 @@ public class MapMarkers {
     private ArrayList<User> users;
     private HashMap<String, User> markerMap= new HashMap<String, User>();
 
-    class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+    class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
+        LayoutInflater mInflater;
 
-        private View popup=null;
-        private LayoutInflater inflater=null;
-
-        MapInfoWindowAdapter(LayoutInflater inflater) {
-            this.inflater=inflater;
+        public CustomWindowAdapter(LayoutInflater i){
+            mInflater = i;
         }
 
-        @Override
-        public View getInfoWindow(Marker marker) {
-            return(null);
-        }
-
-        @SuppressLint("InflateParams")
+        // This defines the contents within the info window based on the marker
         @Override
         public View getInfoContents(Marker marker) {
-            if (popup == null) {
-                popup=inflater.inflate(R.layout.map_info_window, null);
-            }
+            View v = mInflater.inflate(R.layout.map_info_window, null);
             if (markerMap != null) {
                 User user = markerMap.get(marker.getId());
 
-                TextView tv=(TextView)popup.findViewById(R.id.tvTitle);
-                tv.setText(user.getFullName());
+                final TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
+                tvTitle.setText(user.getFullName());
 
-                tv=(TextView)popup.findViewById(R.id.tvDescription);
-                tv.setText(user.getDescription());
+                final TextView tvDescription = (TextView) v.findViewById(R.id.tvDescription);
+                tvDescription.setText(user.getDescription());
+
+                final Button btnChat = (Button) v.findViewById(R.id.btnChat);
+                btnChat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(), "button clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+            // Return info window contents
+            return v;
+        }
 
-            return(popup);
+        // This changes the frame of the info window; returning null uses the default frame.
+        // This is just the border and arrow surrounding the contents specified above
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
         }
     }
 
@@ -71,13 +78,22 @@ public class MapMarkers {
     }
 
     public void addMarkersToMap(GoogleMap map, LayoutInflater inflater) {
-        map.setInfoWindowAdapter(new MapInfoWindowAdapter(inflater));
+        map.setInfoWindowAdapter(new CustomWindowAdapter(inflater));
 
         markerMap= new HashMap<String, User>();
         if (users != null) {
             for(User user: users) {
                 createMarkerForUser(map, user);
             }
+        }
+    }
+
+    private void loadUsers(Context context) {
+        try {
+            JSONObject response = AHomeWithinClient.getUsers(context);
+            users = User.fromJSONArray(response.getJSONArray("users"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -94,15 +110,6 @@ public class MapMarkers {
         Marker marker = map.addMarker(markerOptions);
         dropPinEffect(marker);
         markerMap.put(marker.getId(), user);
-    }
-
-    private void loadUsers(Context context) {
-        try {
-            JSONObject response = AHomeWithinClient.getUsers(context);
-            users = User.fromJSONArray(response.getJSONArray("users"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void dropPinEffect(final Marker marker) {

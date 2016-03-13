@@ -7,6 +7,7 @@ package org.ahomewithin.ahomewithin.activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -62,6 +64,13 @@ public class MapActivity extends MainActivity implements
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+//        Rect displayRectangle = new Rect();
+//        this.getWindow().getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+//        View layout = inflater.inflate(R.layout.create_tweet, null);
+//        layout.setMinimumWidth((int)(displayRectangle.width() * 0.8f));
+//        layout.setMinimumHeight((int) (displayRectangle.height() * 0.8f));
 
         mMapMarkers = new MapMarkers(getApplicationContext());
     }
