@@ -32,7 +32,7 @@ import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
  */
 public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnItemInteraction {
     public static final String ARG_STREAM_TYPE = "stream_type";
-    public int type;
+    public Item.ITEM_TYPE type;
     ArrayList<Item> items;
     ItemsStreamAdapter aItems;
     @Bind(R.id.rvStream) RecyclerView rvStream;
@@ -61,7 +61,7 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        type = getArguments().getInt(ARG_STREAM_TYPE);
+        type = Item.ITEM_TYPE.values()[(getArguments().getInt(ARG_STREAM_TYPE))];
         aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>(), this);
 
         rvStream.setAdapter(aItems);
@@ -79,7 +79,7 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 //                new ItemClickSupport.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                        Intent intent = new Intent(getActivity(), DetailActivity.class);
+//                        Intent intent = new Intent(getActivity(), DetailFragment.class);
 //                        Tweet tweet = tweets.get(position);
 //                        intent.putExtra("tweet", Parcels.wrap(tweet));
 //                        startActivity(intent);

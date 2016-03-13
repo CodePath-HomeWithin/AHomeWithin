@@ -14,30 +14,49 @@ import java.util.ArrayList;
  */
 // TODO Use parceler
 public class Item implements Serializable {
+
+    public enum ITEM_TYPE {
+        VIDEOS,
+        CONVERSATIONS
+    }
+
     public static final String LOG_TAG = Item.class.getSimpleName();
     public static final String SERIALIZABLE_TAG = "item_serializable";
 
-    public String title;
-    public String description;
-    public String imageUrl;
     public int id;
-    public int type;    // 0: videos, 1: conversation cards
+    public ITEM_TYPE type;    // 0: videos, 1: conversation cards
+    public String title;
+    public String imageUrl;
+    public String description;
     public boolean owned;
-    public String contentUrl;
     public int price;
-    public JSONObject content;  // it can be a videoUrl or a more complex JSONObject containing a complete conversation card
+    public ArrayList<ConversationCard> contentCards;  //
+    public String videoUrl;
 
 
-    public static Item fromJson(JSONObject jsonObject, int type) {
+    public static Item fromJson(JSONObject jsonObject, ITEM_TYPE type) {
         Item item = new Item();
 
         try {
             item.title = jsonObject.getString("title");
-            item.imageUrl = jsonObject.getString("image");
+            item.imageUrl = jsonObject.getString("imageUrl");
             item.description = jsonObject.getString("description");
             item.id = jsonObject.getInt("id");
-            item.contentUrl = jsonObject.getString("content_url");
             item.type = type;
+            if (type == ITEM_TYPE.VIDEOS) {
+                item.videoUrl = jsonObject.getJSONObject("content").getString("videoUrl");
+            } else {
+                JSONObject deckCards = jsonObject.getJSONObject("content");
+                item.contentCards = new ArrayList<>();
+                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("mind"),
+                        ConversationCard.MIND));
+                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("body"),
+                        ConversationCard.BODY));
+                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("heart"),
+                        ConversationCard.HEART));
+                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("soul"),
+                        ConversationCard.SOUL));
+            }
             item.owned = false;
         } catch (JSONException ex) {
             Log.e("ERR", ex.toString());
@@ -48,7 +67,7 @@ public class Item implements Serializable {
     }
 
 
-    public static ArrayList<Item> fromJson(JSONArray jsonArray, int type) {
+    public static ArrayList<Item> fromJson(JSONArray jsonArray, ITEM_TYPE type) {
         ArrayList<Item> itemArrayList = new ArrayList<Item>();
 
         for (int i = 0; i < jsonArray.length(); i++) {

@@ -116,8 +116,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(
-                    R.id.flContent, fragment).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.flContent, fragment)
+                    .commit();
 
         }
         dlDrawer.closeDrawers();
