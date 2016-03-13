@@ -25,6 +25,8 @@
 
 
     <style name="MapInfoWindow">
+        <item name="android:layout_margin">@dimen/map_popup_margin</item>
+
 
     </style>
 
