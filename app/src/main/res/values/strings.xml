@@ -40,5 +40,7 @@
     <string name="events">Events</string>
     <string name="library">Library</string>
     <string name="recommended">Recommended</string>
+    <string name="type">type</string>
+    <string name="thumbnail">Thumbnail</string>
 
 </resources>

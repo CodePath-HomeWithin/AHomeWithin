@@ -1,35 +1,31 @@
 {"recommendations": [
   {
     "id":1,
-    "type":"book",
-    "title":"Best Book Ever",
-    "summary":"short summmary",
-    "description":"long detailed description",
-    "sourceUrl":"url to source",
+    "type":"blog",
+    "provider":"A Home Within",
+    "title":"Latest News",
+    "summary":"Summary of latest news and events",
+    "sourceUrl":"http://ahomewithin.org/news/",
     "thumbnailUrl":"url to thumbnail image",
-    "pictureUrl":"url to regular sized image",
     "publishDate":"03-05-2016"
   },
   {
     "id":2,
     "type":"blog",
-    "title":"Best Blog Ever",
-    "summary":"short summmary",
-    "description":"long detailed description",
-    "sourceUrl":"url to source",
+    "provider":"Dr. Toni Heinman",
+    "title":"Fostering Art Reincarnated",
+    "summary":"Describes a successful program for current and former foster teens and young adults",
+    "sourceUrl":"http://ahomewithin.org/fostering-art-reincarnated/",
     "thumbnailUrl":"url to thumbnail image",
-    "pictureUrl":"url to regular sized image",
-    "publishDate":"02-05-2016"
+    "publishDate":"03-06-2016"
   },
   {
     "id":3,
     "type":"podcast",
-    "title":"Best Podcast Ever",
-    "summary":"short summmary",
-    "description":"long detailed description",
-    "sourceUrl":"url to source",
+    "title":"The Trauma Therapist Project",
+    "summary":"Toni talks about her early experiences of seeing foster kids and realizing very quickly how inadequate the care was for this population",
+    "sourceUrl":"http://www.thetraumatherapistproject.com/podcast/toni-heineman-phd/",
     "thumbnailUrl":"url to thumbnail image",
-    "pictureUrl":"url to regular sized image",
     "publishDate":"01-05-2016"
   }
 ]}

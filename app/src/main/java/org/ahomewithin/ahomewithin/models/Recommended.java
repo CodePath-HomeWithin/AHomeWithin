@@ -33,17 +33,35 @@ public class Recommended {
     public static Recommended fromJSON(JSONObject jsonObject) {
         Recommended item = new Recommended();
         try {
-            item.id = jsonObject.getString("id");
-            item.type = mapToType(jsonObject.getString("type"));
-            item.title = jsonObject.getString("title");
-            item.summary = jsonObject.getString("summary");
-            item.description = jsonObject.getString("description");
-            item.sourceUrl = jsonObject.getString("sourceUrl");
-            item.thumbnailUrl = jsonObject.getString("thumbnailUrl");
-            item.pictureUrl = jsonObject.getString("pictureUrl");
-            String publishDateStr = jsonObject.getString("publishDate");
-            if (publishDateStr != null) {
-                item.publishDate = DateHelper.parseDate(publishDateStr, "MM-dd-yyyy");
+            if (!jsonObject.isNull("id")) {
+                item.id = jsonObject.getString("id");
+            }
+            if (!jsonObject.isNull("type")) {
+                item.type = mapToType(jsonObject.getString("type"));
+            }
+            if (!jsonObject.isNull("title")) {
+                item.title = jsonObject.getString("title");
+            }
+            if (!jsonObject.isNull("summary")) {
+                item.summary = jsonObject.getString("summary");
+            }
+            if (!jsonObject.isNull("description")) {
+                item.description = jsonObject.getString("description");
+            }
+            if (!jsonObject.isNull("sourceUrl")) {
+                item.sourceUrl = jsonObject.getString("sourceUrl");
+            }
+            if (!jsonObject.isNull("thumbnailUrl")) {
+                item.thumbnailUrl = jsonObject.getString("thumbnailUrl");
+            }
+            if (!jsonObject.isNull("pictureUrl")) {
+                item.pictureUrl = jsonObject.getString("pictureUrl");
+            }
+            if (!jsonObject.isNull("publishDate")) {
+                String publishDateStr = jsonObject.getString("publishDate");
+                if (publishDateStr != null) {
+                    item.publishDate = DateHelper.parseDate(publishDateStr, "MM-dd-yyyy");
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -117,6 +135,10 @@ public class Recommended {
 
     public Date getPublishDate() {
         return publishDate;
+    }
+
+    public String getFormattedPublishDate() {
+        return DateHelper.dateToString(publishDate, DateHelper.FORMAT_MMDDYYYY);
     }
 
     /*

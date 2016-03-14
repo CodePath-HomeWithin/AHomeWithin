@@ -1,68 +1,47 @@
 {"events": [
   {
     "id":1,
-    "name":"Event1 Name",
-    "url":"url",
-    "imageUrl":"imageUrl",
-    "summary":"short summmary",
-    "description":"long detailed description",
+    "group_name":"Helping children form friendships",
+    "event_name":"Join Us At Lone Mountain Park!",
+    "url":"http://www.meetup.com/Las-Vegas-Social-Skills-Group-for-School-aged-Children/",
+    "imageUrl":"http://photos4.meetupstatic.com/photos/event/2/f/6/e/global_335112142.jpeg",
+    "summary":"Play time at the park",
+    "description":"This is a group for parents of children who may be struggling with friendships. Our group is based on acceptance and tolerance. We will have get-togethers and play dates to enhance social skills, foster friendships for our children, and have fun! I have started this group because I have an energetic 8 year old, who often times feels left out by her peers due in part to her ADHD. If you have a child who may be feeling left out because of something they have little to no control over, join us! Let's help our children learn and grow together",
     "address": {
       "lines":["888 Brannan Street"],
       "city":"San Francisco",
       "state":"CA",
       "zipcode":"94013"
     },
-    "date":"03-05-2016",
-    "startTime":"hh:mm",
-    "endTime":"hh:mm",
+    "date":"03-23-2016",
+    "startTime":"11:30 am",
+    "endTime":"2:00 pm",
     "contact": {
-      "email":"email address",
-      "phone":"phone number",
-      "name":"name or person object?  simple name is easier"
+      "email":"loretta@fakemail.com",
+      "name":"Loretta"
     }
   },
   {
-    "id":1,
-    "name":"Event3 Name",
-    "url":"url",
-    "imageUrl":"imageUrl",
-    "summary":"short summmary",
-    "description":"long detailed description",
+    "id":2,
+    "group_name":"National Counseling Group",
+    "event_name":"Learn About Becomming A Foster Parent",
+    "url":"http://www.meetup.com/Become-A-Foster-Parent/events/229467311/",
+    "imageUrl":"http://photos4.meetupstatic.com/photos/event/e/9/6/3/global_10739747.jpeg",
+    "summary":"Informational gathering describing the programs in your area.",
+    "description":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
     "address": {
       "lines":["888 Brannan Street"],
       "city":"San Francisco",
       "state":"CA",
       "zipcode":"94013"
     },
-    "date":"03-05-2016",
-    "startTime":"hh:mm",
-    "endTime":"hh:mm",
+    "date":"04-02-2016",
+    "startTime":"6:00 pm",
+    "endTime":"7:30 pm",
     "contact": {
-      "email":"email address",
-      "phone":"phone number",
-      "name":"name or person object?  simple name is easier"
-    }
-  },
-  {
-    "id":1,
-    "name":"Event2 Name",
-    "url":"url",
-    "imageUrl":"imageUrl",
-    "summary":"short summmary",
-    "description":"long detailed description",
-    "address": {
-      "lines":["888 Brannan Street"],
-      "city":"San Francisco",
-      "state":"CA",
-      "zipcode":"94013"
-    },
-    "date":"03-05-2016",
-    "startTime":"hh:mm",
-    "endTime":"hh:mm",
-    "contact": {
-      "email":"email address",
-      "phone":"phone number",
-      "name":"name or person object?  simple name is easier"
+      "email":"contactus@example.com",
+      "phone":"888-444-3333",
+      "name":"Foster Parent Org"
     }
   }
 ]}

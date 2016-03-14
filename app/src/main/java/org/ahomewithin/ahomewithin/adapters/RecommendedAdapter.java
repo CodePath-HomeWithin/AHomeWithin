@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Recommended;
@@ -19,18 +22,28 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         implements SimpleListAdapter {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView ivImageType;
+        public ImageView ivThumbnail;
         public TextView tvTitle;
+        public TextView tvSummary;
+        public TextView tvPublishDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ivImageType = (ImageView) itemView.findViewById(R.id.ivImageType);
+            ivThumbnail = (ImageView) itemView.findViewById(R.id.ivThumbnail);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
+            tvPublishDate = (TextView) itemView.findViewById(R.id.tvPublishDate);
         }
     }
 
+    private Context mContext;
     private List<Recommended> recommendations;
 
     // Pass in the contact array into the constructor
-    public RecommendedAdapter(List<Recommended> items) {
+    public RecommendedAdapter(Context context, List<Recommended> items) {
+        mContext = context;
         recommendations = items;
     }
 
@@ -45,6 +58,25 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     public void onBindViewHolder(RecommendedAdapter.ViewHolder viewHolder, int position) {
         Recommended item = recommendations.get(position);
         viewHolder.tvTitle.setText(item.getTitle());
+        viewHolder.tvSummary.setText(item.getSummary());
+        viewHolder.tvPublishDate.setText(item.getFormattedPublishDate());
+
+        if (item.getThumbnailUrl() != null) {
+            Glide.with(mContext).load(item.getThumbnailUrl()).into(viewHolder.ivThumbnail);
+        }
+        switch(item.type) {
+            case BOOK:
+                // set drawable book
+                // Glide.with(mContext).load(item.imageUrl).into(viewHolder.ivImageType);
+                break;
+            case PODCAST:
+
+                break;
+            case BLOG:
+                break;
+            default:
+                // other
+        }
     }
 
     public RecyclerView.Adapter getAdapter() {

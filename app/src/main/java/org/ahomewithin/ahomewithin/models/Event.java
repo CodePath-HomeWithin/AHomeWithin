@@ -1,6 +1,7 @@
 package org.ahomewithin.ahomewithin.models;
 
 import android.location.Address;
+import android.text.TextUtils;
 
 import org.ahomewithin.ahomewithin.util.DateHelper;
 import org.json.JSONArray;
@@ -10,6 +11,7 @@ import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by barbara on 3/5/16.
@@ -18,7 +20,8 @@ import java.util.Date;
 public class Event {
 
     public int id;
-    public String name;
+    public String groupName;
+    public String eventName;
     public String url;
     public String imageUrl;
     public String summary;
@@ -36,7 +39,8 @@ public class Event {
         Event event = new Event();
         try {
             event.id = jsonObject.getInt("id");
-            event.name = jsonObject.getString("name");
+            event.groupName = jsonObject.getString("group_name");
+            event.eventName = jsonObject.getString("event_name");
             event.url = jsonObject.getString("url");
             event.imageUrl = jsonObject.getString("imageUrl");
             event.summary = jsonObject.getString("summary");
@@ -73,6 +77,24 @@ public class Event {
 
     public boolean isMoreRecent(Event other) {
         return date.before(other.date);
+    }
+
+    public String getLocation() {
+        return AddressHelper.getLocation(address);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+    public String getDateTime() {
+        List<String> tokens = new ArrayList<String>();
+        if (date != null) {
+            tokens.add(DateHelper.dateToString(date, DateHelper.FORMAT_MMDDYYYY));
+        }
+        if (startTime != null) {
+            tokens.add(startTime);
+        }
+        return(TextUtils.join(" ", tokens));
     }
 
 

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flContent, homeFragment)
+                .addToBackStack("home")
                 .commit();
 
         drawerToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.drawer_open,
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flContent, streamPagerFragment)
-                .addToBackStack("store")
+                .addToBackStack("library")
                 .commit();
     }
 
