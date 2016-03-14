@@ -13,18 +13,14 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-
-import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.CredentialView;
-import org.ahomewithin.ahomewithin.FirebaseClient;
-import org.ahomewithin.ahomewithin.fragments.LoginResetPasswordDialogFragment;
-import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
-import org.ahomewithin.ahomewithin.util.SuccessChainListener;
+import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
+import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.LoginCreateUserDialogFragment;
+import org.ahomewithin.ahomewithin.fragments.LoginResetPasswordDialogFragment;
+import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,7 +39,7 @@ public class UserActivity extends AppCompatActivity {
   @Bind(R.id.tilPassword)
   TextInputLayout tilPassword;
 
-  private static FirebaseClient firebaseClient;
+  private static ParseClient client;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -51,45 +47,8 @@ public class UserActivity extends AppCompatActivity {
     setContentView(R.layout.activity_user);
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
-    Firebase.setAndroidContext(this);
-    setFirebaseClient();
+    client = ParseClient.newInstance(this);
     setListeners();
-  }
-
-  private void setFirebaseClient() {
-    firebaseClient = new FirebaseClient(
-        new Firebase.AuthResultHandler() {
-          @Override
-          public void onAuthenticated(AuthData authData) {
-            Toast.makeText(
-                getApplicationContext(),
-                "Successfully logged in",
-                Toast.LENGTH_SHORT).show();
-            firebaseClient.getCurrentUser(getEmail(),
-                new SuccessChainListener() {
-                  @Override
-                  public void run() {
-                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                    startActivity(intent);
-                  }
-                });
-          }
-
-          @Override
-          public void onAuthenticationError(FirebaseError firebaseError) {
-            tilPassword.setErrorEnabled(true);
-            tilPassword.setError("User name and Password do not match our record!!!");
-          }
-        }
-    );
-  }
-
-  public static FirebaseClient getFirebaseClient() {
-    return firebaseClient;
-  }
-
-  private String getEmail() {
-    return etEmail.getText().toString();
   }
 
   private void setListeners() {
@@ -135,7 +94,25 @@ public class UserActivity extends AppCompatActivity {
       tilPassword.setError("Password can not be empty");
       return;
     }
-    firebaseClient.authenticate(email, password);
+    client.login(
+        email, password, new ParseClientAsyncHandler() {
+          @Override
+          public void onSuccess(Object obj) {
+            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(intent);
+            Toast.makeText(
+                getApplicationContext(),
+                "Successfully logged in",
+                Toast.LENGTH_SHORT).show();
+          }
+
+          @Override
+          public void onFailure(String error) {
+            tilPassword.setErrorEnabled(true);
+            tilPassword.setError("ParseObjectUser name and Password do not match our record!!!");
+          }
+        }
+    );
   }
 
   @OnClick(R.id.btnJoin)
@@ -143,8 +120,31 @@ public class UserActivity extends AppCompatActivity {
     LoginCreateUserDialogFragment fragment = LoginCreateUserDialogFragment.newInstance(
         new User.OnCreateUserListener() {
           @Override
-          public void onCreateUserListener(DialogInterface dialog, final User user, String password) {
-            firebaseClient.getNewUser(getApplicationContext(), dialog, user, password);
+          public void onCreateUserListener(final DialogInterface dialog, final User user, String password) {
+            client.signup(user, password,
+                new ParseClientAsyncHandler() {
+                  @Override
+                  public void onSuccess(Object obj) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Successfully created user account " + user.name + "; Please log in",
+                        Toast.LENGTH_SHORT
+                    ).show();
+                    dialog.dismiss();
+                  }
+
+                  @Override
+                  public void onFailure(String error) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        String.format(
+                            "%s; Please try again",
+                            error
+                        ),
+                        Toast.LENGTH_LONG
+                    ).show();
+                  }
+                });
           }
         }
     );
@@ -157,8 +157,31 @@ public class UserActivity extends AppCompatActivity {
     LoginResetPasswordDialogFragment fragment = LoginResetPasswordDialogFragment.newInstance(
         new OnResetPasswordListener() {
           @Override
-          public void onResetPasswordListener(DialogInterface dialog, String email) {
-            firebaseClient.resetPassword(getApplicationContext(), dialog, email);
+          public void onResetPasswordListener(final DialogInterface dialog, String email) {
+            client.requestResetPassword(email,
+                new ParseClientAsyncHandler() {
+                  @Override
+                  public void onSuccess(Object obj) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Reset email has been sent!",
+                        Toast.LENGTH_SHORT
+                    ).show();
+                    dialog.dismiss();
+                  }
+
+                  @Override
+                  public void onFailure(String error) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        String.format(
+                            "%s !!! Please try again",
+                            error
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show();
+                  }
+                });
           }
         }
     );

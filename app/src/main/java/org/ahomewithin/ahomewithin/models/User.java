@@ -2,94 +2,116 @@ package org.ahomewithin.ahomewithin.models;
 
 import android.content.DialogInterface;
 
-import org.json.JSONArray;
+import com.parse.ParseGeoPoint;
+
+import org.ahomewithin.ahomewithin.parseModel.ParseItem;
+import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by barbara on 3/5/16.
  */
+
+//This is the mirror of ParseObjectUser + ParseUser
+//as a model to communicate with other parts
 @Parcel
 public class User {
-    public int id;
-    public String title;
-    public String firstName;
-    public String lastName;
-    public ArrayList<String> credentials;
-    public String description;
 
-    public long lat;
-    public long lon;
+  public String name;
+  public String email;
+  public String desp;
+  public String type;
+  public String phone;
+  public List<ParseItem> purchasedItems;
+  public String profileUrl;
 
-    public ArrayList<Item> purchasedItems;
-    // TODO prepared for usage when needed
-    //public ArrayList<Conversation> conversations;
+  public double lat;
+  public double lon;
 
-    public String profile;
-    public String profileUrl;
+  private static User currentUser;
+  public static String PWD_HOLDER = "1sdf234efdssdfsd";
 
-    public String email;
-    public String phone;
+  public User(String name, String email, String phone, String desp, String userType) {
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.desp = desp;
+    this.type = userType;
+    this.purchasedItems = new ArrayList<>();
+    this.profileUrl = "null";
+    this.lat = 0;
+    this.lon = 0;
+  }
 
-    //Name, Email and phone of a user
-    //password is not stored; instead
-    //it's maintained as credential in Firebase
-    //Also, this is just a template, so there
-    //may be more fields coming
+  public static User getCurrentUser() {
+    return currentUser;
+  }
 
+  public static void setCurrentUser(ParseObjectUser parseObjectUser) {
+    currentUser = getNewInstanceFromParseObject(parseObjectUser);
+  }
 
-    public User() {
-        credentials = new ArrayList<String>();
+  public User() {}
+
+  public User(
+      String name, String email, String desp, String type,
+      String phone, List<ParseItem> purchasedItems, String profileUrl,
+      double lat, double lon
+  ) {
+    this.name = name;
+    this.email = email;
+    this.desp = desp;
+    this.type = type;
+    this.phone = phone;
+    this.purchasedItems = purchasedItems;
+    this.profileUrl = profileUrl;
+    this.lat = lat;
+    this.lon = lon;
+  }
+
+  public interface OnCreateUserListener extends Serializable {
+    void onCreateUserListener(DialogInterface dialog, User user, String password);
+  }
+
+  public static User getNewInstanceFromParseObject(ParseObjectUser poUser) {
+    ParseGeoPoint location = poUser.getGeo();
+    double lon = location == null? 0 : location.getLongitude();
+    double lan = location == null? 0 : location.getLatitude();
+    User newUser = new User(
+        poUser.getName(), poUser.getEmail(), poUser.getDesp(), poUser.getType(),
+        poUser.getPhone(), poUser.getItems(), poUser.getProfile(),
+        lan, lon);
+    return newUser;
+  }
+
+  public static User fromJSON(JSONObject jsonObject) {
+    User user = new User();
+    try {
+      user.lat = jsonObject.getDouble("lat");
+      user.lon = jsonObject.getDouble("lon");
+
+      if(!jsonObject.isNull("type")) {
+        user.type = jsonObject.getString("type");
+      }
+
+      if(!jsonObject.isNull("name")) {
+        user.name = jsonObject.getString("name");
+      }
+
+      if(!jsonObject.isNull("desp")) {
+        user.desp = jsonObject.getString("desp");
+      }
+
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
+    return user;
+  }
 
-    public User(String name, String email, String phone) {
-        this.firstName = name;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public static User fromJSON(JSONObject jsonObject) {
-        User user = new User();
-        try {
-            user.title = jsonObject.getString("title");
-            user.firstName = jsonObject.getString("firstName");
-            user.lastName = jsonObject.getString("lastName");
-            user.profile = jsonObject.getString("profile");
-            JSONArray jsonCreds = jsonObject.getJSONArray("credentials");
-            if (jsonCreds != null) {
-                for(int i = 0; i < jsonCreds.length()-1; i++) {
-                    user.credentials.add(jsonCreds.get(i).toString());
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-
-
-    public String getName() {
-        return firstName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-
-    /**
-     * Created by xiangyang_xiao on 3/6/16.
-     */
-    public static interface OnCreateUserListener extends Serializable {
-      void onCreateUserListener(DialogInterface dialog, User user, String password);
-    }
 }

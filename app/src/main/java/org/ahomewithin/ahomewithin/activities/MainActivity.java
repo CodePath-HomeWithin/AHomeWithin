@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if (!isOnline()) {
             showSnackbar("Oops!  Please check internet connection!");
         }
+
     }
 
     @Override

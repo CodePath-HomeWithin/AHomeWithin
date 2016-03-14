@@ -6,13 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.models.User;
-import org.ahomewithin.ahomewithin.FirebaseClient;
 import org.ahomewithin.ahomewithin.fragments.LoginEditProfileDialogFragment;
+import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.util.CustomStyle;
-import org.ahomewithin.ahomewithin.util.SuccessChainListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +32,10 @@ public class ProfileActivity extends AppCompatActivity {
   TextView tvEmail;
   @Bind(R.id.tvPhone)
   TextView tvPhone;
+  @Bind(R.id.tvDesp)
+  TextView tvDesp;
+  @Bind(R.id.tvType)
+  TextView tvType;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
   }
 
   private void setProfileContent() {
-    User curUser = FirebaseClient.getCurUser();
-    if(curUser != null) {
+    User curUser = User.getCurrentUser();
+    if (curUser != null) {
       setProfileContent(curUser);
     }
   }
@@ -51,13 +56,19 @@ public class ProfileActivity extends AppCompatActivity {
   private void setProfileContent(User curUser) {
     int customColor = R.color.colorPrimaryDark;
     tvUserName.setText(
-        CustomStyle.stylizeFirstPart("User Name  : ", curUser.getName(), customColor)
+        CustomStyle.stylizeFirstPart("User  Name  : ", curUser.name, customColor)
     );
     tvEmail.setText(
-        CustomStyle.stylizeFirstPart("Email Addr : ", curUser.getEmail(), customColor)
+        CustomStyle.stylizeFirstPart("Email  Addr : ", curUser.email, customColor)
     );
     tvPhone.setText(
-        CustomStyle.stylizeFirstPart("Phone Num  : ", curUser.getPhone(), customColor)
+        CustomStyle.stylizeFirstPart("Phone  Num  : ", curUser.phone, customColor)
+    );
+    tvDesp.setText(
+        CustomStyle.stylizeFirstPart("Description : ", curUser.desp, customColor)
+    );
+    tvType.setText(
+        CustomStyle.stylizeFirstPart("User  Type  : ", curUser.type, customColor)
     );
   }
 
@@ -67,16 +78,28 @@ public class ProfileActivity extends AppCompatActivity {
         LoginEditProfileDialogFragment.newInstance(
             new User.OnCreateUserListener() {
               @Override
-              public void onCreateUserListener(DialogInterface dialog, final User newUser, String newPassword) {
-                UserActivity.getFirebaseClient().updateUserInfo(
-                    getApplicationContext(), dialog, newUser, newPassword,
-                    new SuccessChainListener() {
-                      @Override
-                      public void run() {
-                        setProfileContent(newUser);
-                      }
-                    }
-                );
+              public void onCreateUserListener(final DialogInterface dialog, final User newUser, String newPassword) {
+                ParseClient.newInstance(getApplicationContext())
+                    .updateUserInfo(
+                        newUser,
+                        newPassword,
+                        new ParseClientAsyncHandler() {
+                          @Override
+                          public void onSuccess(Object obj) {
+                            setProfileContent(newUser);
+                            dialog.dismiss();
+                          }
+
+                          @Override
+                          public void onFailure(String error) {
+                            Toast.makeText(
+                                getApplicationContext(),
+                                error,
+                                Toast.LENGTH_SHORT
+                            ).show();
+                          }
+                        }
+                    );
               }
             }
         );
