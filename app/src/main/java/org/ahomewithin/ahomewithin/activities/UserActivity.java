@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -80,11 +80,24 @@ public class UserActivity extends AppCompatActivity {
             );
 
         }
+    }
 
-
+    @OnClick(R.id.btnLogin)
+    public void login() {
+        final String email = etEmail.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            tilEmail.setErrorEnabled(true);
+            tilEmail.setError("User name can not be empty");
+            return;
+        }
+        final String password = etPassword.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            tilPassword.setErrorEnabled(true);
+            tilPassword.setError("Password can not be empty");
+            return;
+        }
         client.login(
-                etEmail.getText().toString(),
-                etPassword.getText().toString(), new ParseClientAsyncHandler() {
+                email, password, new ParseClientAsyncHandler() {
                     @Override
                     public void onSuccess(Object obj) {
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
@@ -172,7 +185,10 @@ public class UserActivity extends AppCompatActivity {
                                     }
                                 });
                     }
-                });
+                }
+        );
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment.show(fragmentManager, "Reset Password");
     }
 
 }

@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.activities.UserActivity;
 import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
@@ -70,14 +70,19 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 
         rvStream.setAdapter(aItems);
 
-        items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
-        aItems.addAll(items);
+        ParseClient.newInstance(getActivity()).getPurchasableItems(new ParseClientAsyncHandler() {
+            @Override
+            public void onSuccess(Object obj) {
+                items = (ArrayList<Item>) obj;
+                // stubbed out method
+                //items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
+                aItems.addAll(items);
 
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvStream.addItemDecoration(itemDecoration);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rvStream.setLayoutManager(llm);
-        rvStream.setItemAnimator(new FlipInBottomXAnimator());
+                RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+                rvStream.addItemDecoration(itemDecoration);
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                rvStream.setLayoutManager(llm);
+                rvStream.setItemAnimator(new FlipInBottomXAnimator());
 
 //        ItemClickSupport.addTo(rvStream).setOnItemClickListener(
 //                new ItemClickSupport.OnItemClickListener() {
@@ -90,6 +95,14 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 //                    }
 //                }
 //        );
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+
     }
 
     @Override

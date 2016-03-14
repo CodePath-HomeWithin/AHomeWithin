@@ -94,19 +94,30 @@ public class LoginCreateUserDialogFragment extends DialogFragment {
           (User.OnCreateUserListener) getArguments().getSerializable("listener");
       // TODO Make this button works
 
-//      positiveButton.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//          User newUser = new User(
-//              etUserName.getText().toString(),
-//              etEmail.getText().toString(),
-//              etPhone.getText().toString(),
-//              etDesp.getText().toString(),
-//              spUserType.getSelectedItem().toString()
-//          );
-//          listener.onCreateUserListener(alertDialog, newUser, etPassword.getText().toString());
-//        }
-//      });
+      positiveButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          User newUser = new User(
+              etUserName.getText().toString(),
+              etEmail.getText().toString(),
+              etPhone.getText().toString(),
+              etDesp.getText().toString(),
+              getUserType()
+          );
+          listener.onCreateUserListener(alertDialog, newUser, etPassword.getText().toString());
+        }
+      });
     }
+  }
+
+  private User.UserType getUserType() {
+    String textChosen = spUserType.getSelectedItem().toString();
+
+    if(textChosen.equals("Parent")) {
+      return User.UserType.COMMUNITY;
+    } else {
+      return User.UserType.SERVICE_PROVIDER;
+    }
+
   }
 }
