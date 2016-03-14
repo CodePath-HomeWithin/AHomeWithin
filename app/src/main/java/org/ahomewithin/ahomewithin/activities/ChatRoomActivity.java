@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
@@ -68,11 +69,20 @@ public class ChatRoomActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                ParseClient client = ParseClient.newInstance(getApplicationContext());
+                if(!client.isUserLoggedIn()) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "You are not logged in",
+                        Toast.LENGTH_SHORT
+                        ).show();
+                    return;
+                }
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                User  user    = (User) listView.getItemAtPosition(position);
+                User user = (User) listView.getItemAtPosition(position);
 
                 Intent intent = new Intent(ChatRoomActivity.this, ChatActivity.class);
                 intent.putExtra("otherEmail", user.email);
