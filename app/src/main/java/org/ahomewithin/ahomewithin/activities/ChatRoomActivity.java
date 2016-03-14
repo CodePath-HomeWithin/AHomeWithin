@@ -29,12 +29,13 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatroom);
 
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list);
+        listView = (ListView) findViewById(R.id.lvChat);
 
         ParseClient.newInstance(this).getAllUsers(new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
                 values = (ArrayList<User>) obj;
+                setAdapter();
             }
 
             @Override
@@ -49,6 +50,10 @@ public class ChatRoomActivity extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
+
+    }
+
+    private void setAdapter() {
         ArrayAdapter adapter = new ArrayAdapter<User>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
 

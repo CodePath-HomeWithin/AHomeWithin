@@ -46,11 +46,18 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".activities.ChatRoomActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ChatRoomActivity" />
         </activity>
         <activity
             android:name=".activities.StreamActivity"
