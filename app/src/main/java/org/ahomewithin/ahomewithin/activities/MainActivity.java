@@ -6,21 +6,29 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
+import org.ahomewithin.ahomewithin.FirebaseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
-import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 
 import java.io.IOException;
@@ -30,9 +38,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.dlDrawer) DrawerLayout dlDrawer;
     @Bind(R.id.nvView) NavigationView nvView;
-    ActionBarDrawerToggle drawerToggle;
+    private Drawer drawer;
+    private AccountHeader accountHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.flContent, homeFragment)
                 .commit();
 
-        drawerToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.drawer_open,
-                        R.string.drawer_close);
-        dlDrawer.setDrawerListener(drawerToggle);
-
-        setupDrawerContent(nvView);
+        createDrawer();
 
         if (!isOnline()) {
             showSnackbar("Oops!  Please check internet connection!");
@@ -67,63 +71,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        // The action bar home/up action should open or close the drawer.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                dlDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }
+//        if (drawerToggle.onOptionsItemSelected(item)) {
+//            return true;
+//        }
+//
+//        // The action bar home/up action should open or close the drawer.
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                dlDrawer.openDrawer(GravityCompat.START);
+//                return true;
+//        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-        dlDrawer.closeDrawers();
-
-        Fragment fragment = null;
-        switch(menuItem.getItemId()) {
-            case R.id.miLibrary:
-                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
-                break;
-            case R.id.miEvents:
-                fragment = EventsFragment.newInstance();
-                break;
-            case R.id.miLearnMore:
-                fragment = LearnMoreFragment.newInstance();
-                break;
-//            case R.id.miAccount:
-//                Intent i = new Intent(this, UserActivity.class);
-//                startActivity(i);
-//                break;
-            case R.id.miAboutUs:
-                fragment = AboutUsFragment.newInstance();
-                break;
-            default:
-                fragment = HomeFragment.newInstance();
-        }
-
-        if (fragment != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flContent, fragment)
-                    .commit();
-
-        }
-        dlDrawer.closeDrawers();
     }
     
     // `onPostCreate` called when activity start-up is complete after `onStart()`
@@ -131,13 +90,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
+//        drawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
+//        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     public boolean isOnline() {
@@ -187,5 +146,127 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack("store")
                 .commit();
     }
+
+    private void createDrawer() {
+        accountHeader = createAccountHeader();
+        //create the drawer and remember the `Drawer` result object
+        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.home);
+        PrimaryDrawerItem myLibraryItem = new PrimaryDrawerItem().withName(R.string.library);
+        PrimaryDrawerItem trainingItem = new PrimaryDrawerItem().withName(R.string.training_and_tools);
+        PrimaryDrawerItem eventsItem = new PrimaryDrawerItem().withName(R.string.events);
+        PrimaryDrawerItem learnMoreItem = new PrimaryDrawerItem().withName(R.string.learn_more);
+        PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us);
+        PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings);
+
+
+        // do something with the clicked item :D
+        //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+        drawer = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(accountHeader)
+                .addDrawerItems(
+                        homeItem,
+                        new DividerDrawerItem(),
+                        myLibraryItem,
+                        trainingItem,
+                        eventsItem,
+                        learnMoreItem,
+                        aboutUsItem,
+                        new DividerDrawerItem(),
+                        settingsItem)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        Fragment fragment = null;
+                        Log.d("DEBUG", "Clicked item nº" + position);
+                        switch(position) {
+                            case 1: fragment = HomeFragment.newInstance();
+                                break;
+                            case 3:
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+                                break;
+                            case 4:
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
+                                break;
+                            case 5:
+                                //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+                                break;
+                            case 6:
+                                fragment = LearnMoreFragment.newInstance();
+                                break;
+                            case 7:
+                                fragment = AboutUsFragment.newInstance();
+                                break;
+                            default:
+                            case 9:
+                                //fragment = LearnMoreFragment.newInstance();
+                                break;
+                        }
+
+                        gotoFragment(fragment);
+
+                        return true;
+                    }
+                })
+                .build();
+    }
+
+    private AccountHeader createAccountHeader() {
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.kids_1)
+                .withSelectionListEnabledForSingleProfile(false)
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        // TODO Add go to profile fragment
+                        return true;
+                    }
+                })
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
+                )
+                .build();
+
+
+        return headerResult;
+    }
+
+    private void gotoFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.flContent, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        drawer.closeDrawer();
+    }
+
+    public void checkIfLoggedInAndProceed(Fragment fragment) {
+        if(!FirebaseClient.isUserLoggedIn()) {
+            Log.d("DEBUG", "User is not logged in so go to Login");
+            gotoLogin();
+        } else {
+            Log.d("DEBUG", "User is logged in so go to fragment");
+            gotoFragment(fragment);
+        }
+    }
+
+
+    public void gotoLogin() {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+    }
+
+    // TODO call profileActivity which should be used for changing all the user parameters
+    public void gotoProfile() {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+    }
+
 
 }

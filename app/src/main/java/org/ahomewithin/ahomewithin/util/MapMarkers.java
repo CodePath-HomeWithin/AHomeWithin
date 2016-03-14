@@ -2,6 +2,7 @@ package org.ahomewithin.ahomewithin.util;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
@@ -56,6 +57,7 @@ public class MapMarkers {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(v.getContext(), "button clicked", Toast.LENGTH_SHORT).show();
+                        Log.d("MAP", "Chat button clicked");
                     }
                 });
             }
