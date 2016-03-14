@@ -42,5 +42,7 @@
     <string name="recommended">Recommended</string>
     <string name="type">type</string>
     <string name="thumbnail">Thumbnail</string>
-
+    <string name="hint_desp">describe yourself !</string>
+    <string name="send">send</string>
+    <string name="message_hint">type your message</string>
 </resources>

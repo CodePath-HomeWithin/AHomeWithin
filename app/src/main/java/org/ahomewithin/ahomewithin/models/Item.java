@@ -2,6 +2,10 @@ package org.ahomewithin.ahomewithin.models;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import org.ahomewithin.ahomewithin.parseModel.ParseItem;
+import org.ahomewithin.ahomewithin.util.CardContent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,15 +27,17 @@ public class Item implements Serializable {
     public static final String LOG_TAG = Item.class.getSimpleName();
     public static final String SERIALIZABLE_TAG = "item_serializable";
 
-    public int id;
+    public String id;
     public ITEM_TYPE type;    // 0: videos, 1: conversation cards
     public String title;
     public String imageUrl;
     public String description;
     public boolean owned;
-    public int price;
+    public double price;
     public ArrayList<ConversationCard> contentCards;  //
     public String videoUrl;
+    public String contentUrl; //vidoe url
+    public String content;  //card json string, use getCardContentFromJsonString below to deJson
 
 
     public static Item fromJson(JSONObject jsonObject, ITEM_TYPE type) {
@@ -39,25 +45,29 @@ public class Item implements Serializable {
 
         try {
             item.title = jsonObject.getString("title");
-            item.imageUrl = jsonObject.getString("imageUrl");
+            item.imageUrl = jsonObject.getString("imageUrl");  // previously was "image"
             item.description = jsonObject.getString("description");
-            item.id = jsonObject.getInt("id");
+            item.id = jsonObject.getString("id");
             item.type = type;
-            if (type == ITEM_TYPE.VIDEOS) {
-                item.videoUrl = jsonObject.getJSONObject("content").getString("videoUrl");
-            } else {
-                JSONObject deckCards = jsonObject.getJSONObject("content");
-                item.contentCards = new ArrayList<>();
-                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("mind"),
-                        ConversationCard.MIND));
-                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("body"),
-                        ConversationCard.BODY));
-                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("heart"),
-                        ConversationCard.HEART));
-                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("soul"),
-                        ConversationCard.SOUL));
-            }
+
+            item.contentUrl = jsonObject.getString("content_url");
+            item.type = type;
             item.owned = false;
+
+//            if (type == ITEM_TYPE.VIDEOS) {
+//                item.videoUrl = jsonObject.getJSONObject("content").getString("videoUrl");
+//            } else {
+//                JSONObject deckCards = jsonObject.getJSONObject("content");
+//                item.contentCards = new ArrayList<>();
+//                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("mind"),
+//                        ConversationCard.MIND));
+//                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("body"),
+//                        ConversationCard.BODY));
+//                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("heart"),
+//                        ConversationCard.HEART));
+//                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("soul"),
+//                        ConversationCard.SOUL));
+//            }
         } catch (JSONException ex) {
             Log.e("ERR", ex.toString());
             return null;
@@ -80,5 +90,32 @@ public class Item implements Serializable {
             }
         }
         return itemArrayList;
+    }
+
+
+    public static Item getNewInstanceFromParseObject(ParseItem item) {
+        Item newItem = new Item();
+        newItem.id = item.getObjectId();
+        newItem.type = item.getType();
+        newItem.title = item.getTitle();
+        newItem.description = item.getDesp();
+        newItem.price = item.getPrice();
+        newItem.imageUrl = item.getImage();
+        if (newItem.type == ITEM_TYPE.VIDEOS) { //video
+            newItem.contentUrl = item.getContent();
+        } else { //cards
+            newItem.content = item.getContent();
+        }
+        return newItem;
+    }
+
+    public static CardContent getCardContentFromJsonString(String jsonString) {
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, CardContent.class);
+    }
+
+    public static String getJsonStringFromCardContent(CardContent cardContent) {
+        Gson gson = new Gson();
+        return gson.toJson(cardContent);
     }
 }

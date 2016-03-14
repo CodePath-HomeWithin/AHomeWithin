@@ -2,6 +2,7 @@ package org.ahomewithin.ahomewithin.util;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
@@ -15,10 +16,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.ahomewithin.ahomewithin.AHomeWithinClient;
+import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.User;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,8 @@ import java.util.HashMap;
  * Created by barbara on 3/12/16.
  */
 public class MapMarkers {
+
+    public static final String LOG_TAG = MapMarkers.class.getSimpleName();
 
     private ArrayList<User> users;
     private HashMap<String, User> markerMap= new HashMap<String, User>();
@@ -46,10 +49,10 @@ public class MapMarkers {
                 User user = markerMap.get(marker.getId());
 
                 final TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-                tvTitle.setText(user.getFullName());
+                tvTitle.setText(user.name);
 
                 final TextView tvDescription = (TextView) v.findViewById(R.id.tvDescription);
-                tvDescription.setText(user.getDescription());
+                tvDescription.setText(user.description);
 
                 final Button btnChat = (Button) v.findViewById(R.id.btnChat);
                 btnChat.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +93,26 @@ public class MapMarkers {
 
     private void loadUsers(Context context) {
         try {
-            JSONObject response = AHomeWithinClient.getUsers(context);
-            users = User.fromJSONArray(response.getJSONArray("users"));
+
+//            // Stubbed out way
+//            JSONObject response = AHomeWithinClient.getUsers(context);
+//            users = User.fromJSONArray(response.getJSONArray("users"));
+            ParseClient client = ParseClient.newInstance(context);
+            client.getAllUsers(new ParseClientAsyncHandler() {
+                @Override
+                public void onSuccess(Object obj) {
+                    users = (ArrayList<User>) obj;
+                    Log.d(LOG_TAG, "All users recovered from db");
+                }
+
+                @Override
+                public void onFailure(String error) {
+                    Log.d(LOG_TAG, "Error recovering users from db: " + error);
+
+
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,7 +120,7 @@ public class MapMarkers {
 
     private void createMarkerForUser(GoogleMap map, User user) {
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(user.getLat(), user.getLng()));
+        markerOptions.position(new LatLng(user.lat, user.lon));
         switch(user.type) {
             case SERVICE_PROVIDER:
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));

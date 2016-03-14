@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.User;
@@ -30,6 +31,10 @@ public class LoginCreateUserDialogFragment extends DialogFragment {
   EditText etEmail;
   @Bind(R.id.etPhone)
   EditText etPhone;
+  @Bind(R.id.etDesp)
+  EditText etDesp;
+  @Bind(R.id.spUserType)
+  Spinner spUserType;
 
   public static LoginCreateUserDialogFragment newInstance(
       User.OnCreateUserListener listener
@@ -87,18 +92,21 @@ public class LoginCreateUserDialogFragment extends DialogFragment {
       Button positiveButton = alertDialog.getButton(Dialog.BUTTON_POSITIVE);
       final User.OnCreateUserListener listener =
           (User.OnCreateUserListener) getArguments().getSerializable("listener");
+      // TODO Make this button works
 
-      positiveButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          User newUser = new User(
-              etUserName.getText().toString(),
-              etEmail.getText().toString(),
-              etPhone.getText().toString()
-          );
-          listener.onCreateUserListener(alertDialog, newUser, etPassword.getText().toString());
-        }
-      });
+//      positiveButton.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//          User newUser = new User(
+//              etUserName.getText().toString(),
+//              etEmail.getText().toString(),
+//              etPhone.getText().toString(),
+//              etDesp.getText().toString(),
+//              spUserType.getSelectedItem().toString()
+//          );
+//          listener.onCreateUserListener(alertDialog, newUser, etPassword.getText().toString());
+//        }
+//      });
     }
   }
 }

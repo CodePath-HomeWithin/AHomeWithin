@@ -1,9 +1,9 @@
 package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
+import android.widget.SpinnerAdapter;
 
 import org.ahomewithin.ahomewithin.models.User;
-import org.ahomewithin.ahomewithin.FirebaseClient;
 
 /**
  * Created by xiangyang_xiao on 3/6/16.
@@ -27,15 +27,28 @@ public class LoginEditProfileDialogFragment extends LoginCreateUserDialogFragmen
 
   @Override
   protected void setViewContent() {
-    User curUser = FirebaseClient.getCurUser();
-    etUserName.setText(curUser.getName());
-    etUserName.setSelection(curUser.getName().length());
-    etPassword.setText(FirebaseClient.getCurPassword());
-    etPassword.setSelection(FirebaseClient.getCurPassword().length());
-    etEmail.setText(curUser.getEmail());
-    etEmail.setSelection(curUser.getEmail().length());
-    etPhone.setText(curUser.getPhone());
-    etPhone.setSelection(curUser.getPhone().length());
+    User curUser = User.getCurrentUser();
+    etUserName.setText(curUser.name);
+    etUserName.setSelection(curUser.name.length());
+    etPassword.setText(User.PWD_HOLDER);
+    etPassword.setSelection(User.PWD_HOLDER.length());
+    etEmail.setText(curUser.email);
+    etEmail.setSelection(curUser.email.length());
+    etPhone.setText(curUser.phone);
+    etPhone.setSelection(curUser.phone.length());
+    etDesp.setText(curUser.description);
+    etDesp.setSelection(curUser.description.length());
+
+    SpinnerAdapter adapter = spUserType.getAdapter();
+    int index = 0;
+    for(int idx=0; idx<adapter.getCount(); idx++) {
+      if(adapter.getItem(idx).equals(curUser.type)) {
+        index = idx;
+        break;
+      }
+    }
+    spUserType.setSelection(index);
+
   }
 
 }
