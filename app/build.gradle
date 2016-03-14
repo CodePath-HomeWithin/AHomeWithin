@@ -49,4 +49,5 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'org.mongodb:mongodb-driver-async:3.2.2'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
