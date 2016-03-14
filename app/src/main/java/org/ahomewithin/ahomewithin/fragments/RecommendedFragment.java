@@ -39,7 +39,7 @@ public class RecommendedFragment extends SimpleListFragment {
 
     protected void setupViews(View view) {
         recommendations = new ArrayList<Recommended>();
-        rAdapter = new RecommendedAdapter(recommendations);
+        rAdapter = new RecommendedAdapter(getContext(), recommendations);
         super.setupViews(view, recommendations, rAdapter);
     }
 
