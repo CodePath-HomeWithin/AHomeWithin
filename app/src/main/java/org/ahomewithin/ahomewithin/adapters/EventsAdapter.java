@@ -1,10 +1,17 @@
 package org.ahomewithin.ahomewithin.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Event;
@@ -18,17 +25,31 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         implements SimpleListAdapter {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvName;
+        public RelativeLayout rlEventContainer;
+        public TextView tvGroupName;
+        public TextView tvEventName;
+        public ImageView ivImage;
+        public TextView tvDescription;
+        public TextView tvLocation;
+        public TextView tvDateTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            rlEventContainer = (RelativeLayout) itemView.findViewById(R.id.rlEventContainer);
+            tvGroupName = (TextView) itemView.findViewById(R.id.tvGroupName);
+            tvEventName = (TextView) itemView.findViewById(R.id.tvEventName);
+            tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
+            tvLocation = (TextView) itemView.findViewById(R.id.tvLocation);
+            tvDateTime = (TextView) itemView.findViewById(R.id.tvDateTime);
+            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
         }
     }
 
+    private Context mContext;
     private List<Event> events;
 
-    public EventsAdapter(List<Event> items) {
+    public EventsAdapter(Context context, List<Event> items) {
+        mContext = context;
         events = items;
     }
 
@@ -42,7 +63,25 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(EventsAdapter.ViewHolder viewHolder, int position) {
         Event item = events.get(position);
-        viewHolder.tvName.setText(item.name);
+        viewHolder.tvGroupName.setText(item.groupName);
+        viewHolder.tvEventName.setText(item.eventName);
+        viewHolder.tvDescription.setText(item.description);
+        viewHolder.tvLocation.setText(item.getLocation());
+        viewHolder.tvDateTime.setText(item.getDateTime());
+        Glide.with(mContext).load(item.imageUrl).into(viewHolder.ivImage);
+
+        String url = item.getUrl();
+        if (url != null) {
+            viewHolder.rlEventContainer.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO:  need to bind url to this clickevent
+                    Toast.makeText(mContext, "clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
     }
 
     public RecyclerView.Adapter getAdapter() {

@@ -42,7 +42,7 @@ public class EventsListFragment extends SimpleListFragment {
 
     protected void setupViews(View view) {
         events = new ArrayList<Event>();
-        eAdapter = new EventsAdapter(events);
+        eAdapter = new EventsAdapter(getContext(), events);
         super.setupViews(view, events, eAdapter);
     }
 
@@ -50,17 +50,19 @@ public class EventsListFragment extends SimpleListFragment {
         setRefreshing(true);
         Event firstInList = null;
         Event lastInList = null;
-        if (page < 0) {
-            firstInList = (Event) getFirstInList();
-        } else if (page > 0) {
-            lastInList = (Event) getLastInList();
-        } else {
-            clear();
-        }
         // TODO: use async JsonHttpResponseHandler!
         try {
-            JSONObject response = AHomeWithinClient.getEvents(getContext());
-            addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
+            if (page < 0) {
+                firstInList = (Event) getFirstInList();
+                // TODO: load more recent events
+            } else if (page > 0) {
+                lastInList = (Event) getLastInList();
+                // TODO:  load next pages of events
+            } else {
+                clear();
+                JSONObject response = AHomeWithinClient.getEvents(getContext());
+                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
+            }
             setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();

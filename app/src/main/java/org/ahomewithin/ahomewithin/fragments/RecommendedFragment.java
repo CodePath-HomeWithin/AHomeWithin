@@ -47,17 +47,19 @@ public class RecommendedFragment extends SimpleListFragment {
         setRefreshing(true);
         Recommended firstInList = null;
         Recommended lastInList = null;
-        if (page < 0) {
-            firstInList = (Recommended) getFirstInList();
-        } else if (page > 0) {
-            lastInList = (Recommended) getLastInList();
-        } else {
-            clear();
-        }
         // TODO: use async JsonHttpResponseHandler!
         try {
-            JSONObject response = AHomeWithinClient.getRecommendations(getContext());
-            addOrInsertAll(Recommended.fromJSONArray(response.getJSONArray("recommendations")));
+            if (page < 0) {
+                firstInList = (Recommended) getFirstInList();
+                // TODO:  load any newer pages
+            } else if (page > 0) {
+                lastInList = (Recommended) getLastInList();
+                // TODO:  load later pages
+            } else {
+                clear();
+                JSONObject response = AHomeWithinClient.getRecommendations(getContext());
+                addOrInsertAll(Recommended.fromJSONArray(response.getJSONArray("recommendations")));
+            }
             setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();

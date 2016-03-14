@@ -1,10 +1,14 @@
 package org.ahomewithin.ahomewithin.models;
 
+import android.text.TextUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -19,15 +23,31 @@ public class AddressHelper {
         try {
             JSONArray streetLines = jsonObject.getJSONArray("lines");
             if (streetLines != null) {
-                for(int i = 0; i < streetLines.length()-1; i++) {
-                    address.setAddressLine(i, streetLines.get(i).toString());
+                for(int i = 0; i < streetLines.length(); i++) {
+                    String line = streetLines.getString(i);
+                    address.setAddressLine(i, line);
                 }
             }
+            address.setLocality(jsonObject.getString("city"));
             address.setCountryCode("US");
             address.setPostalCode(jsonObject.getString("zipcode"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return address;
+    }
+
+    public static String getLocation(android.location.Address address) {
+        if (address != null) {
+            List<String> tokens = new ArrayList<String>();
+            for(int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                tokens.add(address.getAddressLine(i));
+            }
+            if (address.getLocality() != null) {
+                tokens.add(address.getLocality());
+            }
+            return(TextUtils.join(", ", tokens));
+        }
+        return "";
     }
 }

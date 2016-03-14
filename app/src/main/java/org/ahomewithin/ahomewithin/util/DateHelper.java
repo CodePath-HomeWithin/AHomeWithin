@@ -11,7 +11,7 @@ import java.util.Locale;
  * Created by barbara on 3/5/16.
  */
 public class DateHelper {
-    // public static final String FORMAT_MMDDYYYY = "MM/dd/yyyy";
+  public static final String FORMAT_MMDDYYYY = "MM/dd/yyyy";
 //    public static final String FORMAT_YYYYMMDD = "yyyyMMdd"; //"YYYYMMDD";
 //    public static final String FORMAT_MONTH_DAY_YEAR = "MM/dd/yyyy";
 //    public static final String FORMAT_LONG = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"; // "Mon Apr 01 21:16:23 +0000 2014"
@@ -32,6 +32,14 @@ public class DateHelper {
         CharSequence str = "";
         if (timestamp != null) {
             str = android.text.format.DateFormat.format(format, timestamp);
+        }
+        return str.toString();
+    }
+
+    public static String dateToString(Date date, String format) {
+        CharSequence str = "";
+        if (date != null) {
+            str = android.text.format.DateFormat.format(format, date.getTime());
         }
         return str.toString();
     }
