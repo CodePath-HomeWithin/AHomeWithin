@@ -1,5 +1,7 @@
 package org.ahomewithin.ahomewithin.parseModel;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -24,7 +26,13 @@ public class ParseMessage extends ParseObject {
   }
 
   public String getUserId() {
-    return getString(USER_ID_KEY);
+    try {
+      this.fetchIfNeeded();
+      return getString(USER_ID_KEY);
+    } catch(Exception e) {
+      Log.e("message", e.getMessage());
+    }
+    return null;
   }
 
   public String getBody() {

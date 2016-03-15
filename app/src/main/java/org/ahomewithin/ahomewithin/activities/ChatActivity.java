@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-  static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
-
-  static final String TAG = ChatActivity.class.getSimpleName();
 
   EditText etParseMessage;
   Button btSend;
@@ -45,13 +40,14 @@ public class ChatActivity extends AppCompatActivity {
     setContentView(R.layout.activity_chat);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    client = ParseClient.newInstance(this);
+
     if (ParseUser.getCurrentUser() != null) {
       //only able to chat when logged in
       startWithCurrentUser();
       mHandler.postDelayed(mRefreshParseMessagesRunnable, POLL_INTERVAL);
     }
 
-    client = ParseClient.newInstance(this);
     //TODO : this should be an intent
     //with the other users email
     otherEmail = getIntent().getStringExtra("otherEmail");
@@ -59,7 +55,6 @@ public class ChatActivity extends AppCompatActivity {
 
   void startWithCurrentUser() {
     setupParseMessagePosting();
-
   }
 
   private void setupParseMessagePosting() {
@@ -69,7 +64,7 @@ public class ChatActivity extends AppCompatActivity {
     mParseMessages = new ArrayList<>();
     lvChat.setTranscriptMode(1);
     mFirstLoad = true;
-    final String userId = ParseUser.getCurrentUser().getObjectId();
+    final String userId = client.getCurParseObjectUser().getObjectId();
     mAdapter = new ChatListAdapter(ChatActivity.this, userId, mParseMessages);
     lvChat.setAdapter(mAdapter);
     btSend.setOnClickListener(new View.OnClickListener() {
@@ -125,25 +120,4 @@ public class ChatActivity extends AppCompatActivity {
     }
   };
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_chat, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
-  }
 }

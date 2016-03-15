@@ -47,7 +47,6 @@ dependencies {
     compile 'com.parse:parse-android:1.13.0'
     compile 'com.parse:parseinterceptors:0.0.2' // for logging API calls to LogCat
     compile 'com.parse.bolts:bolts-android:1.+'
-    compile 'org.mongodb:mongodb-driver-async:3.2.2'
     compile 'com.google.code.gson:gson:2.6.2'
     compile('com.mikepenz:materialdrawer:5.1.2@aar') {
         transitive = true
