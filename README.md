@@ -53,13 +53,19 @@ Store/Library Stream Flow:
 	- on library page, clicking on video should go to video detail player view
 	- on library page, clicking on conversation should go to conversation card view
 	- better, less cluttered images
+	- lock landscape/portrait is not supported
+	- create detail activity for my library
+	- on library page, over video, show arrow button to go to the detail video player
+	
 
 User flow:
+    - switch user activites to fragment
+    - after register, auto login
+    - after login, close the activity and go to correct next view (ask Jose)  (ok, seriously, pass it in as an argument)
 	- If you are not logged on, don't show profile in toolbar
 	- If you are logged in, show profile image
 	- clicking the profile in the drawer should go to user profile page
-	- After login, there is no way to get to where we need to go.  Can we please integrate the drawer here for access?
-	- After purchase, it would be IDEAL to go to DETAIL PAGE of library!!!
+	
 Home Page:
 	- we should reorder for demo
 		- tools and training
@@ -80,19 +86,14 @@ Chat:
 	- don't know status
 	- hook up to map button (which doesn't exist yet)
 
-
-STYLING!!!!!!:
-	- font
-	- colors
-	- title
-	- borders
-	- icons in toolbar
-	
 styling:
 	- fonts
 	- colors, borders!
-	- images in toolbar
-	- icons for recommended
+	- titlebar
+	- images in drawer
+	- icons for recommended:  book, blog, podcast
+
+Animations!
 
 
 # Suggested Demo Flow
