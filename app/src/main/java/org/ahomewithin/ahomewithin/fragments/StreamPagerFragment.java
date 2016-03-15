@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -31,12 +30,16 @@ public class StreamPagerFragment extends Fragment {
     @Bind(R.id.pagerSlidingTabs) PagerSlidingTabStrip pagerSlidingTabs;
 
     public static final String ARG_STREAM_TAB = "stream";
-    private ViewType mType;
+    public static final String ARG_OWNED_ITEMS = "my_library";
 
-    public static StreamPagerFragment newInstance(ViewType type) {
+    private ViewType mType;
+    private boolean showOnlyOwned;
+
+    public static StreamPagerFragment newInstance(ViewType type, boolean showOnlyOwned) {
         StreamPagerFragment streamFragment = new StreamPagerFragment();
         Bundle args = new Bundle();
         args.putInt("type", type.ordinal());
+        args.putBoolean(ARG_OWNED_ITEMS, showOnlyOwned);
         streamFragment.setArguments(args);
         return streamFragment;
     }
@@ -49,6 +52,7 @@ public class StreamPagerFragment extends Fragment {
         Bundle bundle = this.getArguments();
         int typeIndex = bundle.getInt("type", ViewType.STORE.ordinal());
         mType = ViewType.values()[typeIndex];
+        showOnlyOwned = bundle.getBoolean(ARG_OWNED_ITEMS);
         initForType(mType);
 
         View convertView = inflater.inflate(R.layout.content_stream_pager, container, false);
@@ -95,9 +99,9 @@ public class StreamPagerFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             if (position == VIDEOS) {
-                return StreamFragment.newInstance(VIDEOS);
+                return StreamFragment.newInstance(VIDEOS, showOnlyOwned);
             } else if (position == CONVERSATIONS) {
-                return StreamFragment.newInstance(CONVERSATIONS);
+                return StreamFragment.newInstance(CONVERSATIONS, showOnlyOwned);
             } else {
                 return null;
             }

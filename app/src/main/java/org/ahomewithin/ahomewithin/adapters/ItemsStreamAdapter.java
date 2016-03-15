@@ -115,6 +115,7 @@ public class ItemsStreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         notifyDataSetChanged();
     }
 
+
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ivItemImage) ImageView ivItemImage;
         @Bind(R.id.tvTitle) TextView tvTitle;

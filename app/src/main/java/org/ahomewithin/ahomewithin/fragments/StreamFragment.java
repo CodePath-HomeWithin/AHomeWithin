@@ -36,16 +36,19 @@ import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
  */
 public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnItemInteraction {
     public static final String ARG_STREAM_TYPE = "stream_type";
+    public static final String ARG_OWNED_ITEMS = "my_library";
     public Item.ITEM_TYPE type;
+    public boolean showOnlyOwned;
     ArrayList<Item> items;
     ItemsStreamAdapter aItems;
     @Bind(R.id.rvStream) RecyclerView rvStream;
 
-    public static StreamFragment newInstance(int streamType) {
+    public static StreamFragment newInstance(int streamType, boolean showOnlyOwned) {
         StreamFragment streamFragment = new StreamFragment();
 
         Bundle args = new Bundle();
         args.putInt(ARG_STREAM_TYPE, streamType);
+        args.putBoolean(ARG_OWNED_ITEMS, showOnlyOwned);
         streamFragment.setArguments(args);
         return streamFragment;
     }
@@ -66,6 +69,8 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
         super.onViewCreated(view, savedInstanceState);
 
         type = Item.ITEM_TYPE.values()[(getArguments().getInt(ARG_STREAM_TYPE))];
+        showOnlyOwned = getArguments().getBoolean(ARG_OWNED_ITEMS);
+
         aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>(), this);
 
         rvStream.setAdapter(aItems);
@@ -74,6 +79,8 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
             @Override
             public void onSuccess(Object obj) {
                 items = (ArrayList<Item>) obj;
+
+                items = getSubsetOfItems(items, type, showOnlyOwned);
                 // stubbed out method
                 //items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
                 aItems.addAll(items);
@@ -103,6 +110,18 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
             }
         });
 
+    }
+
+    // TODO Add show only owned
+    private ArrayList<Item> getSubsetOfItems(ArrayList<Item> items, Item.ITEM_TYPE type, boolean showOnlyOwned) {
+        ArrayList<Item> auxItems = new ArrayList<>();
+        for (Item item: items) {
+            if (item.type == type) {
+                auxItems.add(item);
+            }
+        }
+
+        return auxItems;
     }
 
     @Override

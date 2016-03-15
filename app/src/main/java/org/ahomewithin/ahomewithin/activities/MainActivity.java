@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectLibrary(View v) {
-        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flContent, streamPagerFragment)
                 .addToBackStack("library")
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectToolsAndTechniques(View v) {
-        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
+        Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flContent, streamPagerFragment)
                 .addToBackStack("store")
@@ -190,10 +190,10 @@ public class MainActivity extends AppCompatActivity {
                             case 1: fragment = HomeFragment.newInstance();
                                 break;
                             case 3:
-                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
                                 break;
                             case 4:
-                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
                                 break;
                             case 5:
                                 fragment = EventsFragment.newInstance();
