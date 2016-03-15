@@ -31,6 +31,8 @@ The basic functionality of the app will include:
 
 http://imgur.com/UoaGVOe
 
+http://i.imgur.com/UoaGVOe.gif
+
 
 <img src='http://i.imgur.com/UoaGVOe.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
