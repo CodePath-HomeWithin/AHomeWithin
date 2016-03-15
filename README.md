@@ -29,6 +29,9 @@ The basic functionality of the app will include:
 
 ## Demo
 
+http://imgur.com/UoaGVOe
+
+
 <img src='http://i.imgur.com/UoaGVOe.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 previous:  i.imgur.com/P798p6S.gif
