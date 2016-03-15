@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
@@ -29,12 +30,13 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatroom);
 
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list);
+        listView = (ListView) findViewById(R.id.lvChat);
 
         ParseClient.newInstance(this).getAllUsers(new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
                 values = (ArrayList<User>) obj;
+                setAdapter();
             }
 
             @Override
@@ -49,6 +51,10 @@ public class ChatRoomActivity extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
+
+    }
+
+    private void setAdapter() {
         ArrayAdapter adapter = new ArrayAdapter<User>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
@@ -63,11 +69,20 @@ public class ChatRoomActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                ParseClient client = ParseClient.newInstance(getApplicationContext());
+                if(!client.isUserLoggedIn()) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "You are not logged in",
+                        Toast.LENGTH_SHORT
+                        ).show();
+                    return;
+                }
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                User  user    = (User) listView.getItemAtPosition(position);
+                User user = (User) listView.getItemAtPosition(position);
 
                 Intent intent = new Intent(ChatRoomActivity.this, ChatActivity.class);
                 intent.putExtra("otherEmail", user.email);

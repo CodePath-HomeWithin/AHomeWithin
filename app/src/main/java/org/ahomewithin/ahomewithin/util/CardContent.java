@@ -1,9 +1,11 @@
 package org.ahomewithin.ahomewithin.util;
 
+import java.io.Serializable;
+
 /**
  * Created by xiangyang_xiao on 3/13/16.
  */
-public class CardContent {
+public class CardContent implements Serializable{
 
   public static CardContent getDefault() {
     return new CardContent(
@@ -47,9 +49,13 @@ public class CardContent {
 
   public CardContent(CardContentContent body, CardContentContent heart, CardContentContent soul, CardContentContent mind) {
     this.body = body;
+    this.body.type = CardContentContent.BODY;
     this.heart = heart;
+    this.heart.type = CardContentContent.HEART;
     this.soul = soul;
+    this.soul.type = CardContentContent.SOUL;
     this.mind = mind;
+    this.mind.type = CardContentContent.MIND;
   }
 
   private CardContentContent mind;
