@@ -35,7 +35,6 @@ public class Item implements Serializable {
     public boolean owned;
     public double price;
     public ArrayList<ConversationCard> contentCards;  //
-    public String videoUrl;
     public String contentUrl; //vidoe url
     public String content;  //card json string, use getCardContentFromJsonString below to deJson
 
@@ -104,7 +103,12 @@ public class Item implements Serializable {
         if (newItem.type == ITEM_TYPE.VIDEOS) { //video
             newItem.contentUrl = item.getContent();
         } else { //cards
-            newItem.content = item.getContent();
+            try {
+                newItem.content = item.getContentJson().toString();
+                newItem.contentCards = ConversationCard.fromJson(new JSONObject(newItem.content));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return newItem;
     }

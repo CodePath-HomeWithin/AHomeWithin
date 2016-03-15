@@ -59,6 +59,7 @@ public class MapMarkers {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(v.getContext(), "button clicked", Toast.LENGTH_SHORT).show();
+                        Log.d("MAP", "Chat button clicked");
                     }
                 });
             }

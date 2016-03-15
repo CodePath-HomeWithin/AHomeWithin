@@ -10,16 +10,18 @@
     <string name="about_us">About Us</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="test">Home</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="forget_password">Forgot Your Password?</string>
     <string name="create_new_account">Join Now Free</string>
     <string name="no_account">No Account?</string>
-    <string name="hint_user_name">Please type user name</string>
-    <string name="hint_password">Please type password</string>
-    <string name="hint_phone">Please add your phone number</string>
-    <string name="hint_email">Please add your email address</string>
+    <string name="hint_user_name">User name</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_email">Email address</string>
     <string name="reset_password">Please enter your email</string>
     <string name="or">Or</string>
     <string name="reset_email_hint">Email</string>
@@ -43,6 +45,10 @@
     <string name="type">type</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="hint_desp">describe yourself !</string>
-    <string name="send">send</string>
-    <string name="message_hint">type your message</string>
+
+    <string name="message_hint">Say anything</string>
+    <string name="send">Send</string>
+    <string name="profile_other">Other\'s Profile</string>
+    <string name="profile_me">My Profile</string>
+>>>>>>> Stashed changes
 </resources>

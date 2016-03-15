@@ -1,6 +1,7 @@
 package org.ahomewithin.ahomewithin;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -62,6 +63,10 @@ public class ParseClient {
       }
     }
     return client;
+  }
+
+  public ParseObjectUser getCurParseObjectUser() {
+    return curParseObjectUser;
   }
 
   public void login(final String email, String password, final ParseClientAsyncHandler handler) {
@@ -145,6 +150,10 @@ public class ParseClient {
               curParseObjectUser = users.get(0);
               User.setCurrentUser(curParseObjectUser);
               handler.onSuccess(null);
+            } else if (e != null) {
+              Log.e("xxy_test", e.getMessage());
+            } else {
+              Log.e("xxy_test", "empty");
             }
           }
         }
@@ -158,7 +167,7 @@ public class ParseClient {
   }
 
   public boolean isUserLoggedIn() {
-    return com.parse.ParseUser.getCurrentUser() != null;
+    return curParseObjectUser != null;
   }
 
   public void changeCredentials(String newEmail, String newPassword, final ParseClientAsyncHandler handler) {
@@ -453,13 +462,13 @@ public class ParseClient {
   }
 
   private void getParseObjectUserFromEmail(final String email, final ParseClientAsyncHandler handler) {
-    ParseQuery<ParseObject> query =
+    ParseQuery<ParseObjectUser> query =
         ParseQuery.getQuery(ParseObjectUser.PARSE_NAME);
     query.whereEqualTo("email", email);
     query.findInBackground(
-        new FindCallback<ParseObject>() {
+        new FindCallback<ParseObjectUser>() {
           @Override
-          public void done(List<ParseObject> objects, ParseException e) {
+          public void done(List<ParseObjectUser> objects, ParseException e) {
             if (e == null) {
               if (!objects.isEmpty()) {
                 handler.onSuccess(objects.get(0));

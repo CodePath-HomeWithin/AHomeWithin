@@ -1,11 +1,13 @@
 package org.ahomewithin.ahomewithin.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,10 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.ahomewithin.ahomewithin.AHomeWithinClient;
+import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.activities.UserActivity;
 import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
 import org.ahomewithin.ahomewithin.adapters.ItemsStreamAdapter;
 import org.ahomewithin.ahomewithin.models.Item;
@@ -66,14 +70,19 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 
         rvStream.setAdapter(aItems);
 
-        items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
-        aItems.addAll(items);
+        ParseClient.newInstance(getActivity()).getPurchasableItems(new ParseClientAsyncHandler() {
+            @Override
+            public void onSuccess(Object obj) {
+                items = (ArrayList<Item>) obj;
+                // stubbed out method
+                //items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
+                aItems.addAll(items);
 
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvStream.addItemDecoration(itemDecoration);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rvStream.setLayoutManager(llm);
-        rvStream.setItemAnimator(new FlipInBottomXAnimator());
+                RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+                rvStream.addItemDecoration(itemDecoration);
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                rvStream.setLayoutManager(llm);
+                rvStream.setItemAnimator(new FlipInBottomXAnimator());
 
 //        ItemClickSupport.addTo(rvStream).setOnItemClickListener(
 //                new ItemClickSupport.OnItemClickListener() {
@@ -86,11 +95,26 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 //                    }
 //                }
 //        );
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+
     }
 
     @Override
     public void onBuy(final int position) {
         FragmentManager fm = getFragmentManager();
+
+        if (!ParseClient.newInstance(getActivity()).isUserLoggedIn()) {
+            Log.d("DEBUG", "User is not logged in so go to Login");
+            gotoLogin();
+            return;
+        }
+
         BuyDialog buyDialog = BuyDialog.newInstance(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -105,5 +129,11 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
             }
         });
         buyDialog.show(fm, "");
+    }
+
+    public void gotoLogin() {
+        Intent intent = new Intent(getActivity(), UserActivity.class);
+        intent.putExtra("Message", "For buying products, please Log in or Register");
+        startActivity(intent);
     }
 }

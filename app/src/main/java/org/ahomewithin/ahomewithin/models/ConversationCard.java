@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by chezlui on 11/03/16.
@@ -41,5 +42,23 @@ public class ConversationCard implements Serializable{
         }
 
         return card;
+    }
+
+    public static ArrayList<ConversationCard> fromJson(JSONObject jsonObject) {
+        ArrayList<ConversationCard> cards = new ArrayList<>();
+        try {
+            ConversationCard  mind = fromJson(jsonObject.getJSONObject("mind"), MIND);
+            ConversationCard  body = fromJson(jsonObject.getJSONObject("mind"), BODY);
+            ConversationCard  heart = fromJson(jsonObject.getJSONObject("mind"), HEART);
+            ConversationCard  soul = fromJson(jsonObject.getJSONObject("mind"), SOUL);
+
+            cards.add(mind);
+            cards.add(body);
+            cards.add(heart);
+            cards.add(soul);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cards;
     }
 }

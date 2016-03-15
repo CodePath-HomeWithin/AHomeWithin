@@ -62,10 +62,10 @@ public class DetailFragment extends Fragment {
 
             fvvVideo.setMediaController(mediaController);
             mediaController.setMediaPlayer(fvvVideo);
-            fvvVideo.setVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
+            fvvVideo.setVideo(mItem.contentUrl,
                     MediaFensterPlayerController.DEFAULT_VIDEO_START);
             fvvVideo.start();
-            Log.d("DEBUG", "Watching: " + mItem.videoUrl);
+            Log.d("DEBUG", "Watching: " + mItem.contentUrl);
 
             fvvVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
