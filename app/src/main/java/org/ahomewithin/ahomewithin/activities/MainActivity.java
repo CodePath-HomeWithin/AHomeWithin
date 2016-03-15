@@ -26,6 +26,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
+import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         learnMoreItem,
                         aboutUsItem,
                         new DividerDrawerItem(),
-                        settingsItem,
+                        //settingsItem,
                         chatRoomItem)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE);
                                 break;
                             case 5:
-                                //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
+                                fragment = EventsFragment.newInstance();
                                 break;
                             case 6:
                                 fragment = LearnMoreFragment.newInstance();
@@ -204,10 +205,10 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = AboutUsFragment.newInstance();
                                 break;
                             default:
-                            case 9:
+                            //case 9:
                                 //fragment = LearnMoreFragment.newInstance();
                                 break;
-                            case 10:
+                            case 9:
                                 Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
                                 startActivity(intent);
                         }
