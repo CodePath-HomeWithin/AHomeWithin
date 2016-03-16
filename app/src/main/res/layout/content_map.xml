@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/flMapContainer">
-</FrameLayout>
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/flMapContainer">
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:text="The Awesome Sliding Up Panel"
+        android:textSize="16sp"/>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
