@@ -1,40 +1,32 @@
 package org.ahomewithin.ahomewithin.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.UserActivity;
 import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
 import org.ahomewithin.ahomewithin.adapters.ItemsStreamAdapter;
 import org.ahomewithin.ahomewithin.models.Item;
-import org.ahomewithin.ahomewithin.util.BuyDialog;
+import org.ahomewithin.ahomewithin.util.UserTools;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
 
 /**
  * Created by chezlui on 06/03/16.
  */
-public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnItemInteraction {
+public class StreamFragment extends Fragment {
     public static final String ARG_STREAM_TYPE = "stream_type";
     public static final String ARG_OWNED_ITEMS = "my_library";
     public Item.ITEM_TYPE type;
@@ -71,9 +63,11 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
         type = Item.ITEM_TYPE.values()[(getArguments().getInt(ARG_STREAM_TYPE))];
         showOnlyOwned = getArguments().getBoolean(ARG_OWNED_ITEMS);
 
-        aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>(), this);
+        aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>());
 
         rvStream.setAdapter(aItems);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rvStream.setLayoutManager(llm);
 
         ParseClient.newInstance(getActivity()).getPurchasableItems(new ParseClientAsyncHandler() {
             @Override
@@ -87,15 +81,13 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
 
                 RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
                 rvStream.addItemDecoration(itemDecoration);
-                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                rvStream.setLayoutManager(llm);
                 rvStream.setItemAnimator(new FlipInBottomXAnimator());
 
 //        ItemClickSupport.addTo(rvStream).setOnItemClickListener(
 //                new ItemClickSupport.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                        Intent intent = new Intent(getActivity(), DetailFragment.class);
+//                        Intent intent = new Intent(getActivity(), ConsumerItemFragment.class);
 //                        Tweet tweet = tweets.get(position);
 //                        intent.putExtra("tweet", Parcels.wrap(tweet));
 //                        startActivity(intent);
@@ -117,42 +109,16 @@ public class StreamFragment extends Fragment implements ItemsStreamAdapter.OnIte
         ArrayList<Item> auxItems = new ArrayList<>();
         for (Item item: items) {
             if (item.type == type) {
-                auxItems.add(item);
+                if (showOnlyOwned) {
+                    if(UserTools.isItemPurchased(getActivity(), item.id)) {
+                        auxItems.add(item);
+                    }
+                } else {
+                    auxItems.add(item);
+                }
             }
         }
 
         return auxItems;
-    }
-
-    @Override
-    public void onBuy(final int position) {
-        FragmentManager fm = getFragmentManager();
-
-        if (!ParseClient.newInstance(getActivity()).isUserLoggedIn()) {
-            Log.d("DEBUG", "User is not logged in so go to Login");
-            gotoLogin();
-            return;
-        }
-
-        BuyDialog buyDialog = BuyDialog.newInstance(new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Toast.makeText(getActivity(), "Now you can watch it", Toast.LENGTH_SHORT).show();
-                items.get(position).owned = true;
-                aItems.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-        buyDialog.show(fm, "");
-    }
-
-    public void gotoLogin() {
-        Intent intent = new Intent(getActivity(), UserActivity.class);
-        intent.putExtra("Message", "For buying products, please Log in or Register");
-        startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package org.ahomewithin.ahomewithin.activities;
+package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +14,6 @@ import com.malmstein.fenster.controller.MediaFensterPlayerController;
 import com.malmstein.fenster.view.FensterVideoView;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.fragments.CardsPagerFragment;
 import org.ahomewithin.ahomewithin.models.Item;
 
 import butterknife.Bind;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by chezlui on 07/03/16.
  */
-public class DetailFragment extends Fragment {
+public class ConsumerItemFragment extends Fragment {
     @Bind(R.id.rlVideoContainer) RelativeLayout rlVideoContainer;
     @Bind(R.id.flCardsPager) FrameLayout flCardsPager;
     @Bind(R.id.fvvVideo) FensterVideoView fvvVideo;
@@ -32,20 +31,20 @@ public class DetailFragment extends Fragment {
 
     private Item mItem;
 
-    public static DetailFragment newInstance(Item item) {
-        DetailFragment detailFragment = new DetailFragment();
+    public static ConsumerItemFragment newInstance(Item item) {
+        ConsumerItemFragment consumerItemFragment = new ConsumerItemFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Item.SERIALIZABLE_TAG, item);
-        detailFragment.setArguments(bundle);
+        consumerItemFragment.setArguments(bundle);
 
-        return detailFragment;
+        return consumerItemFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View convertView = inflater.inflate(R.layout.fragment_detail, container, false);
+        View convertView = inflater.inflate(R.layout.fragment_consumer_item, container, false);
 
         return convertView;
     }

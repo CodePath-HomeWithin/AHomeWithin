@@ -49,12 +49,12 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Store/Library Stream Flow:
 [x] looks like both video and conversation cards are in the same list
-[ ] Library page looks exactly like Store page -- should not show BUY
-[ ] on library page, clicking on video should go to video detail player view
-[ ] on library page, clicking on conversation should go to conversation card view
+[x] Library page looks exactly like Store page -- should not show BUY
+[x] on library page, clicking on video should go to video detail player view
+[x] on library page, clicking on conversation should go to conversation card view
 [ ] better, less cluttered images
 [ ] lock landscape/portrait is not supported
-[ ] create detail activity for my library
+[x] create detail activity for my library
 [ ] on library page, over video, show arrow button to go to the detail video player
 	
 
@@ -74,7 +74,7 @@ Home Page:
 Maps:
 [ ] either load users first, or stub users out in json for faster load
 [ ] replace popup with dialog box and working button
-[ ] add gestures to map
+[ ] add gestures to map (pinch, expand)
 
 Events, LearnMore, Recommended:
 [ ] I can own this...  Stub out a little more data and make it look good, perhaps combine into one page
