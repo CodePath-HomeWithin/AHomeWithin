@@ -6,6 +6,7 @@ import com.parse.ParseGeoPoint;
 
 import org.ahomewithin.ahomewithin.parseModel.ParseItem;
 import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
@@ -94,18 +95,37 @@ public class User {
         return newUser;
     }
 
+    public static ArrayList<User> fromJSONArray(JSONArray jsonArray) {
+        ArrayList<User> users = new ArrayList<User>();
+        for(int i = 0; i < jsonArray.length(); i++) {
+            try {
+                JSONObject itemJson = jsonArray.getJSONObject(i);
+                User item = User.fromJSON(itemJson);
+                if (item != null) {
+                    users.add(item);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        return users;
+    }
+
     public static User fromJSON(JSONObject jsonObject) {
         User user = new User();
         try {
             user.lat = jsonObject.getDouble("lat");
-            user.lon = jsonObject.getDouble("lon");
+            user.lon = jsonObject.getDouble("lng");
 
-//            if (!jsonObject.isNull("type")) {
-//                user.type = jsonObject.getString("type");
-//            }
+            if (!jsonObject.isNull("type")) {
 
-            if (!jsonObject.isNull("name")) {
-                user.name = jsonObject.getString("name");
+                //user.type = jsonObject.getString("type");
+                user.type = UserType.SERVICE_PROVIDER;
+            }
+
+            if (!jsonObject.isNull("firstName")) {
+                user.name = jsonObject.getString("firstName");
             }
 
             if (!jsonObject.isNull("desp")) {
@@ -117,4 +137,28 @@ public class User {
         }
         return user;
     }
+
+//    public static User fromJSON(JSONObject jsonObject) {
+//        User user = new User();
+//        try {
+//            user.lat = jsonObject.getDouble("lat");
+//            user.lon = jsonObject.getDouble("lon");
+//
+////            if (!jsonObject.isNull("type")) {
+////                user.type = jsonObject.getString("type");
+////            }
+//
+//            if (!jsonObject.isNull("name")) {
+//                user.name = jsonObject.getString("name");
+//            }
+//
+//            if (!jsonObject.isNull("desp")) {
+//                user.description = jsonObject.getString("desp");
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return user;
+//    }
 }
