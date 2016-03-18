@@ -42,7 +42,8 @@ public class MapMarkers {
 
     public static class ViewHolder {
         public RelativeLayout rlMapPopup;
-        public TextView tvName;
+        public TextView tvTitle;
+        public TextView tvSubtitle;
         public TextView tvDescription;
         public Button btnChat;
         public Marker previousMarker;
@@ -50,9 +51,17 @@ public class MapMarkers {
 
         public ViewHolder(View view) {
             rlMapPopup =  (RelativeLayout) view.findViewById(R.id.rlMapPopup);
-            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+            tvSubtitle = (TextView) view.findViewById(R.id.tvSubtitle);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
             btnChat = (Button) view.findViewById(R.id.btnChat);
+        }
+
+        public void setAllVisible(int visibility) {
+            tvTitle.setVisibility(visibility);
+            tvSubtitle.setVisibility(visibility);
+            tvDescription.setVisibility(visibility);
+            btnChat.setVisibility(visibility);
         }
     }
 
@@ -96,12 +105,16 @@ public class MapMarkers {
         restoreMarker(mMapPopupViewHolder.previousMarker, mMapPopupViewHolder.previousUser);
         if (user != null) {
             highlightMarker(marker, user);
-            //mMapPopupViewHolder.rlMapPopup.setVisibility(View.VISIBLE);
-            mMapPopupViewHolder.tvName.setVisibility(View.VISIBLE);
-            mMapPopupViewHolder.tvDescription.setVisibility(View.VISIBLE);
-            mMapPopupViewHolder.btnChat.setVisibility(View.VISIBLE);
-
-            mMapPopupViewHolder.tvName.setText(user.name);
+            mMapPopupViewHolder.setAllVisible(View.VISIBLE);
+            mMapPopupViewHolder.tvTitle.setText(user.getFullName(true));
+            switch(user.type) {
+                case SERVICE_PROVIDER:
+                    mMapPopupViewHolder.tvSubtitle.setText(R.string.service_provider);
+                    break;
+                case COMMUNITY:
+                    mMapPopupViewHolder.tvSubtitle.setText(R.string.community);
+                    break;
+            }
             mMapPopupViewHolder.tvDescription.setText(user.description);
             mMapPopupViewHolder.btnChat.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,10 +123,7 @@ public class MapMarkers {
                 }
             });
         } else {
-            //mMapPopupViewHolder.rlMapPopup.setVisibility(View.INVISIBLE);
-            mMapPopupViewHolder.tvName.setVisibility(View.INVISIBLE);
-            mMapPopupViewHolder.tvDescription.setVisibility(View.INVISIBLE);
-            mMapPopupViewHolder.btnChat.setVisibility(View.INVISIBLE);
+            mMapPopupViewHolder.setAllVisible(View.INVISIBLE);
         }
         mMapPopupViewHolder.previousMarker = marker;
         mMapPopupViewHolder.previousUser = user;
@@ -147,7 +157,7 @@ public class MapMarkers {
 
     private void createMarkerForUser(GoogleMap map, User user) {
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(user.lat, user.lon));
+        markerOptions.position(new LatLng(user.lat, user.lng));
         Marker marker = map.addMarker(markerOptions);
         restoreMarker(marker, user);
         dropPinEffect(marker);

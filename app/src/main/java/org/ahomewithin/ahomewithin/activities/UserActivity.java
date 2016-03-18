@@ -129,7 +129,7 @@ public class UserActivity extends AppCompatActivity {
                                     public void onSuccess(Object obj) {
                                         Toast.makeText(
                                                 getApplicationContext(),
-                                                "Successfully created user account " + user.name + "; Please log in",
+                                                "Successfully created user account " + user.lastName + "; Please log in",
                                                 Toast.LENGTH_SHORT
                                         ).show();
                                         dialog.dismiss();

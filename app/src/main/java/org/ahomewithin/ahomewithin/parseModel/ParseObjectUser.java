@@ -124,7 +124,7 @@ public class ParseObjectUser extends ParseObject {
 
   public void updateUserBasicInfo(User user) {
     setEmail(user.email);
-    setName(user.name);
+    setName(user.lastName);
     setDesp(user.description);
     setType(user.type);
     setPhone(user.phone);
@@ -132,11 +132,11 @@ public class ParseObjectUser extends ParseObject {
 
   public void updateUser(User user) {
     setEmail(user.email);
-    setName(user.name);
+    setName(user.lastName);
     setDesp(user.description);
     setType(user.type);
     setPhone(user.phone);
-    setGeo(new ParseGeoPoint(user.lat, user.lon));
+    setGeo(new ParseGeoPoint(user.lat, user.lng));
     setItems(new ArrayList<ParseItem>());
     setProfile(user.profileUrl);
   }

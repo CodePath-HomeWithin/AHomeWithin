@@ -28,8 +28,8 @@ public class LoginEditProfileDialogFragment extends LoginCreateUserDialogFragmen
   @Override
   protected void setViewContent() {
     User curUser = User.getCurrentUser();
-    etUserName.setText(curUser.name);
-    etUserName.setSelection(curUser.name.length());
+    etUserName.setText(curUser.lastName);
+    etUserName.setSelection(curUser.lastName.length());
     etPassword.setText(User.PWD_HOLDER);
     etPassword.setSelection(User.PWD_HOLDER.length());
     etEmail.setText(curUser.email);

@@ -50,5 +50,6 @@
     <string name="send">Send</string>
     <string name="profile_other">Other\'s Profile</string>
     <string name="profile_me">My Profile</string>
->>>>>>> Stashed changes
+    <string name="community">Community</string>
+    <string name="service_provider">Service Provider</string>
 </resources>

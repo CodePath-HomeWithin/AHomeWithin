@@ -7,7 +7,7 @@
     "title":"Dr.",
     "firstName":"Wilma",
     "lastName":"Flintstone",
-    "credentials":"PsyD",  // comma-separated
+    "credentials":["PsyD"],
     "description":"Dr. Flintstone entered the field of psychology ten years ago through her work in group homes for foster youth. Inspired by a desire to better serve the children with whom she worked, she returned to school to pursue a graduate degree in clinical psychology. She received a PsyD from the California Institute of Integral Studies in 2012. Dr. Herzberg's training includes work with low-income children and families at the Talkline Family Support Center and with parents and their young children (0-3) at the Infant Parent Program, as well as work with a diverse range of adult clients in various settings. She is currently in private practice in Berkeley, working with adults, adolescents, and children, and developing a specialization in complex trauma. Dr. Herzberg is also a meditation and yoga practitioner and incorporates mindfulness and body awareness into her work."
   },
   {
@@ -25,7 +25,7 @@
     "type":"service_provider",
     "firstName":"Gorge",
     "lastName":"Williams",
-    "credentials":"Therapist",
+    "credentials":["Therapist"],
     "description":"summary goes here...."
 
   }

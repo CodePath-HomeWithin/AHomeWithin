@@ -19,32 +19,40 @@
         android:id="@+id/rlMapPopup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/MapInfoWindow">
+        style="@style/MapInfoWindow"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:ellipsize="end"
-            android:singleLine="true"
             style="@style/MapInfoWindow.Title"/>
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:layout_below="@+id/tvName"
-            style="@style/MapInfoWindow.Body" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnChat"
             android:text="@string/start_chat"
-            android:layout_below="@+id/tvDescription"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/tvTitle"
             style="@style/MapInfoWindow.Button"/>
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:text="subtitle"
+            style="@style/MapInfoWindow.Subtitle"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSubtitle"
+            android:text="description"
+            style="@style/MapInfoWindow.Body" />
 
     </RelativeLayout>
 
