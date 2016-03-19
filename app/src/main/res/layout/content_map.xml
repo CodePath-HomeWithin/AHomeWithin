@@ -19,8 +19,7 @@
         android:id="@+id/rlMapPopup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/MapInfoWindow"
-        android:background="?attr/selectableItemBackground">
+        style="@style/MapInfoWindow">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -30,12 +29,14 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:id="@+id/btnChat"
-            android:text="@string/start_chat"
+            android:text="@string/chat_now"
             android:visibility="invisible"
             android:layout_alignParentRight="true"
+            android:paddingRight="@dimen/map_popup_margin"
             android:layout_alignRight="@+id/tvTitle"
+            android:layout_alignTop="@+id/tvTitle"
             style="@style/MapInfoWindow.Button"/>
 
         <TextView
@@ -43,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTitle"
-            android:text="subtitle"
             style="@style/MapInfoWindow.Subtitle"/>
 
         <TextView
@@ -51,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvSubtitle"
-            android:text="description"
             style="@style/MapInfoWindow.Body" />
 
     </RelativeLayout>
