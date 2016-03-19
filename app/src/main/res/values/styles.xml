@@ -135,6 +135,18 @@
         <item name="android:textColor">@color/colorTextIcons</item>
     </style>
 
+
+    <!-- Recommended theme. -->
+    <style name="Recommended">
+    </style>
+
+    <style name="RecommendedText" parent="conv_card_sections_body">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+
+
+    <!-- Home Menu theme. -->
     <style name="home_menu_item_image">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">180dp</item>

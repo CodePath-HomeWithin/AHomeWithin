@@ -89,10 +89,18 @@ public class Recommended {
     public static RecommendedType mapToType(String type) {
         RecommendedType rt = RecommendedType.OTHER;
         switch(type) {
-            case "book":  rt = RecommendedType.BOOK;
-            case "podcast": rt = RecommendedType.PODCAST;
-            case "blog": rt = RecommendedType.BLOG;
-            case "article": rt = RecommendedType.ARTICLE;
+            case "book":
+                rt = RecommendedType.BOOK;
+                break;
+            case "podcast":
+                rt = RecommendedType.PODCAST;
+                break;
+            case "blog":
+                rt = RecommendedType.BLOG;
+                break;
+            case "article":
+                rt = RecommendedType.ARTICLE;
+                break;
         }
         return rt;
     }

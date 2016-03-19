@@ -66,16 +66,17 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         }
         switch(item.type) {
             case BOOK:
-                // set drawable book
-                // Glide.with(mContext).load(item.imageUrl).into(viewHolder.ivImageType);
+                Glide.with(mContext).load(R.drawable.ic_more_book).into(viewHolder.ivImageType);
                 break;
             case PODCAST:
-
+                Glide.with(mContext).load(R.drawable.ic_more_podcast).into(viewHolder.ivImageType);
                 break;
             case BLOG:
+                Glide.with(mContext).load(R.drawable.ic_more_blog).into(viewHolder.ivImageType);
                 break;
             default:
                 // other
+                Glide.with(mContext).load(R.drawable.ic_more_book).into(viewHolder.ivImageType);
         }
     }
 

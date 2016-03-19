@@ -21,7 +21,7 @@ public class LearnMoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View convertView = inflater.inflate(R.layout.content_learn_more, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.recommended);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.learn_more);
         if (savedInstanceState == null) {
             RecommendedFragment fragmentRecommendations = RecommendedFragment.newInstance();
             getFragmentManager().beginTransaction()

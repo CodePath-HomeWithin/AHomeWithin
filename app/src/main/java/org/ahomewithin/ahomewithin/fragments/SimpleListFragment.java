@@ -33,33 +33,36 @@ public abstract class SimpleListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_simple_list, container, false);
     }
 
+    public abstract void bindRecycleViewToLayoutManager(RecyclerView rvItems);
+
     protected void setupViews(View view, ArrayList<?> itemsList, SimpleListAdapter adapter) {
         listOfItems = itemsList;
         itemsAdapter = adapter;
         rvItems = (RecyclerView) view.findViewById(R.id.rvItems);
         rvItems.setAdapter(itemsAdapter.getAdapter());
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        bindRecycleViewToLayoutManager(rvItems);
 
 
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        layoutManager.scrollToPosition(0);
-//        rvItems.setLayoutManager(layoutManager);
-
-        // First param is number of columns and second param is orientation i.e Vertical or Horizontal
-        StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-// Attach the layout manager to the recycler view
-        rvItems.setLayoutManager(gridLayoutManager);
-
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvItems.addItemDecoration(itemDecoration);
-        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                loadMore(page, totalItemsCount);
-            }
-        });
+////        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+////        layoutManager.scrollToPosition(0);
+////        rvItems.setLayoutManager(layoutManager);
+//
+//        // First param is number of columns and second param is orientation i.e Vertical or Horizontal
+//        StaggeredGridLayoutManager gridLayoutManager =
+//                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//// Attach the layout manager to the recycler view
+//        rvItems.setLayoutManager(gridLayoutManager);
+//
+//        RecyclerView.ItemDecoration itemDecoration = new
+//                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+//        rvItems.addItemDecoration(itemDecoration);
+//        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount) {
+//                loadMore(page, totalItemsCount);
+//            }
+//        });
 
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
