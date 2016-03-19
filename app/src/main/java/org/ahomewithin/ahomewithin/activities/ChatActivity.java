@@ -22,11 +22,16 @@ import org.ahomewithin.ahomewithin.parseModel.ParseMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
+public class ChatActivity extends AppCompatActivity {
+  @Bind(R.id.etMessage)
   EditText etParseMessage;
+  @Bind(R.id.btSend)
   Button btSend;
 
+  @Bind(R.id.lvChat)
   ListView lvChat;
   ArrayList<ParseMessage> mParseMessages;
   ChatListAdapter mAdapter;
@@ -38,6 +43,8 @@ public class ChatActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_chat);
+    ButterKnife.bind(this);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     client = ParseClient.newInstance(this);
@@ -48,7 +55,6 @@ public class ChatActivity extends AppCompatActivity {
       mHandler.postDelayed(mRefreshParseMessagesRunnable, POLL_INTERVAL);
     }
 
-    //TODO : this should be an intent
     //with the other users email
     otherEmail = getIntent().getStringExtra("otherEmail");
   }
@@ -58,14 +64,14 @@ public class ChatActivity extends AppCompatActivity {
   }
 
   private void setupParseMessagePosting() {
-    etParseMessage = (EditText) findViewById(R.id.etMessage);
-    btSend = (Button) findViewById(R.id.btSend);
-    lvChat = (ListView) findViewById(R.id.lvChat);
     mParseMessages = new ArrayList<>();
     lvChat.setTranscriptMode(1);
     mFirstLoad = true;
-    final String userId = client.getCurParseObjectUser().getObjectId();
-    mAdapter = new ChatListAdapter(ChatActivity.this, userId, mParseMessages);
+    mAdapter = new ChatListAdapter(
+        ChatActivity.this,
+        client.getCurParseObjectUser(),
+        mParseMessages
+    );
     lvChat.setAdapter(mAdapter);
     btSend.setOnClickListener(new View.OnClickListener() {
       @Override

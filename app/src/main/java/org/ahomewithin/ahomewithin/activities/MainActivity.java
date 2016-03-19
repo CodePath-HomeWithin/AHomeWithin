@@ -38,24 +38,28 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.nvView) NavigationView nvView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.nvView)
+    NavigationView nvView;
     private Drawer drawer;
     private AccountHeader accountHeader;
+    private ParseClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        client = ParseClient.newInstance(this);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
 
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, homeFragment)
-                .addToBackStack("home")
-                .commit();
+            .replace(R.id.flContent, homeFragment)
+            .addToBackStack("home")
+            .commit();
 
         createDrawer();
 
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    
+
     // `onPostCreate` called when activity start-up is complete after `onStart()`
     // NOTE! Make sure to override the method with only a single `Bundle` argument
     @Override
@@ -106,16 +110,19 @@ public class MainActivity extends AppCompatActivity {
         Runtime runtime = Runtime.getRuntime();
         try {
             Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
-            int     exitValue = ipProcess.waitFor();
+            int exitValue = ipProcess.waitFor();
             return (exitValue == 0);
-        } catch (IOException e)          { e.printStackTrace(); }
-        catch (InterruptedException e) { e.printStackTrace(); }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     private void showSnackbar(String message) {
         final Snackbar snackBar = Snackbar.make(findViewById(R.id.dlDrawer),
-                message, Snackbar.LENGTH_INDEFINITE);
+            message, Snackbar.LENGTH_INDEFINITE);
 
         snackBar.setAction("Dismiss", new View.OnClickListener() {
             @Override
@@ -129,25 +136,25 @@ public class MainActivity extends AppCompatActivity {
     public void onSelectLibrary(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, streamPagerFragment)
-                .addToBackStack("library")
-                .commit();
+            .replace(R.id.flContent, streamPagerFragment)
+            .addToBackStack("library")
+            .commit();
     }
 
     public void onSelectNearYou(View v) {
         Fragment mapFragment = MapFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, mapFragment)
-                .addToBackStack("map")
-                .commit();
+            .replace(R.id.flContent, mapFragment)
+            .addToBackStack("map")
+            .commit();
     }
 
     public void onSelectToolsAndTechniques(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, streamPagerFragment)
-                .addToBackStack("store")
-                .commit();
+            .replace(R.id.flContent, streamPagerFragment)
+            .addToBackStack("store")
+            .commit();
     }
 
     private void createDrawer() {
@@ -160,90 +167,93 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem learnMoreItem = new PrimaryDrawerItem().withName(R.string.learn_more);
         PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us);
         PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings);
-        PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName("Chat");
-        // TODO Used for testing, erase for demo
-        PrimaryDrawerItem loginItem = new PrimaryDrawerItem().withName("Login / Logout");
-
+        PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName(R.string.chat);
+        PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withName(R.string.logout);
 
         // do something with the clicked item :D
         //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
         drawer = new DrawerBuilder()
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withAccountHeader(accountHeader)
-                .addDrawerItems(
-                        homeItem,
-                        new DividerDrawerItem(),
-                        myLibraryItem,
-                        trainingItem,
-                        eventsItem,
-                        learnMoreItem,
-                        aboutUsItem,
-                        new DividerDrawerItem(),
-                        //settingsItem,
-                        chatRoomItem,
-                        loginItem)
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
-                        Fragment fragment = null;
-                        Log.d("DEBUG", "Clicked item nº" + position);
-                        switch(position) {
-                            case 1: fragment = HomeFragment.newInstance();
-                                break;
-                            case 3:
-                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
-                                break;
-                            case 4:
-                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
-                                break;
-                            case 5:
-                                fragment = EventsFragment.newInstance();
-                                break;
-                            case 6:
-                                fragment = LearnMoreFragment.newInstance();
-                                break;
-                            case 7:
-                                fragment = AboutUsFragment.newInstance();
-                                break;
-                            default:
+            .withActivity(this)
+            .withToolbar(toolbar)
+            .withAccountHeader(accountHeader)
+            .addDrawerItems(
+                homeItem,
+                new DividerDrawerItem(),
+                myLibraryItem,
+                trainingItem,
+                eventsItem,
+                learnMoreItem,
+                aboutUsItem,
+                new DividerDrawerItem(),
+                //settingsItem,
+                chatRoomItem,
+                logoutItem)
+            .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                @Override
+                public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                    // do something with the clicked item :D
+                    Fragment fragment = null;
+                    Log.d("DEBUG", "Clicked item nº" + position);
+                    switch (position) {
+                        case 1:
+                            fragment = HomeFragment.newInstance();
+                            break;
+                        case 3:
+                            fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
+                            break;
+                        case 4:
+                            fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
+                            break;
+                        case 5:
+                            fragment = EventsFragment.newInstance();
+                            break;
+                        case 6:
+                            fragment = LearnMoreFragment.newInstance();
+                            break;
+                        case 7:
+                            fragment = AboutUsFragment.newInstance();
+                            break;
+
+                        case 9:
+                            Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+                            startActivity(intent);
+                            break;
+                        case 10:
+                            if (client.isUserLoggedIn()) {
+                                client.logout();
+                            }
+                            break;
+                        default:
+                            Log.e("NavigationViewError", "select non-existing item");
                             //case 9:
-                                //fragment = LearnMoreFragment.newInstance();
-                                break;
-                            case 9:
-                                Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-                                startActivity(intent);
-                            case 10:
-                                intent = new Intent(MainActivity.this, UserActivity.class);
-                                startActivity(intent);
-                        }
-
-                        gotoFragment(fragment);
-
-                        return true;
+                            //fragment = LearnMoreFragment.newInstance();
                     }
-                })
-                .build();
+
+                    gotoFragment(fragment);
+
+                    return true;
+                }
+            })
+            .build();
     }
 
     private AccountHeader createAccountHeader() {
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.kids_1)
-                .withSelectionListEnabledForSingleProfile(false)
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        // TODO Add go to profile fragment
-                        return true;
-                    }
-                })
-                .addProfiles(
-                        new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
-                )
-                .build();
+            .withActivity(this)
+            .withHeaderBackground(R.drawable.kids_1)
+            .withSelectionListEnabledForSingleProfile(false)
+            .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                @Override
+                public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                    // TODO Add go to profile fragment
+                    return true;
+                }
+            })
+            .addProfiles(
+                new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
+            )
+            .build();
 
 
         return headerResult;
@@ -252,9 +262,9 @@ public class MainActivity extends AppCompatActivity {
     private void gotoFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flContent, fragment)
-                    .addToBackStack(null)
-                    .commit();
+                .replace(R.id.flContent, fragment)
+                .addToBackStack(null)
+                .commit();
         }
 
         drawer.closeDrawer();
@@ -262,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkIfLoggedInAndProceed(Fragment fragment) {
 
-        if(!ParseClient.newInstance(this).isUserLoggedIn()) {
+        if (!ParseClient.newInstance(this).isUserLoggedIn()) {
             Log.d("DEBUG", "User is not logged in so go to Login");
             gotoLogin();
         } else {
