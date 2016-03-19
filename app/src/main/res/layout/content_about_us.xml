@@ -1,11 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="About Us..."/>
+    <ScrollView android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/conv_card_title"
+                android:text="History"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/conv_card_sections_body"
+                android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
+                android:text="Founded in San Francisco in 1994 as a small, loosely organized network of like-minded therapists, A Home Within is currently celebrating nearly 15 years as a national nonprofit.  Our founder, Dr. Toni Heineman, continues to serve as our Executive Director, and one of our very first therapists, Dr. Wendy von Wiederhold, is now our Director of Programs."/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivAboutUs1"
+                android:layout_marginTop="20dp"
+                tools:src="@drawable/aboutus_1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/conv_card_title"
+                android:text="A Home Within..."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/conv_card_sections_body"
+                android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
+                android:text="is the only national organization dedicated solely to meeting the emotional needs of foster youth.
+We began by recognizing a need to bring stable, caring relationships into the lives of foster youth; research continues to demonstrate the healing power of relationships, and we continue to provide this service as we keep vigilant to other ways in which we can help.  We’ve recently expanded our impact by educating and supporting other adults who interact with foster youth and similarly vulnerable populations.   Fostering Relationships offers an array of online trainings and real-world tools for relationship-based, trauma-informed care."/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivAboutUs2"
+                android:layout_marginTop="20dp"
+                tools:src="@drawable/aboutus_2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/conv_card_title"
+                android:text="Mission"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/conv_card_sections_body"
+                android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
+                android:text="A Home Within creates and supports lasting, caring relationships.  Our direct services, education, and advocacy focus solely on enhancing the emotional well-being of the foster-care community."/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivAboutUs3"
+                android:layout_marginTop="20dp"
+                tools:src="@drawable/aboutus_3"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp" />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

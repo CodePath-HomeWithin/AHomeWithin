@@ -28,9 +28,13 @@ public class AddressHelper {
                     address.setAddressLine(i, line);
                 }
             }
-            address.setLocality(jsonObject.getString("city"));
+            if (!jsonObject.isNull("city")) {
+                address.setLocality(jsonObject.getString("city"));
+            }
             address.setCountryCode("US");
-            address.setPostalCode(jsonObject.getString("zipcode"));
+            if (!jsonObject.isNull("zipcode")) {
+                address.setPostalCode(jsonObject.getString("zipcode"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
