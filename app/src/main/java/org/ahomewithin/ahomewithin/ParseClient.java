@@ -162,6 +162,7 @@ public class ParseClient {
 
   public void logout() {
     if (isUserLoggedIn()) {
+      curParseObjectUser = null;
       ParseUser.logOutInBackground();
     }
   }

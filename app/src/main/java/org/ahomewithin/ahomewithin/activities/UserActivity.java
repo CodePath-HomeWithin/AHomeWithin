@@ -1,7 +1,6 @@
 package org.ahomewithin.ahomewithin.activities;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +19,6 @@ import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.LoginCreateUserDialogFragment;
 import org.ahomewithin.ahomewithin.fragments.LoginResetPasswordDialogFragment;
 import org.ahomewithin.ahomewithin.models.User;
-import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
 import org.ahomewithin.ahomewithin.util.UserTools;
 
@@ -39,7 +36,6 @@ public class UserActivity extends AppCompatActivity {
     @Bind(R.id.tilPassword)
     TextInputLayout tilPassword;
     @Bind(R.id.tvUserLoginAdvice) TextView tvUserLoginAdvice;
-    @Bind(R.id.btnLogout) Button btnLogout;
 
     private static ParseClient client;
 
@@ -51,7 +47,7 @@ public class UserActivity extends AppCompatActivity {
         client = ParseClient.newInstance(this);
         setListeners();
         String message = getIntent().getStringExtra("Message");
-        if ((message != null) || (message != "")) {
+        if (message != null && message.equals("")) {
             tvUserLoginAdvice.setText(message);
         }
     }
@@ -104,30 +100,22 @@ public class UserActivity extends AppCompatActivity {
                 email, password, new ParseClientAsyncHandler() {
                     @Override
                     public void onSuccess(Object obj) {
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
                         UserTools.loginUser(UserActivity.this, email);
                         Toast.makeText(
                                 getApplicationContext(),
                                 "Successfully logged in",
                                 Toast.LENGTH_SHORT).show();
+                        finish();
                     }
 
                     @Override
                     public void onFailure(String error) {
+                        UserTools.logoutUser(UserActivity.this, email);
                         tilPassword.setErrorEnabled(true);
                         tilPassword.setError("ParseObjectUser name and Password do not match our record!!!");
-                        UserTools.logoutUser(UserActivity.this, email);
                     }
                 }
         );
-    }
-
-    @OnClick(R.id.btnLogout)
-    public void logoutUser() {
-        ParseObjectUser user = client.getCurParseObjectUser();
-        UserTools.logoutUser(UserActivity.this, user.getEmail());
-        client.logout();
     }
 
     @OnClick(R.id.btnJoin)
