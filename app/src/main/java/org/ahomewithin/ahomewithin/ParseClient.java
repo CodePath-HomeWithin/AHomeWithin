@@ -462,7 +462,7 @@ public class ParseClient {
     );
   }
 
-  private void getParseObjectUserFromEmail(final String email, final ParseClientAsyncHandler handler) {
+  public void getParseObjectUserFromEmail(final String email, final ParseClientAsyncHandler handler) {
     ParseQuery<ParseObjectUser> query =
         ParseQuery.getQuery(ParseObjectUser.PARSE_NAME);
     query.whereEqualTo("email", email);

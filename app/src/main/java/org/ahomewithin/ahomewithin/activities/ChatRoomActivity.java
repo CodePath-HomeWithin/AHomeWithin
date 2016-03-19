@@ -14,6 +14,7 @@ import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.ChatUsersRecyclerViewAdapter;
 import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.ahomewithin.ahomewithin.util.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object obj) {
                 users = (ArrayList<User>) obj;
+
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 rvUsers.setLayoutManager(layoutManager);
                 rvUsers.setHasFixedSize(true);
@@ -56,17 +58,9 @@ public class ChatRoomActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(View itemView, int position) {
                             String otherEmail = users.get(position).email;
-                            if (client.getCurParseObjectUser().getEmail().equals(otherEmail)) {
-                                Toast.makeText(
-                                    getApplicationContext(),
-                                    "You can not chat with yourself",
-                                    Toast.LENGTH_SHORT
-                                ).show();
-                            } else {
-                                Intent newIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                                newIntent.putExtra("otherEmail", otherEmail);
-                                startActivity(newIntent);
-                            }
+                            Intent newIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                            newIntent.putExtra("otherEmail", otherEmail);
+                            startActivity(newIntent);
                         }
                     }
                 );
@@ -94,5 +88,25 @@ public class ChatRoomActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ParseObjectUser currentUser = client.getCurParseObjectUser();
+        if (currentUser != null) {
+            int curUsrIdx = -1;
+            for (int idx = 0; idx < users.size(); idx++) {
+                if (client.getCurParseObjectUser().getEmail().equals(
+                    users.get(idx).email)) {
+                    curUsrIdx = idx;
+                }
+            }
+            if (curUsrIdx != -1) {
+                users.remove(curUsrIdx);
+                rcAdapter.notifyItemRemoved(curUsrIdx);
+            }
+        }
+
     }
 }
