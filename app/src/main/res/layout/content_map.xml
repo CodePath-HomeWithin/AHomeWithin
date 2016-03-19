@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/flMapContainer">
-</FrameLayout>
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/flMapContainer">
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMapPopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MapInfoWindow"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MapInfoWindow.Title"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnChat"
+            android:text="@string/start_chat"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/tvTitle"
+            style="@style/MapInfoWindow.Button"/>
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:text="subtitle"
+            style="@style/MapInfoWindow.Subtitle"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSubtitle"
+            android:text="description"
+            style="@style/MapInfoWindow.Body" />
+
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

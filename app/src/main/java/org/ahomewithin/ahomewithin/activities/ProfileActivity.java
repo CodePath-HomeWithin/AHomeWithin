@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
   private void setProfileContent(User curUser) {
     int customColor = R.color.colorPrimaryDark;
     tvUserName.setText(
-        CustomStyle.stylizeFirstPart("User  Name  : ", curUser.name, customColor)
+        CustomStyle.stylizeFirstPart("User  Name  : ", curUser.lastName, customColor)
     );
     tvEmail.setText(
         CustomStyle.stylizeFirstPart("Email  Addr : ", curUser.email, customColor)

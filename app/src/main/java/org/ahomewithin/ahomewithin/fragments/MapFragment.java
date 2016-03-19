@@ -99,7 +99,7 @@ public class MapFragment extends Fragment implements
         enableMyLocation();
 
         if (mMapMarkers != null) {
-            mMapMarkers.addMarkersToMap(mMap, getActivity().getLayoutInflater());
+            mMapMarkers.addMarkersToMap(mMap);
         }
     }
 
