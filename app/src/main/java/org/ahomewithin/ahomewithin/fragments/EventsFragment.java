@@ -23,7 +23,7 @@ public class EventsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View convertView = inflater.inflate(R.layout.content_services, container, false);
+        View convertView = inflater.inflate(R.layout.content_events, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.events);
         if (savedInstanceState == null) {
             EventsListFragment fragmentEvents = EventsListFragment.newInstance();

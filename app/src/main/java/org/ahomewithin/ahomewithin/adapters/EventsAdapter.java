@@ -2,11 +2,13 @@ package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,21 +27,19 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         implements SimpleListAdapter {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public RelativeLayout rlEventContainer;
+        public LinearLayout llEventContainer;
         public TextView tvGroupName;
         public TextView tvEventName;
         public ImageView ivImage;
         public TextView tvDescription;
-        public TextView tvLocation;
         public TextView tvDateTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            rlEventContainer = (RelativeLayout) itemView.findViewById(R.id.rlEventContainer);
+            llEventContainer = (LinearLayout) itemView.findViewById(R.id.llEventContainer);
             tvGroupName = (TextView) itemView.findViewById(R.id.tvGroupName);
             tvEventName = (TextView) itemView.findViewById(R.id.tvEventName);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
-            tvLocation = (TextView) itemView.findViewById(R.id.tvLocation);
             tvDateTime = (TextView) itemView.findViewById(R.id.tvDateTime);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
         }
@@ -65,14 +65,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         Event item = events.get(position);
         viewHolder.tvGroupName.setText(item.groupName);
         viewHolder.tvEventName.setText(item.eventName);
-        viewHolder.tvDescription.setText(item.description);
-        viewHolder.tvLocation.setText(item.getLocation());
         viewHolder.tvDateTime.setText(item.getDateTime());
         Glide.with(mContext).load(item.imageUrl).into(viewHolder.ivImage);
 
         String url = item.getUrl();
         if (url != null) {
-            viewHolder.rlEventContainer.setOnClickListener(new OnClickListener() {
+            viewHolder.llEventContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // TODO:  need to bind url to this clickevent

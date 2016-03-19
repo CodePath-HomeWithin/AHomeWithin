@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,18 @@ public abstract class SimpleListFragment extends Fragment {
         rvItems = (RecyclerView) view.findViewById(R.id.rvItems);
         rvItems.setAdapter(itemsAdapter.getAdapter());
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-        rvItems.setLayoutManager(layoutManager);
+
+
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        layoutManager.scrollToPosition(0);
+//        rvItems.setLayoutManager(layoutManager);
+
+        // First param is number of columns and second param is orientation i.e Vertical or Horizontal
+        StaggeredGridLayoutManager gridLayoutManager =
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+// Attach the layout manager to the recycler view
+        rvItems.setLayoutManager(gridLayoutManager);
+
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
         rvItems.addItemDecoration(itemDecoration);
