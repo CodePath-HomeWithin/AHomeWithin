@@ -1,6 +1,7 @@
 package org.ahomewithin.ahomewithin;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import com.parse.FindCallback;
@@ -38,6 +39,7 @@ public class ParseClient {
 
   private ParseObjectUser curParseObjectUser;
   private String curParseObjectUserEmailAddress;
+  private Handler messageRunnableHandler;
 
   public ParseClient(Context context) {
 
@@ -51,6 +53,10 @@ public class ParseClient {
         .clientKey("myMasterKey")  // set explicitly unless clientKey is explicitly configured on Parse server
         .addNetworkInterceptor(new ParseLogInterceptor())
         .server("https://chatcodepath.herokuapp.com/parse/").build());
+  }
+
+  public void setMessageRunnableHandler(Handler handler) {
+    messageRunnableHandler = handler;
   }
 
   public static ParseClient newInstance(Context context) {
@@ -164,6 +170,9 @@ public class ParseClient {
     if (isUserLoggedIn()) {
       curParseObjectUser = null;
       ParseUser.logOutInBackground();
+    }
+    if(messageRunnableHandler!=null) {
+      messageRunnableHandler.removeCallbacksAndMessages(null);
     }
   }
 

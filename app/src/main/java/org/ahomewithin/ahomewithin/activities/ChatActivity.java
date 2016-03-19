@@ -37,9 +37,11 @@ public class ChatActivity extends AppCompatActivity {
     ArrayList<ParseMessage> mParseMessages;
     ChatListAdapter mAdapter;
     boolean mFirstLoad;
-    ParseClient client;
     ParseObjectUser otherUser;
     String otherEmail;
+    ParseClient client;
+
+    static final int POLL_INTERVAL = 100; // milliseconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,16 @@ public class ChatActivity extends AppCompatActivity {
         //with the other users email
         otherEmail = getIntent().getStringExtra("otherEmail");
 
+        final Handler mHandler = new Handler();  // android.os.Handler
+
+        final Runnable mRefreshParseMessagesRunnable = new Runnable() {
+            @Override
+            public void run() {
+                refreshParseMessages();
+                mHandler.postDelayed(this, POLL_INTERVAL);
+            }
+        };
+        client.setMessageRunnableHandler(mHandler);
         client.getParseObjectUserFromEmail(otherEmail, new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
@@ -130,15 +142,5 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
-    static final int POLL_INTERVAL = 100; // milliseconds
-    Handler mHandler = new Handler();  // android.os.Handler
-    Runnable mRefreshParseMessagesRunnable = new Runnable() {
-        @Override
-        public void run() {
-            refreshParseMessages();
-            mHandler.postDelayed(this, POLL_INTERVAL);
-        }
-    };
 
 }

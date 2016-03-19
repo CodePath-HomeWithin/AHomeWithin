@@ -69,6 +69,21 @@ public class ChatRoomActivity extends AppCompatActivity {
                 alphaAdapter.setInterpolator(new OvershootInterpolator());
                 alphaAdapter.setFirstOnly(false);
                 rvUsers.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
+
+                ParseObjectUser currentUser = client.getCurParseObjectUser();
+                if (currentUser != null) {
+                    int curUsrIdx = -1;
+                    for (int idx = 0; idx < users.size(); idx++) {
+                        if (client.getCurParseObjectUser().getEmail().equals(
+                            users.get(idx).email)) {
+                            curUsrIdx = idx;
+                        }
+                    }
+                    if (curUsrIdx != -1) {
+                        users.remove(curUsrIdx);
+                        rcAdapter.notifyItemRemoved(curUsrIdx);
+                    }
+                }
             }
 
             @Override
@@ -83,30 +98,6 @@ public class ChatRoomActivity extends AppCompatActivity {
                 ).show();
             }
         });
-
-        if (!client.isUserLoggedIn()) {
-            Intent intent = new Intent(this, UserActivity.class);
-            startActivity(intent);
-        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ParseObjectUser currentUser = client.getCurParseObjectUser();
-        if (currentUser != null && users != null) {
-            int curUsrIdx = -1;
-            for (int idx = 0; idx < users.size(); idx++) {
-                if (client.getCurParseObjectUser().getEmail().equals(
-                    users.get(idx).email)) {
-                    curUsrIdx = idx;
-                }
-            }
-            if (curUsrIdx != -1) {
-                users.remove(curUsrIdx);
-                rcAdapter.notifyItemRemoved(curUsrIdx);
-            }
-        }
-
-    }
 }
