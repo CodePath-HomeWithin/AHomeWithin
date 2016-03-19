@@ -21,11 +21,12 @@ public class Event {
 
     public int id;
     public String groupName;
+    public String groupDescription;
     public String eventName;
+    public String eventDescription;
     public String url;
     public String imageUrl;
-    public String summary;
-    public String description;
+    public String locationName;
     public Address address;
     public Date date;
     public String startTime;
@@ -38,19 +39,46 @@ public class Event {
     public static Event fromJSON(JSONObject jsonObject) {
         Event event = new Event();
         try {
-            event.id = jsonObject.getInt("id");
-            event.groupName = jsonObject.getString("group_name");
-            event.eventName = jsonObject.getString("event_name");
-            event.url = jsonObject.getString("url");
-            event.imageUrl = jsonObject.getString("imageUrl");
-            event.summary = jsonObject.getString("summary");
-            event.description = jsonObject.getString("description");
-            event.startTime = jsonObject.getString("startTime");
-            event.endTime = jsonObject.getString("endTime");
-            event.address = AddressHelper.addressFromJson(jsonObject.getJSONObject("address"));
-            String dateStr = jsonObject.getString("date");
-            if (dateStr != null) {
-                event.date = DateHelper.parseDate(dateStr, "MM-dd-yyyy");
+            if (!jsonObject.isNull("id")) {
+                event.id = jsonObject.getInt("id");
+            }
+            if (!jsonObject.isNull("groupName")) {
+                event.groupName = jsonObject.getString("groupName");
+            }
+            if (!jsonObject.isNull("groupDescription")) {
+                event.groupDescription = jsonObject.getString("groupDescription");
+            }
+            if (!jsonObject.isNull("eventName")) {
+                event.eventName = jsonObject.getString("eventName");
+            }
+            if (!jsonObject.isNull("eventDescription")) {
+                event.eventDescription = jsonObject.getString("eventDescription");
+            }
+            if (!jsonObject.isNull("url")) {
+                event.url = jsonObject.getString("url");
+            }
+            if (!jsonObject.isNull("imageUrl")) {
+                event.imageUrl = jsonObject.getString("imageUrl");
+            }
+
+            if (!jsonObject.isNull("startTime")) {
+                event.startTime = jsonObject.getString("startTime");
+            }
+            if (!jsonObject.isNull("endTime")) {
+                event.endTime = jsonObject.getString("endTime");
+            }
+            if (!jsonObject.isNull("location")) {
+                JSONObject location = jsonObject.getJSONObject("location");
+                if (!location.isNull("name")) {
+                    event.locationName = location.getString("name");
+                }
+                event.address = AddressHelper.addressFromJson(jsonObject.getJSONObject("location"));
+            }
+            if (!jsonObject.isNull("date")) {
+                String dateStr = jsonObject.getString("date");
+                if (dateStr != null) {
+                    event.date = DateHelper.parseDate(dateStr, "MM-dd-yyyy");
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

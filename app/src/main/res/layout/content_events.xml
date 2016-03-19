@@ -4,19 +4,10 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/events_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/events_title"
-        android:textAppearance="@style/TitleTextAppearance"
-        android:padding="10dp"/>
-
     <FrameLayout
         android:id="@+id/flEvents"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/events_title">
+        android:layout_height="match_parent">
     </FrameLayout>
 
 </RelativeLayout>
