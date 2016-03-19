@@ -54,4 +54,5 @@
     <string name="community">Community</string>
     <string name="service_provider">Service Provider</string>
     <string name="chat">chat</string>
+    <string name="chat_now">Chat now...</string>
 </resources>
