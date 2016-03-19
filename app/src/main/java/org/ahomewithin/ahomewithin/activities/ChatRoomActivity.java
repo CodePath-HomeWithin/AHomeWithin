@@ -94,7 +94,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ParseObjectUser currentUser = client.getCurParseObjectUser();
-        if (currentUser != null) {
+        if (currentUser != null && users != null) {
             int curUsrIdx = -1;
             for (int idx = 0; idx < users.size(); idx++) {
                 if (client.getCurParseObjectUser().getEmail().equals(
