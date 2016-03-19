@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us);
         PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings);
         PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName("Chat");
+        // TODO Used for testing, erase for demo
+        PrimaryDrawerItem loginItem = new PrimaryDrawerItem().withName("Login / Logout");
 
 
         // do something with the clicked item :D
@@ -179,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
                         aboutUsItem,
                         new DividerDrawerItem(),
                         //settingsItem,
-                        chatRoomItem)
+                        chatRoomItem,
+                        loginItem)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -210,6 +213,9 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 9:
                                 Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+                                startActivity(intent);
+                            case 10:
+                                intent = new Intent(MainActivity.this, UserActivity.class);
                                 startActivity(intent);
                         }
 

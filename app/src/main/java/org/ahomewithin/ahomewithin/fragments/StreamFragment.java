@@ -87,7 +87,7 @@ public class StreamFragment extends Fragment {
 //                new ItemClickSupport.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                        Intent intent = new Intent(getActivity(), ConsumerItemFragment.class);
+//                        Intent intent = new Intent(getActivity(), VideoActivity.class);
 //                        Tweet tweet = tweets.get(position);
 //                        intent.putExtra("tweet", Parcels.wrap(tweet));
 //                        startActivity(intent);
@@ -111,6 +111,7 @@ public class StreamFragment extends Fragment {
             if (item.type == type) {
                 if (showOnlyOwned) {
                     if(UserTools.isItemPurchased(getActivity(), item.id)) {
+                        item.owned = true;
                         auxItems.add(item);
                     }
                 } else {

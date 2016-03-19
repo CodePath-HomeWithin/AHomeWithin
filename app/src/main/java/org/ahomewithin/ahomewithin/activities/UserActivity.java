@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.LoginCreateUserDialogFragment;
 import org.ahomewithin.ahomewithin.fragments.LoginResetPasswordDialogFragment;
 import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
+import org.ahomewithin.ahomewithin.util.UserTools;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +39,7 @@ public class UserActivity extends AppCompatActivity {
     @Bind(R.id.tilPassword)
     TextInputLayout tilPassword;
     @Bind(R.id.tvUserLoginAdvice) TextView tvUserLoginAdvice;
+    @Bind(R.id.btnLogout) Button btnLogout;
 
     private static ParseClient client;
 
@@ -102,6 +106,7 @@ public class UserActivity extends AppCompatActivity {
                     public void onSuccess(Object obj) {
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                         startActivity(intent);
+                        UserTools.loginUser(UserActivity.this, email);
                         Toast.makeText(
                                 getApplicationContext(),
                                 "Successfully logged in",
@@ -112,9 +117,17 @@ public class UserActivity extends AppCompatActivity {
                     public void onFailure(String error) {
                         tilPassword.setErrorEnabled(true);
                         tilPassword.setError("ParseObjectUser name and Password do not match our record!!!");
+                        UserTools.logoutUser(UserActivity.this, email);
                     }
                 }
         );
+    }
+
+    @OnClick(R.id.btnLogout)
+    public void logoutUser() {
+        ParseObjectUser user = client.getCurParseObjectUser();
+        UserTools.logoutUser(UserActivity.this, user.getEmail());
+        client.logout();
     }
 
     @OnClick(R.id.btnJoin)

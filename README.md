@@ -53,7 +53,7 @@ Store/Library Stream Flow:
 [x] on library page, clicking on video should go to video detail player view
 [x] on library page, clicking on conversation should go to conversation card view
 [ ] better, less cluttered images
-[ ] lock landscape/portrait is not supported
+[x] lock landscape/portrait is not supported
 [x] create detail activity for my library
 [ ] on library page, over video, show arrow button to go to the detail video player
 	
