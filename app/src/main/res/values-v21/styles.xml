@@ -6,6 +6,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--<item name="colorPrimaryLight">@color/colorPrimaryLight</item>-->
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
