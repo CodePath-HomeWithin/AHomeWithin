@@ -48,50 +48,50 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 # TODO -- MILESTONES
 
 Store/Library Stream Flow:
-	- looks like both video and conversation cards are in the same list
-	- Library page looks exactly like Store page -- should not show BUY
-	- on library page, clicking on video should go to video detail player view
-	- on library page, clicking on conversation should go to conversation card view
-	- better, less cluttered images
-	- lock landscape/portrait is not supported
-	- create detail activity for my library
-	- on library page, over video, show arrow button to go to the detail video player
+[x] looks like both video and conversation cards are in the same list
+[x] Library page looks exactly like Store page -- should not show BUY
+[x] on library page, clicking on video should go to video detail player view
+[x] on library page, clicking on conversation should go to conversation card view
+[ ] better, less cluttered images
+[x] lock landscape/portrait is not supported
+[x] create detail activity for my library
+[ ] on library page, over video, show arrow button to go to the detail video player
 	
 
 User flow:
     - switch user activites to fragment
     - after register, auto login
     - after login, close the activity and go to correct next view (ask Jose)  (ok, seriously, pass it in as an argument)
-	- If you are not logged on, don't show profile in toolbar
-	- If you are logged in, show profile image
-	- clicking the profile in the drawer should go to user profile page
+[ ] If you are not logged on, don't show profile in toolbar
+[ ] If you are logged in, show profile image
+[ ] clicking the profile in the drawer should go to user profile page
 	
 Home Page:
-	- we should reorder for demo
-		- tools and training
-		- then library
-		- near you
+[ ] we should reorder for demo
+	[ ] tools and training
+	[ ] then library
+	[ ] near you
 Maps:
-	- either load users first, or stub users out in json for faster load
-	- replace popup with dialog box and working button
-	- add gestures to map
+[ ] either load users first, or stub users out in json for faster load
+[ ] replace popup with dialog box and working button
+[ ] add gestures to map (pinch, expand)
 
 Events, LearnMore, Recommended:
-	- I can own this...  Stub out a little more data and make it look good, perhaps combine into one page
+[ ] I can own this...  Stub out a little more data and make it look good, perhaps combine into one page
 
 About Us:
-	- provide some content
+[ ] provide some content
 
 Chat:
-	- don't know status
-	- hook up to map button (which doesn't exist yet)
+[ ] don't know status
+[ ] hook up to map button (which doesn't exist yet)
 
 styling:
-	- fonts
-	- colors, borders!
-	- titlebar
-	- images in drawer
-	- icons for recommended:  book, blog, podcast
+[ ] fonts
+[ ] colors, borders!
+[ ] titlebar
+[ ] images in drawer
+[ ] icons for recommended:  book, blog, podcast
 
 Animations!
 
@@ -99,29 +99,29 @@ Animations!
 # Suggested Demo Flow
 
 Demo Flow:
-	- open app
-	- explore top level Tools and Training
-		- see videos and cards
-		- purchase video click
-			- create user
-			- then back to purchase fragment?
-			- purchase
-				- go to library detailed view showing video
-	- pull out drawer to get to Tools and Training
-		- see videos and cards
-		- purchase card click
-			- purchase successful => go to library detail view showing conversation card.
-	- pull out drawer to get back to home
-		- quickly view my library
-	- back to home
-		- click near you
-			- zoom to your location
-			- click to view several people
-			- initiate chat
-			- chat a bit...
-	- quickly visit Eventts
-	- quickly visit Learn More
-	- quickly visit About Us
+[ ] open app
+[ ] explore top level Tools and Training
+	[ ] see videos and cards
+	[ ] purchase video click
+		[ ] create user
+		[ ] then back to purchase fragment?
+		[ ] purchase
+			[ ] go to library detailed view showing video
+[ ] pull out drawer to get to Tools and Training
+	[ ] see videos and cards
+	[ ] purchase card click
+		[ ] purchase successful => go to library detail view showing conversation card.
+[ ] pull out drawer to get back to home
+	[ ] quickly view my library
+[ ] back to home
+	[ ] click near you
+		[ ] zoom to your location
+		[ ] click to view several people
+		[ ] initiate chat
+		[ ] chat a bit...
+[ ] quickly visit Eventts
+[ ] quickly visit Learn More
+[ ] quickly visit About Us
 
 	=> done
 

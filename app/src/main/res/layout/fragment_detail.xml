@@ -1,40 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:context=".activities.DetailFragment">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rlVideoContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="gone">
+        android:background="@android:color/white">
 
-        <com.malmstein.fenster.view.FensterVideoView
-            android:id="@+id/fvvVideo"
+        <ImageView
+            android:id="@+id/ivItemImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="280dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:fitsSystemWindows="true"
-            android:keepScreenOn="true"/>
 
-        <com.malmstein.fenster.controller.MediaFensterPlayerController
-            android:id="@+id/fvMediaPlayerController"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/card_dummy"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/detail_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/llBuyRow"
+            tools:text="This is an example"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/detail_description"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvTitle"
+            android:padding="8dp"
+            tools:text="Lorem ipsum dolor sit aemet whatever and bla bla bla"/>
+
+        <LinearLayout
+            android:id="@+id/llBuyRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/fvvVideo"
-            android:animateLayoutChanges="true"
-            android:fitsSystemWindows="true"/>
+            android:layout_below="@+id/ivItemImage"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvPrice"
+                style="@style/detail_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Price: $25"/>
+
+            <Button
+                android:id="@+id/btBuy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:background="#f57f17"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp"
+                android:text="BUY NOW"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/flCardsPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-
-
-</RelativeLayout>
+</ScrollView>

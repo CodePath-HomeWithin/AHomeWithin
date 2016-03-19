@@ -1,69 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlStreamItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="60dp">
+
+    <ImageView
+        android:id="@+id/ivItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/card_dummy"/>
 
     <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/ivItemImage"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#44000000">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="This is an example"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:id="@+id/ivItemImage"
+            android:layout_alignParentStart="true"/>
 
-            tools:src="@drawable/card_dummy"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:id="@+id/tvTitle"
-            tools:text="This is an example"
-            android:layout_below="@+id/ivItemImage"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
+            android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:id="@+id/tvDescription"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="Lorem ipsum dolor sit aemet whatever and bla bla bla"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/tvSeeMore"
-            android:layout_alignRight="@+id/tvBuy"
-            android:layout_alignEnd="@+id/tvBuy" />
+            android:textColor="@android:color/white"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="See more"
-            android:id="@+id/tvSeeMore"
-            android:textColor="@android:color/holo_blue_dark"
+            tools:text="Lorem ipsum dolor sit aemet whatever and bla bla bla and more bla bla bla that goes beyond and bla bla bla and more bla bla bla tha"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_below="@+id/tvTitle"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-
-            android:text="BUY"
-            android:id="@+id/tvBuy"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_orange_dark"
-            android:layout_alignTop="@+id/tvSeeMore"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
+            android:layout_alignParentStart="true"/>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
