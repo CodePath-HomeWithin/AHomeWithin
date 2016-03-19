@@ -171,15 +171,15 @@ public class MainActivity extends AppCompatActivity {
     private void createDrawer() {
         accountHeader = createAccountHeader();
         //create the drawer and remember the `Drawer` result object
-        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.home);
-        PrimaryDrawerItem myLibraryItem = new PrimaryDrawerItem().withName(R.string.library);
-        PrimaryDrawerItem trainingItem = new PrimaryDrawerItem().withName(R.string.training_and_tools);
-        PrimaryDrawerItem eventsItem = new PrimaryDrawerItem().withName(R.string.events);
-        PrimaryDrawerItem learnMoreItem = new PrimaryDrawerItem().withName(R.string.learn_more);
-        PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us);
+        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.home).withIcon(R.drawable.ic_sidemenu_home);
+        PrimaryDrawerItem myLibraryItem = new PrimaryDrawerItem().withName(R.string.library).withIcon(R.drawable.ic_sidemenu_library);
+        PrimaryDrawerItem trainingItem = new PrimaryDrawerItem().withName(R.string.training_and_tools).withIcon(R.drawable.ic_sidemenu_training);
+        PrimaryDrawerItem eventsItem = new PrimaryDrawerItem().withName(R.string.events).withIcon(R.drawable.ic_sidemenu_events);
+        PrimaryDrawerItem learnMoreItem = new PrimaryDrawerItem().withName(R.string.learn_more).withIcon(R.drawable.ic_sidemenu_more);
+        PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us).withIcon(R.drawable.ic_sidemenu_about);
         PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings);
-        PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName(R.string.chat);
-        PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withName(R.string.logout);
+        PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName(R.string.chat).withIcon(R.drawable.ic_sidemenu_chat);
+        PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withName(R.string.logout).withIcon(R.drawable.ic_sidemenu_logout);
 
         // do something with the clicked item :D
         //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
