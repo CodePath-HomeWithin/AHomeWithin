@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private AccountHeader accountHeader;
     private ParseClient client;
 
+    private static final int REQUEST_CODE = 20;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
         }
-
 
         ButterKnife.bind(this);
 
@@ -240,8 +241,13 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case 9:
-                            Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-                            startActivity(intent);
+                            if (!client.isUserLoggedIn()) {
+                                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE);
+                            } else {
+                                Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+                                startActivity(intent);
+                            }
                             break;
                         case 10:
                             if (client.isUserLoggedIn()) {
@@ -253,13 +259,19 @@ public class MainActivity extends AppCompatActivity {
                             //case 9:
                             //fragment = LearnMoreFragment.newInstance();
                     }
-
                     gotoFragment(fragment);
-
                     return true;
                 }
             })
             .build();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode==RESULT_OK && requestCode==REQUEST_CODE) {
+            Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+            startActivity(intent);
+        }
     }
 
     private AccountHeader createAccountHeader() {
