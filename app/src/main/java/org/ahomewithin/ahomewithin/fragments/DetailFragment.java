@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.activities.UserActivity;
+import org.ahomewithin.ahomewithin.activities.VideoActivity;
 import org.ahomewithin.ahomewithin.models.Item;
 import org.ahomewithin.ahomewithin.util.BuyDialog;
 import org.ahomewithin.ahomewithin.util.UserTools;
@@ -72,6 +72,8 @@ public class DetailFragment extends Fragment {
         tvTitle.setText(mItem.title);
         tvDescription.setText(mItem.description);
 
+        // Calculate again to force update
+        mItem.owned = UserTools.isItemPurchased(getActivity(), mItem.id);
         if (mItem.owned) {
             btBuy.setText("WATCH NOW");
         } else {
@@ -82,12 +84,7 @@ public class DetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mItem.owned) {
-                    ((AppCompatActivity) getActivity())
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .add(R.id.flContent, ConsumerItemFragment.newInstance(mItem))
-                            .addToBackStack(null)
-                            .commit();
+                    onWatch();
                 } else {
                     onBuy();
                 }
@@ -120,6 +117,31 @@ public class DetailFragment extends Fragment {
             }
         });
         buyDialog.show(fm, "");
+    }
+
+
+    public void onWatch() {
+
+        if(mItem.type == Item.ITEM_TYPE.CONVERSATIONS) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.flContent, CardsPagerFragment.newInstance(mItem))
+                    .addToBackStack(null)
+                    .commit();
+        } else if (mItem.type == Item.ITEM_TYPE.VIDEOS) {
+            Intent intent = new Intent(getActivity(), VideoActivity.class);
+            intent.putExtra(Item.SERIALIZABLE_TAG, mItem);
+            startActivity(intent);
+        }
+//        ((AppCompatActivity) getActivity())
+//                .getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.flContent, VideoActivity.newInstance(mItem))
+//                .addToBackStack(null)
+//                .commit();
+
+
+
     }
 
     public void gotoLogin() {
