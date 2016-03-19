@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.util.LoadProfileImageView;
 import org.ahomewithin.ahomewithin.util.OnItemClickListener;
 
 import java.util.List;
@@ -83,15 +82,11 @@ public class ChatUsersRecyclerViewAdapter
 
         public void bindView(Object userObj) {
             User user = (User) userObj;
-            if (user.profileUrl != null) {
-                Glide.with(mContext).
-                    load(user.profileUrl)
-                    .placeholder(R.drawable.profile_placeholder)
-                    .error(R.drawable.profile_placeholder)
-                    .into(ivProfileImage);
-            } else {
-                ivProfileImage.setImageResource(R.drawable.profile_placeholder);
-            }
+            LoadProfileImageView.loadProfile(
+                ivProfileImage,
+                mContext,
+                user
+            );
             tvUserName.setText(user.firstName+" "+user.lastName);
             tvDescription.setText(user.description);
             tvUserType.setText(user.type.toString());

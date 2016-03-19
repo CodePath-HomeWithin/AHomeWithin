@@ -1,7 +1,6 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,25 +9,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.parseModel.ParseMessage;
 import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
+import org.ahomewithin.ahomewithin.util.LoadProfileImageView;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.util.List;
 
 /**
  * Created by xiangyang_xiao on 2/17/16.
  */
 public class ChatListAdapter extends ArrayAdapter<ParseMessage> {
-    private ParseObjectUser mUser;
+    private ParseObjectUser curUser;
+    private ParseObjectUser otherUser;
+    private ParseObjectUser user;
 
-    public ChatListAdapter(Context context, ParseObjectUser user, List<ParseMessage> messages) {
+    public ChatListAdapter(
+        Context context,
+        ParseObjectUser curUser,
+        ParseObjectUser otherUser,
+        List<ParseMessage> messages) {
         super(context, 0, messages);
-        this.mUser = user;
+        this.curUser = curUser;
+        this.otherUser = otherUser;
     }
 
     @Override
@@ -46,44 +50,35 @@ public class ChatListAdapter extends ArrayAdapter<ParseMessage> {
         final ViewHolder holder = (ViewHolder) convertView.getTag();
         String messageId = message.getUserId();
 
-        final boolean isMe = messageId.equals(mUser.getObjectId());
+        final boolean isMe = messageId.equals(curUser.getObjectId());
         // Show-hide image based on the logged-in user.
         // Display the profile image to the right for our user, left for other users.
         if (isMe) {
             holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            user = curUser;
         } else {
             holder.imageOther.setVisibility(View.VISIBLE);
             holder.imageMe.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            user = otherUser;
         }
         final ImageView profileView = isMe ? holder.imageMe : holder.imageOther;
+        LoadProfileImageView.loadProfile(
+            profileView,
+            getContext(),
+            User.getNewInstanceFromParseObject(user)
+        );
+        /*
         Glide.with(getContext())
             .load(getProfileUrl())
             .placeholder(R.drawable.profile_placeholder)
             .error(R.drawable.profile_placeholder)
             .into(profileView);
+            */
         holder.body.setText(message.getBody());
         return convertView;
-    }
-
-    // Create a gravatar image based on the hash value obtained from userId
-    private String getProfileUrl() {
-        String profileUrl = mUser.getProfile();
-        if (profileUrl != null && !TextUtils.isEmpty(profileUrl)) {
-            return profileUrl;
-        }
-        String hex = "";
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(mUser.getObjectId().getBytes());
-            final BigInteger bigInt = new BigInteger(hash);
-            hex = bigInt.abs().toString(16);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "http://www.gravatar.com/avatar/" + hex + "?d=identicon";
     }
 
     final class ViewHolder {
