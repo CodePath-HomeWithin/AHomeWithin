@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -23,7 +24,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -266,7 +266,10 @@ public class MainActivity extends AppCompatActivity {
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
             .withActivity(this)
-            .withHeaderBackground(R.drawable.kids_1)
+            .withHeaderBackground(R.drawable.logo_drawer_background)
+                .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
+                .withCompactStyle(true)
+                .withHeightDp(100)
             .withSelectionListEnabledForSingleProfile(false)
             .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                 @Override
@@ -275,9 +278,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             })
-            .addProfiles(
-                new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
-            )
+//            .addProfiles(
+//                new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
+//            )
             .build();
 
 
