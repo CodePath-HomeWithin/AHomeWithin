@@ -1,11 +1,14 @@
-package org.ahomewithin.ahomewithin.activities;
+package org.ahomewithin.ahomewithin.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
@@ -26,44 +29,50 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /**
- * Created by chezlui on 14/03/16.
+ * Created by xiangyang_xiao on 3/19/16.
  */
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatRoomFragment extends Fragment {
 
     @Bind(R.id.rvUsers)
     RecyclerView rvUsers;
 
-    ParseClient client;
-    ChatUsersRecyclerViewAdapter rcAdapter;
-    List<User> users;
+    public static ChatRoomFragment newInstance() {
+        return new ChatRoomFragment();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View chatRoomView = inflater.inflate(R.layout.fragment_chatroom, container, false);
+        ButterKnife.bind(this, chatRoomView);
+        return chatRoomView;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatroom);
-        ButterKnife.bind(this);
-
-        client = ParseClient.newInstance(this);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        final ParseClient client = ParseClient.newInstance(getContext());
         client.getAllUsers(new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
-                users = (ArrayList<User>) obj;
+                final List<User> users = (ArrayList<User>) obj;
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 rvUsers.setLayoutManager(layoutManager);
                 rvUsers.setHasFixedSize(true);
-                rcAdapter = new ChatUsersRecyclerViewAdapter(
-                    users,
-                    new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View itemView, int position) {
-                            String otherEmail = users.get(position).email;
-                            Intent newIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                            newIntent.putExtra("otherEmail", otherEmail);
-                            startActivity(newIntent);
+                ChatUsersRecyclerViewAdapter rcAdapter =
+                    new ChatUsersRecyclerViewAdapter(
+                        users,
+                        new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View itemView, int position) {
+                                String otherEmail = users.get(position).email;
+                                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
+                                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                ft.replace(R.id.flContent, chatFragment);
+                                ft.commit();
+                            }
                         }
-                    }
-                );
+                    );
                 AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(rcAdapter);
                 alphaAdapter.setDuration(1000);
                 alphaAdapter.setInterpolator(new OvershootInterpolator());
@@ -89,7 +98,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             @Override
             public void onFailure(String error) {
                 Toast.makeText(
-                    getApplicationContext(),
+                    getContext(),
                     String.format(
                         "Failed to fetch users due to ",
                         error

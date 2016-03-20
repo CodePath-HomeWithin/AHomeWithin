@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
@@ -55,6 +57,7 @@ public class MapFragment extends Fragment implements
     private GoogleMap mMap;
     private MapMarkers mMapMarkers;
     private SupportMapFragment mMapFragment;
+    private SlidingUpPanelLayout mSlidePanel;
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -64,6 +67,26 @@ public class MapFragment extends Fragment implements
     // http://stackoverflow.com/questions/25051246/how-to-use-supportmapfragment-inside-a-fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_map, container, false);
+        mSlidePanel = (SlidingUpPanelLayout) v.findViewById(R.id.sliding_layout);
+
+        // Close SlidingPanel when back button pressed
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (mSlidePanel.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                        mSlidePanel.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+
         mMapFragment = CustomMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.flMapContainer, mMapFragment).commit();
         mMapMarkers = new MapMarkers(getActivity());
@@ -133,7 +156,7 @@ public class MapFragment extends Fragment implements
 
     @Override
     public boolean onMyLocationButtonClick() {
-        // Return false so that we don't consume the event and the default behavior still occurs
+        // Return false so that we don't consume the event and the default behavior till occurs
         // (the camera animates to the user's current position).
         return false;
     }
