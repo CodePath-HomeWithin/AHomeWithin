@@ -8,12 +8,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         <TextView
-            android:id="@+id/tvTitle"
-            style="@style/detail_title"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            tools:text="This is an example"/>
+                android:id="@+id/tvGroupName"
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RobotoCondensed"
+                tools:text="GroupName: some test for design..."
+                android:layout_below="@+id/ivImage"/>
+
+        <TextView
+                android:id="@+id/tvDateTime"
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RobotoMedium"
+            android:layout_below="@+id/tvGroupName"
+                tools:text="tvDateTime: some test for design..."/>
+
+        <TextView
+                android:id="@+id/tvEventName"
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDateTime"
+                tools:text="tvEventName: some test for design..."
+                style="@style/RobotoCondensed"/>
+
+        <TextView
+            android:id="@+id/tvEventDescription"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvEventName"
+            tools:text="tvEventDescription: some test for design..."
+            style="@style/RobotoCondensed"/>
 
     </RelativeLayout>
 </ScrollView>
