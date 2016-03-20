@@ -326,23 +326,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void checkIfLoggedInAndProceed(Fragment fragment) {
-
-        if (!ParseClient.newInstance(this).isUserLoggedIn()) {
-            Log.d("DEBUG", "User is not logged in so go to Login");
-            gotoLogin();
-        } else {
-            Log.d("DEBUG", "User is logged in so go to fragment");
-            gotoFragment(fragment);
-        }
-    }
-
-
-    public void gotoLogin() {
-        Intent intent = new Intent(this, UserActivity.class);
-        startActivity(intent);
-    }
-
     // TODO call profileActivity which should be used for changing all the user parameters
     public void gotoProfile() {
         Intent intent = new Intent(this, ProfileActivity.class);
