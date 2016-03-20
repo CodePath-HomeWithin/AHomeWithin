@@ -6,48 +6,62 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        style="@style/EventDetailLayout">
 
         <ImageView
-                android:id="@+id/ivImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="event_image_transition" />
 
         <TextView
                 android:id="@+id/tvGroupName"
                 android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/RobotoCondensed"
+                style="@style/EventDetail.GroupName"
                 tools:text="GroupName: some test for design..."
                 android:layout_below="@+id/ivImage"/>
 
-        <TextView
-                android:id="@+id/tvDateTime"
-                android:layout_marginTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/RobotoMedium"
-            android:layout_below="@+id/tvGroupName"
-                tools:text="tvDateTime: some test for design..."/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/ivLink"
+            android:tint="@color/colorAccent"
+            android:contentDescription="@string/type"
+            android:src="@drawable/ic_link_black_48px"
+            android:layout_below="@+id/ivImage"
+            android:layout_alignTop="@+id/tvGroupName"
+            android:layout_alignParentRight="true"/>
 
         <TextView
                 android:id="@+id/tvEventName"
                 android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvDateTime"
+                android:layout_below="@+id/tvGroupName"
                 tools:text="tvEventName: some test for design..."
-                style="@style/RobotoCondensed"/>
+                style="@style/EventDetail.EventName"/>
+
+
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/EventDetail.EventTime"
+            android:layout_below="@+id/tvEventName"
+            tools:text="tvDateTime: some test for design..."/>
 
         <TextView
             android:id="@+id/tvEventDescription"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvEventName"
+            android:layout_below="@+id/tvDateTime"
             tools:text="tvEventDescription: some test for design..."
-            style="@style/RobotoCondensed"/>
+            style="@style/EventDetail.Body"/>
 
     </RelativeLayout>
 </ScrollView>

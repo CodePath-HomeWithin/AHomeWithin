@@ -1,5 +1,9 @@
 package org.ahomewithin.ahomewithin.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,12 +31,16 @@ import butterknife.ButterKnife;
  */
 public class EventDetailFragment extends Fragment {
     Event mEvent;
+    Context mContext;
 
     @Bind(R.id.tvGroupName) TextView tvGroupName;
     @Bind(R.id.tvEventName) TextView tvEventName;
     @Bind(R.id.tvEventDescription) TextView tvEventDescription;
     @Bind(R.id.tvDateTime) TextView tvDateTime;
     @Bind(R.id.ivImage) ImageView ivImage;
+    @Bind(R.id.ivLink) ImageView ivLink;
+
+
 
     public static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
@@ -50,6 +58,12 @@ public class EventDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View convertView = inflater.inflate(R.layout.fragment_event_detail, container, false);
         ButterKnife.bind(this, convertView);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            convertView.findViewById(R.id.ivImage).setTransitionName("event_image_transition");
+        }
+
+        mContext = getContext();
         mEvent = (Event) Parcels.unwrap(getArguments().getParcelable(Event.SERIALIZABLE_TAG));
         return convertView;
     }
@@ -61,6 +75,13 @@ public class EventDetailFragment extends Fragment {
         tvEventName.setText(mEvent.eventName);
         tvEventDescription.setText(mEvent.eventDescription);
         tvDateTime.setText(mEvent.getDateTime());
+        ivLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mEvent.getUrl()));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 }
