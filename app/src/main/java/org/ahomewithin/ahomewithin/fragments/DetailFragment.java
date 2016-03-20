@@ -150,6 +150,7 @@ public class DetailFragment extends Fragment {
         LoginFragment loginFragment = LoginFragment.newInstance(REQUEST_CODE, Parcels.wrap(mItem));
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.flContent, loginFragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 }

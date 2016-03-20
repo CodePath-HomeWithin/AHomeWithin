@@ -57,18 +57,31 @@ public class ChatFragment extends Fragment {
         Log.i("xxyChat", "onCreateView");
         View chatView = inflater.inflate(R.layout.fragment_chat, container, false);
         ButterKnife.bind(this, chatView);
-        chatView.setOnKeyListener(new View.OnKeyListener() {
+        return chatView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    getFragmentManager().beginTransaction().detach(ChatFragment.this).commit();
+                if (event.getAction() == KeyEvent.ACTION_UP || keyCode == KeyEvent.KEYCODE_BACK) {
+                    getActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack();
+                    getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .detach(ChatFragment.this)
+                        .commit();
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
             }
         });
-        return chatView;
     }
 
     @Override
@@ -180,7 +193,7 @@ public class ChatFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroy();
+        super.onDestroyView();
         Log.i("xxyChat", "onDestroyView");
         ParseClient.newInstance(getActivity()).stopHanlder();
     }
