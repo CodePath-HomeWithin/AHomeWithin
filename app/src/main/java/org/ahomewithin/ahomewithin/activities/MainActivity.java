@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private Drawer drawer;
     private AccountHeader accountHeader;
     private ParseClient client;
+    private boolean closeToExit;
 
     private static final int REQUEST_CODE = 20;
 
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
             .replace(R.id.flContent, homeFragment)
-            .addToBackStack("home")
             .commit();
 
         createDrawer();
@@ -315,6 +316,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         drawer.closeDrawer();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            if (!closeToExit) {
+                Toast.makeText(this, "Click one more time to exit", Toast.LENGTH_SHORT).show();
+                closeToExit = true;
+            } else {
+                finish();
+            }
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     public void checkIfLoggedInAndProceed(Fragment fragment) {
