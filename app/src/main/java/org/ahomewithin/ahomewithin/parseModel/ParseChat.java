@@ -16,6 +16,9 @@ import java.util.List;
 @ParseClassName("Chat")
 public class ParseChat extends ParseObject {
 
+  public ParseChat() {
+  }
+
   public static final String PARSE_NAME = "Chat";
   public static final String USERS = "users";
   public static final int MAX_CHAT_TO_SHOW = 30;
@@ -25,10 +28,6 @@ public class ParseChat extends ParseObject {
 
   //List<ParseMessage> messages;
   public static final String MESSAGES_KEY = "messages";
-
-  public ParseChat() {
-    super(PARSE_NAME);
-  }
 
   public List<ParseMessage> getMessages() {
     return getList(MESSAGES_KEY);

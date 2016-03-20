@@ -5,13 +5,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SaveCallback;
@@ -24,8 +24,10 @@ import org.ahomewithin.ahomewithin.parseModel.ParseChat;
 import org.ahomewithin.ahomewithin.parseModel.ParseItem;
 import org.ahomewithin.ahomewithin.parseModel.ParseMessage;
 import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
+import org.ahomewithin.ahomewithin.parseModel.ParseUsersChatRelation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,6 +49,7 @@ public class ParseClient {
         ParseObject.registerSubclass(ParseMessage.class);
         ParseObject.registerSubclass(ParseItem.class);
         ParseObject.registerSubclass(ParseChat.class);
+        ParseObject.registerSubclass(ParseUsersChatRelation.class);
 
         Parse.initialize(new Parse.Configuration.Builder(context)
             .applicationId("myAppId") // should correspond to APP_ID env variable
@@ -247,7 +250,7 @@ public class ParseClient {
                 @Override
                 public void done(List<ParseItem> items, ParseException e) {
                     if (e == null) {
-                        List<Item> normalItems = new ArrayList<Item>();
+                        List<Item> normalItems = new ArrayList<>();
                         for (ParseItem parseItem : items) {
                             normalItems.add(Item.getNewInstanceFromParseObject(parseItem));
                         }
@@ -427,15 +430,30 @@ public class ParseClient {
         final ParseChat newChat = (ParseChat) ParseObject.create(ParseChat.PARSE_NAME);
         newChat.setMessages(new ArrayList<ParseMessage>());
 
-        ParseRelation<ParseObjectUser> usersInChat = newChat.getRelation(ParseChat.USERS);
-        usersInChat.add(curParseObjectUser);
-        usersInChat.add(other);
+        final ParseUsersChatRelation relation =
+            (ParseUsersChatRelation) ParseObject.create(ParseUsersChatRelation.PARSE_NAME);
+        relation.setUsers(Arrays.asList(curParseObjectUser, other));
+
         newChat.saveInBackground(
             new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        handler.onSuccess(newChat);
+                        relation.setChat(newChat);
+                        relation.saveInBackground(
+                            new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+
+                                        handler.onSuccess(newChat);
+                                    } else {
+                                        handler.onFailure(e.getMessage());
+                                    }
+
+                                }
+                            }
+                        );
                     } else {
                         handler.onFailure(e.getMessage());
                     }
@@ -453,21 +471,33 @@ public class ParseClient {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        List<ParseMessage> parseMessages = chat.getMessages();
-                        parseMessages.add(message);
-                        chat.setMessages(parseMessages);
-                        chat.saveInBackground(
-                            new SaveCallback() {
+                        chat.fetchIfNeededInBackground(
+                            new GetCallback<ParseObject>() {
                                 @Override
-                                public void done(ParseException e) {
+                                public void done(ParseObject object, ParseException e) {
                                     if (e == null) {
-                                        handler.onSuccess(null);
+                                        List<ParseMessage> parseMessages = chat.getMessages();
+                                        parseMessages.add(message);
+                                        chat.setMessages(parseMessages);
+                                        chat.saveInBackground(
+                                            new SaveCallback() {
+                                                @Override
+                                                public void done(ParseException e) {
+                                                    if (e == null) {
+                                                        handler.onSuccess(null);
+                                                    } else {
+                                                        handler.onFailure(e.getMessage());
+                                                    }
+                                                }
+                                            }
+                                        );
                                     } else {
                                         handler.onFailure(e.getMessage());
                                     }
                                 }
                             }
                         );
+
                     } else {
                         handler.onFailure(e.getMessage());
                     }
@@ -505,15 +535,19 @@ public class ParseClient {
     }
 
     public void sentMessage(final String messageContent, final ParseObjectUser otherUser, final ParseClientAsyncHandler handler) {
-        ParseQuery<ParseChat> query = ParseQuery.getQuery(ParseChat.class);
-        query.whereEqualTo(ParseChat.USERS, curParseObjectUser);
-        query.whereEqualTo(ParseChat.USERS, otherUser);
+        ParseQuery<ParseUsersChatRelation> query = ParseQuery.getQuery(ParseUsersChatRelation.class);
+        query.whereContainsAll(
+            ParseUsersChatRelation.USERS_KEY,
+            Arrays.asList(curParseObjectUser, otherUser)
+        );
+
+        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
         query.findInBackground(
-            new FindCallback<ParseChat>() {
+            new FindCallback<ParseUsersChatRelation>() {
                 @Override
-                public void done(List<ParseChat> objects, ParseException e) {
+                public void done(List<ParseUsersChatRelation> relations, ParseException e) {
                     if (e == null) {
-                        if (objects.isEmpty()) {
+                        if (relations.isEmpty()) {
                             startChat(otherUser, new ParseClientAsyncHandler() {
                                 @Override
                                 public void onSuccess(Object obj) {
@@ -527,7 +561,7 @@ public class ParseClient {
                                 }
                             });
                         } else {
-                            addMessageToChat(messageContent, objects.get(0), handler);
+                            addMessageToChat(messageContent, relations.get(0).getChat(), handler);
                         }
 
                     } else {
@@ -539,43 +573,47 @@ public class ParseClient {
         );
     }
 
-    public void getPastMessages(final String otherEmail, final ParseClientAsyncHandler handler) {
-        getParseObjectUserFromEmail(otherEmail, new ParseClientAsyncHandler() {
-            @Override
-            public void onSuccess(final Object obj) {
-                ParseQuery<ParseChat> query = ParseQuery.getQuery(ParseChat.class);
-                query.whereEqualTo(ParseChat.USERS, curParseObjectUser);
-                query.whereEqualTo(ParseChat.USERS, (ParseObjectUser) obj);
-                // Configure limit and sort order
-                query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
-                query.orderByAscending("createdAt");
-                query.findInBackground(
-                    new FindCallback<ParseChat>() {
-                        @Override
-                        public void done(List<ParseChat> objects, ParseException e) {
-                            if (e == null) {
-                                if (objects.isEmpty()) {
-                                    handler.onSuccess(new ArrayList<ParseMessage>());
-                                } else {
-                                    handler.onSuccess(objects.get(0).getMessages());
+    public void getPastMessages(ParseObjectUser otherUser, final ParseClientAsyncHandler handler) {
+        ParseQuery<ParseUsersChatRelation> query =
+            ParseQuery.getQuery(ParseUsersChatRelation.class);
+
+        query.whereContainsAll(
+            ParseUsersChatRelation.USERS_KEY,
+            Arrays.asList(curParseObjectUser, otherUser)
+        );
+        // Configure limit and sort order
+        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+        query.orderByAscending("createdAt");
+        query.findInBackground(
+            new FindCallback<ParseUsersChatRelation>() {
+                @Override
+                public void done(List<ParseUsersChatRelation> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.isEmpty()) {
+                            handler.onSuccess(new ArrayList<ParseMessage>());
+                        } else {
+                            final ParseChat chat = objects.get(0).getChat();
+                            chat.fetchIfNeededInBackground(
+                                new GetCallback<ParseObject>() {
+                                    @Override
+                                    public void done(ParseObject object, ParseException e) {
+                                        if (e == null) {
+                                            handler.onSuccess(chat.getMessages());
+                                        } else {
+                                            handler.onFailure(e.getMessage());
+                                        }
+                                    }
                                 }
-
-                            } else {
-                                handler.onFailure(e.getMessage());
-                            }
+                            );
                         }
+
+                    } else {
+                        handler.onFailure(e.getMessage());
                     }
-
-                );
+                }
             }
 
-            @Override
-            public void onFailure(String error) {
-                handler.onFailure(error);
-            }
-        });
-
+        );
     }
-
 
 }

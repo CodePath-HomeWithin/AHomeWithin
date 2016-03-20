@@ -11,6 +11,9 @@ import com.parse.ParseObject;
 @ParseClassName("Message")
 public class ParseMessage extends ParseObject {
 
+  public ParseMessage() {
+  }
+
   public static final String PARSE_NAME = "Message";
 
   //String usrId
@@ -20,10 +23,6 @@ public class ParseMessage extends ParseObject {
   //String body
   //the message content
   public static final String BODY_KEY = "body";
-
-  public ParseMessage() {
-    super(PARSE_NAME);
-  }
 
   public String getUserId() {
     try {

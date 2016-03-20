@@ -15,6 +15,9 @@ import java.io.Serializable;
 public class ParseItem extends ParseObject
         implements Serializable {
 
+    public ParseItem() {
+    }
+
     public static final String PARSE_NAME = "Item";
     //0 for video and 1 for card
     //int type;
@@ -35,11 +38,6 @@ public class ParseItem extends ParseObject
     //only available for video resource
     //JSONObject content;
     public static final String CONTENT_KEY = "content";
-
-
-    public ParseItem() {
-        super(PARSE_NAME);
-    }
 
     public Item.ITEM_TYPE getType() {
         switch (getInt(TYPE_KEY)) {
