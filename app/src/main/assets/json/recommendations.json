@@ -1,13 +1,12 @@
 {"recommendations": [
   {
     "id":1,
-    "type":"blog",
-    "provider":"A Home Within",
-    "title":"Latest News",
-    "summary":"Summary of latest news and events",
-    "sourceUrl":"http://ahomewithin.org/news/",
-    "thumbnailUrl":"url to thumbnail image",
-    "publishDate":"03-05-2016"
+    "type":"book",
+    "title":"Treating Trauma",
+    "summary":"Treating Trauma: Relationship-Based Psychotherapy with Children, Adolescents, and Young Adults presents a theoretically based and empirically supported framework for work with traumatized children, youth, and young adults who have spent time in foster care. ",
+    "sourceUrl":"http://ahomewithin.org/treating-trauma/",
+    "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/41Xb5uvy8JL._SX311_BO1204203200_-300x450.jpg",
+    "publishDate":"01-05-2016"
   },
   {
     "id":2,
@@ -16,7 +15,7 @@
     "title":"Fostering Art Reincarnated",
     "summary":"Describes a successful program for current and former foster teens and young adults",
     "sourceUrl":"http://ahomewithin.org/fostering-art-reincarnated/",
-    "thumbnailUrl":"url to thumbnail image",
+    "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/Viceroy-in-the-Prairie-700x499.jpg",
     "publishDate":"03-06-2016"
   },
   {
@@ -25,7 +24,17 @@
     "title":"The Trauma Therapist Project",
     "summary":"Toni talks about her early experiences of seeing foster kids and realizing very quickly how inadequate the care was for this population",
     "sourceUrl":"http://www.thetraumatherapistproject.com/podcast/toni-heineman-phd/",
-    "thumbnailUrl":"url to thumbnail image",
+    "thumbnailUrl":"http://www.thetraumatherapistproject.com/wp-content/uploads/2015/05/toni-heineman-phd-300x292.jpg",
     "publishDate":"01-05-2016"
-  }
+  },
+  {
+    "id":4,
+    "type":"blog",
+    "provider":"A Home Within",
+    "title":"Latest News",
+    "summary":"Summary of latest news and events",
+    "sourceUrl":"http://ahomewithin.org/news/",
+    "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/AHW-center-pride-291x300.jpg",
+    "publishDate":"03-05-2016"
+  },
 ]}

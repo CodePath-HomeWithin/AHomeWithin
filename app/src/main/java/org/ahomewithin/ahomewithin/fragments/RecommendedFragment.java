@@ -2,6 +2,9 @@ package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.adapters.RecommendedAdapter;
 import org.ahomewithin.ahomewithin.models.Recommended;
+import org.ahomewithin.ahomewithin.views.DividerItemDecoration;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -41,6 +45,29 @@ public class RecommendedFragment extends SimpleListFragment {
         recommendations = new ArrayList<Recommended>();
         rAdapter = new RecommendedAdapter(getContext(), recommendations);
         super.setupViews(view, recommendations, rAdapter);
+    }
+
+    public RecyclerView.LayoutManager getLayoutManager() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+        return(layoutManager);
+    }
+    public  void bindRecycleViewToLayoutManager(RecyclerView rvItems) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+        rvItems.setLayoutManager(layoutManager);
+
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        rvItems.addItemDecoration(itemDecoration);
+        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                loadMore(page, totalItemsCount);
+            }
+        });
     }
 
     public void loadRecommendations(int page) {

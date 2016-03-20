@@ -6,12 +6,15 @@ import org.ahomewithin.ahomewithin.models.Recommended;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.adapters.RecommendedAdapter;
+import org.ahomewithin.ahomewithin.views.DividerItemDecoration;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -44,6 +47,22 @@ public class EventsListFragment extends SimpleListFragment {
         events = new ArrayList<Event>();
         eAdapter = new EventsAdapter(getContext(), events);
         super.setupViews(view, events, eAdapter);
+    }
+
+    public  void bindRecycleViewToLayoutManager(RecyclerView rvItems) {
+        StaggeredGridLayoutManager gridLayoutManager =
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvItems.setLayoutManager(gridLayoutManager);
+
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        rvItems.addItemDecoration(itemDecoration);
+        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                loadMore(page, totalItemsCount);
+            }
+        });
     }
 
     public void loadEvents(int page) {

@@ -4,22 +4,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/subscribe_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subscribe_title"
-        android:textAppearance="@style/TitleTextAppearance"
-        android:paddingBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/recommendations_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recommendations_title"
-        android:textAppearance="@style/TitleTextAppearance"
-        android:layout_below="@+id/subscribe_title"/>
-
     <FrameLayout
         android:id="@+id/flRecommended"
         android:layout_width="match_parent"
