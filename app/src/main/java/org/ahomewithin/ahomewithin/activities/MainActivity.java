@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -54,7 +55,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
-    implements LoginCallback {
+        implements LoginCallback {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.nvView)
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, homeFragment)
-            .commit();
+                .replace(R.id.flContent, homeFragment)
+                .commit();
 
         createDrawer();
 
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity
 
     private void showSnackbar(String message) {
         final Snackbar snackBar = Snackbar.make(findViewById(R.id.dlDrawer),
-            message, Snackbar.LENGTH_INDEFINITE);
+                message, Snackbar.LENGTH_INDEFINITE);
 
         snackBar.setAction("Dismiss", new View.OnClickListener() {
             @Override
@@ -173,129 +174,144 @@ public class MainActivity extends AppCompatActivity
     public void onSelectLibrary(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, streamPagerFragment)
-            .addToBackStack("library")
-            .commit();
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("library")
+                .commit();
     }
 
     public void onSelectNearYou(View v) {
         Fragment mapFragment = MapFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, mapFragment)
-            .addToBackStack("map")
-            .commit();
+                .replace(R.id.flContent, mapFragment)
+                .addToBackStack("map")
+                .commit();
     }
 
     public void onSelectToolsAndTechniques(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, streamPagerFragment)
-            .addToBackStack("store")
-            .commit();
+                .replace(R.id.flContent, streamPagerFragment)
+                .addToBackStack("store")
+                .commit();
     }
 
     private void createDrawer() {
         accountHeader = createAccountHeader();
         //create the drawer and remember the `Drawer` result object
-        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.home).withIcon(R.drawable.ic_sidemenu_home);
-        PrimaryDrawerItem myLibraryItem = new PrimaryDrawerItem().withName(R.string.library).withIcon(R.drawable.ic_sidemenu_library);
-        PrimaryDrawerItem trainingItem = new PrimaryDrawerItem().withName(R.string.training_and_tools).withIcon(R.drawable.ic_sidemenu_training);
-        PrimaryDrawerItem eventsItem = new PrimaryDrawerItem().withName(R.string.events).withIcon(R.drawable.ic_sidemenu_events);
-        PrimaryDrawerItem learnMoreItem = new PrimaryDrawerItem().withName(R.string.learn_more).withIcon(R.drawable.ic_sidemenu_more);
-        PrimaryDrawerItem aboutUsItem = new PrimaryDrawerItem().withName(R.string.about_us).withIcon(R.drawable.ic_sidemenu_about);
-        PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings);
-        PrimaryDrawerItem chatRoomItem = new PrimaryDrawerItem().withName(R.string.chat).withIcon(R.drawable.ic_sidemenu_chat);
-        PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withName(R.string.logout).withIcon(R.drawable.ic_sidemenu_logout);
+        PrimaryDrawerItem homeItem = createDrawerIcon(R.string.home, R.drawable.ic_sidemenu_home);
+        PrimaryDrawerItem mapItem = createDrawerIcon(R.string.near_you, R.drawable.ic_sidemenu_nearyou);
+        PrimaryDrawerItem myLibraryItem = createDrawerIcon(R.string.library, R.drawable.ic_sidemenu_library);
+        PrimaryDrawerItem trainingItem = createDrawerIcon(R.string.training_and_tools, R.drawable.ic_sidemenu_training);
+        PrimaryDrawerItem eventsItem = createDrawerIcon(R.string.events, R.drawable.ic_sidemenu_events);
+        PrimaryDrawerItem learnMoreItem = createDrawerIcon(R.string.learn_more, R.drawable.ic_sidemenu_more);
+        PrimaryDrawerItem aboutUsItem = createDrawerIcon(R.string.about_us, R.drawable.ic_sidemenu_about);
+        PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings).withIconTintingEnabled(true);
+        PrimaryDrawerItem chatRoomItem = createDrawerIcon(R.string.chat, R.drawable.ic_sidemenu_chat);
+        PrimaryDrawerItem logoutItem = createDrawerIcon(R.string.logout, R.drawable.ic_sidemenu_logout);
 
         // do something with the clicked item :D
         //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
         drawer = new DrawerBuilder()
-            .withActivity(this)
-            .withToolbar(toolbar)
-            .withAccountHeader(accountHeader)
-            .addDrawerItems(
-                homeItem,
-                new DividerDrawerItem(),
-                myLibraryItem,
-                trainingItem,
-                eventsItem,
-                learnMoreItem,
-                aboutUsItem,
-                new DividerDrawerItem(),
-                //settingsItem,
-                chatRoomItem,
-                logoutItem)
-            .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                @Override
-                public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                    // do something with the clicked item :D
-                    Fragment fragment = null;
-                    Log.d("DEBUG", "Clicked item nº" + position);
-                    switch (position) {
-                        case 1:
-                            fragment = HomeFragment.newInstance();
-                            break;
-                        case 3:
-                            fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
-                            break;
-                        case 4:
-                            fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
-                            break;
-                        case 5:
-                            fragment = EventsFragment.newInstance();
-                            break;
-                        case 6:
-                            fragment = LearnMoreFragment.newInstance();
-                            break;
-                        case 7:
-                            fragment = AboutUsFragment.newInstance();
-                            break;
-
-                        case 9:
-                            if (!client.isUserLoggedIn()) {
-                                fragment = LoginFragment.newInstance(REQUEST_CODE);
-                            } else {
-                                fragment = ChatRoomFragment.newInstance();
-                            }
-                            break;
-                        case 10:
-                            if (client.isUserLoggedIn()) {
-                                client.logout();
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(accountHeader)
+                .addDrawerItems(
+                        homeItem,
+                        new DividerDrawerItem(),
+                        mapItem,
+                        myLibraryItem,
+                        trainingItem,
+                        eventsItem,
+                        learnMoreItem,
+                        new DividerDrawerItem(),
+                        aboutUsItem,
+                        //settingsItem,
+                        chatRoomItem,
+                        logoutItem)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        Fragment fragment = null;
+                        Log.d("DEBUG", "Clicked item nº" + position);
+                        switch (position) {
+                            case 1:
                                 fragment = HomeFragment.newInstance();
-                            }
-                            break;
-                        default:
-                            Log.e("NavigationViewError", "select non-existing item");
-                            //case 9:
-                            //fragment = LearnMoreFragment.newInstance();
+                                break;
+                            case 3:
+                                fragment = MapFragment.newInstance();
+                                break;
+                            case 4:
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
+                                break;
+                            case 5:
+                                fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
+                                break;
+                            case 6:
+                                fragment = EventsFragment.newInstance();
+                                break;
+                            case 7:
+                                fragment = LearnMoreFragment.newInstance();
+                                break;
+                            case 9:
+                                fragment = AboutUsFragment.newInstance();
+                                break;
+                            case 10:
+                                if (!client.isUserLoggedIn()) {
+                                    fragment = LoginFragment.newInstance(REQUEST_CODE);
+                                } else {
+                                    fragment = ChatRoomFragment.newInstance();
+                                }
+                                break;
+                            case 11:
+                                if (client.isUserLoggedIn()) {
+                                    client.logout();
+                                    fragment = HomeFragment.newInstance();
+                                }
+                                break;
+                            default:
+                                Log.e("NavigationViewError", "select non-existing item");
+                                //case 9:
+                                //fragment = LearnMoreFragment.newInstance();
+                        }
+                        gotoFragment(fragment);
+                        return true;
                     }
-                    gotoFragment(fragment);
-                    return true;
-                }
-            })
-            .build();
+                })
+                .build();
+    }
+
+    private PrimaryDrawerItem createDrawerIcon(int name, int icon) {
+
+        return new PrimaryDrawerItem()
+                .withName(name)
+                .withIcon(icon)
+                .withIconColor(ContextCompat.getColor(getApplicationContext(), R.color.primary_dark))
+                .withSelectedIconColor(ContextCompat.getColor(getApplicationContext(), R.color.accent))
+                .withIconTintingEnabled(true)
+                .withTextColor(ContextCompat.getColor(getApplicationContext(), R.color.primary_dark));
     }
 
     private AccountHeader createAccountHeader() {
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
-            .withActivity(this)
-            .withHeaderBackground(R.drawable.logo_drawer_background)
-            .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
-            .withCompactStyle(true)
-            .withHeightDp(100)
-            .withSelectionListEnabledForSingleProfile(false)
-            .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                @Override
-                public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                    // TODO Add go to profile fragment
-                    return true;
-                }
-            })
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.logo_drawer_background)
+                .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
+                .withCompactStyle(true)
+                .withHeightDp(100)
+                .withSelectionListEnabledForSingleProfile(false)
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        // TODO Add go to profile fragment
+                        return true;
+                    }
+                })
 //            .addProfiles(
 //                new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
 //            )
-            .build();
+                .build();
 
 
         return headerResult;
@@ -304,9 +320,9 @@ public class MainActivity extends AppCompatActivity
     private void gotoFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, fragment)
-                .addToBackStack(null)
-                .commit();
+                    .replace(R.id.flContent, fragment)
+                    .addToBackStack(null)
+                    .commit();
         }
 
         drawer.closeDrawer();
@@ -347,7 +363,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case DetailFragment.REQUEST_CODE:
                 DetailFragment detailFragment = DetailFragment.newInstance(
-                    (Item)Parcels.unwrap(extra[0]));
+                        (Item) Parcels.unwrap(extra[0]));
                 gotoFragment(detailFragment);
                 break;
             default:
