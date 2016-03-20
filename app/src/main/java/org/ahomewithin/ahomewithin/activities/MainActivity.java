@@ -35,6 +35,7 @@ import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
+import org.ahomewithin.ahomewithin.util.MapMarkers;
 
 import java.io.IOException;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
-        
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -268,9 +269,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK && requestCode==REQUEST_CODE) {
-            Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-            startActivity(intent);
+        if (resultCode == RESULT_OK) {
+            if(requestCode == REQUEST_CODE) {
+                Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+                startActivity(intent);
+            } else if(requestCode == MapMarkers.REQUEST_CODE) {
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                intent.putExtra("otherEmail", MapMarkers.curUserOnMap.email);
+                startActivity(intent);
+            }
         }
     }
 
@@ -279,9 +286,9 @@ public class MainActivity extends AppCompatActivity {
         AccountHeader headerResult = new AccountHeaderBuilder()
             .withActivity(this)
             .withHeaderBackground(R.drawable.logo_drawer_background)
-                .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
-                .withCompactStyle(true)
-                .withHeightDp(100)
+            .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP)
+            .withCompactStyle(true)
+            .withHeightDp(100)
             .withSelectionListEnabledForSingleProfile(false)
             .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                 @Override

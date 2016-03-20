@@ -70,13 +70,7 @@ public class ChatListAdapter extends ArrayAdapter<ParseMessage> {
             getContext(),
             User.getNewInstanceFromParseObject(user)
         );
-        /*
-        Glide.with(getContext())
-            .load(getProfileUrl())
-            .placeholder(R.drawable.profile_placeholder)
-            .error(R.drawable.profile_placeholder)
-            .into(profileView);
-            */
+
         holder.body.setText(message.getBody());
         return convertView;
     }

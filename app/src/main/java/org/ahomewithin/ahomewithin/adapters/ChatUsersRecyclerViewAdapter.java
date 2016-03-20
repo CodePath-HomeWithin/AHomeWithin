@@ -17,6 +17,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 /**
  * Created by xiangyang_xiao on 2/28/16.
  */
@@ -29,7 +30,7 @@ public class ChatUsersRecyclerViewAdapter
     public ChatUsersRecyclerViewAdapter(
         List<User> users,
         OnItemClickListener listener
-    ){
+    ) {
         mUsers = users;
         mListener = listener;
     }
@@ -72,7 +73,7 @@ public class ChatUsersRecyclerViewAdapter
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(mListener!=null) {
+                        if (mListener != null) {
                             mListener.onItemClick(v, getLayoutPosition());
                         }
                     }
@@ -87,8 +88,14 @@ public class ChatUsersRecyclerViewAdapter
                 mContext,
                 user
             );
-            tvUserName.setText(user.firstName+" "+user.lastName);
-            tvDescription.setText(user.description);
+            tvUserName.setText(user.lastName);
+            if (user.description == null ||
+                user.description.equals("null")
+                ) {
+                tvDescription.setVisibility(View.INVISIBLE);
+            } else {
+                tvDescription.setText(user.description);
+            }
             tvUserType.setText(user.type.toString());
         }
     }
