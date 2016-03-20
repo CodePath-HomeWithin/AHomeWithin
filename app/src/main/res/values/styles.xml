@@ -150,7 +150,7 @@
      </style>
 
     <style name="RecommendedText.Body" parent="RecommendedText">
-        <item name="android:textSize">@dimen/conv_text_big</item>
+        <item name="android:textSize">@dimen/conv_text_regular</item>
     </style>
 
 

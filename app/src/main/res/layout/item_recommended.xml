@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
     android:orientation="horizontal">
 
@@ -9,24 +10,44 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/ivImageType"
-        android:contentDescription="@string/type"/>
+        android:contentDescription="@string/type"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        tools:src="@drawable/ic_more_book"/>
 
     <TextView
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
         android:id="@+id/tvTitle"
         style="@style/RecommendedText.Title"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        tools:text="this is a sample long title"
+        android:layout_alignBottom="@+id/ivImageType"
+        android:layout_alignTop="@+id/ivImageType"
+        android:layout_toRightOf="@+id/ivImageType"
+        android:layout_toEndOf="@+id/ivImageType" />
 
     <TextView
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:id="@+id/tvSummary"
         style="@style/RecommendedText.Body"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        tools:text="this is a sample long summary, well, not that long."
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivLink"
+        android:tint="@color/colorAccent"
+        android:contentDescription="@string/type"
+        android:src="@drawable/ic_link_black_48px"
+        android:layout_below="@+id/tvSummary"
+        android:layout_alignRight="@+id/tvSummary"
+        android:layout_alignEnd="@+id/tvSummary" />
 
-</LinearLayout>
+</RelativeLayout>
 

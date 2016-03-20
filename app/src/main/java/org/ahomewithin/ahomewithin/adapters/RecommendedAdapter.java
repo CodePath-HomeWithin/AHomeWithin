@@ -1,9 +1,11 @@
 package org.ahomewithin.ahomewithin.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Recommended;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -27,12 +30,17 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         public ImageView ivImageType;
         public TextView tvTitle;
         public TextView tvSummary;
+        public ImageView ivLink;
+        public boolean isExpanded;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivImageType = (ImageView) itemView.findViewById(R.id.ivImageType);
+            ivLink = (ImageView) itemView.findViewById(R.id.ivLink);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
+            isExpanded = false;
         }
     }
 
@@ -53,10 +61,11 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     }
 
     @Override
-    public void onBindViewHolder(RecommendedAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final RecommendedAdapter.ViewHolder viewHolder, int position) {
         Recommended item = recommendations.get(position);
         viewHolder.tvTitle.setText(item.getTitle());
         viewHolder.tvSummary.setText(item.getSummary());
+        viewHolder.isExpanded = false;
 
         switch(item.type) {
             case BOOK:
@@ -74,7 +83,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         }
         if (item.sourceUrl != null) {
             final String sourceUrl = item.getSourceUrl();
-            viewHolder.ivImageType.setOnClickListener(new View.OnClickListener() {
+            viewHolder.ivLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sourceUrl));
@@ -82,6 +91,24 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
                 }
             });
         }
+        viewHolder.tvSummary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                if (viewHolder.isExpanded) {
+                    viewHolder.tvSummary.setMaxLines(3);
+                    if(viewHolder.tvSummary.getLineCount() > 3) {
+                        viewHolder.tvSummary.setEllipsize(TextUtils.TruncateAt.END);
+                    }
+                } else {
+                    viewHolder.tvSummary.setMaxLines(Integer.MAX_VALUE);
+                    viewHolder.tvSummary.setEllipsize(null);
+                }
+                viewHolder.isExpanded = !viewHolder.isExpanded;
+            }
+        });
     }
 
     public RecyclerView.Adapter getAdapter() {
