@@ -138,6 +138,7 @@ public class MapMarkers {
                         LoginFragment loginFragment = LoginFragment.newInstance(REQUEST_CODE);
                         FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.flContent, loginFragment);
+                        ft.addToBackStack(null);
                         ft.commit();
                     } else {
                         ChatFragment chatFragment = ChatFragment.newIntance(user.email);
