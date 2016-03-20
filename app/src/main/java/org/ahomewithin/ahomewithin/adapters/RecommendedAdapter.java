@@ -1,6 +1,8 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +25,14 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivImageType;
-        public ImageView ivThumbnail;
         public TextView tvTitle;
         public TextView tvSummary;
-        public TextView tvPublishDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivImageType = (ImageView) itemView.findViewById(R.id.ivImageType);
-            ivThumbnail = (ImageView) itemView.findViewById(R.id.ivThumbnail);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
-            tvPublishDate = (TextView) itemView.findViewById(R.id.tvPublishDate);
         }
     }
 
@@ -59,11 +57,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         Recommended item = recommendations.get(position);
         viewHolder.tvTitle.setText(item.getTitle());
         viewHolder.tvSummary.setText(item.getSummary());
-        viewHolder.tvPublishDate.setText(item.getFormattedPublishDate());
 
-        if (item.getThumbnailUrl() != null) {
-            Glide.with(mContext).load(item.getThumbnailUrl()).into(viewHolder.ivThumbnail);
-        }
         switch(item.type) {
             case BOOK:
                 Glide.with(mContext).load(R.drawable.ic_more_book).into(viewHolder.ivImageType);
@@ -77,6 +71,16 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             default:
                 // other
                 Glide.with(mContext).load(R.drawable.ic_more_book).into(viewHolder.ivImageType);
+        }
+        if (item.sourceUrl != null) {
+            final String sourceUrl = item.getSourceUrl();
+            viewHolder.ivImageType.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sourceUrl));
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 

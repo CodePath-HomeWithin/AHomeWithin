@@ -144,6 +144,14 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
+    <style name="RecommendedText.Title" parent="RecommendedText">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textSize">@dimen/conv_text_big</item>
+     </style>
+
+    <style name="RecommendedText.Body" parent="RecommendedText">
+        <item name="android:textSize">@dimen/conv_text_big</item>
+    </style>
 
 
     <!-- Home Menu theme. -->
