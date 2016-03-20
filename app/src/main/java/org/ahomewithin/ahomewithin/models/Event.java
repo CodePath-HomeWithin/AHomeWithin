@@ -19,6 +19,8 @@ import java.util.List;
 @Parcel
 public class Event {
 
+    public static final String SERIALIZABLE_TAG = "event";
+
     public int id;
     public String groupName;
     public String groupDescription;

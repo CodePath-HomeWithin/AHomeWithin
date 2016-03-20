@@ -1,6 +1,7 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.DetailFragment;
+import org.ahomewithin.ahomewithin.fragments.EventDetailFragment;
 import org.ahomewithin.ahomewithin.models.Event;
 
 import java.util.List;
@@ -60,22 +63,25 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(EventsAdapter.ViewHolder viewHolder, int position) {
-        Event item = events.get(position);
-        viewHolder.tvEventName.setText(item.eventName);
+        final Event event = events.get(position);
+        viewHolder.tvEventName.setText(event.eventName);
         viewHolder.tvGroupName.setVisibility(View.GONE);
-        viewHolder.tvDateTime.setText(item.getDateTime());
+        viewHolder.tvDateTime.setText(event.getDateTime());
         Glide.with(mContext)
-                .load(item.imageUrl)
+                .load(event.imageUrl)
                 .fitCenter()
                 .into(viewHolder.ivImage);
 
-        String url = item.getUrl();
+        String url = event.getUrl();
         if (url != null) {
             viewHolder.llEventContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO:  need to bind url to this clickevent
                     Toast.makeText(mContext, "clicked", Toast.LENGTH_SHORT).show();
+                    ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.flContent, EventDetailFragment.newInstance(event))
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
         }
