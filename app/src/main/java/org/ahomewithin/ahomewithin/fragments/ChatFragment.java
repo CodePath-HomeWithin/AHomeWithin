@@ -55,7 +55,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("xxyChat", "onCreateView");
-        View chatView = inflater.inflate(R.layout.content_chat, container, false);
+        View chatView = inflater.inflate(R.layout.fragment_chat, container, false);
         ButterKnife.bind(this, chatView);
         chatView.setOnKeyListener(new View.OnKeyListener() {
             @Override
