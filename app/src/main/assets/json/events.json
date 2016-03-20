@@ -183,19 +183,19 @@
   },
   {
     "id":8,
-    "groupName":"Spiritual Playdate",
-    "groupDescription":"In our ever changing, modern world, Spiritual Playdate helps Parents, Guardians and Mentors foster dialogue for their children through a global interfaith program enabling adults & organizations to explore & discover beliefs about the topic of god, through web-based educational tools designed to build bridges of acceptance & understanding.",
-    "eventName":"Sharing Sacred Practices: An Experiential Interfaith Service",
+    "groupName":"Black Girls Do",
+    "groupDescription":"BGD mission is to redefine the perceptions of who Black Women are and what we are about by celebrating black women (us) in action. Thus doing activities that foster sister hood with in our community celebrating achievements and being active.",
+    "eventName":"Purposeful Living",
     "location": {
       "name":"",
       "lines": [""],
       "city":"Oakland",
       "state":"CA"
     },
-    "url":"http://www.meetup.com/Spiritual-Playdate/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/3/f/6/e/600_434356238.jpeg",
+    "url":"http://www.meetup.com/Black-Girls-Do/",
+    "imageUrl":"http://photos4.meetupstatic.com/photos/event/4/3/7/2/global_447077266.jpeg",
     "eventDescription":"",
-    "date":"05-05-2016",
+    "date":"04-17-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
@@ -281,7 +281,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/moms-munchkins-of-parker/",
-    "imageUrl":"",
+    "imageUrl":"http://photos4.meetupstatic.com/photos/event/5/8/3/6/global_209122582.jpeg",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -315,19 +315,19 @@
   },
   {
     "id":14,
-    "groupName":"Black Girls Do",
-    "groupDescription":"BGD mission is to redefine the perceptions of who Black Women are and what we are about by celebrating black women (us) in action. Thus doing activities that foster sister hood with in our community celebrating achievements and being active.",
-    "eventName":"Purposeful Living",
+    "groupName":"Spiritual Playdate",
+    "groupDescription":"In our ever changing, modern world, Spiritual Playdate helps Parents, Guardians and Mentors foster dialogue for their children through a global interfaith program enabling adults & organizations to explore & discover beliefs about the topic of god, through web-based educational tools designed to build bridges of acceptance & understanding.",
+    "eventName":"Sharing Sacred Practices: An Experiential Interfaith Service",
     "location": {
       "name":"",
       "lines": [""],
       "city":"Oakland",
       "state":"CA"
     },
-    "url":"http://www.meetup.com/Black-Girls-Do/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/4/3/7/2/global_447077266.jpeg",
+    "url":"http://www.meetup.com/Spiritual-Playdate/",
+    "imageUrl":"http://photos3.meetupstatic.com/photos/event/1/6/9/0/global_440105776.jpeg",
     "eventDescription":"",
-    "date":"04-17-2016",
+    "date":"05-05-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
