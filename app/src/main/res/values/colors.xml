@@ -10,6 +10,8 @@
     <color name="colorSecondaryText">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
 
+    <color name="colorPrimaryLightTransparent">#44B2DFDB</color>
+
     <!-- OVERWRITE THESE COLORS FOR A DARK THEME -->
     <!-- MaterialDrawer DEFAULT DARK colors -->
     <color name="material_drawer_background">#dedede</color>

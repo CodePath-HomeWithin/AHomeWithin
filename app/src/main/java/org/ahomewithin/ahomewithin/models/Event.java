@@ -117,7 +117,7 @@ public class Event {
     public String getDateTime() {
         List<String> tokens = new ArrayList<String>();
         if (date != null) {
-            tokens.add(DateHelper.dateToString(date, DateHelper.FORMAT_MMDDYYYY));
+            tokens.add(DateHelper.dateToString(date, DateHelper.FORMAT_EEEMMMdd));
         }
         if (startTime != null) {
             tokens.add(startTime);

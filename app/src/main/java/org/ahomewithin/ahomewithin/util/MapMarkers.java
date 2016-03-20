@@ -3,10 +3,11 @@ package org.ahomewithin.ahomewithin.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,25 +36,29 @@ public class MapMarkers {
     private Context mContext;
     private ViewHolder mMapPopupViewHolder;
     private ArrayList<User> users;
-    private HashMap<String, User> markerMap;
 
+    private ArrayList<Marker> markers;
+
+    private HashMap<String, User> markerMap;
     public static final int REQUEST_CODE = 21;
+
     public static User curUserOnMap;
     public static class ViewHolder {
         public RelativeLayout rlMapPopup;
         public TextView tvTitle;
         public TextView tvSubtitle;
         public TextView tvDescription;
-        public Button btnChat;
+        public ImageView btnChat;
+        public ImageView btnTelephone;
         public Marker previousMarker;
         public User previousUser;
-
         public ViewHolder(View view) {
             rlMapPopup = (RelativeLayout) view.findViewById(R.id.rlMapPopup);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             tvSubtitle = (TextView) view.findViewById(R.id.tvSubtitle);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
-            btnChat = (Button) view.findViewById(R.id.btnChat);
+            btnChat = (ImageView) view.findViewById(R.id.btnChat);
+            btnTelephone = (ImageView) view.findViewById(R.id.btnTelephone);
         }
 
         public void setAllVisible(int visibility) {
@@ -61,10 +66,10 @@ public class MapMarkers {
             tvSubtitle.setVisibility(visibility);
             tvDescription.setVisibility(visibility);
             btnChat.setVisibility(visibility);
+            btnTelephone.setVisibility(visibility);
         }
+
     }
-
-
     public MapMarkers(Context context) {
         mContext = context;
 //        View rootView = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
@@ -72,8 +77,10 @@ public class MapMarkers {
 
 
         users = new ArrayList<User>();
+        markers = new ArrayList<>();
         loadUsers(context);
     }
+
 
     public void addMarkersToMap(GoogleMap map) {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
@@ -98,6 +105,10 @@ public class MapMarkers {
                 return false;
             }
         });
+    }
+
+    public ArrayList<Marker> getMarkers() {
+        return markers;
     }
 
     private void updateMapPopupView(Marker marker, final User user) {
@@ -129,6 +140,14 @@ public class MapMarkers {
                         intent.putExtra("otherEmail", user.email);
                         mContext.startActivity(intent);
                     }
+                }
+            });
+
+            mMapPopupViewHolder.btnTelephone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + user.phone));
+                    mContext.startActivity(intent);
                 }
             });
         } else {
@@ -168,6 +187,7 @@ public class MapMarkers {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(user.lat, user.lng));
         Marker marker = map.addMarker(markerOptions);
+        markers.add(marker);
         restoreMarker(marker, user);
         dropPinEffect(marker);
         markerMap.put(marker.getId(), user);

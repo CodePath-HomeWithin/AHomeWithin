@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,48 +10,54 @@
     sothree:umanoShadowHeight="4dp">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/flMapContainer">
+                 android:id="@+id/flMapContainer"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
     </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/rlMapPopup"
+        style="@style/MapInfoWindow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/MapInfoWindow">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/MapInfoWindow.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/MapInfoWindow.Title"/>
+            android:layout_height="wrap_content"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+        <ImageView
             android:id="@+id/btnChat"
-            android:text="@string/chat_now"
-            android:visibility="invisible"
+            android:src="@drawable/ic_chat_black_24px"
             android:layout_alignParentRight="true"
-            android:paddingRight="@dimen/map_popup_margin"
             android:layout_alignRight="@+id/tvTitle"
             android:layout_alignTop="@+id/tvTitle"
+            android:text="@string/chat_now"
+            style="@style/MapInfoWindow.Button"/>
+
+        <ImageView
+            android:id="@+id/btnTelephone"
+            android:src="@drawable/ic_local_phone_black_24px"
+            android:layout_toLeftOf="@+id/btnChat"
+            android:layout_alignTop="@+id/tvTitle"
+            android:text="@string/chat_now"
             style="@style/MapInfoWindow.Button"/>
 
         <TextView
             android:id="@+id/tvSubtitle"
+            style="@style/MapInfoWindow.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTitle"
-            style="@style/MapInfoWindow.Subtitle"/>
+            android:layout_below="@+id/tvTitle"/>
 
         <TextView
             android:id="@+id/tvDescription"
+            style="@style/MapInfoWindow.Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvSubtitle"
-            style="@style/MapInfoWindow.Body" />
+            android:layout_below="@+id/tvSubtitle"/>
 
     </RelativeLayout>
 

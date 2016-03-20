@@ -15,6 +15,7 @@ public class DateHelper {
 //    public static final String FORMAT_YYYYMMDD = "yyyyMMdd"; //"YYYYMMDD";
 //    public static final String FORMAT_MONTH_DAY_YEAR = "MM/dd/yyyy";
 //    public static final String FORMAT_LONG = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"; // "Mon Apr 01 21:16:23 +0000 2014"
+    public static final String FORMAT_EEEMMMdd = "EEE MMM dd";
 
     public static Long getTimestamp(String strDate, String format) {
         SimpleDateFormat sf = new SimpleDateFormat(format, Locale.ENGLISH);
