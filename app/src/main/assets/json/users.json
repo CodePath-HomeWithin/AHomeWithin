@@ -57,6 +57,7 @@
     "type":"service_provider",
     "firstName":"Nora",
     "lastName":"Heins",
+    "email" : "nh@gmail.com",
     "credentials":["PsyD"],
     "description":"Dr. Nora Heins is a clinical psychologist in private practice in San Francisco. Dr. Heins completed her pre-doctoral internship at UCLA Counseling and Psychological Services and obtained specialized post-doctoral training in the treatment of PTSD at San Francisco VA Medical Center. She specializes in relational issues, professional/academic performance concerns, and brief, empirically-based treatment for insomnia. She is a co-founder of Pre-Doc Prep, an organization that provides professional development and dissertation support to graduate students in the mental health disciplines. Dr. Heins also holds a Master's Degree in clinical social work from the Smith College School for Social Work."
   },

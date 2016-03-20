@@ -65,7 +65,7 @@ public class MapFragment extends Fragment implements
         View v = inflater.inflate(R.layout.content_map, container, false);
         mMapFragment = CustomMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.flMapContainer, mMapFragment).commit();
-        mMapMarkers = new MapMarkers(getContext());
+        mMapMarkers = new MapMarkers(getActivity());
         return v;
     }
 

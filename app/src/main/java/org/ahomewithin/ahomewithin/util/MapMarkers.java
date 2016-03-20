@@ -2,17 +2,13 @@ package org.ahomewithin.ahomewithin.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -22,8 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.ParseClient;
-import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.activities.ChatActivity;
+import org.ahomewithin.ahomewithin.activities.UserActivity;
 import org.ahomewithin.ahomewithin.models.User;
 import org.json.JSONObject;
 
@@ -40,6 +37,8 @@ public class MapMarkers {
     private ArrayList<User> users;
     private HashMap<String, User> markerMap;
 
+    public static final int REQUEST_CODE = 21;
+    public static User curUserOnMap;
     public static class ViewHolder {
         public RelativeLayout rlMapPopup;
         public TextView tvTitle;
@@ -50,7 +49,7 @@ public class MapMarkers {
         public User previousUser;
 
         public ViewHolder(View view) {
-            rlMapPopup =  (RelativeLayout) view.findViewById(R.id.rlMapPopup);
+            rlMapPopup = (RelativeLayout) view.findViewById(R.id.rlMapPopup);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             tvSubtitle = (TextView) view.findViewById(R.id.tvSubtitle);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
@@ -77,12 +76,12 @@ public class MapMarkers {
     }
 
     public void addMarkersToMap(GoogleMap map) {
-        View rootView = ((Activity)mContext).getWindow().getDecorView().findViewById(android.R.id.content);
+        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
         mMapPopupViewHolder = new ViewHolder(rootView);
 
-        markerMap= new HashMap<String, User>();
+        markerMap = new HashMap<String, User>();
         if (users != null) {
-            for(User user: users) {
+            for (User user : users) {
                 createMarkerForUser(map, user);
             }
         }
@@ -101,13 +100,13 @@ public class MapMarkers {
         });
     }
 
-    private void updateMapPopupView(Marker marker, User user) {
+    private void updateMapPopupView(Marker marker, final User user) {
         restoreMarker(mMapPopupViewHolder.previousMarker, mMapPopupViewHolder.previousUser);
         if (user != null) {
             highlightMarker(marker, user);
             mMapPopupViewHolder.setAllVisible(View.VISIBLE);
             mMapPopupViewHolder.tvTitle.setText(user.getFullName(true));
-            switch(user.type) {
+            switch (user.type) {
                 case SERVICE_PROVIDER:
                     mMapPopupViewHolder.tvSubtitle.setText(R.string.service_provider);
                     break;
@@ -119,7 +118,17 @@ public class MapMarkers {
             mMapPopupViewHolder.btnChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "clicked", Toast.LENGTH_SHORT).show();
+                    ParseClient client = ParseClient.newInstance(mContext);
+                    if (!client.isUserLoggedIn()) {
+                        curUserOnMap = user;
+                        Intent intent = new Intent(mContext, UserActivity.class);
+                        Activity origActivity = (Activity)mContext;
+                        origActivity.startActivityForResult(intent, REQUEST_CODE);
+                    } else {
+                        Intent intent = new Intent(mContext, ChatActivity.class);
+                        intent.putExtra("otherEmail", user.email);
+                        mContext.startActivity(intent);
+                    }
                 }
             });
         } else {
@@ -191,7 +200,7 @@ public class MapMarkers {
 
         // Use the bounce interpolator
         final android.view.animation.Interpolator interpolator =
-                new BounceInterpolator();
+            new BounceInterpolator();
 
         // Animate marker with a bounce updating its position every 15ms
         handler.post(new Runnable() {
@@ -200,8 +209,8 @@ public class MapMarkers {
                 long elapsed = SystemClock.uptimeMillis() - start;
                 // Calculate t for bounce based on elapsed time
                 float t = Math.max(
-                        1 - interpolator.getInterpolation((float) elapsed
-                                / duration), 0);
+                    1 - interpolator.getInterpolation((float) elapsed
+                        / duration), 0);
                 // Set the anchor
                 marker.setAnchor(0.5f, 1.0f + 14 * t);
 
