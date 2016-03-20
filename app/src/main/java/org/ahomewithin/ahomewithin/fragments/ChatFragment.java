@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class ChatFragment extends Fragment {
         Log.i("xxyChat", "onCreateView");
         View chatView = inflater.inflate(R.layout.fragment_chat, container, false);
         ButterKnife.bind(this, chatView);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.chatting);
         return chatView;
     }
 
@@ -71,13 +73,10 @@ public class ChatFragment extends Fragment {
                 if (event.getAction() == KeyEvent.ACTION_UP || keyCode == KeyEvent.KEYCODE_BACK) {
                     getActivity()
                         .getSupportFragmentManager()
-                        .popBackStack();
-                    getActivity()
-                        .getSupportFragmentManager()
                         .beginTransaction()
                         .detach(ChatFragment.this)
                         .commit();
-                    return true;
+                    return false;
                 }
                 return false;
             }
@@ -115,7 +114,7 @@ public class ChatFragment extends Fragment {
         client.getParseObjectUserFromEmail(otherEmail, new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
-                ParseObjectUser otherUser = (ParseObjectUser) obj;
+                final ParseObjectUser otherUser = (ParseObjectUser) obj;
                 if (ParseUser.getCurrentUser() != null) {
                     ChatListAdapter mAdapter = new ChatListAdapter(
                         getContext(),
@@ -130,7 +129,7 @@ public class ChatFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             String data = etParseMessage.getText().toString();
-                            client.sentMessage(data, otherEmail, new ParseClientAsyncHandler() {
+                            client.sentMessage(data, otherUser, new ParseClientAsyncHandler() {
                                     @Override
                                     public void onSuccess(Object obj) {
                                         Toast.makeText(

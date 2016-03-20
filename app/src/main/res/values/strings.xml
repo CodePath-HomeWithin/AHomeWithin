@@ -56,4 +56,6 @@
     <string name="service_provider">Service Provider</string>
     <string name="chat">Chat</string>
     <string name="chat_now">Chat now...</string>
+    <string name="chatRoom">Chat With Someone</string>
+    <string name="chatting">chatting</string>
 </resources>
