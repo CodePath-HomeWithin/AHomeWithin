@@ -5,7 +5,7 @@
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryLight">#B2DFDB</color>
     <color name="colorTextIcons">#FFFFFF</color>
-    <color name="colorAccent">#FF9800</color>
+    <color name="colorAccent">#ef6c00</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
@@ -22,7 +22,7 @@
     <color name="material_drawer_hint_text">#42000000</color>
     <color name="material_drawer_divider">#1F000000</color>
     <!-- Material DEFAULT drawer colors -->
-    <color name="material_drawer_selected">#51000000</color>
+    <color name="material_drawer_selected">#30000000</color>
     <color name="material_drawer_selected_text">@color/colorAccent</color>
     <color name="material_drawer_header_selection_text">#BB000000</color>
 
