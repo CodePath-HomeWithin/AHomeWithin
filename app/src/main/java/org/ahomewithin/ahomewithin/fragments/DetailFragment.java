@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.UserActivity;
 import org.ahomewithin.ahomewithin.activities.VideoActivity;
 import org.ahomewithin.ahomewithin.models.Item;
 import org.ahomewithin.ahomewithin.util.BuyDialog;
 import org.ahomewithin.ahomewithin.util.UserTools;
+import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.ivItemImage) ImageView ivItemImage;
 
     public static final String LOG_TAG = DetailFragment.class.getSimpleName();
+    public static final int REQUEST_CODE = 22;
 
 
     public static DetailFragment newInstance(Item mItem) {
@@ -145,8 +147,9 @@ public class DetailFragment extends Fragment {
     }
 
     public void gotoLogin() {
-        Intent intent = new Intent(getActivity(), UserActivity.class);
-        intent.putExtra("Message", "For buying products, please Log in or Register");
-        startActivity(intent);
+        LoginFragment loginFragment = LoginFragment.newInstance(REQUEST_CODE, Parcels.wrap(mItem));
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.flContent, loginFragment);
+        ft.commit();
     }
 }

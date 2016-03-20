@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -31,12 +32,19 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
+import org.ahomewithin.ahomewithin.fragments.ChatFragment;
+import org.ahomewithin.ahomewithin.fragments.ChatRoomFragment;
+import org.ahomewithin.ahomewithin.fragments.DetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
+import org.ahomewithin.ahomewithin.fragments.LoginFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
+import org.ahomewithin.ahomewithin.models.Item;
+import org.ahomewithin.ahomewithin.util.LoginCallback;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
+import org.parceler.Parcels;
 
 import java.io.IOException;
 
@@ -45,7 +53,8 @@ import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements LoginCallback {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.nvView)
@@ -244,16 +253,15 @@ public class MainActivity extends AppCompatActivity {
 
                         case 9:
                             if (!client.isUserLoggedIn()) {
-                                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-                                startActivityForResult(intent, REQUEST_CODE);
+                                fragment = LoginFragment.newInstance(REQUEST_CODE);
                             } else {
-                                Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-                                startActivity(intent);
+                                fragment = ChatRoomFragment.newInstance();
                             }
                             break;
                         case 10:
                             if (client.isUserLoggedIn()) {
                                 client.logout();
+                                fragment = HomeFragment.newInstance();
                             }
                             break;
                         default:
@@ -266,20 +274,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             })
             .build();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if(requestCode == REQUEST_CODE) {
-                Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-                startActivity(intent);
-            } else if(requestCode == MapMarkers.REQUEST_CODE) {
-                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                intent.putExtra("otherEmail", MapMarkers.curUserOnMap.email);
-                startActivity(intent);
-            }
-        }
     }
 
     private AccountHeader createAccountHeader() {
@@ -351,9 +345,29 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO call profileActivity which should be used for changing all the user parameters
     public void gotoProfile() {
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 
-
+    @Override
+    public void onPostLogin(int requestCode, Parcelable... extra) {
+        switch (requestCode) {
+            case REQUEST_CODE:
+                ChatRoomFragment chatRoomFragment = ChatRoomFragment.newInstance();
+                gotoFragment(chatRoomFragment);
+                break;
+            case MapMarkers.REQUEST_CODE:
+                String otherEmail = MapMarkers.curUserOnMap.email;
+                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
+                gotoFragment(chatFragment);
+                break;
+            case DetailFragment.REQUEST_CODE:
+                DetailFragment detailFragment = DetailFragment.newInstance(
+                    (Item)Parcels.unwrap(extra[0]));
+                gotoFragment(detailFragment);
+                break;
+            default:
+                Log.e("onPostLogin", String.format("the code %s is unknown", requestCode));
+        }
+    }
 }

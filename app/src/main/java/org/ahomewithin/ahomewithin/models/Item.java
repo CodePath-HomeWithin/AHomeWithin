@@ -9,6 +9,7 @@ import org.ahomewithin.ahomewithin.util.CardContent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 /**
  * Created by chezlui on 06/03/16.
  */
-// TODO Use parceler
+
+@Parcel
 public class Item implements Serializable {
 
     public enum ITEM_TYPE {

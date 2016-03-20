@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
@@ -20,8 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.activities.ChatActivity;
-import org.ahomewithin.ahomewithin.activities.UserActivity;
+import org.ahomewithin.ahomewithin.fragments.ChatFragment;
+import org.ahomewithin.ahomewithin.fragments.LoginFragment;
 import org.ahomewithin.ahomewithin.models.User;
 import org.json.JSONObject;
 
@@ -130,15 +132,18 @@ public class MapMarkers {
                 @Override
                 public void onClick(View v) {
                     ParseClient client = ParseClient.newInstance(mContext);
+                    AppCompatActivity mainActivity = (AppCompatActivity)mContext;
                     if (!client.isUserLoggedIn()) {
                         curUserOnMap = user;
-                        Intent intent = new Intent(mContext, UserActivity.class);
-                        Activity origActivity = (Activity)mContext;
-                        origActivity.startActivityForResult(intent, REQUEST_CODE);
+                        LoginFragment loginFragment = LoginFragment.newInstance(REQUEST_CODE);
+                        FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.flContent, loginFragment);
+                        ft.commit();
                     } else {
-                        Intent intent = new Intent(mContext, ChatActivity.class);
-                        intent.putExtra("otherEmail", user.email);
-                        mContext.startActivity(intent);
+                        ChatFragment chatFragment = ChatFragment.newIntance(user.email);
+                        FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.flContent, chatFragment);
+                        ft.commit();
                     }
                 }
             });
