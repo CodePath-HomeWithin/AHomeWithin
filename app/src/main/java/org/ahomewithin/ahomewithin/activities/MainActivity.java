@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         client = ParseClient.newInstance(this);
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
+                .setDefaultFontPath("fonts/Roboto-Regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, homeFragment)
+            .replace(R.id.flContent, homeFragment)
                 .commit();
 
         createDrawer();
@@ -319,9 +319,15 @@ public class MainActivity extends AppCompatActivity
 
     private void gotoFragment(Fragment fragment) {
         if (fragment != null) {
+            // Clean all fragments when using drawer
+            // TODO Not working
+//            getSupportFragmentManager().popBackStack(
+//                    HomeFragment.FRAGMENT_TAG, 0);
+
+
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flContent, fragment)
-                    .addToBackStack(null)
+                .addToBackStack(null)
                     .commit();
         }
 
@@ -330,7 +336,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        if (drawer.isDrawerOpen()) {
+            drawer.closeDrawer();
+        } else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             if (!closeToExit) {
                 Toast.makeText(this, "Click one more time to exit", Toast.LENGTH_SHORT).show();
                 closeToExit = true;

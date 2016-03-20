@@ -58,4 +58,5 @@
     <string name="chat_now">Chat now...</string>
     <string name="chatRoom">Chat With Someone</string>
     <string name="chatting">chatting</string>
+    <string name="no_data_available">Oops, it looks like you don\'t have any item in your library yet. Go to tools and trainings to see what resources are available!</string>
 </resources>

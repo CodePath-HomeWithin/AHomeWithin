@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
@@ -57,7 +59,7 @@ public class StreamFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         type = Item.ITEM_TYPE.values()[(getArguments().getInt(ARG_STREAM_TYPE))];
@@ -82,6 +84,31 @@ public class StreamFragment extends Fragment {
                 RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
                 rvStream.addItemDecoration(itemDecoration);
                 rvStream.setItemAnimator(new FlipInBottomXAnimator());
+
+                TextView emptyView = (TextView) view.findViewById(R.id.empty_view);
+                ImageView goToTools = (ImageView) view.findViewById(R.id.ivToolsAndTraining);
+
+                if (items.isEmpty()) {
+                    rvStream.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                    goToTools.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvStream.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
+                    goToTools.setVisibility(View.GONE);
+                }
+
+                goToTools.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.flContent, StreamPagerFragment.newInstance(
+                                        StreamPagerFragment.ViewType.STORE, false))
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
 
 //        ItemClickSupport.addTo(rvStream).setOnItemClickListener(
 //                new ItemClickSupport.OnItemClickListener() {

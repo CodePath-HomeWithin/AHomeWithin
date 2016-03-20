@@ -12,6 +12,8 @@ import org.ahomewithin.ahomewithin.R;
 
 public class HomeFragment extends Fragment {
 
+    public static final String FRAGMENT_TAG = "home";
+
     public static HomeFragment newInstance() {
         HomeFragment homeFragment = new HomeFragment();
         return homeFragment;
