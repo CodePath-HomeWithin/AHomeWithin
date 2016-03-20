@@ -504,50 +504,39 @@ public class ParseClient {
 
     }
 
-    public void sentMessage(final String messageContent, final String otherEmail, final ParseClientAsyncHandler handler) {
-        getParseObjectUserFromEmail(otherEmail, new ParseClientAsyncHandler() {
-            @Override
-            public void onSuccess(final Object obj) {
-                ParseQuery<ParseChat> query = ParseQuery.getQuery(ParseChat.class);
-                query.whereEqualTo(ParseChat.USERS, curParseObjectUser);
-                query.whereEqualTo(ParseChat.USERS, (ParseObjectUser) obj);
-                query.findInBackground(
-                    new FindCallback<ParseChat>() {
-                        @Override
-                        public void done(List<ParseChat> objects, ParseException e) {
-                            if (e == null) {
-                                if (objects.isEmpty()) {
-                                    startChat((ParseObjectUser) obj, new ParseClientAsyncHandler() {
-                                        @Override
-                                        public void onSuccess(Object obj) {
-                                            ParseChat newChat = (ParseChat) obj;
-                                            addMessageToChat(messageContent, newChat, handler);
-                                        }
-
-                                        @Override
-                                        public void onFailure(String error) {
-                                            handler.onFailure(error);
-                                        }
-                                    });
-                                } else {
-                                    addMessageToChat(messageContent, objects.get(0), handler);
+    public void sentMessage(final String messageContent, final ParseObjectUser otherUser, final ParseClientAsyncHandler handler) {
+        ParseQuery<ParseChat> query = ParseQuery.getQuery(ParseChat.class);
+        query.whereEqualTo(ParseChat.USERS, curParseObjectUser);
+        query.whereEqualTo(ParseChat.USERS, otherUser);
+        query.findInBackground(
+            new FindCallback<ParseChat>() {
+                @Override
+                public void done(List<ParseChat> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.isEmpty()) {
+                            startChat(otherUser, new ParseClientAsyncHandler() {
+                                @Override
+                                public void onSuccess(Object obj) {
+                                    ParseChat newChat = (ParseChat) obj;
+                                    addMessageToChat(messageContent, newChat, handler);
                                 }
 
-                            } else {
-                                handler.onFailure(e.getMessage());
-                            }
+                                @Override
+                                public void onFailure(String error) {
+                                    handler.onFailure(error);
+                                }
+                            });
+                        } else {
+                            addMessageToChat(messageContent, objects.get(0), handler);
                         }
+
+                    } else {
+                        handler.onFailure(e.getMessage());
                     }
-
-                );
+                }
             }
 
-            @Override
-            public void onFailure(String error) {
-                handler.onFailure(error);
-            }
-        });
-
+        );
     }
 
     public void getPastMessages(final String otherEmail, final ParseClientAsyncHandler handler) {

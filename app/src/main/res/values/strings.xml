@@ -42,6 +42,7 @@
     <string name="start_chat">Start Chat</string>
     <string name="events">Events</string>
     <string name="library">My Library</string>
+    <string name="near_you">Near you</string>
     <string name="recommended">Recommended</string>
     <string name="type">type</string>
     <string name="thumbnail">Thumbnail</string>
@@ -55,4 +56,7 @@
     <string name="service_provider">Service Provider</string>
     <string name="chat">Chat</string>
     <string name="chat_now">Chat now...</string>
+    <string name="chatRoom">Chat With Someone</string>
+    <string name="chatting">chatting</string>
+    <string name="no_data_available">Oops, it looks like you don\'t have any item in your library yet. Go to tools and trainings to see what resources are available!</string>
 </resources>

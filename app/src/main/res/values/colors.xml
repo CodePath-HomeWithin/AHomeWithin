@@ -14,7 +14,7 @@
 
     <!-- OVERWRITE THESE COLORS FOR A DARK THEME -->
     <!-- MaterialDrawer DEFAULT DARK colors -->
-    <color name="material_drawer_background">#dedede</color>
+    <color name="material_drawer_background">#d2d2d2</color>
     <!-- Material DEFAULT text / items colors -->
     <color name="material_drawer_primary_text">#DE000000</color>
     <color name="material_drawer_primary_icon">@color/colorAccent</color>
@@ -22,7 +22,7 @@
     <color name="material_drawer_hint_text">#42000000</color>
     <color name="material_drawer_divider">#1F000000</color>
     <!-- Material DEFAULT drawer colors -->
-    <color name="material_drawer_selected">#30000000</color>
+    <color name="material_drawer_selected">#f2f2f2</color>
     <color name="material_drawer_selected_text">@color/colorAccent</color>
     <color name="material_drawer_header_selection_text">#BB000000</color>
 
