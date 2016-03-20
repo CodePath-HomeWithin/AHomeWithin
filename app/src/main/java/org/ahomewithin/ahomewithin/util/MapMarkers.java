@@ -3,10 +3,11 @@ package org.ahomewithin.ahomewithin.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,7 +45,8 @@ public class MapMarkers {
         public TextView tvTitle;
         public TextView tvSubtitle;
         public TextView tvDescription;
-        public Button btnChat;
+        public ImageView btnChat;
+        public ImageView btnTelephone;
         public Marker previousMarker;
         public User previousUser;
 
@@ -53,7 +55,8 @@ public class MapMarkers {
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             tvSubtitle = (TextView) view.findViewById(R.id.tvSubtitle);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
-            btnChat = (Button) view.findViewById(R.id.btnChat);
+            btnChat = (ImageView) view.findViewById(R.id.btnChat);
+            btnTelephone = (ImageView) view.findViewById(R.id.btnTelephone);
         }
 
         public void setAllVisible(int visibility) {
@@ -61,6 +64,7 @@ public class MapMarkers {
             tvSubtitle.setVisibility(visibility);
             tvDescription.setVisibility(visibility);
             btnChat.setVisibility(visibility);
+            btnTelephone.setVisibility(visibility);
         }
     }
 
@@ -129,6 +133,14 @@ public class MapMarkers {
                         intent.putExtra("otherEmail", user.email);
                         mContext.startActivity(intent);
                     }
+                }
+            });
+
+            mMapPopupViewHolder.btnTelephone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + user.phone));
+                    mContext.startActivity(intent);
                 }
             });
         } else {

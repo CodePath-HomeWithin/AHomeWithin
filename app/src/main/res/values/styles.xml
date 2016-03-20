@@ -111,7 +111,7 @@
     <!-- Map application theme. -->
     <style name="MapInfoWindow">
         <item name="android:padding">@dimen/map_popup_margin</item>
-        <item name="android:background">@color/material_drawer_dark_background</item>
+        <item name="android:background">@color/material_drawer_background</item>
     </style>
 
     <style name="MapInfoWindow.Title" parent="conv_card_section_title">
@@ -128,13 +128,6 @@
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
-
-    <style name="MapInfoWindow.Button" parent="MapInfoWindow">
-        <item name="android:padding">10dp</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColor">@color/colorTextIcons</item>
-    </style>
-
 
     <!-- Recommended theme. -->
     <style name="Recommended">
@@ -204,6 +197,14 @@
         <item name="android:textStyle">bold</item>
         <item name="fontPath">fonts/RobotoCondensed-Regular.ttf</item>
 
+    </style>
+
+    <style name="MapInfoWindow.Button">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:paddingRight">@dimen/map_popup_margin</item>
+        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:visibility">invisible</item>
     </style>
 
 
