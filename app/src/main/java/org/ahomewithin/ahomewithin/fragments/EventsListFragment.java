@@ -1,9 +1,5 @@
 package org.ahomewithin.ahomewithin.fragments;
 
-import org.ahomewithin.ahomewithin.adapters.EventsAdapter;
-import org.ahomewithin.ahomewithin.models.Event;
-import org.ahomewithin.ahomewithin.models.Recommended;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
-import org.ahomewithin.ahomewithin.adapters.RecommendedAdapter;
-import org.ahomewithin.ahomewithin.views.DividerItemDecoration;
+import org.ahomewithin.ahomewithin.adapters.EventsAdapter;
+import org.ahomewithin.ahomewithin.models.Event;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,12 +47,9 @@ public class EventsListFragment extends SimpleListFragment {
 
     public  void bindRecycleViewToLayoutManager(RecyclerView rvItems) {
         StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         rvItems.setLayoutManager(gridLayoutManager);
 
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvItems.addItemDecoration(itemDecoration);
         rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {

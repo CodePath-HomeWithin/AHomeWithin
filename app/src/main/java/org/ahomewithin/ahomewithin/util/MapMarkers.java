@@ -36,9 +36,12 @@ public class MapMarkers {
     private Context mContext;
     private ViewHolder mMapPopupViewHolder;
     private ArrayList<User> users;
-    private HashMap<String, User> markerMap;
 
+    private ArrayList<Marker> markers;
+
+    private HashMap<String, User> markerMap;
     public static final int REQUEST_CODE = 21;
+
     public static User curUserOnMap;
     public static class ViewHolder {
         public RelativeLayout rlMapPopup;
@@ -49,7 +52,6 @@ public class MapMarkers {
         public ImageView btnTelephone;
         public Marker previousMarker;
         public User previousUser;
-
         public ViewHolder(View view) {
             rlMapPopup = (RelativeLayout) view.findViewById(R.id.rlMapPopup);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
@@ -66,9 +68,8 @@ public class MapMarkers {
             btnChat.setVisibility(visibility);
             btnTelephone.setVisibility(visibility);
         }
+
     }
-
-
     public MapMarkers(Context context) {
         mContext = context;
 //        View rootView = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
@@ -76,8 +77,10 @@ public class MapMarkers {
 
 
         users = new ArrayList<User>();
+        markers = new ArrayList<>();
         loadUsers(context);
     }
+
 
     public void addMarkersToMap(GoogleMap map) {
         View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
@@ -102,6 +105,10 @@ public class MapMarkers {
                 return false;
             }
         });
+    }
+
+    public ArrayList<Marker> getMarkers() {
+        return markers;
     }
 
     private void updateMapPopupView(Marker marker, final User user) {
@@ -180,6 +187,7 @@ public class MapMarkers {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(user.lat, user.lng));
         Marker marker = map.addMarker(markerOptions);
+        markers.add(marker);
         restoreMarker(marker, user);
         dropPinEffect(marker);
         markerMap.put(marker.getId(), user);

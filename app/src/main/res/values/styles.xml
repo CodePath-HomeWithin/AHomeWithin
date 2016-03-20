@@ -207,5 +207,18 @@
         <item name="android:visibility">invisible</item>
     </style>
 
+    <style name="RobotoCondensed">
+        <item name="fontPath">fonts/RobotoCondensed-Regular.ttf</item>
+    </style>
+
+    <style name="RobotoLight">
+        <item name="fontPath">fonts/RobotoCondensed-Light.ttf</item>
+    </style>
+
+    <style name="RobotoMedium">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+
 
 </resources>

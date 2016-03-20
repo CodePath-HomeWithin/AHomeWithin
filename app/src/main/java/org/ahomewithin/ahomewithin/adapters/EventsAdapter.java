@@ -2,14 +2,12 @@ package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,10 +61,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(EventsAdapter.ViewHolder viewHolder, int position) {
         Event item = events.get(position);
-        viewHolder.tvGroupName.setText(item.groupName);
         viewHolder.tvEventName.setText(item.eventName);
+        viewHolder.tvGroupName.setVisibility(View.GONE);
         viewHolder.tvDateTime.setText(item.getDateTime());
-        Glide.with(mContext).load(item.imageUrl).into(viewHolder.ivImage);
+        Glide.with(mContext)
+                .load(item.imageUrl)
+                .fitCenter()
+                .into(viewHolder.ivImage);
 
         String url = item.getUrl();
         if (url != null) {

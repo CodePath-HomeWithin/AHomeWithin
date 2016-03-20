@@ -25,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
@@ -89,17 +90,18 @@ public class MapFragment extends Fragment implements
 
         // center view over US
         // http://stackoverflow.com/questions/14636118/android-set-goolgemap-bounds-from-from-database-of-points
-        LatLngBounds.Builder bounds = new LatLngBounds.Builder();
-        bounds.include(new LatLng(24.891752, -98.4375));
-        bounds.include(new LatLng(40.351289, -124.244385));
-        bounds.include(new LatLng(44.488196, -70.290656));
-        bounds.include(new LatLng(49.000282, -101.37085));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
 
-        enableMyLocation();
 
         if (mMapMarkers != null) {
             mMapMarkers.addMarkersToMap(mMap);
+
+            LatLngBounds.Builder bounds = new LatLngBounds.Builder();
+            for (Marker marker : mMapMarkers.getMarkers()) {
+                bounds.include(marker.getPosition());
+            }
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
+
+            enableMyLocation();
         }
     }
 
