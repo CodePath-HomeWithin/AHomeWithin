@@ -97,25 +97,26 @@ public class ChatFragment extends Fragment {
         final List<Boolean> firstLoadWrapper = new ArrayList<>();
         firstLoadWrapper.add(true);
         final String otherEmail = getArguments().getString("otherEmail");
-        final Runnable mRefreshParseMessagesRunnable = new Runnable() {
-            @Override
-            public void run() {
-                refreshParseMessages(
-                    client,
-                    mParseMessages,
-                    otherEmail,
-                    mAdapterWrapper.get(0),
-                    firstLoadWrapper
-                );
-                mHandler.postDelayed(this, POLL_INTERVAL);
-            }
-        };
+
 
         client.getParseObjectUserFromEmail(otherEmail, new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
                 final ParseObjectUser otherUser = (ParseObjectUser) obj;
                 if (ParseUser.getCurrentUser() != null) {
+                    final Runnable mRefreshParseMessagesRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshParseMessages(
+                                client,
+                                mParseMessages,
+                                otherUser,
+                                mAdapterWrapper.get(0),
+                                firstLoadWrapper
+                            );
+                            mHandler.postDelayed(this, POLL_INTERVAL);
+                        }
+                    };
                     ChatListAdapter mAdapter = new ChatListAdapter(
                         getContext(),
                         client.getCurParseObjectUser(),
@@ -163,10 +164,10 @@ public class ChatFragment extends Fragment {
     void refreshParseMessages(
         ParseClient client,
         final List<ParseMessage> mParseMessages,
-        String otherEmail,
+        ParseObjectUser otherUser,
         final ChatListAdapter mAdapter,
         final List<Boolean> firstLoadWrapper) {
-        client.getPastMessages(otherEmail, new ParseClientAsyncHandler() {
+        client.getPastMessages(otherUser, new ParseClientAsyncHandler() {
             @Override
             public void onSuccess(Object obj) {
                 List<ParseMessage> parseMessages = (List<ParseMessage>) obj;
