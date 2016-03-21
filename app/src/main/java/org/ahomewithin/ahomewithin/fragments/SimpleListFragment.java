@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.SimpleListAdapter;
+import org.ahomewithin.ahomewithin.views.ItemOffsetDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,36 +35,35 @@ public abstract class SimpleListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_simple_list, container, false);
     }
 
-    public abstract void bindRecycleViewToLayoutManager(RecyclerView rvItems);
+    public int numGridColumns() {
+        return(1);
+    };
+
+    public RecyclerView.ItemDecoration itemDecoration() {
+        return null;
+    }
 
     protected void setupViews(View view, ArrayList<?> itemsList, SimpleListAdapter adapter) {
         listOfItems = itemsList;
         itemsAdapter = adapter;
         rvItems = (RecyclerView) view.findViewById(R.id.rvItems);
         rvItems.setAdapter(itemsAdapter.getAdapter());
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        bindRecycleViewToLayoutManager(rvItems);
 
+        final StaggeredGridLayoutManager gridLayoutManager =
+                new StaggeredGridLayoutManager(numGridColumns(), StaggeredGridLayoutManager.VERTICAL);
+        rvItems.setLayoutManager(gridLayoutManager);
 
-////        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-////        layoutManager.scrollToPosition(0);
-////        rvItems.setLayoutManager(layoutManager);
-//
-//        // First param is number of columns and second param is orientation i.e Vertical or Horizontal
-//        StaggeredGridLayoutManager gridLayoutManager =
-//                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//// Attach the layout manager to the recycler view
-//        rvItems.setLayoutManager(gridLayoutManager);
-//
-//        RecyclerView.ItemDecoration itemDecoration = new
-//                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-//        rvItems.addItemDecoration(itemDecoration);
-//        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount) {
-//                loadMore(page, totalItemsCount);
-//            }
-//        });
+        RecyclerView.ItemDecoration itemDecoration = itemDecoration();
+        if (itemDecoration != null) {
+            rvItems.addItemDecoration(itemDecoration);
+        }
+
+        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                loadMore(page, totalItemsCount);
+            }
+        });
 
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading

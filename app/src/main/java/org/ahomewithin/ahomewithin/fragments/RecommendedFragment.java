@@ -48,28 +48,10 @@ public class RecommendedFragment extends SimpleListFragment {
         super.setupViews(view, recommendations, rAdapter);
     }
 
-    public RecyclerView.LayoutManager getLayoutManager() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-        return(layoutManager);
+    public RecyclerView.ItemDecoration itemDecoration() {
+        return (new  DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
     }
-    public  void bindRecycleViewToLayoutManager(RecyclerView rvItems) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-        rvItems.setLayoutManager(layoutManager);
 
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvItems.addItemDecoration(itemDecoration);
-        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                loadMore(page, totalItemsCount);
-            }
-        });
-    }
 
     public void loadRecommendations(int page) {
         setRefreshing(true);

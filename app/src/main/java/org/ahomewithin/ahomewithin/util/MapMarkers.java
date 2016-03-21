@@ -200,8 +200,12 @@ public class MapMarkers {
     }
 
     private void highlightMarker(Marker marker, User user) {
+        // http://serennu.com/colour/hsltorgb.php
+        int hue_orange = 27;
+        int hue_green = 175;
+
         if (marker != null) {
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(hue_green));
         }
     }
 

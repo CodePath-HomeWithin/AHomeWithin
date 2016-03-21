@@ -47,18 +47,9 @@ public class EventsListFragment extends SimpleListFragment {
         super.setupViews(view, events, eAdapter);
     }
 
-    public  void bindRecycleViewToLayoutManager(RecyclerView rvItems) {
-        StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        rvItems.setLayoutManager(gridLayoutManager);
-
-        rvItems.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                loadMore(page, totalItemsCount);
-            }
-        });
-    }
+    public int numGridColumns() {
+        return(3);
+    };
 
     public void loadEvents(int page) {
         setRefreshing(true);
