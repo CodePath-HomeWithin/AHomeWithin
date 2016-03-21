@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:layout_toRightOf="@+id/ivProfileImage"
-        android:text="New Text"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/tvDescription"
@@ -33,7 +33,7 @@
         android:layout_toEndOf="@+id/ivProfileImage"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:layout_alignBottom="@id/ivProfileImage"
-        android:text="New Text"/>
+        android:text=""/>
 
     <TextView
         android:textStyle="bold"
@@ -43,5 +43,5 @@
         android:layout_alignBottom="@+id/tvUserName"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="New Text"/>
+        android:text=""/>
 </RelativeLayout>

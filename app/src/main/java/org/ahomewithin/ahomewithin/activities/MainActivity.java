@@ -35,7 +35,7 @@ import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.AboutUsFragment;
 import org.ahomewithin.ahomewithin.fragments.ChatFragment;
-import org.ahomewithin.ahomewithin.fragments.ChatRoomFragment;
+import org.ahomewithin.ahomewithin.fragments.ChatTabsFragment;
 import org.ahomewithin.ahomewithin.fragments.DetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.fragments.HomeFragment;
@@ -270,8 +270,8 @@ public class MainActivity extends AppCompatActivity
                                     fragment = LoginFragment.newInstance(REQUEST_CODE);
                                     tag = LoginFragment.FRAGMENT_TAG;
                                 } else {
-                                    fragment = ChatRoomFragment.newInstance();
-                                    tag = ChatRoomFragment.FRAGMENT_TAG;
+                                    fragment = ChatTabsFragment.newInstance();
+                                    tag = ChatTabsFragment.FRAGMENT_TAG;
                                 }
                                 break;
                             case 11:
@@ -381,8 +381,8 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().popBackStackImmediate();
         switch (requestCode) {
             case REQUEST_CODE:
-                ChatRoomFragment chatRoomFragment = ChatRoomFragment.newInstance();
-                gotoFragment(chatRoomFragment, ChatRoomFragment.FRAGMENT_TAG);
+                ChatTabsFragment chatTabsFragment = ChatTabsFragment.newInstance();
+                gotoFragment(chatTabsFragment, ChatTabsFragment.FRAGMENT_TAG);
                 break;
             case MapMarkers.REQUEST_CODE:
                 String otherEmail = MapMarkers.curUserOnMap.email;

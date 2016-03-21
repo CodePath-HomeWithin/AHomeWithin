@@ -271,11 +271,7 @@ public class ParseClient {
                 @Override
                 public void done(List<ParseObjectUser> users, ParseException e) {
                     if (e == null) {
-                        List<User> normalUsers = new ArrayList<>();
-                        for (ParseObjectUser oneUser : users) {
-                            normalUsers.add(User.getNewInstanceFromParseObject(oneUser));
-                        }
-                        handler.onSuccess(normalUsers);
+                        handler.onSuccess(users);
                     } else {
                         handler.onFailure(e.getMessage());
                     }
@@ -407,22 +403,51 @@ public class ParseClient {
     }
 
     public void getChatHistory(final ParseClientAsyncHandler handler) {
-        ParseQuery<ParseChat> query = ParseQuery.getQuery(ParseChat.class);
+        ParseQuery<ParseUsersChatRelation> query =
+            ParseQuery.getQuery(ParseUsersChatRelation.class);
 
-        query.whereEqualTo(ParseChat.USERS, curParseObjectUser);
-        query.setLimit(ParseChat.MAX_CHAT_TO_SHOW);
-        query.orderByDescending("_updated_at");
+        query.whereContainsAll(
+            ParseUsersChatRelation.USERS_KEY,
+            Arrays.asList(curParseObjectUser)
+        );
+        // Configure limit and sort order
+        query.setLimit(20);
+        query.orderByDescending("updatedAt");
         query.findInBackground(
-            new FindCallback<ParseChat>() {
+            new FindCallback<ParseUsersChatRelation>() {
                 @Override
-                public void done(List<ParseChat> objects, ParseException e) {
+                public void done(List<ParseUsersChatRelation> objects, ParseException e) {
+                    List<ParseObjectUser> userList = new ArrayList<>();
                     if (e == null) {
-                        handler.onSuccess(objects);
+                        if (!objects.isEmpty()) {
+                            for (ParseUsersChatRelation relation : objects) {
+                                try {
+                                    relation.fetchIfNeeded();
+                                    List<ParseObjectUser> users = relation.getUsers();
+                                    for(ParseObjectUser user : users) {
+                                        user.fetchIfNeeded();
+                                        if(! user.getEmail().equals(curParseObjectUser.getEmail())) {
+                                            userList.add(user);
+                                        }
+                                    }
+                                } catch (ParseException parseException) {
+                                    Log.e("PareClient",
+                                        String.format(
+                                            "Failed to fetch chat due to %s",
+                                            parseException.getMessage()
+                                        )
+                                    );
+                                }
+
+                            }
+                        }
+                        handler.onSuccess(userList);
                     } else {
                         handler.onFailure(e.getMessage());
                     }
                 }
             }
+
         );
     }
 
@@ -573,7 +598,17 @@ public class ParseClient {
         );
     }
 
-    public void getPastMessages(ParseObjectUser otherUser, final ParseClientAsyncHandler handler) {
+    interface OrderQueryResultFunc {
+        void orderByQuery(ParseQuery<?> query);
+    }
+
+    public void getPastGiveNumMessages(
+        ParseObjectUser otherUser,
+        final ParseClientAsyncHandler handler,
+        int num,
+        OrderQueryResultFunc orderFunc
+    ) {
+
         ParseQuery<ParseUsersChatRelation> query =
             ParseQuery.getQuery(ParseUsersChatRelation.class);
 
@@ -582,8 +617,8 @@ public class ParseClient {
             Arrays.asList(curParseObjectUser, otherUser)
         );
         // Configure limit and sort order
-        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
-        query.orderByAscending("createdAt");
+        query.setLimit(num);
+        orderFunc.orderByQuery(query);
         query.findInBackground(
             new FindCallback<ParseUsersChatRelation>() {
                 @Override
@@ -616,4 +651,31 @@ public class ParseClient {
         );
     }
 
+    public void getPastMessages(ParseObjectUser otherUser, final ParseClientAsyncHandler handler) {
+        getPastGiveNumMessages(
+            otherUser,
+            handler,
+            MAX_CHAT_MESSAGES_TO_SHOW,
+            new OrderQueryResultFunc() {
+                @Override
+                public void orderByQuery(ParseQuery<?> query) {
+                    query.orderByAscending("createdAt");
+                }
+            }
+        );
+    }
+
+    public void getLastMessageWithUser(ParseObjectUser otherUser, ParseClientAsyncHandler handler) {
+        getPastGiveNumMessages(
+            otherUser,
+            handler,
+            1,
+            new OrderQueryResultFunc() {
+                @Override
+                public void orderByQuery(ParseQuery<?> query) {
+                    query.orderByDescending("updatedAt");
+                }
+            }
+        );
+    }
 }

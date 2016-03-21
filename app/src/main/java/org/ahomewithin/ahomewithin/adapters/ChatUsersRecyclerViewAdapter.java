@@ -2,14 +2,24 @@ package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
+import org.ahomewithin.ahomewithin.ParseClient;
+import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.fragments.ChatHistoryFragment;
+import org.ahomewithin.ahomewithin.fragments.ChatRoomFragment;
+import org.ahomewithin.ahomewithin.parseModel.ParseMessage;
+import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.ahomewithin.ahomewithin.util.LoadProfileImageView;
 import org.ahomewithin.ahomewithin.util.OnItemClickListener;
 
@@ -24,15 +34,19 @@ import butterknife.ButterKnife;
 public class ChatUsersRecyclerViewAdapter
     extends RecyclerView.Adapter<ChatUsersRecyclerViewAdapter.ChatUserViewHolder> {
 
-    private List<User> mUsers;
+    private List<ParseObjectUser> mUsers;
     private OnItemClickListener mListener;
+    private int mFragmentCode;
 
     public ChatUsersRecyclerViewAdapter(
-        List<User> users,
-        OnItemClickListener listener
+        List<ParseObjectUser> users,
+        OnItemClickListener listener,
+        int fragmentCode
+
     ) {
         mUsers = users;
         mListener = listener;
+        mFragmentCode = fragmentCode;
     }
 
     @Override
@@ -44,7 +58,7 @@ public class ChatUsersRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(ChatUserViewHolder holder, int position) {
-        User user = mUsers.get(position);
+        ParseObjectUser user = mUsers.get(position);
         holder.bindView(user);
     }
 
@@ -82,21 +96,68 @@ public class ChatUsersRecyclerViewAdapter
         }
 
         public void bindView(Object userObj) {
-            User user = (User) userObj;
+            ParseObjectUser user = (ParseObjectUser) userObj;
             LoadProfileImageView.loadProfile(
                 ivProfileImage,
                 mContext,
                 user
             );
-            tvUserName.setText(user.lastName);
-            if (user.description == null ||
-                user.description.equals("null")
-                ) {
-                tvDescription.setVisibility(View.INVISIBLE);
-            } else {
-                tvDescription.setText(user.description);
+            tvUserName.setText(user.getName());
+            switch (mFragmentCode) {
+                case ChatRoomFragment.FRAGMENT_CODE:
+                    if (user.getDesp() == null ||
+                        user.getDesp().equals("null")
+                        ) {
+                        tvDescription.setVisibility(View.INVISIBLE);
+                    } else {
+                        tvDescription.setText(user.getDesp());
+                    }
+                    tvUserType.setText(user.getType().toString());
+                    break;
+                case ChatHistoryFragment.FRAGMENT_CODE:
+                    ParseClient client = ParseClient.newInstance(mContext);
+                    client.getLastMessageWithUser(
+                        user,
+                        new ParseClientAsyncHandler() {
+                            @Override
+                            public void onSuccess(Object obj) {
+                                List<ParseMessage> messages = (List<ParseMessage>) obj;
+                                ParseMessage lastMessage = messages.get(0);
+                                lastMessage.fetchIfNeededInBackground(
+                                    new GetCallback<ParseObject>() {
+                                        @Override
+                                        public void done(ParseObject object, ParseException e) {
+                                            if (e == null) {
+                                                tvDescription.setText(
+                                                    ((ParseMessage)object).getBody()
+                                                    );
+                                            } else {
+                                                tvDescription.setVisibility(View.INVISIBLE);
+                                            }
+
+                                        }
+                                    }
+                                );
+                            }
+
+                            @Override
+                            public void onFailure(String error) {
+                                tvDescription.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    );
+                    tvUserType.setVisibility(View.GONE);
+                    break;
+                default:
+                    Log.e(
+                        "ChatUserRecyclerView",
+                        String.format(
+                            "fragment code %d unkown",
+                            mFragmentCode
+                        )
+                    );
             }
-            tvUserType.setText(user.type.toString());
+
         }
     }
 
