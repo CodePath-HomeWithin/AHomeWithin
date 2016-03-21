@@ -18,6 +18,8 @@ import butterknife.ButterKnife;
  * Created by chezlui on 06/03/16.
  */
 public class CardFragment extends Fragment {
+    public static final String FRAGMENT_TAG = CardFragment.class.getSimpleName();
+
     ConversationCard mCard;
 
     @Bind(R.id.tvTitle) TextView tvTitle;

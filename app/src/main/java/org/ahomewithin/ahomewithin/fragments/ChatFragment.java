@@ -35,6 +35,8 @@ import butterknife.ButterKnife;
  */
 public class ChatFragment extends Fragment {
 
+    public static final String FRAGMENT_TAG = ChatFragment.class.getSimpleName();
+
     @Bind(R.id.etMessage)
     EditText etParseMessage;
     @Bind(R.id.btSend)

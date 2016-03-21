@@ -14,7 +14,8 @@ import org.ahomewithin.ahomewithin.R;
  * Created by barbara on 3/4/16.
  */
 public class EventsFragment extends Fragment {
-    public static final String FRAGMENT_ID = "EventsFragmentId";
+
+    public static final String FRAGMENT_TAG = EventsFragment.class.getSimpleName();
 
     public static EventsFragment newInstance() {
         EventsFragment servicesFragment = new EventsFragment();

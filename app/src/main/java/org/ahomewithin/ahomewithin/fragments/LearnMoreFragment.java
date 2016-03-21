@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import org.ahomewithin.ahomewithin.R;
 
 public class LearnMoreFragment extends Fragment {
+    public static final String FRAGMENT_TAG = LearnMoreFragment.class.getSimpleName();
 
     public static LearnMoreFragment newInstance() {
         LearnMoreFragment learnMoreFragment = new LearnMoreFragment();

@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
  * Created by chezlui on 06/03/16.
  */
 public class CardsPagerFragment extends Fragment {
+    public static final String FRAGMENT_TAG = CardsPagerFragment.class.getSimpleName();
+
     @Bind(R.id.viewpager) ViewPager viewPager;
     Item mItem;
 

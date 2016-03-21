@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
  * Created by chezlui on 06/03/16.
  */
 public class StreamPagerFragment extends Fragment {
+    public static final String FRAGMENT_TAG = StreamPagerFragment.class.getSimpleName();
+
     public enum ViewType {
         STORE, LIBRARY
     }
