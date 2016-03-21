@@ -1,72 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@android:color/transparent"
+              android:layout_margin="8dp">
 
-    <TextView
-        android:id="@+id/textView"
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="20sp"
-        android:text="Introduce your card details" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        >
 
-    <EditText
-        android:id="@+id/etBuyerName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:ems="10"
-        android:hint="Name"
-        android:maxLength="15"
-        android:inputType="textPersonName"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <EditText
-        android:id="@+id/etBuyerCardNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:ems="10"
-        android:hint="Card number"
-        android:inputType="numberDecimal"
-        android:layout_below="@+id/etBuyerName"
-        android:layout_alignStart="@+id/etBuyerName" />
+            android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etBuyerDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="6"
-        android:hint="MM/YY"
-        android:inputType="date"
-        android:layout_below="@+id/etBuyerCardNumber"
-        android:layout_alignParentStart="true" />
+            <EditText
+                android:id="@+id/etBuyerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/imageView"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:maxLength="15"/>
 
-    <EditText
-        android:id="@+id/etBuyerCVC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/etBuyerDate"
-        android:ems="3"
-        android:hint="CVC"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/etBuyerCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/etBuyerName"
+                android:layout_below="@+id/etBuyerName"
+                android:layout_marginLeft="0dp"
+                android:maxLength="16"
+                android:ems="10"
+                android:hint="Card number"
+                android:inputType="numberDecimal"/>
 
-    <Button
-        android:id="@+id/btBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/etBuyerCVC"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="34dp"
-        android:text="BUY" />
-</RelativeLayout>
+            <EditText
+                android:id="@+id/etBuyerDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/etBuyerCardNumber"
+                android:ems="6"
+                android:hint="MM/YY"
+                android:maxLength="5"
+                android:inputType="date"/>
+
+            <EditText
+                android:id="@+id/etBuyerCVC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/etBuyerDate"
+                android:ems="3"
+                android:maxLength="3"
+                android:hint="CVC"
+                android:inputType="numberPassword"/>
+
+            <Button
+                android:id="@+id/btBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/button_standard"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/etBuyerCVC"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="34dp"
+                android:text="BUY"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/mastercard_logo"/>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignTop="@+id/imageView"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/imageView"
+                android:src="@drawable/visa"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

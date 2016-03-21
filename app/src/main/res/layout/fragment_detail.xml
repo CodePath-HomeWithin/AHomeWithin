@@ -59,13 +59,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:background="#f57f17"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="5dp"
-                android:text="BUY NOW"/>
+                android:text="BUY NOW"
+                style="@style/button_standard"/>
 
         </LinearLayout>
 
