@@ -14,7 +14,9 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:transitionName="event_image_transition" />
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:transitionName="@string/even_transition" />
 
         <TextView
                 android:id="@+id/tvGroupName"

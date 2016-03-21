@@ -3,7 +3,6 @@ package org.ahomewithin.ahomewithin.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.Event;
@@ -28,7 +25,6 @@ import butterknife.ButterKnife;
 public class EventDetailFragment extends Fragment {
     public static final String FRAGMENT_TAG = EventDetailFragment.class.getSimpleName();
     public static final String LOG_TAG = DetailFragment.class.getSimpleName();
-
     Event mEvent;
 
     Context mContext;
@@ -37,7 +33,6 @@ public class EventDetailFragment extends Fragment {
     @Bind(R.id.tvEventDescription) TextView tvEventDescription;
     @Bind(R.id.tvDateTime) TextView tvDateTime;
     @Bind(R.id.ivImage) ImageView ivImage;
-
 
 
     @Bind(R.id.ivLink) ImageView ivLink;
@@ -57,18 +52,17 @@ public class EventDetailFragment extends Fragment {
         View convertView = inflater.inflate(R.layout.fragment_event_detail, container, false);
         ButterKnife.bind(this, convertView);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            convertView.findViewById(R.id.ivImage).setTransitionName("event_image_transition");
-        }
-
         mContext = getContext();
-        mEvent = (Event) Parcels.unwrap(getArguments().getParcelable(Event.SERIALIZABLE_TAG));
+        mEvent = Parcels.unwrap(getArguments().getParcelable(Event.SERIALIZABLE_TAG));
         return convertView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Glide.with(getActivity()).load(mEvent.imageUrl).into(ivImage);
+        final int resourceId = mContext.getResources().getIdentifier(
+                mEvent.imageUrl, "drawable", mContext.getPackageName());
+        ivImage.setImageDrawable(mContext.getResources().getDrawable(resourceId));
+
         tvGroupName.setText(mEvent.groupName);
         tvEventName.setText(mEvent.eventName);
         tvEventDescription.setText(mEvent.eventDescription);

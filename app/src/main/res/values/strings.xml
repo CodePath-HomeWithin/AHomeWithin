@@ -59,4 +59,5 @@
     <string name="chatRoom">Chat With Someone</string>
     <string name="chatting">chatting</string>
     <string name="no_data_available">Oops, it looks like you don\'t have any item in your library yet. Go to tools and trainings to see what resources are available!</string>
+    <string name="even_transition">event_image_transition</string>
 </resources>

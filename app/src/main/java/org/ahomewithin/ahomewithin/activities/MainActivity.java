@@ -234,34 +234,44 @@ public class MainActivity extends AppCompatActivity
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         Fragment fragment = null;
+                        String tag = "";
                         Log.d("DEBUG", "Clicked item nº" + position);
                         switch (position) {
                             case 1:
                                 fragment = HomeFragment.newInstance();
+                                tag = HomeFragment.FRAGMENT_TAG;
                                 break;
                             case 3:
                                 fragment = MapFragment.newInstance();
+                                tag = MapFragment.FRAGMENT_TAG;
                                 break;
                             case 4:
                                 fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
+                                tag = StreamPagerFragment.FRAGMENT_TAG;
                                 break;
                             case 5:
                                 fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
+                                tag = StreamPagerFragment.FRAGMENT_TAG;
                                 break;
                             case 6:
                                 fragment = EventsFragment.newInstance();
+                                tag = EventsFragment.FRAGMENT_TAG;
                                 break;
                             case 7:
                                 fragment = LearnMoreFragment.newInstance();
+                                tag = LearnMoreFragment.FRAGMENT_TAG;
                                 break;
                             case 9:
                                 fragment = AboutUsFragment.newInstance();
+                                tag = AboutUsFragment.FRAGMENT_TAG;
                                 break;
                             case 10:
                                 if (!client.isUserLoggedIn()) {
                                     fragment = LoginFragment.newInstance(REQUEST_CODE);
+                                    tag = LoginFragment.FRAGMENT_TAG;
                                 } else {
                                     fragment = ChatRoomFragment.newInstance();
+                                    tag = ChatRoomFragment.FRAGMENT_TAG;
                                 }
                                 break;
                             case 11:
@@ -269,6 +279,7 @@ public class MainActivity extends AppCompatActivity
                                     client.logout();
                                     clearBackstack();
                                     fragment = HomeFragment.newInstance();
+                                    tag = HomeFragment.FRAGMENT_TAG;
                                 }
                                 break;
                             default:
@@ -276,7 +287,7 @@ public class MainActivity extends AppCompatActivity
                                 //case 9:
                                 //fragment = LearnMoreFragment.newInstance();
                         }
-                        gotoFragment(fragment);
+                        gotoFragment(fragment, tag);
                         return true;
                     }
                 })
@@ -319,7 +330,7 @@ public class MainActivity extends AppCompatActivity
         return headerResult;
     }
 
-    private void gotoFragment(Fragment fragment) {
+    private void gotoFragment(Fragment fragment, String tag) {
         if (fragment != null) {
             // Clean all fragments when using drawer
             // TODO Not working
@@ -328,7 +339,7 @@ public class MainActivity extends AppCompatActivity
 
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flContent, fragment)
+                    .replace(R.id.flContent, fragment, tag)
                 .addToBackStack(null)
                     .commit();
         }
@@ -371,17 +382,17 @@ public class MainActivity extends AppCompatActivity
         switch (requestCode) {
             case REQUEST_CODE:
                 ChatRoomFragment chatRoomFragment = ChatRoomFragment.newInstance();
-                gotoFragment(chatRoomFragment);
+                gotoFragment(chatRoomFragment, ChatRoomFragment.FRAGMENT_TAG);
                 break;
             case MapMarkers.REQUEST_CODE:
                 String otherEmail = MapMarkers.curUserOnMap.email;
                 ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
-                gotoFragment(chatFragment);
+                gotoFragment(chatFragment, ChatFragment.FRAGMENT_TAG);
                 break;
             case DetailFragment.REQUEST_CODE:
                 DetailFragment detailFragment = DetailFragment.newInstance(
                         (Item) Parcels.unwrap(extra[0]));
-                gotoFragment(detailFragment);
+                gotoFragment(detailFragment, DetailFragment.FRAGMENT_TAG);
                 break;
             default:
                 Log.e("onPostLogin", String.format("the code %s is unknown", requestCode));
