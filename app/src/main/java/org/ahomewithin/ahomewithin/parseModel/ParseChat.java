@@ -21,7 +21,7 @@ public class ParseChat extends ParseObject {
 
   public static final String PARSE_NAME = "Chat";
   public static final String USERS = "users";
-  public static final int MAX_CHAT_TO_SHOW = 30;
+  public static final int MAX_CHAT_TO_SHOW = 20;
 
   //List<ParseObjectUser> users;
   //this is a relation, not properties, so not defined

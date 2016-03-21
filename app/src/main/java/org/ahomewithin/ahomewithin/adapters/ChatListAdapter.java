@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.parseModel.ParseMessage;
 import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 import org.ahomewithin.ahomewithin.util.LoadProfileImageView;
@@ -68,7 +67,7 @@ public class ChatListAdapter extends ArrayAdapter<ParseMessage> {
         LoadProfileImageView.loadProfile(
             profileView,
             getContext(),
-            User.getNewInstanceFromParseObject(user)
+            user
         );
 
         holder.body.setText(message.getBody());

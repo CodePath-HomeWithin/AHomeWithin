@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.models.User;
+import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -22,7 +22,7 @@ import java.security.MessageDigest;
 public class LoadProfileImageView {
 
     public static void loadProfile(
-        final ImageView ivUserProfile, final Context context, User user) {
+        final ImageView ivUserProfile, final Context context, ParseObjectUser user) {
         int size = 50;
         Glide.with(context)
             .load(getProfileUrl(user))
@@ -43,15 +43,15 @@ public class LoadProfileImageView {
     }
 
     // Create a gravatar image based on the hash value obtained from userId
-    private static String getProfileUrl(User mUser) {
-        String profileUrl = mUser.profileUrl;
+    private static String getProfileUrl(ParseObjectUser mUser) {
+        String profileUrl = mUser.getProfile();
         if (profileUrl != null && !TextUtils.isEmpty(profileUrl)) {
             return profileUrl;
         }
         String hex = "";
         try {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(mUser.email.getBytes());
+            final byte[] hash = digest.digest(mUser.getEmail().getBytes());
             final BigInteger bigInt = new BigInteger(hash);
             hex = bigInt.abs().toString(16);
         } catch (Exception e) {
