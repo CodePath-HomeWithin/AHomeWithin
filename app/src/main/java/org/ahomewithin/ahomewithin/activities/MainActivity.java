@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -266,6 +267,7 @@ public class MainActivity extends AppCompatActivity
                             case 11:
                                 if (client.isUserLoggedIn()) {
                                     client.logout();
+                                    clearBackstack();
                                     fragment = HomeFragment.newInstance();
                                 }
                                 break;
@@ -326,6 +328,13 @@ public class MainActivity extends AppCompatActivity
         }
 
         drawer.closeDrawer();
+    }
+
+    private void clearBackstack() {
+        FragmentManager fm = getSupportFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
     }
 
     @Override
