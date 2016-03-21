@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPostLogin(int requestCode, Parcelable... extra) {
-        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().popBackStackImmediate();
         switch (requestCode) {
             case REQUEST_CODE:
                 ChatRoomFragment chatRoomFragment = ChatRoomFragment.newInstance();

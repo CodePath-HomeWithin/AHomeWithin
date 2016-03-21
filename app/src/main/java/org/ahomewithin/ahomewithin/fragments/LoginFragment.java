@@ -102,7 +102,11 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void afterTextChanged(Editable s) {
                         if (s.length() > 0) {
-                            etCred.getTextInputLayout().setErrorEnabled(false);
+                            //Can not use setErrorEnabled(false) due to
+                            //error messages from 2nd will be missing
+                            //acording to https://code.google.com/p/android/issues/detail?id=190355
+                            //etCred.getTextInputLayout().setErrorEnabled(false);
+                            etCred.getTextInputLayout().setError(null);
                         }
 
                     }
@@ -116,13 +120,14 @@ public class LoginFragment extends Fragment {
     public void login() {
         final String email = etEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            tilEmail.setErrorEnabled(true);
+            // thing is no need to setErrorEnabled(true).
+            // when you implement seterror method to non-null string,
+            // setErrorEnabled(true) called automatically.
             tilEmail.setError("User name can not be empty");
             return;
         }
         final String password = etPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            tilPassword.setErrorEnabled(true);
             tilPassword.setError("Password can not be empty");
             return;
         }
@@ -149,8 +154,7 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onFailure(String error) {
                     UserTools.logoutUser(getActivity(), email);
-                    tilPassword.setErrorEnabled(true);
-                    tilPassword.setError("ParseObjectUser name and Password do not match our record!!!");
+                    tilPassword.setError("Name and Password do not match our record!!!");
                 }
             }
         );
