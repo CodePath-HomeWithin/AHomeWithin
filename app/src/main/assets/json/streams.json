@@ -5,7 +5,7 @@
       "title": "Using Images for Self Expression",
       "type": 0,
       "price": 25,
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/images_grande.png?v=1457292811",
+      "image_url": "video_1",
       "desp": "Creating visual images about their lives is a safe and exciting approach that can draw young people in and help them begin to heal from traumatic experience – especially when other methods of working through their pain have failed.\n",
       "content": "http://techslides.com/demos/sample-videos/small.mp4"
     },
@@ -14,7 +14,7 @@
       "title": "What is Therapy?",
       "type": 0,
       "price": 25,
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/whatistherapy_grande.png?v=1441766136",
+      "image_url": "video_2",
       "desp": "This online training (created by Dr. Toni Heineman and Loong Kwok, Psyd) provides information about different forms of psychotherapy, from individual to family to group therapies.  It includes information, for anyone who has or works with children, about what signs might suggest that therapy could be useful.",
       "content": "http://techslides.com/demos/sample-videos/small.mp4"
       },
@@ -23,17 +23,63 @@
       "title": "School Age",
       "type": 0,
       "price": 25,
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/schoolage_grande.png?v=1441067896",
+      "image_url": "video_3",
       "desp": "Traumatized children usually find little pleasure in school because both learning and navigating relationships with peers and adults too often leave them feeling defeated, rather than proud.\n",
       "content": "http://techslides.com/demos/sample-videos/small.mp4"
+    },
+    {
+      "id": 104,
+      "title": "Using Images for Self Expression",
+      "type": 0,
+      "price": 45,
+      "image_url": "video_4",
+      "desp": "Creating visual images about their lives is a safe and exciting approach that can draw young people in and help them begin to heal from traumatic experience – especially when other methods of working through their pain have failed.\n",
+      "content": "http://techslides.com/demos/sample-videos/small.mp4"
+    },
+    {
+      "id": 105,
+      "title": "What is Therapy?",
+      "type": 0,
+      "price":15,
+      "image_url": "video_5",
+      "desp": "This online training (created by Dr. Toni Heineman and Loong Kwok, Psyd) provides information about different forms of psychotherapy, from individual to family to group therapies.  It includes information, for anyone who has or works with children, about what signs might suggest that therapy could be useful.",
+      "content": "http://techslides.com/demos/sample-videos/small.mp4"
+    },
+    {
+      "id": 106,
+      "title": "School Age",
+      "type": 0,
+      "price": 25,
+      "image_url": "video_6",
+      "desp": "Traumatized children usually find little pleasure in school because both learning and navigating relationships with peers and adults too often leave them feeling defeated, rather than proud.\n",
+      "content": "http://techslides.com/demos/sample-videos/small.mp4"
+    },
+    {
+      "id": 107,
+      "title": "Using Images for Self Expression",
+      "type": 0,
+      "price": 25,
+      "image_url": "video_7",
+      "desp": "Creating visual images about their lives is a safe and exciting approach that can draw young people in and help them begin to heal from traumatic experience – especially when other methods of working through their pain have failed.\n",
+      "content": "http://techslides.com/demos/sample-videos/small.mp4"
+    },
+    {
+      "id": 108,
+      "title": "What is Therapy?",
+      "type": 0,
+      "price": 20,
+      "image_url": "video_8",
+      "desp": "This online training (created by Dr. Toni Heineman and Loong Kwok, Psyd) provides information about different forms of psychotherapy, from individual to family to group therapies.  It includes information, for anyone who has or works with children, about what signs might suggest that therapy could be useful.",
+      "content": "http://techslides.com/demos/sample-videos/small.mp4"
     }
+
   ],
   "conversations": [
     {
       "id": 201,
       "type": 1,
       "title": "Similarities",
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/Identity.png?v=1444434490",
+      "image_url": "cards_1",
       "desp": "This deck of sixteen cards is designed to help teens and young adults focus on issues and ideas pertinent to identity formation. They can be used with individuals or in groups.\nYoung people whose early lives have been characterized by instability may come to adolescence more uncertain about who they are and their place in the world than their peers.",
       "price": 25,
       "content": {
@@ -67,7 +113,7 @@
       "id": 202,
       "type": 1,
       "title": "Differences",
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/lostandfounddeck_49469049-615d-4c20-8250-1b083dc56598_grande.png?v=1457290883",
+      "image_url": "cards_2",
       "desp": "A scavenger hunt can change our perspective on the world. Every scene we encounter becomes filled with potential because what we’re searching for could be right in front of us.  \n",
       "price": 25,
       "content": {
@@ -101,7 +147,7 @@
       "id": 203,
       "type": 1,
       "title": "Belonging",
-      "image_url": "http://cdn.shopify.com/s/files/1/0550/4841/products/sexuality_grande.png?v=1444434048",
+      "image_url": "cards_3",
       "desp": "Discussions about sex and sexuality often raise considerable anxiety for \nadults and young people alike. By helping to guide conversations, the sixteen cards in this deck can help to make these conversations more comfortable and informative.",
       "price": 25,
       "content": {
@@ -128,6 +174,176 @@
           "quote_author": "Ritu Ghatourey",
           "reflection": "What do you think of sacri cing oneself to save another? Are there situations in which you would not hesitate? Are there other instances in which this would be foolish?",
           "action": "With a partner describe to each other a time that you “took the bullet” for someone else. Would you do the same today? Why / Why Not?"
+        }
+      }
+    },
+    {
+      "id": 204,
+      "type": 1,
+      "title": "Similarities",
+      "image_url": "cards_4",
+      "desp": "This deck of sixteen cards is designed to help teens and young adults focus on issues and ideas pertinent to identity formation. They can be used with individuals or in groups.\nYoung people whose early lives have been characterized by instability may come to adolescence more uncertain about who they are and their place in the world than their peers.",
+      "price": 25,
+      "content": {
+        "mind": {
+          "quote": "One of the things that binds us as a family is a shared sense of humor.",
+          "quote_author": "Ralph Fiennes",
+          "reflection": "Humor can draw people together if they all  nd the same jokes, riddles, or pranks funny. Do you think that humor can also set people apart? How do you think humor works to join or separate people?",
+          "action": "Find a funny video, and show it to three or four people. Did they all laugh? Can you think of people who wouldn’t  nd it funny? What would they think of it?"
+        },
+        "body": {
+          "quote": "Give an extra piece of cake to a stepchild.",
+          "quote_author": "Korean saying",
+          "reflection": "How do you think it would feel to be the child who got the special treat? Do you think the child could feel special in a good way, in a bad way, or both? What would it feel like to other children in the family?",
+          "action": "With a small group, write a script for a dinner table conversation where one child gets an extra piece of cake. Talk about the different feelings that came up for the characters."
+        },
+        "heart": {
+          "quote": "The only thing that I ever get emotional about is my family. I am kind to everyone, but I trust no one. That keeps me from getting hurt.",
+          "quote_author": "Akshay Kumar",
+          "reflection": "Do you think the author trusts family members? Do you think family members were kind or hurtful? Can you tell from the quote?",
+          "action": "Complete this sentence: “People who trust other people will...”"
+        },
+        "soul": {
+          "quote": "Rarely do members of the same family grow up under the same roof.",
+          "quote_author": "Ralph Fiennes",
+          "reflection": "Do you think that this applies to families who all live together in the same house as well as those who live in different houses? How could it be true in both cases?",
+          "action": "Create an image of people who are living in the same place but not really living together. Would you want to live in that place?"
+        }
+      }
+    },
+    {
+      "id": 205,
+      "type": 1,
+      "title": "Differences",
+      "image_url": "cards_5",
+      "desp": "A scavenger hunt can change our perspective on the world. Every scene we encounter becomes filled with potential because what we’re searching for could be right in front of us.  \n",
+      "price": 25,
+      "content": {
+        "mind": {
+          "quote": "Each day of our lives we make deposits in the memory banks of our children.",
+          "quote_author": "Charles R. Swindoll",
+          "reflection": "Do you think memories are stable over time or do they change and shift as we move through life?",
+          "action": "Identify a childhood memory and, with a partner, discuss whether that memory has remained unchanged or whether subtle or not so subtle changes have taken place over time. Describe those changes and what might have contributed to the shifts in memory."
+        },
+        "body": {
+          "quote": "They came through you but not from you and though they are with you they belong not to you.",
+          "quote_author": "Khalil Gibran",
+          "reflection": "The author seems to be talking about parents and biological offspring. What does it mean that children do not belong to their parents? Do you think that parents belong to their children?",
+          "action": "Quickly, make a list of all of the ways people can make a family. Do you think that people in these families belong to each other"
+        },
+        "heart": {
+          "quote": "Family quarrels are bitter things. They don’t go according to any rules. They’re not like aches or wounds, they’re more like splits in the skin that won’t heal because there’s not enough material.",
+          "quote_author": "F. Scott Fitzgerald",
+          "reflection": "This is a harsh statement about family disagreements. Do you think that anger in a family hurts more than anger with friends or acquaintances? Is forgiving family members easier or harder?",
+          "action": "On  ve different cards write  ve things that family members might argue about. With a small group pick one and act out the disagreement. Then act out how the family might heal"
+        },
+        "soul": {
+          "quote": "Having children makes you no more a parent than having a piano makes you a pianist.",
+          "quote_author": "Michael Levine",
+          "reflection": "What do you think it takes to make a parent? Does it take as much practice to get good at it as it does to be a good piano player? Do you think some people are talented parents in the way that some people are talented musicians?",
+          "action": "List 10 things that you think parents should practice every week to be better parents. Are these things that adults did for you or things that you wish they had done?"
+        }
+      }
+    },
+    {
+      "id": 206,
+      "type": 1,
+      "title": "Belonging",
+      "image_url": "cards_6",
+      "desp": "Discussions about sex and sexuality often raise considerable anxiety for \nadults and young people alike. By helping to guide conversations, the sixteen cards in this deck can help to make these conversations more comfortable and informative.",
+      "price": 25,
+      "content": {
+        "mind": {
+          "quote": "We all long for something. I long to belong.",
+          "quote_author": "Jarod Kintz",
+          "reflection": "s belonging a longing that everyone shares? Is longing for a certain type of family different from other types of longing?",
+          "action": "Draw a pyramid and divide it into  ve levels from top to bottom. Beginning at the bottom, list your most basic survival needs; at the next level, list what you need to feel safe; then, what you would need to feel loved. What it would take to feel worthy and respected, and  nally, what it would take to ful ll your greatest potential?"
+        },
+        "body": {
+          "quote": "“It doesn’t matter where you are. When you’re with people you love, you’re where you belong.",
+          "quote_author": "Courtney Carola",
+          "reflection": "There are many de nitions of family, including those that we’re born into and those that we create. What people do you think the author had in mind when she wrote that quote?",
+          "action": "Write a short story about the family you would create. Describe each character’s place in the family and their sense of belonging."
+        },
+        "heart": {
+          "quote": "I would leave behind the nurturing of my family and my home, but in another sense I would take their protection with me. The lessons I had learned, the feelings of groundedness and be- longing that have been woven into my character there, would be my companions on the journey.",
+          "quote_author": "Sidney Poitier",
+          "reflection": "Does our past determine who we are in the future? Do we have a choice about what to take of our past when we leave?",
+          "action": "Find a photograph of a face. Create a story about the various features of that face. Imagine how that person’s family experience in uences how they appear to others in the present."
+        },
+        "soul": {
+          "quote": "It’s funny how sometimes the people you’d take a bullet for are the ones behind the trigger.",
+          "quote_author": "Ritu Ghatourey",
+          "reflection": "What do you think of sacri cing oneself to save another? Are there situations in which you would not hesitate? Are there other instances in which this would be foolish?",
+          "action": "With a partner describe to each other a time that you “took the bullet” for someone else. Would you do the same today? Why / Why Not?"
+        }
+      }
+    },
+    {
+      "id": 207,
+      "type": 1,
+      "title": "Similarities",
+      "image_url": "cards_7",
+      "desp": "This deck of sixteen cards is designed to help teens and young adults focus on issues and ideas pertinent to identity formation. They can be used with individuals or in groups.\nYoung people whose early lives have been characterized by instability may come to adolescence more uncertain about who they are and their place in the world than their peers.",
+      "price": 25,
+      "content": {
+        "mind": {
+          "quote": "One of the things that binds us as a family is a shared sense of humor.",
+          "quote_author": "Ralph Fiennes",
+          "reflection": "Humor can draw people together if they all  nd the same jokes, riddles, or pranks funny. Do you think that humor can also set people apart? How do you think humor works to join or separate people?",
+          "action": "Find a funny video, and show it to three or four people. Did they all laugh? Can you think of people who wouldn’t  nd it funny? What would they think of it?"
+        },
+        "body": {
+          "quote": "Give an extra piece of cake to a stepchild.",
+          "quote_author": "Korean saying",
+          "reflection": "How do you think it would feel to be the child who got the special treat? Do you think the child could feel special in a good way, in a bad way, or both? What would it feel like to other children in the family?",
+          "action": "With a small group, write a script for a dinner table conversation where one child gets an extra piece of cake. Talk about the different feelings that came up for the characters."
+        },
+        "heart": {
+          "quote": "The only thing that I ever get emotional about is my family. I am kind to everyone, but I trust no one. That keeps me from getting hurt.",
+          "quote_author": "Akshay Kumar",
+          "reflection": "Do you think the author trusts family members? Do you think family members were kind or hurtful? Can you tell from the quote?",
+          "action": "Complete this sentence: “People who trust other people will...”"
+        },
+        "soul": {
+          "quote": "Rarely do members of the same family grow up under the same roof.",
+          "quote_author": "Ralph Fiennes",
+          "reflection": "Do you think that this applies to families who all live together in the same house as well as those who live in different houses? How could it be true in both cases?",
+          "action": "Create an image of people who are living in the same place but not really living together. Would you want to live in that place?"
+        }
+      }
+    },
+    {
+      "id": 208,
+      "type": 1,
+      "title": "Differences",
+      "image_url": "cards_8",
+      "desp": "A scavenger hunt can change our perspective on the world. Every scene we encounter becomes filled with potential because what we’re searching for could be right in front of us.  \n",
+      "price": 25,
+      "content": {
+        "mind": {
+          "quote": "Each day of our lives we make deposits in the memory banks of our children.",
+          "quote_author": "Charles R. Swindoll",
+          "reflection": "Do you think memories are stable over time or do they change and shift as we move through life?",
+          "action": "Identify a childhood memory and, with a partner, discuss whether that memory has remained unchanged or whether subtle or not so subtle changes have taken place over time. Describe those changes and what might have contributed to the shifts in memory."
+        },
+        "body": {
+          "quote": "They came through you but not from you and though they are with you they belong not to you.",
+          "quote_author": "Khalil Gibran",
+          "reflection": "The author seems to be talking about parents and biological offspring. What does it mean that children do not belong to their parents? Do you think that parents belong to their children?",
+          "action": "Quickly, make a list of all of the ways people can make a family. Do you think that people in these families belong to each other"
+        },
+        "heart": {
+          "quote": "Family quarrels are bitter things. They don’t go according to any rules. They’re not like aches or wounds, they’re more like splits in the skin that won’t heal because there’s not enough material.",
+          "quote_author": "F. Scott Fitzgerald",
+          "reflection": "This is a harsh statement about family disagreements. Do you think that anger in a family hurts more than anger with friends or acquaintances? Is forgiving family members easier or harder?",
+          "action": "On  ve different cards write  ve things that family members might argue about. With a small group pick one and act out the disagreement. Then act out how the family might heal"
+        },
+        "soul": {
+          "quote": "Having children makes you no more a parent than having a piano makes you a pianist.",
+          "quote_author": "Michael Levine",
+          "reflection": "What do you think it takes to make a parent? Does it take as much practice to get good at it as it does to be a good piano player? Do you think some people are talented parents in the way that some people are talented musicians?",
+          "action": "List 10 things that you think parents should practice every week to be better parents. Are these things that adults did for you or things that you wish they had done?"
         }
       }
     }

@@ -45,19 +45,22 @@ public class Item implements Serializable {
         Item item = new Item();
 
         try {
-            item.title = jsonObject.getString("title");
-            item.imageUrl = jsonObject.getString("imageUrl");  // previously was "image"
-            item.description = jsonObject.getString("description");
-            item.id = jsonObject.getString("id");
+            item.title = jsonObject.has("title") ? jsonObject.getString("title") : "";
+            item.imageUrl = jsonObject.has("image_url") ? jsonObject.getString("image_url") : "";  // previously was "image"
+            item.description = jsonObject.has("desp") ? jsonObject.getString("desp") : "";
+            item.id = jsonObject.has("id") ? jsonObject.getString("id") : "";
             item.type = type;
 
-            item.contentUrl = jsonObject.getString("content_url");
+            item.contentUrl = jsonObject.has("content") ? jsonObject.getString("content") : "";
+            item.content = jsonObject.has("content") ? jsonObject.getString("content") : "";
             item.type = type;
             item.owned = false;
 
-//            if (type == ITEM_TYPE.VIDEOS) {
-//                item.videoUrl = jsonObject.getJSONObject("content").getString("videoUrl");
-//            } else {
+            if (item.type == ITEM_TYPE.VIDEOS) {
+                //item.contentU = jsonObject.getJSONObject("content").getString("videoUrl");
+            } else {
+                item.contentCards = ConversationCard.fromJson(new JSONObject(item.content));
+
 //                JSONObject deckCards = jsonObject.getJSONObject("content");
 //                item.contentCards = new ArrayList<>();
 //                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("mind"),
@@ -68,9 +71,9 @@ public class Item implements Serializable {
 //                        ConversationCard.HEART));
 //                item.contentCards.add(ConversationCard.fromJson(deckCards.getJSONObject("soul"),
 //                        ConversationCard.SOUL));
-//            }
+            }
         } catch (JSONException ex) {
-            Log.e("ERR", ex.toString());
+            Log.e("Parsing item", ex.toString());
             return null;
         }
 

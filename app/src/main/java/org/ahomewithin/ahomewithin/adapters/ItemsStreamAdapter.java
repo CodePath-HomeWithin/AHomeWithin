@@ -51,7 +51,15 @@ public class ItemsStreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ((ItemViewHolder) holder).tvTitle.setText(item.title);
         ((ItemViewHolder) holder).tvDescription.setText(item.description);
-        Glide.with(mContext).load(item.imageUrl).into(
+
+        final int resourceId = mContext.getResources().getIdentifier(
+                item.imageUrl, "drawable", mContext.getPackageName());
+//        ((ItemViewHolder)holder).ivItemImage.setImageDrawable(mContext.getResources().getDrawable(resourceId));
+
+
+        Glide.with(mContext).load(resourceId)
+                .centerCrop()
+                .into(
                 ((ItemViewHolder) holder).ivItemImage);
 
         ((ItemViewHolder) holder).rlStreamItem.setOnClickListener(new View.OnClickListener() {

@@ -86,7 +86,18 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        Glide.with(getActivity()).load(mItem.imageUrl).into(ivItemImage);
+        //Glide.with(getActivity()).load(mItem.imageUrl).into(ivItemImage);
+
+        final int resourceId = getActivity().getResources().getIdentifier(
+                mItem.imageUrl, "drawable", getActivity().getPackageName());
+//        ((ItemViewHolder)holder).ivItemImage.setImageDrawable(mContext.getResources().getDrawable(resourceId));
+
+
+        Glide.with(getActivity()).load(resourceId)
+                .centerCrop()
+                .into(ivItemImage);
+
+
         tvTitle.setText(mItem.title);
         tvDescription.setText(mItem.description);
 

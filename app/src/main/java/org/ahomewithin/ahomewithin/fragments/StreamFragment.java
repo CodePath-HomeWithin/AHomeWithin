@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.ahomewithin.ahomewithin.ParseClient;
-import org.ahomewithin.ahomewithin.ParseClientAsyncHandler;
+import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
 import org.ahomewithin.ahomewithin.adapters.ItemsStreamAdapter;
@@ -87,61 +86,81 @@ public class StreamFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rvStream.setLayoutManager(llm);
 
-        ParseClient.newInstance(getActivity()).getPurchasableItems(new ParseClientAsyncHandler() {
+        /* Stubbed out method, parse method commented forward */
+        items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
+        items = getSubsetOfItems(items, type, showOnlyOwned);
+        aItems.addAll(items);
+
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        rvStream.addItemDecoration(itemDecoration);
+        rvStream.setItemAnimator(new FlipInBottomXAnimator());
+
+        TextView emptyView = (TextView) view.findViewById(R.id.empty_view);
+        ImageView goToTools = (ImageView) view.findViewById(R.id.ivToolsAndTraining);
+
+        if (items.isEmpty()) {
+            rvStream.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+            goToTools.setVisibility(View.VISIBLE);
+        } else {
+            rvStream.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            goToTools.setVisibility(View.GONE);
+        }
+
+        goToTools.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(Object obj) {
-                items = (ArrayList<Item>) obj;
-
-                items = getSubsetOfItems(items, type, showOnlyOwned);
-                // stubbed out method
-                //items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
-                aItems.addAll(items);
-
-                RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-                rvStream.addItemDecoration(itemDecoration);
-                rvStream.setItemAnimator(new FlipInBottomXAnimator());
-
-                TextView emptyView = (TextView) view.findViewById(R.id.empty_view);
-                ImageView goToTools = (ImageView) view.findViewById(R.id.ivToolsAndTraining);
-
-                if (items.isEmpty()) {
-                    rvStream.setVisibility(View.GONE);
-                    emptyView.setVisibility(View.VISIBLE);
-                    goToTools.setVisibility(View.VISIBLE);
-                } else {
-                    rvStream.setVisibility(View.VISIBLE);
-                    emptyView.setVisibility(View.GONE);
-                    goToTools.setVisibility(View.GONE);
-                }
-
-                goToTools.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.flContent, StreamPagerFragment.newInstance(
-                                        StreamPagerFragment.ViewType.STORE, false))
-                                .commit();
-                    }
-                });
-
-//        ItemClickSupport.addTo(rvStream).setOnItemClickListener(
-//                new ItemClickSupport.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                        Intent intent = new Intent(getActivity(), VideoActivity.class);
-//                        Tweet tweet = tweets.get(position);
-//                        intent.putExtra("tweet", Parcels.wrap(tweet));
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
-            }
-
-            @Override
-            public void onFailure(String error) {
-
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.flContent, StreamPagerFragment.newInstance(
+                                StreamPagerFragment.ViewType.STORE, false))
+                        .commit();
             }
         });
+
+//        ParseClient.newInstance(getActivity()).getPurchasableItems(new ParseClientAsyncHandler() {
+//            @Override
+//            public void onSuccess(Object obj) {
+//                items = (ArrayList<Item>) obj;
+//
+//                items = getSubsetOfItems(items, type, showOnlyOwned);
+//                // stubbed out method
+//                //items = Item.fromJson(AHomeWithinClient.getStreams(getActivity(), type), type);
+//                aItems.addAll(items);
+//
+//                RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+//                rvStream.addItemDecoration(itemDecoration);
+//                rvStream.setItemAnimator(new FlipInBottomXAnimator());
+//
+//                TextView emptyView = (TextView) view.findViewById(R.id.empty_view);
+//                ImageView goToTools = (ImageView) view.findViewById(R.id.ivToolsAndTraining);
+//
+//                if (items.isEmpty()) {
+//                    rvStream.setVisibility(View.GONE);
+//                    emptyView.setVisibility(View.VISIBLE);
+//                    goToTools.setVisibility(View.VISIBLE);
+//                } else {
+//                    rvStream.setVisibility(View.VISIBLE);
+//                    emptyView.setVisibility(View.GONE);
+//                    goToTools.setVisibility(View.GONE);
+//                }
+//
+//                goToTools.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        getActivity().getSupportFragmentManager().beginTransaction()
+//                                .replace(R.id.flContent, StreamPagerFragment.newInstance(
+//                                        StreamPagerFragment.ViewType.STORE, false))
+//                                .commit();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//
+//            }
+//        });
 
     }
 
