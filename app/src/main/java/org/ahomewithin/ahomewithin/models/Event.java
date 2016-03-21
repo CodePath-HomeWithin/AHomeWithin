@@ -121,9 +121,6 @@ public class Event {
         if (date != null) {
             tokens.add(DateHelper.dateToString(date, DateHelper.FORMAT_EEEMMMdd));
         }
-        if (startTime != null) {
-            tokens.add(startTime);
-        }
         return(TextUtils.join(" ", tokens));
     }
 

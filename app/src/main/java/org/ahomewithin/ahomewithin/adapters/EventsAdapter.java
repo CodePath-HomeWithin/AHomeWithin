@@ -32,7 +32,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout llEventContainer;
-        public TextView tvGroupName;
         public TextView tvEventName;
         public ImageView ivImage;
         public TextView tvDescription;
@@ -41,7 +40,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
             llEventContainer = (LinearLayout) itemView.findViewById(R.id.llEventContainer);
-            tvGroupName = (TextView) itemView.findViewById(R.id.tvGroupName);
             tvEventName = (TextView) itemView.findViewById(R.id.tvEventName);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             tvDateTime = (TextView) itemView.findViewById(R.id.tvDateTime);
@@ -68,7 +66,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     public void onBindViewHolder(final EventsAdapter.ViewHolder viewHolder, int position) {
         final Event event = events.get(position);
         viewHolder.tvEventName.setText(event.eventName);
-        viewHolder.tvGroupName.setVisibility(View.GONE);
         viewHolder.tvDateTime.setText(event.getDateTime());
         Glide.with(mContext)
                 .load(event.imageUrl)
@@ -119,17 +116,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                                 .addToBackStack("Event")
                                 .commit();
                     }
-
                 }
             });
 
-
-
-
-
         }
-
-
     }
 
     public RecyclerView.Adapter getAdapter() {

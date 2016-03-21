@@ -19,32 +19,30 @@
         android:orientation="vertical"
         android:padding="6dp">
 
-        <ImageView
-            android:id="@+id/ivImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:transitionName="event_image_transition"/>
-
         <TextView
-            android:id="@+id/tvGroupName"
+            android:id="@+id/tvEventName"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/RobotoCondensed" />
+        style="@style/EventList.EventName"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:transitionName="event_image_transition"/>
 
         <TextView
             android:id="@+id/tvDateTime"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/RobotoMedium"/>
-
-        <TextView
-            android:id="@+id/tvEventName"
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/RobotoCondensed"/>
+            style="@style/EventList.Date"
+            android:layout_gravity="center"/>
 
 
 

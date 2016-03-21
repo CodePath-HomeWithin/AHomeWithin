@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.SimpleListAdapter;
-import org.ahomewithin.ahomewithin.views.ItemOffsetDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

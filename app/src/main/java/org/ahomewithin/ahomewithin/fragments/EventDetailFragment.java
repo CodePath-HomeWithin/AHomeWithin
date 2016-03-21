@@ -71,7 +71,11 @@ public class EventDetailFragment extends Fragment {
         Glide.with(getActivity()).load(mEvent.imageUrl).into(ivImage);
         tvGroupName.setText(mEvent.groupName);
         tvEventName.setText(mEvent.eventName);
-        tvEventDescription.setText(mEvent.eventDescription);
+        String desc = mEvent.eventDescription;
+        if ((desc == null) || (desc.length() == 0)) {
+            desc = mEvent.groupDescription;
+        }
+        tvEventDescription.setText(desc);
         tvDateTime.setText(mEvent.getDateTime());
         ivLink.setOnClickListener(new View.OnClickListener() {
             @Override

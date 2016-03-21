@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="7dp"
     android:padding="10dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@android:color/white">
 
     <ImageView
         android:layout_width="50dp"
@@ -26,6 +28,16 @@
         android:layout_toRightOf="@+id/ivImageType"
         android:layout_toEndOf="@+id/ivImageType" />
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/ivLink"
+        android:tint="@color/colorAccent"
+        android:contentDescription="@string/type"
+        android:src="@drawable/ic_link_black_48px"
+        android:layout_alignTop="@+id/tvTitle"
+        android:layout_alignParentRight="true"/>
+
     <TextView
         android:layout_height="wrap_content"
         android:id="@+id/tvSummary"
@@ -38,16 +50,6 @@
         android:layout_alignLeft="@+id/tvTitle"
         android:layout_alignStart="@+id/tvTitle" />
 
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/ivLink"
-        android:tint="@color/colorAccent"
-        android:contentDescription="@string/type"
-        android:src="@drawable/ic_link_black_48px"
-        android:layout_below="@+id/tvSummary"
-        android:layout_alignRight="@+id/tvSummary"
-        android:layout_alignEnd="@+id/tvSummary" />
 
 </RelativeLayout>
 
