@@ -111,7 +111,39 @@
     "credentials":["MFT"],
     "description":"Susan has 15 years experience working with victims of abuse and neglect. She has been working for Santa Cruz Community Counseling Center Since 2001 and is Program Manager of Transition Age Youth (TAY) Programs, serving current and former foster youth. Susan has provided direct services, as well as developed and managed programs that provide community-based housing services, case management, and mental health services to youth transitioning out of foster care. She has interest and experience in Motivational Interviewing and Trauma Informed Services.",
     "phone": "5555554444"
+  },
+  {
+    "id":10,
+    "lat":37.56000,
+    "lng":-122.26201,
+    "type":"community",
+    "firstName":"Xiangyang",
+    "lastName":"Xiao",
+    "email":"xiangyang@gmail.com",
+    "phone": "6507539632"
+  },
+  {
+    "id":11,
+    "lat":37.67950,
+    "lng":-122.39983,
+    "type":"community",
+    "firstName":"Barbara",
+    "lastName":"Raitz",
+    "email":"braitz@gmail.com",
+    "phone": "6508685200"
+  },
+  {
+    "id":12,
+    "lat":37.73357,
+    "lng":-122.47640,
+    "type":"community",
+    "firstName":"Jose",
+    "lastName":"Martin",
+    "email":"joseluismartin@gmail.com",
+    "phone": "1112223333"
   }
+
+
 ]}
 
 
