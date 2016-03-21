@@ -14,6 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +69,7 @@ public class MapFragment extends Fragment implements
     // http://stackoverflow.com/questions/25051246/how-to-use-supportmapfragment-inside-a-fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_map, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.near_you);
         mSlidePanel = (SlidingUpPanelLayout) v.findViewById(R.id.sliding_layout);
 
         // Close SlidingPanel when back button pressed
@@ -104,27 +107,29 @@ public class MapFragment extends Fragment implements
     @Override
     // SF location:  37.772123, -122.405293
     public void onMapReady(GoogleMap map) {
-        mMap = map;
+        if (MapFragment.this.isVisible()) {
+            mMap = map;
 
-        // MAP_TYPE_NORMAL, MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
-        //map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        map.getUiSettings().setMyLocationButtonEnabled(true); // button in upper right of map
-        map.getUiSettings().setZoomControlsEnabled(true);     // zoom controls in lower right of map
+            // MAP_TYPE_NORMAL, MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
+            //map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            map.getUiSettings().setMyLocationButtonEnabled(true); // button in upper right of map
+            map.getUiSettings().setZoomControlsEnabled(true);     // zoom controls in lower right of map
 
-        // center view over US
-        // http://stackoverflow.com/questions/14636118/android-set-goolgemap-bounds-from-from-database-of-points
+            // center view over US
+            // http://stackoverflow.com/questions/14636118/android-set-goolgemap-bounds-from-from-database-of-points
 
 
-        if (mMapMarkers != null) {
-            mMapMarkers.addMarkersToMap(mMap);
+            if (mMapMarkers != null) {
+                mMapMarkers.addMarkersToMap(mMap);
 
-            LatLngBounds.Builder bounds = new LatLngBounds.Builder();
-            for (Marker marker : mMapMarkers.getMarkers()) {
-                bounds.include(marker.getPosition());
+                LatLngBounds.Builder bounds = new LatLngBounds.Builder();
+                for (Marker marker : mMapMarkers.getMarkers()) {
+                    bounds.include(marker.getPosition());
+                }
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
+
+                enableMyLocation();
             }
-            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 40));
-
-            enableMyLocation();
         }
     }
 

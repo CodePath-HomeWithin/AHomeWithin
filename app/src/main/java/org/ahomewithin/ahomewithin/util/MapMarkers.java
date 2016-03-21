@@ -201,20 +201,19 @@ public class MapMarkers {
 
     private void highlightMarker(Marker marker, User user) {
         if (marker != null) {
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         }
     }
 
     private void restoreMarker(Marker marker, User user) {
         if (marker != null) {
-//        switch(user.type) {
-//            case SERVICE_PROVIDER:
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                break;
-//            default: // COMMUNITY:
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-//        }
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            switch (user.type) {
+                case SERVICE_PROVIDER:
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    break;
+                default: // COMMUNITY:
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+            }
         }
     }
 
