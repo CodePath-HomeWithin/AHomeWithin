@@ -7,7 +7,7 @@ import org.ahomewithin.ahomewithin.R;
 /**
  * Created by xiangyang_xiao on 3/19/16.
  */
-public class ChatRoomFragment extends Fragment {
+public class ChatRoomFragment extends ChatBaseFragment {
 
     public final static int FRAGMENT_CODE = 1;
 
