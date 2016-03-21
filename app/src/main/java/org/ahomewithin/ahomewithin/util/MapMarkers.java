@@ -213,7 +213,7 @@ public class MapMarkers {
         if (marker != null) {
             switch (user.type) {
                 case SERVICE_PROVIDER:
-                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
                     break;
                 default: // COMMUNITY:
                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));

@@ -72,6 +72,7 @@ public class ChatRoomFragment extends Fragment {
                                 ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
                                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                 ft.replace(R.id.flContent, chatFragment);
+                                ft.addToBackStack(null);
                                 ft.commit();
                             }
                         }

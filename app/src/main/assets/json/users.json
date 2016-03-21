@@ -7,6 +7,7 @@
     "title":"Dr.",
     "firstName":"Elizabeth",
     "lastName":"Saft",
+    "email":"Elizabeth.lastName@gmail.com",
     "credentials":["Phd"],
     "description":"Elizabeth Saft currently in private practice in Davis, California, specializing in adult and adolescent psychotherapy. She was formerly Assistant Clinical Professor at the University of Virginia in the Clinical Psychology program, as well as in private practice in Charlottesville, Virginia. Since she entered the mental health field in 1986, she has worked in therapeutic nurseries, child and adult inpatient facilities, family homeless shelters, and public schools from preschool through high school. She completed a postdoctoral fellowship at Philadelphia Child Guidance Center, where she concentrated on inpatient, high-risk adolescents and their families. Her research and publications focused on adult and infant attachment.",
     "phone": "5555554444"
@@ -18,6 +19,7 @@
     "type":"service_provider",
     "firstName":"Robbin",
     "lastName":"Rocket",
+    "email":"Robbin.lastName@gmail.com",
     "credentials":["PsyD"],
     "description":"Robbin Rockett is a Psychologist in private practice in Corte Madera, CA who has had more than 10 years of experience in assessing and treating children and adults. She completed her doctoral degree in clinical psychology at the California School of Professional Psychology and received postgraduate training in child psychodynamic play therapy. She also taught health education classes to adults with anxiety and depression at Kaiser, Oakland. She specializes in parenting issues, special needs, behavioral problems, divorce, and bereavement for children and adolescents. She supports parents by helping them understand children’s developmental needs and addressing behavioral issues or parenting conflicts. In addition, she is currently on the board as secretary for the Marin County Psychological Association.",
     "phone": "5555554444"
@@ -30,6 +32,7 @@
     "type":"service_provider",
     "firstName":"Susan",
     "lastName":"Raunegger",
+    "email":"Susan.lastName@gmail.com",
     "credentials":["MSW"],
     "description":"Susan Raunegger is a clinical social worker and psychotherapist that has been working with families, couples, and individuals for 20 years. She holds her masters degree of social work from the University of Denver where she did her training at the Denver Family Therapy Training Center. Earlier in her career, she worked in residential treatment programs as a treatment coordinator for struggling teenagers and families in Oregon. Susan has been living in Vienna, Austria for the last 17 years, working as a psychotherapist in her private practice with families and individuals. Additionally, she worked at the American International School as the counselor serving the international community. As a therapist, Susan uses an eclectic style, with a strong foundation in systems and strength based perspective, while utilizing the most effective approach for each client.",
     "phone": "5555554444"
@@ -41,6 +44,7 @@
     "type":"service_provider",
     "firstName":"Gordana",
     "lastName":"Potrebic",
+    "email":"Gordana.lastName@gmail.com",
     "credentials":["PsyD"],
     "description":"Gordana was trained in the field of clinical psychology at the Wright Institute in Berkeley and at UCSF Infant-Parent Program. She works in private practice where she sees children, adults, and families. Gordana has a strong background in working with infants and toddlers, as an infant-parent relationship therapist, and providing developmental consultations and therapy for parents and caregivers. Her experience spans a variety of settings in US, Canada, and Europe: community mental health clinics, residential programs, psychiatric hospital, and life sharing foster care communities.",
     "phone": "5555554444"
@@ -52,6 +56,7 @@
     "type":"service_provider",
     "firstName":"Genesee",
     "lastName":"Herzberg",
+    "email":"Genesee.lastName@gmail.com",
     "credentials":["PsyD"],
     "description":"Dr. Herzberg entered the field of psychology ten years ago through her work in group homes for foster youth. Inspired by a desire to better serve the children with whom she worked, she returned to school to pursue a graduate degree in clinical psychology. She received a PsyD from the California Institute of Integral Studies in 2012. Dr. Herzberg's training includes work with low-income children and families at the Talkline Family Support Center and with parents and their young children (0-3) at the Infant Parent Program, as well as work with a diverse range of adult clients in various settings. She is currently in private practice in Berkeley, working with adults, adolescents, and children, and developing a specialization in complex trauma. Dr. Herzberg is also a meditation and yoga practitioner and incorporates mindfulness and body awareness into her work.",
     "phone": "5555554444"
@@ -75,6 +80,7 @@
     "type":"service_provider",
     "firstName":"Hatsuko",
     "lastName":"Arima",
+    "email":"Hatsuko.lastName@gmail.com",
     "credentials":["LCSW"],
     "description":"Hatsuko Arima is a licensed clinical social worker, who has worked as a medical social worker at Kaiser Los Angeles Medical Center in Southern California. She dealt with diverse pediatric populations, from infants to adolescents, with serious health issues, such as cancer, diabetes and other chronic illnesses. At Kaiser, she felt blessed to be able to follow some of the same children and their parents for nearly 20 years. After a brief stint at an Asian Pacific mental health agency, Hatsuko chose to be a medical social worker. As a mother of twin daughters with Cystic Fibrosis who later both had lung transplants, Hatsuko felt an affinity towards supporting the psychosocial issues related to medical illnesses. In 2013, Hatsuko has moved from Los Angeles to the San Francisco Bay Area to be close to her children and grandchildren.",
     "phone": "5555554444"
@@ -86,6 +92,7 @@
     "type":"service_provider",
     "firstName":"Meenal",
     "lastName":"Chaudhari",
+    "email":"Meenal.lastName@gmail.com",
     "credentials":["MFTI"],
     "description":"Meenal has a Masters degree: one in Clinical Psychology from India; and one in Counseling Psychology from the department of Holistic Studies at JFKU. She finds the holistic approach makes complete sense as it combines the transpersonal with somatic wisdom. She is currently in private practice with Doreen Maxwell, LMFT. She has held clinical positions at the JFKU Sunnyvale community counseling center, both as a Trainee and as an Intern; prior to that she worked as a psychotherapist in India. Meenal is also a painter.",
     "phone": "5555554444"
@@ -97,6 +104,7 @@
     "type":"service_provider",
     "firstName":"Sybil",
     "lastName":"Anderson-Adams",
+    "email":"Sybil.lastName@gmail.com",
     "credentials":["LCSW"],
     "description":"Sybil has spent the past twelve years as a social worker and supervisor for child welfare in Santa Cruz County. She worked in a program designed to assist aging out foster youth in finding permanent connections and develop life skills necessary for their transition from child welfare. Sybil is currently working with Santa Cruz County as the permanency partner, locating and supporting permanent homes for foster youth.",
     "phone": "5555554444"
@@ -108,6 +116,7 @@
     "type":"service_provider",
     "firstName":"Susan",
     "lastName":"Paradise",
+    "email":"Susan.lastName@gmail.com",
     "credentials":["MFT"],
     "description":"Susan has 15 years experience working with victims of abuse and neglect. She has been working for Santa Cruz Community Counseling Center Since 2001 and is Program Manager of Transition Age Youth (TAY) Programs, serving current and former foster youth. Susan has provided direct services, as well as developed and managed programs that provide community-based housing services, case management, and mental health services to youth transitioning out of foster care. She has interest and experience in Motivational Interviewing and Trauma Informed Services.",
     "phone": "5555554444"
