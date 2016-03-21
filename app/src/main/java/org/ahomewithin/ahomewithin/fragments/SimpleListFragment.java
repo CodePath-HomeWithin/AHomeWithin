@@ -6,14 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.SimpleListAdapter;
-import org.ahomewithin.ahomewithin.views.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +20,8 @@ import java.util.List;
  * Created by barbara on 3/6/16.
  */
 public abstract class SimpleListFragment extends Fragment {
+    public static final String FRAGMENT_TAG = SimpleListFragment.class.getSimpleName();
+
     ArrayList<?> listOfItems;
     SimpleListAdapter itemsAdapter;
     RecyclerView rvItems;

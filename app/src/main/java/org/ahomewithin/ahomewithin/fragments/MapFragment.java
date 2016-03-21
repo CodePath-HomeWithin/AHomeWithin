@@ -39,8 +39,10 @@ public class MapFragment extends Fragment implements
         GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        CustomMapFragment.OnMapFragmentReadyListener
-{
+        CustomMapFragment.OnMapFragmentReadyListener {
+
+    public static final String FRAGMENT_TAG = MapFragment.class.getSimpleName();
+
 
     /**
      * Request code for location permission request.

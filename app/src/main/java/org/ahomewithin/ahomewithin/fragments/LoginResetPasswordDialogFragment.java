@@ -25,7 +25,9 @@ import butterknife.ButterKnife;
  * Created by xiangyang_xiao on 3/6/16.
  */
 public class LoginResetPasswordDialogFragment extends DialogFragment {
-  @Bind(R.id.etEmail)
+    public static final String FRAGMENT_TAG = LoginResetPasswordDialogFragment.class.getSimpleName();
+
+    @Bind(R.id.etEmail)
   EditText etEmail;
   @Bind(R.id.tilEmail)
   TextInputLayout tilEmail;

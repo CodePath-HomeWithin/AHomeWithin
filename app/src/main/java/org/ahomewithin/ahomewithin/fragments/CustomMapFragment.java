@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
  * http://stackoverflow.com/questions/13733299/initialize-mapfragment-programmatically-with-maps-api-v2
  */
 public class CustomMapFragment extends SupportMapFragment {
+    public static final String FRAGMENT_TAG = CustomMapFragment.class.getSimpleName();
 
     /**
      * Listener interface to tell when the map is ready

@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * Created by barbara on 3/6/16.
  */
 public class EventsListFragment extends SimpleListFragment {
+    public static final String FRAGMENT_TAG = EventsListFragment.class.getSimpleName();
+
     ArrayList<Event> events;
     EventsAdapter eAdapter;
 

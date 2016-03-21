@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
  * Created by barbara on 3/6/16.
  */
 public class RecommendedFragment extends SimpleListFragment {
+    public static final String FRAGMENT_TAG = RecommendedFragment.class.getSimpleName();
+
     ArrayList<Recommended> recommendations;
     RecommendedAdapter rAdapter;
 

@@ -29,6 +29,8 @@ import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
  * Created by chezlui on 06/03/16.
  */
 public class StreamFragment extends Fragment {
+    public static final String FRAGMENT_TAG = StreamFragment.class.getSimpleName();
+
     public static final String ARG_STREAM_TYPE = "stream_type";
     public static final String ARG_OWNED_ITEMS = "my_library";
     public Item.ITEM_TYPE type;

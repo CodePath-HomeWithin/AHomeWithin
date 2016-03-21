@@ -34,14 +34,15 @@ import cz.msebera.android.httpclient.Header;
  * Created by chezlui on 15/03/16.
  */
 public class DetailFragment extends Fragment {
-    Item mItem;
+    public static final String FRAGMENT_TAG = DetailFragment.class.getSimpleName();
+    public static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
+    Item mItem;
     @Bind(R.id.btBuy) Button btBuy;
     @Bind(R.id.tvTitle) TextView tvTitle;
     @Bind(R.id.tvDescription) TextView tvDescription;
-    @Bind(R.id.ivItemImage) ImageView ivItemImage;
 
-    public static final String LOG_TAG = DetailFragment.class.getSimpleName();
+    @Bind(R.id.ivItemImage) ImageView ivItemImage;
     public static final int REQUEST_CODE = 22;
 
 

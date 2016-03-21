@@ -33,6 +33,7 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
  * Created by xiangyang_xiao on 3/19/16.
  */
 public class ChatRoomFragment extends Fragment {
+    public static final String FRAGMENT_TAG = ChatRoomFragment.class.getSimpleName();
 
     @Bind(R.id.rvUsers)
     RecyclerView rvUsers;

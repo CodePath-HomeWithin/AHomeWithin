@@ -34,6 +34,7 @@ import butterknife.OnClick;
  * Created by xiangyang_xiao on 3/19/16.
  */
 public class LoginFragment extends Fragment {
+    public static final String FRAGMENT_TAG = LoginFragment.class.getSimpleName();
 
     @Bind(R.id.etEmail)
     EditText etEmail;

@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
  * Created by xiangyang_xiao on 3/5/16.
  */
 public class LoginCreateUserDialogFragment extends DialogFragment {
+  public static final String FRAGMENT_TAG = LoginCreateUserDialogFragment.class.getSimpleName();
+
 
   @Bind(R.id.etUserName)
   EditText etUserName;

@@ -1,14 +1,11 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,12 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.fragments.DetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventDetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.models.Event;
@@ -88,7 +83,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 public void onClick(View v) {
                     EventsFragment currentEventsFragment =
                             (EventsFragment) ((AppCompatActivity) mContext).getSupportFragmentManager().
-                                    findFragmentByTag(EventsFragment.FRAGMENT_ID);
+                                    findFragmentByTag(EventsFragment.FRAGMENT_TAG);
                     EventDetailFragment detailFragment;
 
                     if (currentEventsFragment != null) {

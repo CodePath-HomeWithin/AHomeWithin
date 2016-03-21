@@ -9,6 +9,8 @@ import org.ahomewithin.ahomewithin.models.User;
  * Created by xiangyang_xiao on 3/6/16.
  */
 public class LoginEditProfileDialogFragment extends LoginCreateUserDialogFragment {
+  public static final String FRAGMENT_TAG = LoginEditProfileDialogFragment.class.getSimpleName();
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

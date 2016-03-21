@@ -26,6 +26,9 @@ import butterknife.ButterKnife;
  */
 // TODO this animation will be nice if time https://guides.codepath.com/android/Circular-Reveal-Animation
 public class AboutUsFragment extends Fragment {
+
+    public static final String FRAGMENT_TAG = AboutUsFragment.class.getSimpleName();
+
     @Bind(R.id.ivAboutUs1) ImageView ivAboutUs1;
     @Bind(R.id.ivAboutUs2) ImageView ivAboutUs2;
     @Bind(R.id.ivAboutUs3) ImageView ivAboutUs3;
