@@ -5,10 +5,8 @@ import android.text.TextUtils;
 
 import com.parse.ParseGeoPoint;
 
-import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.parseModel.ParseItem;
 import org.ahomewithin.ahomewithin.parseModel.ParseObjectUser;
-import org.ahomewithin.ahomewithin.util.DateHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,7 +102,7 @@ public class User {
         double lon = location == null ? 0 : location.getLongitude();
         double lan = location == null ? 0 : location.getLatitude();
         User newUser = new User(
-                poUser.getName(), poUser.getEmail(), poUser.getDesp(), UserType.SERVICE_PROVIDER,
+                poUser.getName(), poUser.getEmail(), poUser.getDesp(), poUser.getType(),
                 poUser.getPhone(), poUser.getItems(), poUser.getProfile(),
                 lan, lon);
         return newUser;
