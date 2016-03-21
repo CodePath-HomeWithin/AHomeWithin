@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
  */
 public class StreamPagerFragment extends Fragment {
     public static final String FRAGMENT_TAG = StreamPagerFragment.class.getSimpleName();
+    public StreamsPagerAdapter streamsPagerAdapter;
 
     public enum ViewType {
         STORE, LIBRARY
@@ -94,7 +95,9 @@ public class StreamPagerFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewPager.setAdapter(new StreamsPagerAdapter(getChildFragmentManager()));
+        streamsPagerAdapter = new StreamsPagerAdapter(getChildFragmentManager());
+
+        viewPager.setAdapter(streamsPagerAdapter);
 
         if (getActivity().getIntent().hasExtra(ARG_STREAM_TAB)) {
             viewPager.setCurrentItem(getActivity().getIntent().getIntExtra(ARG_STREAM_TAB, 0));

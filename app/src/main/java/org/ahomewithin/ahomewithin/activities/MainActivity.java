@@ -174,26 +174,20 @@ public class MainActivity extends AppCompatActivity
 
     public void onSelectLibrary(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY, true);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, streamPagerFragment)
-                .addToBackStack("library")
-                .commit();
+        String tag = StreamPagerFragment.FRAGMENT_TAG;
+        gotoFragment(streamPagerFragment, tag);
     }
 
     public void onSelectNearYou(View v) {
         Fragment mapFragment = MapFragment.newInstance();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, mapFragment)
-                .addToBackStack("map")
-                .commit();
+        String tag = MapFragment.FRAGMENT_TAG;
+        gotoFragment(mapFragment, tag);
     }
 
     public void onSelectToolsAndTechniques(View v) {
         Fragment streamPagerFragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.STORE, false);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flContent, streamPagerFragment)
-                .addToBackStack("store")
-                .commit();
+        String tag = StreamPagerFragment.FRAGMENT_TAG;
+        gotoFragment(streamPagerFragment, tag);
     }
 
     private void createDrawer() {

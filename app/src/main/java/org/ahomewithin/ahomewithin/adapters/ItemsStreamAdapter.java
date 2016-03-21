@@ -1,8 +1,11 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,10 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.DetailFragment;
+import org.ahomewithin.ahomewithin.fragments.StreamFragment;
+import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 import org.ahomewithin.ahomewithin.models.Item;
+import org.ahomewithin.ahomewithin.util.DetailsTransition;
 
 import java.util.List;
 
@@ -60,15 +66,54 @@ public class ItemsStreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         Glide.with(mContext).load(resourceId)
                 .centerCrop()
                 .into(
-                ((ItemViewHolder) holder).ivItemImage);
+                        ((ItemViewHolder) holder).ivItemImage);
 
         ((ItemViewHolder) holder).rlStreamItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.flContent, DetailFragment.newInstance(item))
-                        .addToBackStack(null)
-                        .commit();
+                StreamPagerFragment streamPagerFragment = (StreamPagerFragment)
+                        ((AppCompatActivity) mContext).getSupportFragmentManager()
+                                .findFragmentByTag(StreamPagerFragment.FRAGMENT_TAG);
+
+                final StreamFragment streamFragment;
+                if (streamPagerFragment != null) {
+                    streamFragment =                        // This will be the starter fragment
+                            (StreamFragment) streamPagerFragment.streamsPagerAdapter
+                                    .getItem(item.type == Item.ITEM_TYPE.VIDEOS ? 0 : 1);
+
+                    final DetailFragment detailFragment;
+
+                    if (streamFragment != null) {
+                        final ImageView staticImage = (ImageView) ((ItemViewHolder)holder).ivItemImage;
+
+                        detailFragment = DetailFragment.newInstance(item);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            staticImage.setTransitionName(mContext.getString(R.string.even_transition));
+
+                            detailFragment.setSharedElementEnterTransition(new DetailsTransition());
+                            detailFragment.setEnterTransition(new Fade());
+
+                            streamFragment.setExitTransition(new Fade());
+                            streamFragment.setSharedElementReturnTransition(new DetailsTransition());
+                        }
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(Item.SERIALIZABLE_TAG, item);
+                        detailFragment.setArguments(bundle);
+                        ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.flContent, detailFragment, DetailFragment.FRAGMENT_TAG)
+                                .addToBackStack("transaction")
+                                .addSharedElement(staticImage, mContext.getString(R.string.even_transition))
+                                .commit();
+
+                    } else {
+                        ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.flContent, DetailFragment.newInstance(item))
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                }
             }
         });
 

@@ -16,7 +16,7 @@
             android:layout_height="280dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-
+            android:transitionName="@string/even_transition"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             tools:src="@drawable/card_dummy"/>
