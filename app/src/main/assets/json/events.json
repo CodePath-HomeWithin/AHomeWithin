@@ -5,7 +5,7 @@
     "groupDescription":"",
     "eventName":"Join Us At Lone Mountain Park!",
     "url":"http://www.meetup.com/Las-Vegas-Social-Skills-Group-for-School-aged-Children/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/2/f/6/e/global_335112142.jpeg",
+    "imageUrl":"childs",
     "eventDescription":"This is a group for parents of children who may be struggling with friendships. Our group is based on acceptance and tolerance. We will have get-togethers and play dates to enhance social skills, foster friendships for our children, and have fun! I have started this group because I have an energetic 8 year old, who often times feels left out by her peers due in part to her ADHD. If you have a child who may be feeling left out because of something they have little to no control over, join us! Let's help our children learn and grow together",
     "location": {
       "name":"Doloras Park",
@@ -28,7 +28,7 @@
     "groupDescription":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
     "eventName":"Learn About Becomming A Foster Parent",
     "url":"http://www.meetup.com/Become-A-Foster-Parent/events/229467311/",
-    "imageUrl":"http://photos2.meetupstatic.com/photos/event/3/7/3/8/global_434054136.jpeg",
+    "imageUrl":"childs_2",
     "eventDescription":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
     "location": {
       "name":"Rec Center",
@@ -47,12 +47,12 @@
     }
   },
   {
-    "id":2,
+    "id":25,
     "groupName":"National Counseling Group",
     "groupDescription":"",
     "eventName":"Learn About Becomming A Foster Parent",
     "url":"http://www.meetup.com/Become-A-Foster-Parent/events/229467311/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/e/9/6/3/global_10739747.jpeg",
+    "imageUrl":"childs_3",
     "summary":"Informational gathering describing the programs in your area.",
     "eventDescription":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
     "location": {
@@ -83,7 +83,7 @@
       "state":"KY"
     },
     "url":"http://www.meetup.com/Fostering-Peace-Love-Learning-Each-Other-in-Louisville/events/228775605/",
-    "imageUrl":"http://photos2.meetupstatic.com/photos/event/e/3/3/2/global_361018162.jpeg",
+    "imageUrl":"childs_4",
     "eventDescription":"I know you all have already done a million things to make the world a better place, or at least one or two, and we'd like to hear about it! Everyone will have 5-7 minutes to share their story. We will also share change we'd like to create in the future!",
     "date":"03-19-2016",
     "startTime":"5:30 am",
@@ -105,7 +105,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Seeds-For-Tomorrow/photos/15594722/249744712/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/6/0/8/8/600_249744712.jpeg",
+    "imageUrl":"childs_5",
     "eventDescription":"This 2-hr art exploration and social session is for toddlers aged 2 - 4 years of age. We'll start by some free play and introduction to each other with songs, and reading a story book. This is followed by the art session, where we will create art and end off with snacks, music and close.",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -119,7 +119,7 @@
     "id":5,
     "groupName":"Parents' Weekday Gardening Collective",
     "groupDescription":"",
-    "eventName":"",
+    "eventName":"Parents' Weekday Gardening Collective",
     "location": {
       "name":"",
       "lines": [""],
@@ -127,7 +127,7 @@
       "state":"CA"
     },
     "url":"",
-    "imageUrl":"http://photos2.meetupstatic.com/photos/event/9/1/2/6/global_442957158.jpeg",
+    "imageUrl":"childs_6",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -149,7 +149,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/BayAreaSingleParents/",
-    "imageUrl":"http://photos1.meetupstatic.com/photos/event/d/1/e/a/global_18653738.jpeg",
+    "imageUrl":"childs_7",
     "eventDescription":"",
     "date":"03-27-2016",
     "startTime":"11:45 am",
@@ -171,7 +171,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/MarinHomeschooling/",
-    "imageUrl":"http://photos3.meetupstatic.com/photos/event/4/0/a/8/global_422056552.jpeg",
+    "imageUrl":"childs_8",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -193,7 +193,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Black-Girls-Do/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/4/3/7/2/global_447077266.jpeg",
+    "imageUrl":"childs_9",
     "eventDescription":"",
     "date":"04-17-2016",
     "startTime":"9:00 am",
@@ -207,7 +207,7 @@
     "id":9,
     "groupName":"Parent-Child Workshops",
     "groupDescription":"This group is for parents interested in participating in workshops and activities to learn and play with their preschoolers between the age of 2-6 years old. The workshops and activities will be centralized around simple Art &amp; Craft or cooking activities that both the parent and the child can participate in. All these activities are meant for the bonding and fostering of stronger ties between the parent and child. More importantly, for the family to have great fun and learn together!",
-    "eventName":"",
+    "eventName":"Parent-Child Workshops",
     "location": {
       "name":"",
       "lines": [""],
@@ -215,7 +215,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Parent-Child-Workshops-with-Teacher-Wendy/",
-    "imageUrl":"http://photos3.meetupstatic.com/photos/event/6/0/d/8/global_72984792.jpeg",
+    "imageUrl":"childs_10",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -236,8 +236,8 @@
       "city":"Oakland",
       "state":"CA"
     },
-    "url":"",
-    "imageUrl":"http://photos3.meetupstatic.com/photos/event/b/4/e/4/global_444826308.jpeg",
+    "url":"http://www.meetup.com/Black-Girls-Do/",
+    "imageUrl":"childs_11",
     "eventDescription":"",
     "date":"03-27-2016",
     "startTime":"9:00 am",
@@ -259,7 +259,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Chico-Moms/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/8/d/c/4/global_222636292.jpeg",
+    "imageUrl":"childs_12",
     "eventDescription":"",
     "date":"05-21-2016",
     "startTime":"10:00 am",
@@ -273,7 +273,7 @@
     "id":12,
     "groupName":"Mom and Munchkins",
     "groupDescription":"",
-    "eventName":"",
+    "eventName":"Mom and Munchkins",
     "location": {
       "name":"",
       "lines": [""],
@@ -281,7 +281,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/moms-munchkins-of-parker/",
-    "imageUrl":"http://photos4.meetupstatic.com/photos/event/5/8/3/6/global_209122582.jpeg",
+    "imageUrl":"childs_13",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -303,7 +303,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Veggie-Kids/",
-    "imageUrl":"http://photos2.meetupstatic.com/photos/event/2/d/3/e/600_74411582.jpeg",
+    "imageUrl":"childs_14",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
@@ -325,7 +325,7 @@
       "state":"CA"
     },
     "url":"http://www.meetup.com/Spiritual-Playdate/",
-    "imageUrl":"http://photos3.meetupstatic.com/photos/event/1/6/9/0/global_440105776.jpeg",
+    "imageUrl":"childs_15",
     "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",

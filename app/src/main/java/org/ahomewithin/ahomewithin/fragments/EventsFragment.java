@@ -30,7 +30,7 @@ public class EventsFragment extends Fragment {
         if (savedInstanceState == null) {
             EventsListFragment fragmentEvents = EventsListFragment.newInstance();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.flEvents, fragmentEvents).commit();
+                    .replace(R.id.flEvents, fragmentEvents, EventsListFragment.FRAGMENT_TAG).commit();
         }
 
         return convertView;

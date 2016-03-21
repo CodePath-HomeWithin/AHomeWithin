@@ -5,7 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.transition.TransitionInflater;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.fragments.DetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventDetailFragment;
 import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.models.Event;
+import org.ahomewithin.ahomewithin.util.DetailsTransition;
 import org.parceler.Parcels;
 
 import java.util.List;
@@ -67,10 +67,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         final Event event = events.get(position);
         viewHolder.tvEventName.setText(event.eventName);
         viewHolder.tvDateTime.setText(event.getDateTime());
-        Glide.with(mContext)
-                .load(event.imageUrl)
-                .fitCenter()
-                .into(viewHolder.ivImage);
+
+        final int resourceId = mContext.getResources().getIdentifier(
+                event.imageUrl, "drawable", mContext.getPackageName());
+        viewHolder.ivImage.setImageDrawable(mContext.getResources().getDrawable(resourceId));
+
 
         String url = event.getUrl();
         if (url != null) {
@@ -78,37 +79,36 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             viewHolder.llEventContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventsFragment currentEventsFragment =
+                    final EventsFragment currentEventsFragment =
                             (EventsFragment) ((AppCompatActivity) mContext).getSupportFragmentManager().
                                     findFragmentByTag(EventsFragment.FRAGMENT_TAG);
-                    EventDetailFragment detailFragment;
+                    final EventDetailFragment detailFragment;
 
                     if (currentEventsFragment != null) {
-                        ImageView staticImage = (ImageView) v.findViewById(R.id.ivImage);
+                        final ImageView staticImage = (ImageView) v.findViewById(R.id.ivImage);
 
-                        detailFragment = new EventDetailFragment();
+                        detailFragment = EventDetailFragment.newInstance(event);
+
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            currentEventsFragment.setSharedElementReturnTransition(TransitionInflater.from(
-                                    (AppCompatActivity) mContext).inflateTransition(R.transition.change_image_trans));
-                            currentEventsFragment.setExitTransition(TransitionInflater.from(
-                                    (AppCompatActivity) mContext).inflateTransition(android.R.transition.fade));
+                            staticImage.setTransitionName(mContext.getString(R.string.even_transition));
 
-                            detailFragment.setSharedElementEnterTransition(TransitionInflater.from(
-                                    (AppCompatActivity) mContext).inflateTransition(R.transition.change_image_trans));
-                            detailFragment.setEnterTransition(TransitionInflater.from(
-                                    (AppCompatActivity) mContext).inflateTransition(android.R.transition.fade));
+                            detailFragment.setSharedElementEnterTransition(new DetailsTransition());
+                            detailFragment.setEnterTransition(new Fade());
+
+                            currentEventsFragment.setExitTransition(new Fade());
+                            currentEventsFragment.setSharedElementReturnTransition(new DetailsTransition());
+
                         }
 
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(Event.SERIALIZABLE_TAG, Parcels.wrap(event));
-//                        bundle.putString("ACTION", viewHolder.tvEventName.getText().toString());
-//                        bundle.putParcelable("IMAGE", ((BitmapDrawable) viewHolder.ivImage.getDrawable()).getBitmap());
                         detailFragment.setArguments(bundle);
                         ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.flContent, detailFragment)
-                                .addToBackStack("Event")
-                                .addSharedElement(staticImage, "event_image_transition")
+                                .replace(R.id.flContent, detailFragment, DetailFragment.FRAGMENT_TAG)
+                                .addToBackStack("transaction")
+                                .addSharedElement(staticImage, mContext.getString(R.string.even_transition))
                                 .commit();
+
                     } else {
                         detailFragment = EventDetailFragment.newInstance(event);
                         ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
@@ -118,7 +118,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                     }
                 }
             });
-
         }
     }
 
