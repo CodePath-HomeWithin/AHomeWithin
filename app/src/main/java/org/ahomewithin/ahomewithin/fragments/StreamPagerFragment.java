@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,21 @@ public class StreamPagerFragment extends Fragment {
         initForType(mType);
 
         View convertView = inflater.inflate(R.layout.content_stream_pager, container, false);
+        convertView.setFocusableInTouchMode(true);
+        convertView.requestFocus();
+        convertView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(keyCode == KeyEvent.KEYCODE_BACK) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         ButterKnife.bind(this, convertView);
 
         return convertView;
@@ -78,7 +94,7 @@ public class StreamPagerFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewPager.setAdapter(new StreamsPagerAdapter(getFragmentManager()));
+        viewPager.setAdapter(new StreamsPagerAdapter(getChildFragmentManager()));
 
         if (getActivity().getIntent().hasExtra(ARG_STREAM_TAB)) {
             viewPager.setCurrentItem(getActivity().getIntent().getIntExtra(ARG_STREAM_TAB, 0));

@@ -59,6 +59,7 @@ public class ItemsStreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             public void onClick(View v) {
                 ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.flContent, DetailFragment.newInstance(item))
+                        .addToBackStack(null)
                         .commit();
             }
         });

@@ -57,6 +57,20 @@ public class StreamFragment extends Fragment {
 
         ButterKnife.bind(this, convertView);
 
+//        convertView.setFocusableInTouchMode(true);
+//        convertView.requestFocus();
+//        convertView.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    getChildFragmentManager().popBackStack();
+//                    return false;
+//                }
+//                return false;
+//            }
+//        });
+
         return convertView;
     }
 
@@ -94,8 +108,7 @@ public class StreamFragment extends Fragment {
                     rvStream.setVisibility(View.GONE);
                     emptyView.setVisibility(View.VISIBLE);
                     goToTools.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     rvStream.setVisibility(View.VISIBLE);
                     emptyView.setVisibility(View.GONE);
                     goToTools.setVisibility(View.GONE);
@@ -107,7 +120,6 @@ public class StreamFragment extends Fragment {
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.flContent, StreamPagerFragment.newInstance(
                                         StreamPagerFragment.ViewType.STORE, false))
-                                .addToBackStack(null)
                                 .commit();
                     }
                 });
@@ -136,10 +148,10 @@ public class StreamFragment extends Fragment {
     // TODO Add show only owned
     private ArrayList<Item> getSubsetOfItems(ArrayList<Item> items, Item.ITEM_TYPE type, boolean showOnlyOwned) {
         ArrayList<Item> auxItems = new ArrayList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             if (item.type == type) {
                 if (showOnlyOwned) {
-                    if(UserTools.isItemPurchased(getActivity(), item.id)) {
+                    if (UserTools.isItemPurchased(getActivity(), item.id)) {
                         item.owned = true;
                         auxItems.add(item);
                     }

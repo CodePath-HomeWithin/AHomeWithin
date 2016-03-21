@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,20 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View convertView = inflater.inflate(R.layout.fragment_detail, container, false);
+        convertView.setFocusableInTouchMode(true);
+        convertView.requestFocus();
+        convertView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(keyCode == KeyEvent.KEYCODE_BACK) {
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(DetailFragment.this).commit();
+                    return false;
+                }
+                return false;
+            }
+        });
+
         ButterKnife.bind(this, convertView);
         mItem = (Item) getArguments().getSerializable(Item.SERIALIZABLE_TAG);
 
@@ -128,7 +143,7 @@ public class DetailFragment extends Fragment {
         if(mItem.type == Item.ITEM_TYPE.CONVERSATIONS) {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.flContent, CardsPagerFragment.newInstance(mItem))
+                    .replace(R.id.flContent, CardsPagerFragment.newInstance(mItem))
                     .addToBackStack(null)
                     .commit();
         } else if (mItem.type == Item.ITEM_TYPE.VIDEOS) {
