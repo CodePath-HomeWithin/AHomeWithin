@@ -16,6 +16,7 @@
                         xmlns:tools="http://schemas.android.com/tools"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
+                        android:elevation="10dp"
                         android:onClick="onSelectNearYou">
 
 
@@ -38,6 +39,7 @@
                         xmlns:tools="http://schemas.android.com/tools"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
+                        android:translationZ="6dp"
                         android:onClick="onSelectLibrary">
 
 
@@ -68,7 +70,7 @@
             <ImageView
                 android:id="@+id/ivMenuImageTools"
                 style="@style/home_menu_item_image"
-                android:src="@drawable/tools_1"/>
+                android:src="@drawable/tools_6"/>
 
             <RelativeLayout
                 style="@style/home_menu_title_background">
@@ -80,5 +82,5 @@
             </RelativeLayout>
 
         </RelativeLayout>
-        </LinearLayout>
+    </LinearLayout>
 </ScrollView>
