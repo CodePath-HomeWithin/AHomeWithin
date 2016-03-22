@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tilPassword"
         android:textAlignment="center"
+        style="@style/button_standard"
         android:text="@string/login"/>
 
     <TextView
@@ -84,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNoAccount"
+        style="@style/button_standard"
         android:text="@string/create_new_account"
         android:textAlignment="center"/>
 
