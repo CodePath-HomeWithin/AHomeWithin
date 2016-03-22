@@ -1,11 +1,7 @@
 package org.ahomewithin.ahomewithin.adapters;
 
 import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,12 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.fragments.DetailFragment;
-import org.ahomewithin.ahomewithin.fragments.EventDetailFragment;
-import org.ahomewithin.ahomewithin.fragments.EventsFragment;
 import org.ahomewithin.ahomewithin.models.Event;
-import org.ahomewithin.ahomewithin.util.DetailsTransition;
-import org.parceler.Parcels;
+import org.ahomewithin.ahomewithin.util.EventClickListener;
 
 import java.util.List;
 
@@ -29,6 +21,8 @@ import java.util.List;
  */
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder>
         implements SimpleListAdapter {
+
+    private final EventClickListener mListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout llEventContainer;
@@ -50,9 +44,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     private Context mContext;
     private List<Event> events;
 
-    public EventsAdapter(Context context, List<Event> items) {
+    public EventsAdapter(Context context, List<Event> items, EventClickListener eventClickListener) {
         mContext = context;
         events = items;
+        mListener = eventClickListener;
     }
 
     @Override
@@ -79,43 +74,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             viewHolder.llEventContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final EventsFragment currentEventsFragment =
-                            (EventsFragment) ((AppCompatActivity) mContext).getSupportFragmentManager().
-                                    findFragmentByTag(EventsFragment.FRAGMENT_TAG);
-                    final EventDetailFragment detailFragment;
+                    mListener.onEventClicked(viewHolder, event);
 
-                    if (currentEventsFragment != null) {
-                        final ImageView staticImage = (ImageView) v.findViewById(R.id.ivImage);
-
-                        detailFragment = EventDetailFragment.newInstance(event);
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            staticImage.setTransitionName(mContext.getString(R.string.even_transition));
-
-                            detailFragment.setSharedElementEnterTransition(new DetailsTransition());
-                            detailFragment.setEnterTransition(new Fade());
-
-                            currentEventsFragment.setExitTransition(new Fade());
-                            currentEventsFragment.setSharedElementReturnTransition(new DetailsTransition());
-
-                        }
-
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable(Event.SERIALIZABLE_TAG, Parcels.wrap(event));
-                        detailFragment.setArguments(bundle);
-                        ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.flContent, detailFragment, DetailFragment.FRAGMENT_TAG)
-                                .addToBackStack("transaction")
-                                .addSharedElement(staticImage, mContext.getString(R.string.even_transition))
-                                .commit();
-
-                    } else {
-                        detailFragment = EventDetailFragment.newInstance(event);
-                        ((AppCompatActivity) mContext).getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.flContent, detailFragment)
-                                .addToBackStack("Event")
-                                .commit();
-                    }
                 }
             });
         }

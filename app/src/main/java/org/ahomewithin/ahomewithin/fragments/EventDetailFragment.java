@@ -61,7 +61,7 @@ public class EventDetailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final int resourceId = mContext.getResources().getIdentifier(
                 mEvent.imageUrl, "drawable", mContext.getPackageName());
-        ivImage.setImageDrawable(mContext.getResources().getDrawable(resourceId));
+        ivImage.setImageResource(resourceId);
 
         tvGroupName.setText(mEvent.groupName);
         tvEventName.setText(mEvent.eventName);
