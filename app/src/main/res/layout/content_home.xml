@@ -19,7 +19,7 @@
                         android:onClick="onSelectNearYou">
 
 
-            <ImageView
+            <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/ivMenuImageMap"
                 style="@style/home_menu_item_image"
                 android:src="@drawable/map_1"/>
@@ -41,7 +41,7 @@
                         android:onClick="onSelectLibrary">
 
 
-            <ImageView
+            <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/ivMenuImageLibrary"
                 style="@style/home_menu_item_image"
                 android:src="@drawable/library_1"/>
@@ -65,7 +65,7 @@
                         android:onClick="onSelectToolsAndTechniques">
 
 
-            <ImageView
+            <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/ivMenuImageTools"
                 style="@style/home_menu_item_image"
                 android:src="@drawable/tools_6"/>
