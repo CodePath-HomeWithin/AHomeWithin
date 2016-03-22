@@ -35,7 +35,7 @@ public class Item implements Serializable {
     public String imageUrl;
     public String description;
     public boolean owned;
-    public double price;
+    public int price;
     public ArrayList<ConversationCard> contentCards;  //
     public String contentUrl; //vidoe url
     public String content;  //card json string, use getCardContentFromJsonString below to deJson
@@ -53,6 +53,8 @@ public class Item implements Serializable {
 
             item.contentUrl = jsonObject.has("content") ? jsonObject.getString("content") : "";
             item.content = jsonObject.has("content") ? jsonObject.getString("content") : "";
+            item.price = jsonObject.has("price") ?
+                    Integer.valueOf(jsonObject.getString("price")) : 0;
             item.type = type;
             item.owned = false;
 

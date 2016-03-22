@@ -1,5 +1,6 @@
 package org.ahomewithin.ahomewithin.activities;
 
+import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,8 +39,17 @@ public class VideoActivity extends AppCompatActivity {
         if (mItem.type == Item.ITEM_TYPE.VIDEOS) {
             fvvVideo.setMediaController(mediaController);
             mediaController.setMediaPlayer(fvvVideo);
-            fvvVideo.setVideo(mItem.contentUrl,
-                    MediaFensterPlayerController.DEFAULT_VIDEO_START);
+
+            AssetFileDescriptor assetFileDescriptor = getResources().openRawResourceFd(R.raw.video);
+            fvvVideo.setVideo(assetFileDescriptor, MediaFensterPlayerController.DEFAULT_VIDEO_START);
+
+//            fvvVideo.setVideo(mItem.contentUrl,
+//                    MediaFensterPlayerController.DEFAULT_VIDEO_START);
+//
+//            fvvVideo.setVideo("https://s3-eu-west-1.amazonaws.com/chezlui.freelancer/codepath/video.mp4",
+//                    MediaFensterPlayerController.DEFAULT_VIDEO_START);
+
+
             fvvVideo.start();
             Log.d("DEBUG", "Watching: " + mItem.contentUrl);
 

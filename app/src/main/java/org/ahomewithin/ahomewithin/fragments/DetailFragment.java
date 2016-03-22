@@ -44,6 +44,7 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.tvDescription) TextView tvDescription;
 
     @Bind(R.id.ivItemImage) ImageView ivItemImage;
+    @Bind(R.id.tvPrice) TextView tvPrice;
     public static final int REQUEST_CODE = 22;
 
 
@@ -100,11 +101,13 @@ public class DetailFragment extends Fragment {
 
         tvTitle.setText(mItem.title);
         tvDescription.setText(mItem.description);
+        tvPrice.setText("Price: $" + mItem.price);
 
         // Calculate again to force update
         mItem.owned = UserTools.isItemPurchased(getActivity(), mItem.id);
         if (mItem.owned) {
             btBuy.setText("WATCH NOW");
+            tvPrice.setVisibility(View.INVISIBLE);
         } else {
             btBuy.setText("BUY NOW");
         }
