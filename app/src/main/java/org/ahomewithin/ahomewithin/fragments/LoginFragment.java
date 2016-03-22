@@ -24,7 +24,6 @@ import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.util.LoginCallback;
 import org.ahomewithin.ahomewithin.util.OnResetPasswordListener;
-import org.ahomewithin.ahomewithin.util.UserTools;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -136,7 +135,6 @@ public class LoginFragment extends Fragment {
             email, password, new ParseClientAsyncHandler() {
                 @Override
                 public void onSuccess(Object obj) {
-                    UserTools.loginUser(getActivity(), email);
                     Toast.makeText(
                         getContext(),
                         "Successfully logged in",
@@ -154,7 +152,6 @@ public class LoginFragment extends Fragment {
 
                 @Override
                 public void onFailure(String error) {
-                    UserTools.logoutUser(getActivity(), email);
                     tilPassword.setError("Name and Password do not match our record!!!");
                 }
             }

@@ -32,23 +32,23 @@ public class UserTools {
     }
 
     // Save in sharedPreferences
-    public static void loginUser(Context context, String id) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
+//    public static void loginUser(Context context, String id) {
+//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+//        SharedPreferences.Editor editor = sp.edit();
+//
+//        editor.putBoolean(id, true);
+//        editor.commit();
+//    }
 
-        editor.putBoolean(id, true);
-        editor.commit();
-    }
 
-
-    // Save in sharedPreferences
-    public static void logoutUser(Context context, String id) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-
-        editor.putBoolean(id, false);
-        editor.commit();
-    }
+//    // Save in sharedPreferences
+//    public static void logoutUser(Context context, String id) {
+//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+//        SharedPreferences.Editor editor = sp.edit();
+//
+//        editor.putBoolean(id, false);
+//        editor.commit();
+//    }
 
     public static boolean isUserLoggedIn(Context context, String id) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);

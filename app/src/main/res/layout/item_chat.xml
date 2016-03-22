@@ -2,8 +2,11 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="@dimen/component_vertical_margin"
+              android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:layout_marginTop="16dp"
               android:orientation="horizontal">
 
     <ImageView
@@ -15,21 +18,21 @@
 
     <TextView
         android:id="@+id/tvBody"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
         android:lines="3"
-        android:padding="20dp"
-        android:textSize="18sp">
+        tools:text="Esto es una prueba lo suficientementh"
+        android:textSize="14sp">
     </TextView>
 
     <ImageView
         android:id="@+id/ivProfileMe"
         android:layout_width="@dimen/chat_profile_image_width"
         android:layout_height="@dimen/chat_profile_image_height"
-        android:layout_marginLeft="-64dp"
-        android:layout_marginStart="-64dp"
         android:contentDescription="@string/profile_me"
         android:src="@mipmap/ic_launcher"/>
 </LinearLayout>
