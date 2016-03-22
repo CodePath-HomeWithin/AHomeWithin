@@ -1,5 +1,8 @@
 package org.ahomewithin.ahomewithin.util;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -97,6 +100,7 @@ public class MapMarkers {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     updateMapPopupView(marker, markerMap.get(marker.getId()));
+                    startColorAnimation(mMapPopupViewHolder.rlMapPopup);
                     return false;
                 }
             });
@@ -171,12 +175,8 @@ public class MapMarkers {
     }
 
     private void highlightMarker(Marker marker, User user) {
-        // http://serennu.com/colour/hsltorgb.php
-        int hue_orange = 27;
-        int hue_green = 175;
-
         if (marker != null) {
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(hue_green));
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         }
     }
 
@@ -220,6 +220,18 @@ public class MapMarkers {
                 }
             }
         });
+    }
+
+    private void startColorAnimation(View v) {
+        int colorStart = 0xffB2DFDB;
+        int colorEnd = 0xffd2d2d2;
+
+        ValueAnimator colorAnim = ObjectAnimator.ofInt(v,
+                "backgroundColor", colorStart, colorEnd);
+        colorAnim.setDuration(400);
+        colorAnim.setEvaluator(new ArgbEvaluator());
+        colorAnim.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnim.start();
     }
 
 
