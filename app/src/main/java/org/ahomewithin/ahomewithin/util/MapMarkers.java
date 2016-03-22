@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by barbara on 3/12/16.
@@ -37,8 +38,6 @@ public class MapMarkers {
 
     private Context mContext;
     private ViewHolder mMapPopupViewHolder;
-    private ArrayList<User> users;
-
     private ArrayList<Marker> markers;
 
     private HashMap<String, User> markerMap;
@@ -74,39 +73,34 @@ public class MapMarkers {
     }
     public MapMarkers(Context context) {
         mContext = context;
-//        View rootView = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
-//        mMapPopupViewHolder = new ViewHolder(rootView);
-
-
-        users = new ArrayList<User>();
         markers = new ArrayList<>();
-        loadUsers(context);
     }
 
 
-    public void addMarkersToMap(GoogleMap map) {
-        View rootView = ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
-        mMapPopupViewHolder = new ViewHolder(rootView);
+    public void addMarkersToMap(View v, GoogleMap map, List<User> users) {
+        if (mMapPopupViewHolder == null) {
+            mMapPopupViewHolder = new ViewHolder(v);
 
-        markerMap = new HashMap<String, User>();
-        if (users != null) {
-            for (User user : users) {
-                createMarkerForUser(map, user);
+            markerMap = new HashMap<String, User>();
+            if (users != null) {
+                for (User user : users) {
+                    createMarkerForUser(map, user);
+                }
             }
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    updateMapPopupView(null, null);
+                }
+            });
+            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    updateMapPopupView(marker, markerMap.get(marker.getId()));
+                    return false;
+                }
+            });
         }
-        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                updateMapPopupView(null, null);
-            }
-        });
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                updateMapPopupView(marker, markerMap.get(marker.getId()));
-                return false;
-            }
-        });
     }
 
     public ArrayList<Marker> getMarkers() {
@@ -163,31 +157,7 @@ public class MapMarkers {
         mMapPopupViewHolder.previousUser = user;
     }
 
-    private void loadUsers(Context context) {
-        try {
-            // Stubbed out way
-            JSONObject response = AHomeWithinClient.getUsers(context);
-            users = User.fromJSONArray(response.getJSONArray("users"));
-//            ParseClient client = ParseClient.newInstance(context);
-//            client.getAllUsers(new ParseClientAsyncHandler() {
-//                @Override
-//                public void onSuccess(Object obj) {
-//                    users = (ArrayList<User>) obj;
-//                    Log.d(LOG_TAG, "All users recovered from db");
-//                }
-//
-//                @Override
-//                public void onFailure(String error) {
-//                    Log.d(LOG_TAG, "Error recovering users from db: " + error);
-//
-//
-//                }
-//            });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void createMarkerForUser(GoogleMap map, User user) {
         MarkerOptions markerOptions = new MarkerOptions();
@@ -210,14 +180,12 @@ public class MapMarkers {
     }
 
     private void restoreMarker(Marker marker, User user) {
-        if (marker != null) {
-            switch (user.type) {
-                case SERVICE_PROVIDER:
-                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-                    break;
-                default: // COMMUNITY:
-                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        if ((marker != null) && (user != null)) {
+            float color = BitmapDescriptorFactory.HUE_VIOLET;
+            if (user.type == User.UserType.SERVICE_PROVIDER) {
+                color = BitmapDescriptorFactory.HUE_CYAN;
             }
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(color));
         }
     }
 

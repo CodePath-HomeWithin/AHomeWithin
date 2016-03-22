@@ -5,6 +5,7 @@ package org.ahomewithin.ahomewithin.fragments;
  */
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -31,9 +32,14 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.models.User;
 import org.ahomewithin.ahomewithin.util.MapMarkers;
 import org.ahomewithin.ahomewithin.util.PermissionUtils;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class MapFragment extends Fragment implements
         GoogleMap.OnMyLocationButtonClickListener,
@@ -62,6 +68,7 @@ public class MapFragment extends Fragment implements
     private MapMarkers mMapMarkers;
     private SupportMapFragment mMapFragment;
     private SlidingUpPanelLayout mSlidePanel;
+    private View mMapRootView;
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -93,6 +100,7 @@ public class MapFragment extends Fragment implements
 
 
         mMapFragment = CustomMapFragment.newInstance();
+        mMapRootView = v.findViewById(android.R.id.content);
         getChildFragmentManager().beginTransaction().replace(R.id.flMapContainer, mMapFragment).commit();
         mMapMarkers = new MapMarkers(getActivity());
         return v;
@@ -122,7 +130,8 @@ public class MapFragment extends Fragment implements
 
 
             if (mMapMarkers != null) {
-                mMapMarkers.addMarkersToMap(mMap);
+                View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
+                mMapMarkers.addMarkersToMap(rootView, mMap, loadUsers());
 
                 LatLngBounds.Builder bounds = new LatLngBounds.Builder();
                 for (Marker marker : mMapMarkers.getMarkers()) {
@@ -191,6 +200,33 @@ public class MapFragment extends Fragment implements
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getActivity().getSupportFragmentManager(), "dialog");
+    }
+
+    private List<User> loadUsers() {
+        try {
+            // Stubbed out way
+            JSONObject response = AHomeWithinClient.getUsers(getContext());
+            return(User.fromJSONArray(response.getJSONArray("users")));
+//            ParseClient client = ParseClient.newInstance(context);
+//            client.getAllUsers(new ParseClientAsyncHandler() {
+//                @Override
+//                public void onSuccess(Object obj) {
+//                    users = (ArrayList<User>) obj;
+//                    Log.d(LOG_TAG, "All users recovered from db");
+//                }
+//
+//                @Override
+//                public void onFailure(String error) {
+//                    Log.d(LOG_TAG, "Error recovering users from db: " + error);
+//
+//
+//                }
+//            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
