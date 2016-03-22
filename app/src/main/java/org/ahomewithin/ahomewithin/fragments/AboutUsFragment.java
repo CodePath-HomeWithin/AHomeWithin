@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.util.CircularFragReveal;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,5 +99,34 @@ public class AboutUsFragment extends Fragment {
                         ivAboutUs3.setImageDrawable(circularBitmapDrawable);
                     }
                 });
+
+        CircularFragReveal.Builder builder = new CircularFragReveal.Builder(view);
+        builder.setRevealTime(2000);
+        CircularFragReveal circularFragReveal = builder.build();
+
+        View image = getView().findViewById(R.id.ivAboutUs1);
+        int location[] = new int[2];
+        image.getLocationOnScreen(location);
+        circularFragReveal.startReveal(location[0], location[1], new CircularFragReveal.OnCircularReveal() {
+            @Override
+            public void onFragCircRevealStart() {
+
+            }
+
+            @Override
+            public void onFragCircRevealEnded() {
+
+            }
+
+            @Override
+            public void onFragCircUnRevealStart() {
+
+            }
+
+            @Override
+            public void onFragCircUnRevealEnded() {
+
+            }
+        });
     }
 }
