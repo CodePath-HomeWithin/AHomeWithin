@@ -65,7 +65,7 @@
     "id":6,
     "lat":37.774929,
     "lng": -122.419416,
-    "type":"service_provider",
+    "type":"community",
     "firstName":"Nora",
     "lastName":"Heins",
     "email" : "nh@gmail.com",
@@ -89,7 +89,7 @@
     "id":7,
     "lat":37.354108,
     "lng":-121.955236,
-    "type":"service_provider",
+    "type":"community",
     "firstName":"Meenal",
     "lastName":"Chaudhari",
     "email":"Meenal.lastName@gmail.com",
@@ -145,11 +145,12 @@
     "id":12,
     "lat":37.73357,
     "lng":-122.47640,
-    "type":"community",
+    "type":"service_provider",
     "firstName":"Jose",
     "lastName":"Martin",
+    "description":"Jose Martin currently in private practice in Davis, California, specializing in adult and adolescent psychotherapy. He was formerly Assistant Clinical Professor at the University of Virginia in the Clinical Psychology program, as well as in private practice in Charlottesville, Virginia. Since she entered the mental health field in 1986, she has worked in therapeutic nurseries, child and adult inpatient facilities, family homeless shelters, and public schools from preschool through high school. She completed a postdoctoral fellowship at Philadelphia Child Guidance Center, where she concentrated on inpatient, high-risk adolescents and their families. Her research and publications focused on adult and infant attachment.",
     "email":"joseluismartin@gmail.com",
-    "phone": "1112223333"
+    "phone": "6508685200"
   }
 
 
