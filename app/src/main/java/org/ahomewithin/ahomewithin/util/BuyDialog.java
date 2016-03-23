@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,11 +23,12 @@ import org.ahomewithin.ahomewithin.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fr.tvbarthel.lib.blurdialogfragment.SupportBlurDialogFragment;
 
 /**
  * Created by chezlui on 07/03/16.
  */
-public class BuyDialog extends DialogFragment {
+public class BuyDialog extends SupportBlurDialogFragment {
     AsyncHttpResponseHandler responseHandler;
 
     public static final String LOG_TAG = BuyDialog.class.getSimpleName();
@@ -132,5 +132,24 @@ public class BuyDialog extends DialogFragment {
         if (activity instanceof DialogInterface.OnDismissListener) {
             ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
         }
+    }
+
+    @Override
+    protected boolean isActionBarBlurred() {
+        // Enable or disable the blur effect on the action bar.
+        // Disabled by default.
+        return true;
+    }
+
+    @Override
+    protected float getDownScaleFactor() {
+        // Allow to customize the down scale factor.
+        return 5;
+    }
+
+    @Override
+    protected int getBlurRadius() {
+        // Allow to customize the blur radius factor.
+        return 7;
     }
 }

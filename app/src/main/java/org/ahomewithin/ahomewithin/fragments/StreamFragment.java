@@ -1,10 +1,13 @@
 package org.ahomewithin.ahomewithin.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,8 @@ import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
 import org.ahomewithin.ahomewithin.adapters.ItemsStreamAdapter;
 import org.ahomewithin.ahomewithin.models.Item;
+import org.ahomewithin.ahomewithin.util.DetailsTransition;
+import org.ahomewithin.ahomewithin.util.ItemHomeClickListener;
 import org.ahomewithin.ahomewithin.util.UserTools;
 
 import java.util.ArrayList;
@@ -27,7 +32,7 @@ import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
 /**
  * Created by chezlui on 06/03/16.
  */
-public class StreamFragment extends Fragment {
+public class StreamFragment extends Fragment implements ItemHomeClickListener {
     public static final String FRAGMENT_TAG = StreamFragment.class.getSimpleName();
 
     public static final String ARG_STREAM_TYPE = "stream_type";
@@ -80,7 +85,7 @@ public class StreamFragment extends Fragment {
         type = Item.ITEM_TYPE.values()[(getArguments().getInt(ARG_STREAM_TYPE))];
         showOnlyOwned = getArguments().getBoolean(ARG_OWNED_ITEMS);
 
-        aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>());
+        aItems = new ItemsStreamAdapter(getActivity(), new ArrayList<Item>(), this);
 
         rvStream.setAdapter(aItems);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -182,4 +187,35 @@ public class StreamFragment extends Fragment {
 
         return auxItems;
     }
+
+    @Override
+    public void onEventClicked(ItemsStreamAdapter.ItemViewHolder holder, Item item) {
+
+        DetailFragment detailFragment = DetailFragment.newInstance(item);
+
+        // Note that we need the API version check here because the actual transition classes (e.g. Fade)
+        // are not in the support library and are only available in API 21+. The methods we are calling on the Fragment
+        // ARE available in the support library (though they don't do anything on API < 21)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            detailFragment.setSharedElementEnterTransition(new DetailsTransition());
+            detailFragment.setEnterTransition(new Fade());
+            setExitTransition(new Fade());
+            detailFragment.setSharedElementReturnTransition(new DetailsTransition());
+        }
+
+        ViewCompat.setTransitionName(holder.ivItemImage, getActivity().getString(R.string.even_transition));
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Item.SERIALIZABLE_TAG, item);
+        detailFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .addSharedElement(holder.ivItemImage, getActivity().getString(R.string.even_transition))
+                .replace(R.id.flContent, detailFragment, DetailFragment.FRAGMENT_TAG)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+
 }

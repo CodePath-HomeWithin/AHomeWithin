@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +16,12 @@ import org.ahomewithin.ahomewithin.models.User;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fr.tvbarthel.lib.blurdialogfragment.SupportBlurDialogFragment;
 
 /**
  * Created by xiangyang_xiao on 3/5/16.
  */
-public class LoginCreateUserDialogFragment extends DialogFragment {
+public class LoginCreateUserDialogFragment extends SupportBlurDialogFragment {
   public static final String FRAGMENT_TAG = LoginCreateUserDialogFragment.class.getSimpleName();
 
 
@@ -122,4 +122,25 @@ public class LoginCreateUserDialogFragment extends DialogFragment {
     }
 
   }
+
+  @Override
+  protected boolean isActionBarBlurred() {
+    // Enable or disable the blur effect on the action bar.
+    // Disabled by default.
+    return true;
+  }
+
+  @Override
+  protected float getDownScaleFactor() {
+    // Allow to customize the down scale factor.
+    return 5;
+  }
+
+  @Override
+  protected int getBlurRadius() {
+    // Allow to customize the blur radius factor.
+    return 7;
+  }
+
+
 }

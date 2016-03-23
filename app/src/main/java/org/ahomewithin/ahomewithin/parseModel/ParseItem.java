@@ -57,8 +57,8 @@ public class ParseItem extends ParseObject
         return getString(DESP_KEY);
     }
 
-    public double getPrice() {
-        return getDouble(PRICE_KEY);
+    public int getPrice() {
+        return getInt(PRICE_KEY);
     }
 
     public String getImage() {
