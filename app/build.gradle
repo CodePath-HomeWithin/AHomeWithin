@@ -57,6 +57,5 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.3.0'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'fr.tvbarthel.blurdialogfragment:lib:2.1.5'
-    compile 'com.flaviofaria:kenburnsview:1.0.7'
 
 }

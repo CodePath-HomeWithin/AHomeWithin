@@ -153,7 +153,7 @@
         <item name="android:layout_height">180dp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">centerInside</item>
+        <item name="android:scaleType">centerCrop</item>
     </style>
 
     <style name="home_menu_item_title">
