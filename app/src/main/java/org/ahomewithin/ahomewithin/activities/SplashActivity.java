@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import org.ahomewithin.ahomewithin.R;
 
@@ -29,12 +31,22 @@ public class SplashActivity extends AppCompatActivity {
     @Bind(R.id.ivSmallHouse) ImageView ivSmallHouse;
     @Bind(R.id.ivAHome) ImageView ivAHome;
     @Bind(R.id.ivWithin) ImageView ivWithin;
+    @Bind(R.id.rlSplashScreen) RelativeLayout rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+            }
+        });
+
+
 
         new Handler().postDelayed(new Runnable() {
 
@@ -47,11 +59,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
-
-                // close this activity
-                finish();
+                goToMainActivity();
             }
         }, SPLASH_TIME_OUT);
 
@@ -79,8 +87,19 @@ public class SplashActivity extends AppCompatActivity {
                 animateScreen();
             }
         }, 200);
+    }
 
+    private void goToMainActivity() {
+        ivSmallHouse.animate().cancel();
+        ivLargeHouse.animate().cancel();
+        ivAHome.animate().cancel();
+        ivWithin.animate().cancel();
 
+        Intent i = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(i);
+
+        // close this activity
+        finish();
     }
 
     private void animateScreen() {
