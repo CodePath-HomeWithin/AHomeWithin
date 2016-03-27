@@ -29,16 +29,22 @@
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true" >
-        <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+        <activity android:name=".activities.SplashActivity"
+                  android:label="A Home Within"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
+
         </activity>
 
         <activity
