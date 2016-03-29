@@ -64,10 +64,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
 
         <uses-library
             android:name="com.google.android.maps"

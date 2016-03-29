@@ -28,6 +28,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -42,6 +43,7 @@ import org.ahomewithin.ahomewithin.fragments.HomeFragment;
 import org.ahomewithin.ahomewithin.fragments.LearnMoreFragment;
 import org.ahomewithin.ahomewithin.fragments.LoginFragment;
 import org.ahomewithin.ahomewithin.fragments.MapFragment;
+import org.ahomewithin.ahomewithin.fragments.ProfileFragment;
 import org.ahomewithin.ahomewithin.fragments.StreamPagerFragment;
 import org.ahomewithin.ahomewithin.models.Item;
 import org.ahomewithin.ahomewithin.util.LoginCallback;
@@ -57,6 +59,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements LoginCallback {
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.nvView)
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, homeFragment)
+                .replace(R.id.flContent, homeFragment)
                 .commit();
 
         createDrawer();
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity
         PrimaryDrawerItem aboutUsItem = createDrawerIcon(R.string.about_us, R.drawable.ic_sidemenu_about);
         PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withName(R.string.action_settings).withIconTintingEnabled(true);
         PrimaryDrawerItem chatRoomItem = createDrawerIcon(R.string.chat, R.drawable.ic_sidemenu_chat);
-        PrimaryDrawerItem logoutItem = createDrawerIcon(R.string.logout, R.drawable.ic_sidemenu_logout);
+        PrimaryDrawerItem profileItem = createDrawerIcon(R.string.logout, R.drawable.ic_sidemenu_logout);
 
         // do something with the clicked item :D
         //fragment = StreamPagerFragment.newInstance(StreamPagerFragment.ViewType.LIBRARY);
@@ -222,7 +226,7 @@ public class MainActivity extends AppCompatActivity
                         aboutUsItem,
                         //settingsItem,
                         chatRoomItem,
-                        logoutItem)
+                        profileItem)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -270,10 +274,8 @@ public class MainActivity extends AppCompatActivity
                                 break;
                             case 11:
                                 if (client.isUserLoggedIn()) {
-                                    client.logout();
-                                    clearBackstack();
-                                    fragment = HomeFragment.newInstance();
-                                    tag = HomeFragment.FRAGMENT_TAG;
+                                    fragment = ProfileFragment.newInstance();
+                                    tag = ProfileFragment.FRAGMENT_TAG;
                                 }
                                 break;
                             default:
@@ -312,16 +314,27 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
                         // TODO Add go to profile fragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.flContent, ProfileFragment.newInstance(), null)
+                                .addToBackStack(null)
+                                .commit();
+
+                        drawer.closeDrawer();
                         return true;
                     }
                 })
-//            .addProfiles(
-//                new ProfileDrawerItem().withName("Lubna Dani").withEmail("lubna@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
-//            )
+                //.addProfiles(createProfileDrawerItem())
                 .build();
 
 
-        return headerResult;
+    return headerResult;
+}
+
+    private ProfileDrawerItem createProfileDrawerItem() {
+        return new ProfileDrawerItem()
+                .withName("Lubna Dani")
+                .withEmail("lubna@gmail.com")
+                .withIcon(getResources().getDrawable(R.drawable.profile));
     }
 
     private void gotoFragment(Fragment fragment, String tag) {
@@ -334,7 +347,7 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flContent, fragment, tag)
-                .addToBackStack(null)
+                    .addToBackStack(null)
                     .commit();
         }
 
@@ -343,7 +356,7 @@ public class MainActivity extends AppCompatActivity
 
     private void clearBackstack() {
         FragmentManager fm = getSupportFragmentManager();
-        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
         }
     }
@@ -366,7 +379,7 @@ public class MainActivity extends AppCompatActivity
 
     // TODO call profileActivity which should be used for changing all the user parameters
     public void gotoProfile() {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, ProfileFragment.class);
         startActivity(intent);
     }
 
