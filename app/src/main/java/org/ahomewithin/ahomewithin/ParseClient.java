@@ -93,7 +93,7 @@ public class ParseClient {
             });
     }
 
-    public void signup(final User user, String password, final ParseClientAsyncHandler handler) {
+    public void signup(final User user, final String password, final ParseClientAsyncHandler handler) {
         ParseUser parseUser = new ParseUser();
         parseUser.setUsername(user.email);
         parseUser.setPassword(password);

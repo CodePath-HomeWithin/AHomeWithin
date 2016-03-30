@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -48,13 +50,13 @@ public class LoginFragment extends Fragment {
     private ParseClient mClient;
 
     public static LoginFragment newInstance(
-        int requestCode,
-        Parcelable... extra
-        ) {
+            int requestCode,
+            Parcelable... extra
+    ) {
         LoginFragment userFragment = new LoginFragment();
         Bundle args = new Bundle();
         args.putInt("requestCode", requestCode);
-        if(extra.length > 0) {
+        if (extra.length > 0) {
             args.putParcelableArray("extra", extra);
         }
         userFragment.setArguments(args);
@@ -79,38 +81,38 @@ public class LoginFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mClient = ParseClient.newInstance(context);
-        mCallback = (LoginCallback)context;
+        mCallback = (LoginCallback) context;
     }
 
     private void setListeners() {
         CredentialView[] etCredentials = {
-            new CredentialView(etEmail, tilEmail),
-            new CredentialView(etPassword, tilPassword)};
+                new CredentialView(etEmail, tilEmail),
+                new CredentialView(etPassword, tilPassword)};
 
         for (final CredentialView etCred : etCredentials) {
             etCred.getEditText().clearFocus();
             etCred.getEditText().addTextChangedListener(
-                new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if (s.length() > 0) {
-                            //Can not use setErrorEnabled(false) due to
-                            //error messages from 2nd will be missing
-                            //acording to https://code.google.com/p/android/issues/detail?id=190355
-                            //etCred.getTextInputLayout().setErrorEnabled(false);
-                            etCred.getTextInputLayout().setError(null);
+                    new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                         }
 
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            if (s.length() > 0) {
+                                //Can not use setErrorEnabled(false) due to
+                                //error messages from 2nd will be missing
+                                //acording to https://code.google.com/p/android/issues/detail?id=190355
+                                //etCred.getTextInputLayout().setErrorEnabled(false);
+                                etCred.getTextInputLayout().setError(null);
+                            }
+
+                        }
                     }
-                }
             );
 
         }
@@ -132,64 +134,72 @@ public class LoginFragment extends Fragment {
             return;
         }
         mClient.login(
-            email, password, new ParseClientAsyncHandler() {
-                @Override
-                public void onSuccess(Object obj) {
-                    Toast.makeText(
-                        getContext(),
-                        "Successfully logged in",
-                        Toast.LENGTH_SHORT).show();
-                    Bundle args = getArguments();
-                    if(args.containsKey("extra")) {
-                        mCallback.onPostLogin(
-                            args.getInt("requestCode"),
-                            args.getParcelableArray("extra")
-                        );
-                    } else {
-                        mCallback.onPostLogin(args.getInt("requestCode"));
+                email, password, new ParseClientAsyncHandler() {
+                    @Override
+                    public void onSuccess(Object obj) {
+                        final Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content),
+                                "Successfully logged in",
+                                Snackbar.LENGTH_LONG);
+
+                        //snack.setActionTextColor(getResources().getColor(R.color.accent));
+                        ViewGroup group = (ViewGroup) snack.getView();
+                        group.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
+                        snack.show();
+                        Bundle args = getArguments();
+                        if (args.containsKey("extra")) {
+                            mCallback.onPostLogin(
+                                    args.getInt("requestCode"),
+                                    args.getParcelableArray("extra")
+                            );
+                        } else {
+                            mCallback.onPostLogin(args.getInt("requestCode"));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        tilPassword.setError("Name and Password do not match our record!!!");
                     }
                 }
-
-                @Override
-                public void onFailure(String error) {
-                    tilPassword.setError("Name and Password do not match our record!!!");
-                }
-            }
         );
     }
 
     @OnClick(R.id.btnJoin)
     public void addNewUser() {
         LoginCreateUserDialogFragment fragment = LoginCreateUserDialogFragment.newInstance(
-            new User.OnCreateUserListener() {
-                @Override
-                public void onCreateUserListener(final DialogInterface dialog, final User user, String password) {
-                    mClient.signup(user, password,
-                        new ParseClientAsyncHandler() {
-                            @Override
-                            public void onSuccess(Object obj) {
-                                Toast.makeText(
-                                    getContext(),
-                                    "Successfully created user account " + user.lastName + "; Please log in",
-                                    Toast.LENGTH_SHORT
-                                ).show();
-                                dialog.dismiss();
-                            }
+                new User.OnCreateUserListener() {
+                    @Override
+                    public void onCreateUserListener(final DialogInterface dialog, final User user, String password) {
+                        mClient.signup(user, password,
+                                new ParseClientAsyncHandler() {
+                                    @Override
+                                    public void onSuccess(Object obj) {
+//                                final Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content),
+//                                        "Successfully created user account.\n" +
+//                                                user.lastName + " please log in",
+//                                         Snackbar.LENGTH_LONG);
+//
+//                                //snack.setActionTextColor(getResources().getColor(R.color.accent));
+//                                ViewGroup group = (ViewGroup) snack.getView();
+//                                group.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
+//                                snack.show();
+                                        dialog.dismiss();
+                                    }
 
-                            @Override
-                            public void onFailure(String error) {
-                                Toast.makeText(
-                                    getContext(),
-                                    String.format(
-                                        "%s; Please try again",
-                                        error
-                                    ),
-                                    Toast.LENGTH_LONG
-                                ).show();
-                            }
-                        });
+                                    @Override
+                                    public void onFailure(String error) {
+                                        final Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content),
+                                                "There was an error, please try again",
+                                                Snackbar.LENGTH_LONG);
+
+                                        //snack.setActionTextColor(getResources().getColor(R.color.accent));
+                                        ViewGroup group = (ViewGroup) snack.getView();
+                                        group.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
+                                        snack.show();
+                                    }
+                                });
+                    }
                 }
-            }
         );
         FragmentManager fragmentManager = getFragmentManager();
         fragment.show(fragmentManager, "Create a new account");
@@ -198,35 +208,35 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.tvForgetPasswd)
     public void resetPassword() {
         LoginResetPasswordDialogFragment fragment = LoginResetPasswordDialogFragment.newInstance(
-            new OnResetPasswordListener() {
-                @Override
-                public void onResetPasswordListener(final DialogInterface dialog, String email) {
-                    mClient.requestResetPassword(email,
-                        new ParseClientAsyncHandler() {
-                            @Override
-                            public void onSuccess(Object obj) {
-                                Toast.makeText(
-                                    getContext(),
-                                    "Reset email has been sent!",
-                                    Toast.LENGTH_SHORT
-                                ).show();
-                                dialog.dismiss();
-                            }
+                new OnResetPasswordListener() {
+                    @Override
+                    public void onResetPasswordListener(final DialogInterface dialog, String email) {
+                        mClient.requestResetPassword(email,
+                                new ParseClientAsyncHandler() {
+                                    @Override
+                                    public void onSuccess(Object obj) {
+                                        Toast.makeText(
+                                                getContext(),
+                                                "Reset email has been sent!",
+                                                Toast.LENGTH_SHORT
+                                        ).show();
+                                        dialog.dismiss();
+                                    }
 
-                            @Override
-                            public void onFailure(String error) {
-                                Toast.makeText(
-                                    getContext(),
-                                    String.format(
-                                        "%s !!! Please try again",
-                                        error
-                                    ),
-                                    Toast.LENGTH_SHORT
-                                ).show();
-                            }
-                        });
+                                    @Override
+                                    public void onFailure(String error) {
+                                        Toast.makeText(
+                                                getContext(),
+                                                String.format(
+                                                        "%s !!! Please try again",
+                                                        error
+                                                ),
+                                                Toast.LENGTH_SHORT
+                                        ).show();
+                                    }
+                                });
+                    }
                 }
-            }
         );
         FragmentManager fragmentManager = getFragmentManager();
         fragment.show(fragmentManager, "Reset Password");

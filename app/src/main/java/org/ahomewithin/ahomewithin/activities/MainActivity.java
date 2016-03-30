@@ -17,10 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -354,7 +354,13 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer();
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             if (!closeToExit) {
-                Toast.makeText(this, "Click one more time to exit", Toast.LENGTH_SHORT).show();
+                final Snackbar snack = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_exit_text, Snackbar.LENGTH_LONG);
+
+                //snack.setActionTextColor(getResources().getColor(R.color.accent));
+                ViewGroup group = (ViewGroup) snack.getView();
+                group.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
+                snack.show();
+
                 closeToExit = true;
             } else {
                 finish();

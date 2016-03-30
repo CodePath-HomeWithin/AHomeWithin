@@ -61,4 +61,5 @@
     <string name="no_data_available">Oops, it looks like you don\'t have any item in your library yet. Go to tools and trainings to see what resources are available!</string>
     <string name="even_transition">event_image_transition</string>
     <string name="snackbar_purchased_text">You have new training materials!</string>
+    <string name="snackbar_exit_text">Click back one more time to exit</string>
 </resources>
