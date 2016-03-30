@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.R;
-import org.ahomewithin.ahomewithin.adapters.DividerItemDecoration;
 import org.ahomewithin.ahomewithin.adapters.ItemsStreamAdapter;
 import org.ahomewithin.ahomewithin.models.Item;
 import org.ahomewithin.ahomewithin.util.DetailsTransition;
@@ -61,6 +60,9 @@ public class StreamFragment extends Fragment implements ItemHomeClickListener {
 
         ButterKnife.bind(this, convertView);
 
+       // tabs.setTextColor(getResources().getColor(android.R.color.white));
+        //tabs.setIndicatorHeight(8);
+
 //        convertView.setFocusableInTouchMode(true);
 //        convertView.requestFocus();
 //        convertView.setOnKeyListener(new View.OnKeyListener() {
@@ -96,8 +98,6 @@ public class StreamFragment extends Fragment implements ItemHomeClickListener {
         items = getSubsetOfItems(items, type, showOnlyOwned);
         aItems.addAll(items);
 
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        rvStream.addItemDecoration(itemDecoration);
         rvStream.setItemAnimator(new FlipInBottomXAnimator());
 
         TextView emptyView = (TextView) view.findViewById(R.id.empty_view);

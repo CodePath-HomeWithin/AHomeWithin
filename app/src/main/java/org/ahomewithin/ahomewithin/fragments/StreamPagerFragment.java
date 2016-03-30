@@ -77,7 +77,23 @@ public class StreamPagerFragment extends Fragment {
 
         ButterKnife.bind(this, convertView);
 
+        // Hide toolbar shadow
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) getActivity()
+                .findViewById(android.R.id.content)).getChildAt(0);
+        View shadow = viewGroup.findViewById(R.id.toolbar_shadow);
+        shadow.setVisibility(View.INVISIBLE);
+
         return convertView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Show toolbar shadow
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) getActivity()
+                .findViewById(android.R.id.content)).getChildAt(0);
+        View shadow = viewGroup.findViewById(R.id.toolbar_shadow);
+        shadow.setVisibility(View.VISIBLE);
     }
 
     private void initForType(ViewType type) {
