@@ -48,9 +48,9 @@ public class ConversationCard implements Serializable{
         ArrayList<ConversationCard> cards = new ArrayList<>();
         try {
             ConversationCard  mind = fromJson(jsonObject.getJSONObject("mind"), MIND);
-            ConversationCard  body = fromJson(jsonObject.getJSONObject("mind"), BODY);
-            ConversationCard  heart = fromJson(jsonObject.getJSONObject("mind"), HEART);
-            ConversationCard  soul = fromJson(jsonObject.getJSONObject("mind"), SOUL);
+            ConversationCard  body = fromJson(jsonObject.getJSONObject("body"), BODY);
+            ConversationCard  heart = fromJson(jsonObject.getJSONObject("heart"), HEART);
+            ConversationCard  soul = fromJson(jsonObject.getJSONObject("soul"), SOUL);
 
             cards.add(mind);
             cards.add(body);
