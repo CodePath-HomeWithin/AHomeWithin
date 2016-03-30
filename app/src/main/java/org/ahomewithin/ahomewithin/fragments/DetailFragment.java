@@ -3,9 +3,11 @@ package org.ahomewithin.ahomewithin.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -68,7 +69,7 @@ public class DetailFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if(keyCode == KeyEvent.KEYCODE_BACK) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(DetailFragment.this).commit();
                     return false;
                 }
@@ -78,7 +79,6 @@ public class DetailFragment extends Fragment {
 
         ButterKnife.bind(this, convertView);
         mItem = (Item) getArguments().getSerializable(Item.SERIALIZABLE_TAG);
-
 
 
         return convertView;
@@ -136,25 +136,35 @@ public class DetailFragment extends Fragment {
         BuyDialog buyDialog = BuyDialog.newInstance(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Toast.makeText(getActivity(), "Now you can watch it", Toast.LENGTH_SHORT).show();
                 // TODO Save bought item
                 UserTools.purchaseItem(getActivity(), mItem.id);
                 mItem.owned = true;
                 btBuy.setText("WATCH NOW");
+                final Snackbar snack = Snackbar.make(getView(), R.string.snackbar_purchased_text, Snackbar.LENGTH_INDEFINITE);
+                snack.setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snack.dismiss();
+                    }
+                });
+                //snack.setActionTextColor(getResources().getColor(R.color.accent));
+                ViewGroup group = (ViewGroup) snack.getView();
+                group.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
+                snack.show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d(LOG_TAG, "Error on buying item, code " + statusCode);
             }
-        });
+        }, mItem);
         buyDialog.show(fm, "");
     }
 
 
     public void onWatch() {
 
-        if(mItem.type == Item.ITEM_TYPE.CONVERSATIONS) {
+        if (mItem.type == Item.ITEM_TYPE.CONVERSATIONS) {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.flContent, CardsPagerFragment.newInstance(mItem))
@@ -171,7 +181,6 @@ public class DetailFragment extends Fragment {
 //                .add(R.id.flContent, VideoActivity.newInstance(mItem))
 //                .addToBackStack(null)
 //                .commit();
-
 
 
     }
