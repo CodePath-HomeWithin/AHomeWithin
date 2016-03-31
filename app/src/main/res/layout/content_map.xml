@@ -21,7 +21,8 @@
         android:id="@+id/rlMapPopup"
         style="@style/MapInfoWindow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorTextIcons">
 
         <TextView
             android:id="@+id/tvTitle"

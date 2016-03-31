@@ -117,24 +117,41 @@
 
     <!-- Map application theme. -->
     <style name="MapInfoWindow">
-        <item name="android:padding">@dimen/map_popup_margin</item>
-        <item name="android:background">@color/material_drawer_background</item>
+        <!--<item name="android:background">@color/colorTextIcons</item>-->
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
 
-    <style name="MapInfoWindow.Title" parent="conv_card_section_title">
+    <style name="MapInfoWindow.Title" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/conv_text_big</item>
+        <item name="fontPath">fonts/RobotoMedium.ttf</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:paddingTop">10dp</item>
     </style>
 
-    <style name="MapInfoWindow.Subtitle" parent="conv_card_quote_body">
+    <style name="MapInfoWindow.Subtitle">
+        <item name="android:textStyle">italic</item>
+        <item name="fontPath">fonts/RobotoMedium.ttf</item>
         <item name="android:textSize">@dimen/conv_text_regular</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="MapInfoWindow.Body" parent="conv_card_sections_body">
+    <style name="MapInfoWindow.Body">
+        <item name="android:textSize">@dimen/conv_text_regular</item>
+        <item name="fontPath">fonts/RobotoMedium.ttf</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="MapInfoWindow.Button">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:paddingRight">@dimen/map_popup_margin</item>
+        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:visibility">invisible</item>
     </style>
 
     <!-- Recommended theme. -->
@@ -205,14 +222,6 @@
         <item name="android:textStyle">bold</item>
         <item name="fontPath">fonts/RobotoCondensed-Regular.ttf</item>
 
-    </style>
-
-    <style name="MapInfoWindow.Button">
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:paddingRight">@dimen/map_popup_margin</item>
-        <item name="android:tint">@color/colorAccent</item>
-        <item name="android:visibility">invisible</item>
     </style>
 
     <style name="RobotoCondensed">

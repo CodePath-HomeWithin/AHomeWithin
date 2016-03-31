@@ -234,7 +234,7 @@ public class MapMarkers {
 
     private void startColorAnimation(View v) {
         int colorStart = 0xffB2DFDB;
-        int colorEnd = 0xffd2d2d2;
+        int colorEnd = 0xffffffff;
 
         ValueAnimator colorAnim = ObjectAnimator.ofInt(v,
                 "backgroundColor", colorStart, colorEnd);
