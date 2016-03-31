@@ -3,9 +3,10 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:background="@android:color/transparent"
-              android:layout_margin="8dp">
+              android:layout_margin="4dp">
 
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,6 +23,29 @@
             android:layout_height="wrap_content"
 
             android:padding="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are purchasing:"
+                android:id="@+id/textView"
+                style="@style/RobotoLight"
+                android:textSize="16sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This New Material"
+                android:id="@+id/tvTitlePurchase"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                style="@style/RobotoCondensed"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_below="@+id/textView"/>
 
             <EditText
                 android:id="@+id/etBuyerName"
@@ -33,6 +57,7 @@
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName"
+                style="@style/RobotoMedium"
                 android:maxLength="15"/>
 
             <EditText
@@ -45,6 +70,7 @@
                 android:maxLength="16"
                 android:ems="10"
                 android:hint="Card number"
+                style="@style/RobotoMedium"
                 android:inputType="numberDecimal"/>
 
             <EditText
@@ -56,6 +82,7 @@
                 android:ems="6"
                 android:hint="MM/YY"
                 android:maxLength="5"
+                style="@style/RobotoMedium"
                 android:inputType="date"/>
 
             <EditText
@@ -67,6 +94,7 @@
                 android:ems="3"
                 android:maxLength="3"
                 android:hint="CVC"
+                style="@style/RobotoMedium"
                 android:inputType="numberPassword"/>
 
             <Button
@@ -84,9 +112,10 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/mastercard_logo"/>
+                android:src="@drawable/mastercard_logo"
+                android:layout_below="@+id/tvTitlePurchase"
+                android:layout_alignRight="@+id/btBuy"
+                android:layout_alignEnd="@+id/btBuy"/>
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -98,6 +127,24 @@
                 android:layout_toLeftOf="@+id/imageView"
                 android:src="@drawable/visa"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="* When you click Buy your order will be automatically charged to your credit card"
+                android:id="@+id/tvDisclaimer"
+                android:layout_alignTop="@+id/btBuy"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="12sp"
+                style="@style/RobotoLight"
+                android:layout_toLeftOf="@id/btBuy"
+                />
+
+
+
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

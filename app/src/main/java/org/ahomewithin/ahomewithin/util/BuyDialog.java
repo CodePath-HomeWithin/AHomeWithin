@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.ahomewithin.ahomewithin.BuyClient;
 import org.ahomewithin.ahomewithin.R;
+import org.ahomewithin.ahomewithin.models.Item;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +32,7 @@ import fr.tvbarthel.lib.blurdialogfragment.SupportBlurDialogFragment;
  */
 public class BuyDialog extends SupportBlurDialogFragment {
     AsyncHttpResponseHandler responseHandler;
+    Item mItem;
 
     public static final String LOG_TAG = BuyDialog.class.getSimpleName();
     @Bind(R.id.etBuyerName) EditText etBuyerName;
@@ -37,13 +40,16 @@ public class BuyDialog extends SupportBlurDialogFragment {
     @Bind(R.id.etBuyerDate) EditText etBuyerDate;
     @Bind(R.id.etBuyerCVC) EditText etBuyerCVC;
     @Bind(R.id.btBuy) Button btBuy;
+    @Bind(R.id.tvTitlePurchase) TextView tvTitlePurchase;
 
     public BuyDialog() {
     }
 
-    public static BuyDialog newInstance(AsyncHttpResponseHandler responseHandler) {
+    public static BuyDialog newInstance(AsyncHttpResponseHandler responseHandler, Item item) {
+
         BuyDialog buyDialog = new BuyDialog();
         buyDialog.responseHandler = responseHandler;
+        buyDialog.mItem = item;
         return buyDialog;
     }
 
@@ -70,6 +76,8 @@ public class BuyDialog extends SupportBlurDialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setListeners();
+        btBuy.setText("Pay $" + mItem.price);
+        tvTitlePurchase.setText(mItem.title);
     }
 
     // For making full screen
@@ -122,6 +130,7 @@ public class BuyDialog extends SupportBlurDialogFragment {
                 etBuyerDate.getText().toString(),
                 etBuyerCVC.getText().toString()
         );
+
         dismiss();
     }
 

@@ -21,12 +21,14 @@ public class CardFragment extends Fragment {
     public static final String FRAGMENT_TAG = CardFragment.class.getSimpleName();
 
     ConversationCard mCard;
-
-    @Bind(R.id.tvTitle) TextView tvTitle;
     @Bind(R.id.tvQuote) TextView tvQuote;
     @Bind(R.id.tvQuote_author) TextView tvQuote_author;
     @Bind(R.id.tvReflection) TextView tvReflection;
     @Bind(R.id.tvAction) TextView tvAction;
+    @Bind(R.id.tvMind) TextView tvMind;
+    @Bind(R.id.tvBody) TextView tvBody;
+    @Bind(R.id.tvHeart) TextView tvHeart;
+    @Bind(R.id.tvSoul) TextView tvSoul;
 
     public static CardFragment newInstance(ConversationCard card) {
         CardFragment cardFragment = new CardFragment();
@@ -53,20 +55,27 @@ public class CardFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvTitle.setText(getTitle(mCard.type));
+        setTitleColour(mCard.type);
         tvQuote.setText(mCard.quote);
         tvQuote_author.setText(mCard.quote_author);
         tvReflection.setText(mCard.reflection);
         tvAction.setText(mCard.action);
     }
 
-    private String getTitle(int type) {
+    private void setTitleColour(int type) {
+        TextView tvToColour;
         switch (type) {
             default:
-            case ConversationCard.BODY: return "BODY";
-            case ConversationCard.MIND: return "MIND";
-            case ConversationCard.HEART: return "HEART";
-            case ConversationCard.SOUL: return "SOUL";
+            case ConversationCard.BODY:
+                tvToColour = tvBody; break;
+            case ConversationCard.MIND:
+                tvToColour = tvMind; break;
+            case ConversationCard.HEART:
+                tvToColour = tvHeart; break;
+            case ConversationCard.SOUL:
+                tvToColour = tvSoul; break;
         }
+
+        tvToColour.setTextColor(getResources().getColor(R.color.accent));
     }
 }

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -135,16 +134,10 @@ public class ChatFragment extends Fragment {
                             client.sentMessage(data, otherUser, new ParseClientAsyncHandler() {
                                     @Override
                                     public void onSuccess(Object obj) {
-                                        Toast.makeText(
-                                            getContext(),
-                                            "Succees",
-                                            Toast.LENGTH_SHORT
-                                        ).show();
                                     }
 
                                     @Override
                                     public void onFailure(String error) {
-
                                     }
                                 }
                             );
