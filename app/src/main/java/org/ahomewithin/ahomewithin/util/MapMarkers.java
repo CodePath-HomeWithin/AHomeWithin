@@ -6,6 +6,9 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -79,10 +83,10 @@ public class MapMarkers {
         markers = new ArrayList<>();
     }
 
-
     public void addMarkersToMap(View v, GoogleMap map, List<User> users) {
         if (mMapPopupViewHolder == null) {
             mMapPopupViewHolder = new ViewHolder(v);
+
 
             markerMap = new HashMap<String, User>();
             if (users != null) {
@@ -162,8 +166,6 @@ public class MapMarkers {
         mMapPopupViewHolder.previousUser = user;
     }
 
-
-
     private void createMarkerForUser(GoogleMap map, User user) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(user.lat, user.lng));
@@ -176,18 +178,26 @@ public class MapMarkers {
 
     private void highlightMarker(Marker marker, User user) {
         if (marker != null) {
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         }
     }
 
     private void restoreMarker(Marker marker, User user) {
         if ((marker != null) && (user != null)) {
-            float color = BitmapDescriptorFactory.HUE_VIOLET;
             if (user.type == User.UserType.SERVICE_PROVIDER) {
-                color = BitmapDescriptorFactory.HUE_CYAN;
+                //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_bluepin));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepin, 78, 96));
+            } else {
+                // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_orangepin));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepin, 78, 96));
             }
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker(color));
-        }
+         }
+    }
+
+    public BitmapDescriptor resizeMapIcons(int drawableName, int width, int height){
+        Bitmap imageBitmap = BitmapFactory.decodeResource(mContext.getResources(), drawableName);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
     }
 
     private void dropPinEffect(final Marker marker) {
@@ -233,6 +243,4 @@ public class MapMarkers {
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.start();
     }
-
-
 }
