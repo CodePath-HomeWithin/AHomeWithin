@@ -39,6 +39,9 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
+        // TODO retirar
+        goToMainActivity();
+
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +76,7 @@ public class SplashActivity extends AppCompatActivity {
         ivLargeHouse.setAlpha(0f);
         ivAHome.setAlpha(0f);
         ivWithin.setAlpha(0f);
+
 
 
         new Handler().postDelayed(new Runnable() {

@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.flContent, homeFragment)
+                .replace(R.id.flContent, homeFragment)
                 .commit();
 
         createDrawer();
@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flContent, fragment, tag)
-                .addToBackStack(null)
+                    .addToBackStack(null)
                     .commit();
         }
 
@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity
 
     private void clearBackstack() {
         FragmentManager fm = getSupportFragmentManager();
-        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
         }
     }
@@ -386,7 +386,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case MapMarkers.REQUEST_CODE:
                 String otherEmail = MapMarkers.curUserOnMap.email;
-                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
+                String otherName = MapMarkers.curUserOnMap.firstName;
+                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail, otherName);
                 gotoFragment(chatFragment, ChatFragment.FRAGMENT_TAG);
                 break;
             case DetailFragment.REQUEST_CODE:

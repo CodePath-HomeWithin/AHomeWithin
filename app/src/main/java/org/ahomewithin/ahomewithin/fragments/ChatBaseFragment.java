@@ -1,6 +1,8 @@
 package org.ahomewithin.ahomewithin.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -41,8 +43,19 @@ public abstract class ChatBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View chatBaseView = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, chatBaseView);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.chatRoom);
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.chatRoom);
+        setTitle(getString(R.string.chatRoom));
         return chatBaseView;
+    }
+
+    // For some weird reason, the title appears with an elipsis and this is the workaround:
+    public void setTitle(final CharSequence title) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                ((AppCompatActivity)getActivity()).setTitle(title);
+            }
+        });
     }
 
     @Override
@@ -63,7 +76,8 @@ public abstract class ChatBaseFragment extends Fragment {
                                     @Override
                                     public void onItemClick(View itemView, int position) {
                                         String otherEmail = users.get(position).getEmail();
-                                        ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
+                                        String otherName = users.get(position).getName();
+                                        ChatFragment chatFragment = ChatFragment.newIntance(otherEmail, otherName);
                                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                         ft.replace(R.id.flContent, chatFragment);
                                         ft.addToBackStack(null);
