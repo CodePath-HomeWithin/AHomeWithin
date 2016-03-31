@@ -53,7 +53,7 @@ public class EventsListFragment extends SimpleListFragment implements EventClick
     }
 
     public int numGridColumns() {
-        return(3);
+        return(2);
     };
 
     public void loadEvents(int page) {
@@ -71,10 +71,6 @@ public class EventsListFragment extends SimpleListFragment implements EventClick
             } else {
                 clear();
                 JSONObject response = AHomeWithinClient.getEvents(getContext());
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
                 addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
                 addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
                 addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));

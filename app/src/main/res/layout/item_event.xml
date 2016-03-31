@@ -18,13 +18,12 @@
         android:orientation="vertical"
         android:padding="6dp">
 
-
         <TextView
-            android:id="@+id/tvEventName"
+            android:id="@+id/tvDateTime"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-        style="@style/EventList.EventName"
+            style="@style/EventList.Date"
             android:layout_gravity="center"/>
 
         <ImageView
@@ -36,14 +35,12 @@
             android:scaleType="centerCrop"/>
 
         <TextView
-            android:id="@+id/tvDateTime"
+            android:id="@+id/tvEventName"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/EventList.Date"
+            style="@style/EventList.EventName"
             android:layout_gravity="center"/>
-
-
 
     </LinearLayout>
 
