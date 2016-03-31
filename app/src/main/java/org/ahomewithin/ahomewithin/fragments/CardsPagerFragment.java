@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.models.ConversationCard;
@@ -54,7 +54,7 @@ public class CardsPagerFragment extends Fragment {
 
         viewPager.setAdapter(new CardsPagerAdapter(getChildFragmentManager()));
         // Reference (or instantiate) a ViewPager instance and apply a transformer
-        viewPager.setPageTransformer(true, new CubeOutTransformer());
+        viewPager.setPageTransformer(true, new RotateUpTransformer());
 
 
 //        if (getActivity().getIntent().hasExtra(ARG_STREAM_TAB)) {

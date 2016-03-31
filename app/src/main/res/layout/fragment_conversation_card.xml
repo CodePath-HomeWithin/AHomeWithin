@@ -1,111 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rlCardContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorTextIcons"
-    android:padding="20dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/conv_card_title"
-        android:text="Title"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutHeader"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rlCardContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/colorTextIcons"
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tvMind"
-            style="@style/conv_card_header_titles"
-            android:text="Mind"/>
+        <LinearLayout
+            android:id="@+id/linearLayoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvBody"
-            style="@style/conv_card_header_titles"
-            android:text="Body"/>
+            <TextView
+                android:id="@+id/tvMind"
+                style="@style/conv_card_header_titles"
+                android:text="Mind"/>
 
-        <TextView
-            android:id="@+id/tvHeart"
-            style="@style/conv_card_header_titles"
-            android:text="Heart"/>
+            <TextView
+                android:id="@+id/tvBody"
+                style="@style/conv_card_header_titles"
+                android:text="Body"/>
 
-        <TextView
-            android:id="@+id/tvSoul"
-            style="@style/conv_card_header_titles"
-            android:text="Soul"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvHeart"
+                style="@style/conv_card_header_titles"
+                android:text="Heart"/>
 
-    <LinearLayout
-        android:id="@+id/llQuote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayoutHeader"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvSoul"
+                style="@style/conv_card_header_titles"
+                android:text="Soul"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvQuote"
-            style="@style/conv_card_quote_body"
+        <LinearLayout
+            android:id="@+id/llQuote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="“It’s funny how sometimes the people you’d take a bullet for are the ones behind the trigger. ”"/>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayoutHeader"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvQuote_author"
-            style="@style/conv_card_quote_author"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvQuote"
+                style="@style/conv_card_quote_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="“It’s funny how sometimes the people you’d take a bullet for are the ones behind the trigger. ”"/>
+
+            <TextView
+                android:id="@+id/tvQuote_author"
+                style="@style/conv_card_quote_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ralph Fiennes"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRelfection"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ralph Fiennes"/>
-    </LinearLayout>
+            android:layout_below="@+id/llQuote"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/llRelfection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llQuote"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/conv_card_section_title"
+                android:text="Reflection"/>
 
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/conv_card_section_title"
-            android:text="Reflection"/>
+            <TextView
+                android:id="@+id/tvReflection"
+                style="@style/conv_card_sections_body"
+                android:text="Is it reasonable to think that we can accept others just because they’re alive and human? What is the difference between acceptance and love?"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvReflection"
-            style="@style/conv_card_sections_body"
-            android:text="Is it reasonable to think that we can accept others just because they’re alive and human? What is the difference between acceptance and love?"/>
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llRelfection"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/llAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llRelfection"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/conv_card_section_title"
+                android:text="Action"/>
 
-        <TextView
-            android:id="@+id/textView3"
-            style="@style/conv_card_section_title"
-            android:text="Action"/>
-
-        <TextView
-            android:id="@+id/tvAction"
-            style="@style/conv_card_sections_body"
-            android:text="Using the members of your family as an example, describe the tension between love and acceptance. What gets in the way of acceptance when you think of various members of your family?"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvAction"
+                style="@style/conv_card_sections_body"
+                android:text="Using the members of your family as an example, describe the tension between love and acceptance. What gets in the way of acceptance when you think of various members of your family?"/>
+        </LinearLayout>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
