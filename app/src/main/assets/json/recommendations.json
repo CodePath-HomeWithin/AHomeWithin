@@ -4,7 +4,7 @@
     "type":"book",
     "title":"Treating Trauma",
     "summary":"Treating Trauma: Relationship-Based Psychotherapy with Children, Adolescents, and Young Adults presents a theoretically based and empirically supported framework for work with traumatized children, youth, and young adults who have spent time in foster care. ",
-    "sourceUrl":"http://ahomewithin.org/treating-trauma/",
+    "sourceUrl":"http://www.amazon.com/Treating-Trauma-Relationship-Based-Psychotherapy-Adolescents-ebook/dp/B00ER3BX8E/ref=sr_1_3?ie=UTF8&qid=1459404066&sr=8-3&keywords=treating+trauma",
     "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/41Xb5uvy8JL._SX311_BO1204203200_-300x450.jpg",
     "publishDate":"01-05-2016"
   },
@@ -17,6 +17,15 @@
     "sourceUrl":"http://ahomewithin.org/fostering-art-reincarnated/",
     "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/Viceroy-in-the-Prairie-700x499.jpg",
     "publishDate":"03-06-2016"
+  },
+  {
+    "id":5,
+    "type":"book",
+    "title":"Relational Treatment of Trauma: \nStories of loss and hope ",
+    "summary":"By successfully considering and integrating both the internal and the external world of the child , this book offers rich yet clear narratives which will hopefully inform caregivers, clinicians , other service providers and social systems involved in caring for children who often feel silenced and lost. The stories in this book are potentially sources for reflection, learning, growth and hope",
+    "sourceUrl":"http://www.amazon.com/Relational-Treatment-Trauma-Stories-Perspectives/dp/1138817368/ref=sr_1_1?s=books&ie=UTF8&qid=1440628242&sr=1-1&keywords=toni+heineman",
+    "thumbnailUrl":"http://ecx.images-amazon.com/images/I/51rkTcxDKqL._SX331_BO1,204,203,200_.jpg",
+    "publishDate":"01-05-2016"
   },
   {
     "id":3,
@@ -36,5 +45,14 @@
     "sourceUrl":"http://ahomewithin.org/news/",
     "thumbnailUrl":"http://ahomewithin.org/wp-content/uploads/AHW-center-pride-291x300.jpg",
     "publishDate":"03-05-2016"
+  },
+  {
+    "id":6,
+    "type":"book",
+    "title":"Building a Home Within: \nMeeting the Emotional Needs of Children",
+    "summary":"This book presents a proven solution based on over 10 years of groundbreaking work by the Children's Psychotherapy Project (CPP): When young people work with the same therapist for as long as they need to, they'll make better progress toward developing strong, healthy relationships and hope for the future",
+    "sourceUrl":"http://www.amazon.com/Building-Home-Within-Emotional-Children/dp/1557668396/ref=pd_bxgy_14_img_2?ie=UTF8&refRID=1RNFK9K64BN4XJ7QXES9",
+    "thumbnailUrl":"http://ecx.images-amazon.com/images/I/51E4nUhbSnL._SX328_BO1,204,203,200_.jpg",
+    "publishDate":"01-05-2016"
   },
 ]}

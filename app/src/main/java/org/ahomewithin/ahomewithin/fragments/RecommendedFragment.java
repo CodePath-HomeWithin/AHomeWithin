@@ -48,11 +48,6 @@ public class RecommendedFragment extends SimpleListFragment {
         super.setupViews(view, recommendations, rAdapter);
     }
 
-    public RecyclerView.ItemDecoration itemDecoration() {
-        return (new  DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-    }
-
-
     public void loadRecommendations(int page) {
         setRefreshing(true);
         Recommended firstInList = null;
