@@ -174,8 +174,14 @@ public class MapMarkers {
     }
 
     private void highlightMarker(Marker marker, User user) {
-        if (marker != null) {
-            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        if ((marker != null) && (user != null)) {
+            if (user.type == User.UserType.SERVICE_PROVIDER) {
+                //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_bluepin));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepinpressed, 78, 96));
+            } else {
+                // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_orangepin));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepinpressed, 78, 96));
+            }
         }
     }
 

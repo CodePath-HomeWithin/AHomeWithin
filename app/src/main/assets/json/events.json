@@ -14,7 +14,7 @@
       "state":"CA",
       "zipcode":"94013"
     },
-    "date":"03-23-2016",
+    "date":"04-04-2016",
     "startTime":"11:30 am",
     "endTime":"2:00 pm",
     "contact": {
@@ -37,82 +37,13 @@
       "state":"CA",
       "zipcode":"94013"
     },
-    "date":"04-02-2016",
+    "date":"04-06-2016",
     "startTime":"6:00 pm",
     "endTime":"7:30 pm",
     "contact": {
       "email":"contactus@example.com",
       "phone":"888-444-3333",
       "name":"Foster Parent Org"
-    }
-  },
-  {
-    "id":25,
-    "groupName":"National Counseling Group",
-    "groupDescription":"",
-    "eventName":"Learn About Becomming A Foster Parent",
-    "url":"http://www.meetup.com/Become-A-Foster-Parent/events/229467311/",
-    "imageUrl":"childs_3",
-    "summary":"Informational gathering describing the programs in your area.",
-    "eventDescription":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
-    "location": {
-      "name":"Doloras Park",
-      "lines":["888 Brannan Street"],
-      "city":"San Francisco",
-      "state":"CA",
-      "zipcode":"94013"
-    },
-    "date":"04-02-2016",
-    "startTime":"6:00 pm",
-    "endTime":"7:30 pm",
-    "contact": {
-      "email":"contactus@example.com",
-      "phone":"888-444-3333",
-      "name":"Foster Parent Org"
-    }
-  },
-  {
-    "id":3,
-    "groupName":"Fostering Peace, Love, Learning & Each Other",
-    "groupDescription":"This group is about how together we can ALL foster a better world.   We are teachers, learners, parents and children (including--but NOT limited to--former, present and future foster parents and children), thinkers, doers, dreamers",
-    "eventName":"Tell Your Story!",
-    "location": {
-      "name":"Diorio's Pizza and Pub",
-      "lines": ["919 Baxter Ave"],
-      "city":"Louisville",
-      "state":"KY"
-    },
-    "url":"http://www.meetup.com/Fostering-Peace-Love-Learning-Each-Other-in-Louisville/events/228775605/",
-    "imageUrl":"childs_4",
-    "eventDescription":"I know you all have already done a million things to make the world a better place, or at least one or two, and we'd like to hear about it! Everyone will have 5-7 minutes to share their story. We will also share change we'd like to create in the future!",
-    "date":"03-19-2016",
-    "startTime":"5:30 am",
-    "endTime":"7:00 pm",
-    "contact": {
-      "email":"robin@fakemail.com",
-      "name":"Robin"
-    }
-  },
-  {
-    "id":4,
-    "groupName":"Thoughtful Parenting: Sowing 'Seeds For Tomorrow'",
-    "groupDescription":"Parenting is rewarding, fun and the most amazing and important role we will play in our lives. But, it is also not easy. One way to think of it is, how we can best 'perfect the art of imperfect parenting.' I am an advocate of positive parenting that is rooted in a values-based and play-based approach.",
-    "eventName":"Little Artists at Large! Art and Socialise Session",
-    "location": {
-      "name":"Art Center",
-      "lines": [""],
-      "city":"Oakland",
-      "state":"CA"
-    },
-    "url":"http://www.meetup.com/Seeds-For-Tomorrow/photos/15594722/249744712/",
-    "imageUrl":"childs_5",
-    "eventDescription":"This 2-hr art exploration and social session is for toddlers aged 2 - 4 years of age. We'll start by some free play and introduction to each other with songs, and reading a story book. This is followed by the art session, where we will create art and end off with snacks, music and close.",
-    "date":"05-05-2016",
-    "startTime":"9:00 am",
-    "endTime":"11:00 am",
-    "contact": {
-      "email":"mark@fakemail.com",
-      "name":"Mark"
     }
   },
   {
@@ -129,7 +60,7 @@
     "url":"",
     "imageUrl":"childs_6",
     "eventDescription":"",
-    "date":"05-05-2016",
+    "date":"04-07-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
@@ -138,86 +69,42 @@
     }
   },
   {
-    "id":6,
-    "groupName":"Bay Area Single Parents",
-    "groupDescription":"We are a vital and active community of single parents. Our group provides a low pressure way to connect with other single parents on hikes, kids activities, dinners out, events with other single families and more. We average 5+ events per week.",
-    "eventName":"Easter Egg Hunt+Hike+picnic lunch",
+    "id":4,
+    "groupName":"Thoughtful Parenting: Sowing 'Seeds For Tomorrow'",
+    "groupDescription":"Parenting is rewarding, fun and the most amazing and important role we will play in our lives. But, it is also not easy. One way to think of it is, how we can best 'perfect the art of imperfect parenting.' I am an advocate of positive parenting that is rooted in a values-based and play-based approach.",
+    "eventName":"Little Artists at Large! Art and Socialise Session",
     "location": {
-      "name":"",
+      "name":"Art Center",
       "lines": [""],
       "city":"Oakland",
       "state":"CA"
     },
-    "url":"http://www.meetup.com/BayAreaSingleParents/",
-    "imageUrl":"childs_7",
-    "eventDescription":"",
-    "date":"03-27-2016",
-    "startTime":"11:45 am",
-    "endTime":"3:00 pm",
-    "contact": {
-      "email":"info@fakemail.com",
-      "name":"info"
-    }
-  },
-  {
-    "id":7,
-    "groupName":"Marin Homeschooling and Teaching Parents",
-    "groupDescription":"This community was formed to create life-long bonds between children and parents who deeply involved in education of their children beyond the school set, including homeschooling, unschooling and home-based afterschool learning.",
-    "eventName":"About Homeschooling",
-    "location": {
-      "name":"",
-      "lines": [""],
-      "city":"Oakland",
-      "state":"CA"
-    },
-    "url":"http://www.meetup.com/MarinHomeschooling/",
-    "imageUrl":"childs_8",
-    "eventDescription":"",
-    "date":"05-05-2016",
+    "url":"http://www.meetup.com/Seeds-For-Tomorrow/photos/15594722/249744712/",
+    "imageUrl":"childs_5",
+    "eventDescription":"This 2-hr art exploration and social session is for toddlers aged 2 - 4 years of age. We'll start by some free play and introduction to each other with songs, and reading a story book. This is followed by the art session, where we will create art and end off with snacks, music and close.",
+    "date":"04-09-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
-      "email":"info@fakemail.com",
-      "name":"info"
+      "email":"mark@fakemail.com",
+      "name":"Mark"
     }
   },
   {
-    "id":8,
-    "groupName":"Black Girls Do",
-    "groupDescription":"BGD mission is to redefine the perceptions of who Black Women are and what we are about by celebrating black women (us) in action. Thus doing activities that foster sister hood with in our community celebrating achievements and being active.",
-    "eventName":"Purposeful Living",
+    "id":13,
+    "groupName":"Veggie Kids",
+    "groupDescription":"Veggie Kids is a unique organization/social group dedicated to supporting vegan and vegetarian families and is open to all who have an appreciation of an earth-friendly, eco-conscious lifestyle. This group promotes a healthy, organic, vegan lifestyle, but is open to EVERYONE regardless of their dietary choices.",
+    "eventName":"Potluck in the Park",
     "location": {
       "name":"",
       "lines": [""],
       "city":"Oakland",
       "state":"CA"
     },
-    "url":"http://www.meetup.com/Black-Girls-Do/",
-    "imageUrl":"childs_9",
+    "url":"http://www.meetup.com/Veggie-Kids/",
+    "imageUrl":"childs_14",
     "eventDescription":"",
-    "date":"04-17-2016",
-    "startTime":"9:00 am",
-    "endTime":"11:00 am",
-    "contact": {
-      "email":"info@fakemail.com",
-      "name":"info"
-    }
-  },
-  {
-    "id":9,
-    "groupName":"Parent-Child Workshops",
-    "groupDescription":"This group is for parents interested in participating in workshops and activities to learn and play with their preschoolers between the age of 2-6 years old. The workshops and activities will be centralized around simple Art &amp; Craft or cooking activities that both the parent and the child can participate in. All these activities are meant for the bonding and fostering of stronger ties between the parent and child. More importantly, for the family to have great fun and learn together!",
-    "eventName":"Parent-Child Workshops",
-    "location": {
-      "name":"",
-      "lines": [""],
-      "city":"Oakland",
-      "state":"CA"
-    },
-    "url":"http://www.meetup.com/Parent-Child-Workshops-with-Teacher-Wendy/",
-    "imageUrl":"childs_10",
-    "eventDescription":"",
-    "date":"05-05-2016",
+    "date":"04-09-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
@@ -239,7 +126,29 @@
     "url":"http://www.meetup.com/Black-Girls-Do/",
     "imageUrl":"childs_11",
     "eventDescription":"",
-    "date":"03-27-2016",
+    "date":"04-10-2016",
+    "startTime":"9:00 am",
+    "endTime":"11:00 am",
+    "contact": {
+      "email":"info@fakemail.com",
+      "name":"info"
+    }
+  },
+  {
+    "id":7,
+    "groupName":"Marin Homeschooling and Teaching Parents",
+    "groupDescription":"This community was formed to create life-long bonds between children and parents who deeply involved in education of their children beyond the school set, including homeschooling, unschooling and home-based afterschool learning.",
+    "eventName":"About Homeschooling",
+    "location": {
+      "name":"",
+      "lines": [""],
+      "city":"Oakland",
+      "state":"CA"
+    },
+    "url":"http://www.meetup.com/MarinHomeschooling/",
+    "imageUrl":"childs_8",
+    "eventDescription":"",
+    "date":"04-10-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
@@ -283,7 +192,7 @@
     "url":"http://www.meetup.com/moms-munchkins-of-parker/",
     "imageUrl":"childs_13",
     "eventDescription":"",
-    "date":"05-05-2016",
+    "date":"04-16-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
@@ -292,25 +201,25 @@
     }
   },
   {
-    "id":13,
-    "groupName":"Veggie Kids",
-    "groupDescription":"Veggie Kids is a unique organization/social group dedicated to supporting vegan and vegetarian families and is open to all who have an appreciation of an earth-friendly, eco-conscious lifestyle. This group promotes a healthy, organic, vegan lifestyle, but is open to EVERYONE regardless of their dietary choices.",
-    "eventName":"Potluck in the Park",
+    "id":3,
+    "groupName":"Fostering Peace, Love, Learning & Each Other",
+    "groupDescription":"This group is about how together we can ALL foster a better world.   We are teachers, learners, parents and children (including--but NOT limited to--former, present and future foster parents and children), thinkers, doers, dreamers",
+    "eventName":"Tell Your Story!",
     "location": {
-      "name":"",
-      "lines": [""],
-      "city":"Oakland",
-      "state":"CA"
+      "name":"Diorio's Pizza and Pub",
+      "lines": ["919 Baxter Ave"],
+      "city":"Louisville",
+      "state":"KY"
     },
-    "url":"http://www.meetup.com/Veggie-Kids/",
-    "imageUrl":"childs_14",
-    "eventDescription":"",
-    "date":"05-05-2016",
-    "startTime":"9:00 am",
-    "endTime":"11:00 am",
+    "url":"http://www.meetup.com/Fostering-Peace-Love-Learning-Each-Other-in-Louisville/events/228775605/",
+    "imageUrl":"childs_4",
+    "eventDescription":"I know you all have already done a million things to make the world a better place, or at least one or two, and we'd like to hear about it! Everyone will have 5-7 minutes to share their story. We will also share change we'd like to create in the future!",
+    "date":"04-17-2016",
+    "startTime":"5:30 am",
+    "endTime":"7:00 pm",
     "contact": {
-      "email":"info@fakemail.com",
-      "name":"info"
+      "email":"robin@fakemail.com",
+      "name":"Robin"
     }
   },
   {
@@ -327,12 +236,125 @@
     "url":"http://www.meetup.com/Spiritual-Playdate/",
     "imageUrl":"childs_15",
     "eventDescription":"",
+    "date":"04-22-2016",
+    "startTime":"9:00 am",
+    "endTime":"11:00 am",
+    "contact": {
+      "email":"info@fakemail.com",
+      "name":"info"
+    }
+  },
+  {
+    "id":25,
+    "groupName":"National Counseling Group",
+    "groupDescription":"",
+    "eventName":"Learn About Becomming A Foster Parent",
+    "url":"http://www.meetup.com/Become-A-Foster-Parent/events/229467311/",
+    "imageUrl":"childs_3",
+    "summary":"Informational gathering describing the programs in your area.",
+    "eventDescription":"There are almost 6,000 children in the foster care system in Virginia. These children have been neglected and abused by those meant to love and care for them.\n\nWhen they're taken out of these dire circumstances, they are placed in loving foster homes. Right now the need for homes is great.\n\nJoin us to learn more about becoming a foster parent and see how you can help a child in need of love.",
+    "location": {
+      "name":"Doloras Park",
+      "lines":["888 Brannan Street"],
+      "city":"San Francisco",
+      "state":"CA",
+      "zipcode":"94013"
+    },
+    "date":"05-01-2016",
+    "startTime":"6:00 pm",
+    "endTime":"7:30 pm",
+    "contact": {
+      "email":"contactus@example.com",
+      "phone":"888-444-3333",
+      "name":"Foster Parent Org"
+    }
+  },
+  {
+    "id":8,
+    "groupName":"Black Girls Do",
+    "groupDescription":"BGD mission is to redefine the perceptions of who Black Women are and what we are about by celebrating black women (us) in action. Thus doing activities that foster sister hood with in our community celebrating achievements and being active.",
+    "eventName":"Purposeful Living",
+    "location": {
+      "name":"",
+      "lines": [""],
+      "city":"Oakland",
+      "state":"CA"
+    },
+    "url":"http://www.meetup.com/Black-Girls-Do/",
+    "imageUrl":"childs_9",
+    "eventDescription":"",
+    "date":"05-2-2016",
+    "startTime":"9:00 am",
+    "endTime":"11:00 am",
+    "contact": {
+      "email":"info@fakemail.com",
+      "name":"info"
+    }
+  },
+  {
+    "id":6,
+    "groupName":"Bay Area Single Parents",
+    "groupDescription":"We are a vital and active community of single parents. Our group provides a low pressure way to connect with other single parents on hikes, kids activities, dinners out, events with other single families and more. We average 5+ events per week.",
+    "eventName":"Easter Egg Hunt+Hike+picnic lunch",
+    "location": {
+      "name":"",
+      "lines": [""],
+      "city":"Oakland",
+      "state":"CA"
+    },
+    "url":"http://www.meetup.com/BayAreaSingleParents/",
+    "imageUrl":"childs_7",
+    "eventDescription":"",
+    "date":"05-05-2016",
+    "startTime":"11:45 am",
+    "endTime":"3:00 pm",
+    "contact": {
+      "email":"info@fakemail.com",
+      "name":"info"
+    }
+  },
+  {
+    "id":9,
+    "groupName":"Parent-Child Workshops",
+    "groupDescription":"This group is for parents interested in participating in workshops and activities to learn and play with their preschoolers between the age of 2-6 years old. The workshops and activities will be centralized around simple Art &amp; Craft or cooking activities that both the parent and the child can participate in. All these activities are meant for the bonding and fostering of stronger ties between the parent and child. More importantly, for the family to have great fun and learn together!",
+    "eventName":"Parent-Child Workshops",
+    "location": {
+      "name":"",
+      "lines": [""],
+      "city":"Oakland",
+      "state":"CA"
+    },
+    "url":"http://www.meetup.com/Parent-Child-Workshops-with-Teacher-Wendy/",
+    "imageUrl":"childs_10",
+    "eventDescription":"",
     "date":"05-05-2016",
     "startTime":"9:00 am",
     "endTime":"11:00 am",
     "contact": {
       "email":"info@fakemail.com",
       "name":"info"
+    }
+  },
+  {
+    "id":3,
+    "groupName":"Fostering Peace, Love, Learning & Each Other",
+    "groupDescription":"This group is about how together we can ALL foster a better world.   We are teachers, learners, parents and children (including--but NOT limited to--former, present and future foster parents and children), thinkers, doers, dreamers",
+    "eventName":"Tell Your Story!",
+    "location": {
+      "name":"Diorio's Pizza and Pub",
+      "lines": ["919 Baxter Ave"],
+      "city":"Louisville",
+      "state":"KY"
+    },
+    "url":"http://www.meetup.com/Fostering-Peace-Love-Learning-Each-Other-in-Louisville/events/228775605/",
+    "imageUrl":"childs_4",
+    "eventDescription":"I know you all have already done a million things to make the world a better place, or at least one or two, and we'd like to hear about it! Everyone will have 5-7 minutes to share their story. We will also share change we'd like to create in the future!",
+    "date":"03-19-2016",
+    "startTime":"5:30 am",
+    "endTime":"7:00 pm",
+    "contact": {
+      "email":"robin@fakemail.com",
+      "name":"Robin"
     }
   }
 ]}

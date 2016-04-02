@@ -125,17 +125,19 @@
 
     <style name="MapInfoWindow.Title" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/conv_text_big</item>
+        <item name="android:textSize">20sp</item>
         <item name="fontPath">fonts/RobotoMedium.ttf</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
     <style name="MapInfoWindow.Subtitle">
         <item name="android:textStyle">italic</item>
         <item name="fontPath">fonts/RobotoMedium.ttf</item>
-        <item name="android:textSize">@dimen/conv_text_regular</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="MapInfoWindow.Body">

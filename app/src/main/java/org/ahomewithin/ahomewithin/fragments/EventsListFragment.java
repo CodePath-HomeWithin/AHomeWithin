@@ -72,9 +72,9 @@ public class EventsListFragment extends SimpleListFragment implements EventClick
                 clear();
                 JSONObject response = AHomeWithinClient.getEvents(getContext());
                 addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
-                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
+//                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
+//                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
+//                addOrInsertAll(Event.fromJSONArray(response.getJSONArray("events")));
             }
             setRefreshing(false);
         } catch (Exception e) {

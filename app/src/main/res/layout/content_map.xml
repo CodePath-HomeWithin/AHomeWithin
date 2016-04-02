@@ -28,16 +28,9 @@
             android:id="@+id/tvTitle"
             style="@style/MapInfoWindow.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:id="@+id/btnChat"
-            android:src="@drawable/ic_chat_black_24px"
-            android:layout_alignParentRight="true"
-            android:layout_alignRight="@+id/tvTitle"
-            android:layout_alignTop="@+id/tvTitle"
-            android:text="@string/chat_now"
-            style="@style/MapInfoWindow.Button"/>
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnTelephone"
+            android:layout_alignParentLeft="true"/>
 
         <ImageView
             android:id="@+id/btnTelephone"
@@ -47,12 +40,21 @@
             android:text="@string/chat_now"
             style="@style/MapInfoWindow.Button"/>
 
+        <ImageView
+            android:id="@+id/btnChat"
+            android:src="@drawable/ic_chat_black_24px"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tvTitle"
+            android:text="@string/chat_now"
+            style="@style/MapInfoWindow.Button"/>
+
         <TextView
             android:id="@+id/tvSubtitle"
             style="@style/MapInfoWindow.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTitle"/>
+            android:layout_below="@+id/tvTitle"
+            android:layout_alignParentLeft="true"/>
 
         <TextView
             android:id="@+id/tvDescription"
