@@ -3,7 +3,6 @@ package org.ahomewithin.ahomewithin.activities;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -47,46 +46,46 @@ public class SplashActivity extends AppCompatActivity {
         });
 
 
-
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                goToMainActivity();
-            }
-        }, SPLASH_TIME_OUT);
-
-        // Animations
-
-//        ivSmallHouse.setTranslationX(-500f);
-//        ivSmallHouse.setTranslationY(500f);
-//        ivSmallHouse.invalidate();
-        ivSmallHouse.setAlpha(0f);
-        ivSmallHouse.setScaleX(0f); ivSmallHouse.setScaleY(0f);
-        ivLargeHouse.setAlpha(0f);
-        ivAHome.setAlpha(0f);
-        ivWithin.setAlpha(0f);
+        // TODO Delete this and apply next TODO
+        goToMainActivity();
+        // TODO Unccomment below for activate animation
 
 
-        new Handler().postDelayed(new Runnable() {
-            //
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
+//        new Handler().postDelayed(new Runnable() {
+//
+//            /*
+//             * Showing splash screen with a timer. This will be useful when you
+//             * want to show case your app logo / company
+//             */
+//
+//            @Override
+//            public void run() {
+//                // This method will be executed once the timer is over
+//                // Start your app main activity
+//                goToMainActivity();
+//            }
+//        }, SPLASH_TIME_OUT);
 
-            @Override
-            public void run() {
-                animateScreen();
-            }
-        }, 200);
+
+//        ivSmallHouse.setAlpha(0f);
+//        ivSmallHouse.setScaleX(0f); ivSmallHouse.setScaleY(0f);
+//        ivLargeHouse.setAlpha(0f);
+//        ivAHome.setAlpha(0f);
+//        ivWithin.setAlpha(0f);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            //
+//            /*
+//             * Showing splash screen with a timer. This will be useful when you
+//             * want to show case your app logo / company
+//             */
+//
+//            @Override
+//            public void run() {
+//                animateScreen();
+//            }
+//        }, 200);
     }
 
     private void goToMainActivity() {
