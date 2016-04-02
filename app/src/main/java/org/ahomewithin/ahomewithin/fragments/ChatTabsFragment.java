@@ -98,7 +98,7 @@ public class ChatTabsFragment extends Fragment {
         super.onPause();
         // Show toolbar shadow
         final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) getActivity()
-                .findViewById(android.R.id.content)).getChildAt(0);
+                .findViewById(android.R.id.content)).getChildAt(0)
         View shadow = viewGroup.findViewById(R.id.toolbar_shadow);
         shadow.setVisibility(View.VISIBLE);
     }
