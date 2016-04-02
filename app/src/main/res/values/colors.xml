@@ -11,6 +11,7 @@
     <color name="colorDivider">#B6B6B6</color>
 
     <color name="colorPrimaryLightTransparent">#44B2DFDB</color>
+    <color name="colorAccentDisabled">#eaa872</color>
 
     <!-- OVERWRITE THESE COLORS FOR A DARK THEME -->
     <!-- MaterialDrawer DEFAULT DARK colors -->

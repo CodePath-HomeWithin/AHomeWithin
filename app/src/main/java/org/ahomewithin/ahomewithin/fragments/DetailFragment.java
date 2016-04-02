@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -86,6 +87,8 @@ public class DetailFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mItem.title);
 
         //Glide.with(getActivity()).load(mItem.imageUrl).into(ivItemImage);
 

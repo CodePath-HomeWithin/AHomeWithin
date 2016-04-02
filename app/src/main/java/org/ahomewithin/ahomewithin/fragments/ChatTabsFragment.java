@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,31 @@ public class ChatTabsFragment extends Fragment {
             )
         );
         tabStrip.setViewPager(vpViewPager);
+        // Hide toolbar shadow
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) getActivity()
+                .findViewById(android.R.id.content)).getChildAt(0);
+        View shadow = viewGroup.findViewById(R.id.toolbar_shadow);
+        shadow.setVisibility(View.INVISIBLE);
+
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Chat Room");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Show toolbar shadow
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) getActivity()
+                .findViewById(android.R.id.content)).getChildAt(0);
+        View shadow = viewGroup.findViewById(R.id.toolbar_shadow);
+        shadow.setVisibility(View.VISIBLE);
+    }
+
+
 
 }

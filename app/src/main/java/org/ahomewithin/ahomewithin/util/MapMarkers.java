@@ -3,7 +3,6 @@ package org.ahomewithin.ahomewithin.util;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,13 +25,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.ahomewithin.ahomewithin.AHomeWithinClient;
 import org.ahomewithin.ahomewithin.ParseClient;
 import org.ahomewithin.ahomewithin.R;
 import org.ahomewithin.ahomewithin.fragments.ChatFragment;
 import org.ahomewithin.ahomewithin.fragments.LoginFragment;
 import org.ahomewithin.ahomewithin.models.User;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -143,7 +140,7 @@ public class MapMarkers {
                         ft.addToBackStack(null);
                         ft.commit();
                     } else {
-                        ChatFragment chatFragment = ChatFragment.newIntance(user.email);
+                        ChatFragment chatFragment = ChatFragment.newIntance(user.email, user.firstName);
                         FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.flContent, chatFragment);
                         ft.addToBackStack(null);

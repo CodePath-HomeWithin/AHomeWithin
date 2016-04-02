@@ -386,7 +386,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case MapMarkers.REQUEST_CODE:
                 String otherEmail = MapMarkers.curUserOnMap.email;
-                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail);
+                String otherName = MapMarkers.curUserOnMap.firstName;
+                ChatFragment chatFragment = ChatFragment.newIntance(otherEmail, otherName);
                 gotoFragment(chatFragment, ChatFragment.FRAGMENT_TAG);
                 break;
             case DetailFragment.REQUEST_CODE:

@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,6 +38,8 @@ public class ChatFragment extends Fragment {
 
     public static final String FRAGMENT_TAG = ChatFragment.class.getSimpleName();
 
+    String otherName;
+
     @Bind(R.id.etMessage)
     EditText etParseMessage;
     @Bind(R.id.btSend)
@@ -43,11 +47,12 @@ public class ChatFragment extends Fragment {
     @Bind(R.id.lvChat)
     ListView lvChat;
 
-    static final int POLL_INTERVAL = 100; // milliseconds
+    static final int POLL_INTERVAL = 2000; // milliseconds
 
-    public static ChatFragment newIntance(String otherEmail) {
+    public static ChatFragment newIntance(String otherEmail, String otherName) {
         Bundle args = new Bundle();
         args.putString("otherEmail", otherEmail);
+        args.putString("otherName", otherName);
         ChatFragment chatFragment = new ChatFragment();
         chatFragment.setArguments(args);
         return chatFragment;
@@ -58,8 +63,9 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("xxyChat", "onCreateView");
         View chatView = inflater.inflate(R.layout.fragment_chat, container, false);
+        otherName = getArguments().getString("otherName");
         ButterKnife.bind(this, chatView);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.chatting);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chatting with " + otherName);
         return chatView;
     }
 
@@ -82,6 +88,29 @@ public class ChatFragment extends Fragment {
                 return false;
             }
         });
+
+        btSend.setEnabled(false);
+        etParseMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0) {
+                    btSend.setEnabled(true);
+                } else {
+                    btSend.setEnabled(false);
+                }
+            }
+        });
+
     }
 
     @Override
