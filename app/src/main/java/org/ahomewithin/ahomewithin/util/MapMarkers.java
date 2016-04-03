@@ -173,14 +173,17 @@ public class MapMarkers {
         markerMap.put(marker.getId(), user);
     }
 
+    private static final int MAP_MARKER_X = 86;
+    private static final int MAP_MARKER_Y = 105;
+
     private void highlightMarker(Marker marker, User user) {
         if ((marker != null) && (user != null)) {
             if (user.type == User.UserType.SERVICE_PROVIDER) {
                 //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_bluepin));
-                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepinpressed, 78, 96));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepinpressed, MAP_MARKER_X, MAP_MARKER_Y));
             } else {
                 // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_orangepin));
-                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepinpressed, 78, 96));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepinpressed, MAP_MARKER_X, MAP_MARKER_Y));
             }
         }
     }
@@ -189,10 +192,10 @@ public class MapMarkers {
         if ((marker != null) && (user != null)) {
             if (user.type == User.UserType.SERVICE_PROVIDER) {
                 //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_bluepin));
-                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepin, 78, 96));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_bluepin, MAP_MARKER_X, MAP_MARKER_Y));
             } else {
                 // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_orangepin));
-                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepin, 78, 96));
+                marker.setIcon(resizeMapIcons(R.drawable.ic_map_orangepin, MAP_MARKER_X, MAP_MARKER_Y));
             }
          }
     }
