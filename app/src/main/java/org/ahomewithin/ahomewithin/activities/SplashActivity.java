@@ -3,6 +3,7 @@ package org.ahomewithin.ahomewithin.activities;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
  */
 public class SplashActivity extends AppCompatActivity {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 20000;
+    private static int SPLASH_TIME_OUT = 10000;
 
     @Bind(R.id.ivLargeHouse) ImageView ivLargeHouse;
     @Bind(R.id.ivSmallHouse) ImageView ivSmallHouse;
@@ -46,46 +47,43 @@ public class SplashActivity extends AppCompatActivity {
         });
 
 
-        // TODO Delete this and apply next TODO
-        goToMainActivity();
-        // TODO Unccomment below for activate animation
 
 
-//        new Handler().postDelayed(new Runnable() {
-//
-//            /*
-//             * Showing splash screen with a timer. This will be useful when you
-//             * want to show case your app logo / company
-//             */
-//
-//            @Override
-//            public void run() {
-//                // This method will be executed once the timer is over
-//                // Start your app main activity
-//                goToMainActivity();
-//            }
-//        }, SPLASH_TIME_OUT);
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                goToMainActivity();
+            }
+        }, SPLASH_TIME_OUT);
 
 
-//        ivSmallHouse.setAlpha(0f);
-//        ivSmallHouse.setScaleX(0f); ivSmallHouse.setScaleY(0f);
-//        ivLargeHouse.setAlpha(0f);
-//        ivAHome.setAlpha(0f);
-//        ivWithin.setAlpha(0f);
-//
-//
-//        new Handler().postDelayed(new Runnable() {
-//            //
-//            /*
-//             * Showing splash screen with a timer. This will be useful when you
-//             * want to show case your app logo / company
-//             */
-//
-//            @Override
-//            public void run() {
-//                animateScreen();
-//            }
-//        }, 200);
+        ivSmallHouse.setAlpha(0f);
+        ivSmallHouse.setScaleX(0f); ivSmallHouse.setScaleY(0f);
+        ivLargeHouse.setAlpha(0f);
+        ivAHome.setAlpha(0f);
+        ivWithin.setAlpha(0f);
+
+
+        new Handler().postDelayed(new Runnable() {
+            //
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                animateScreen();
+            }
+        }, 200);
     }
 
     private void goToMainActivity() {
@@ -117,55 +115,55 @@ public class SplashActivity extends AppCompatActivity {
 
         ObjectAnimator oaFadeSmall = ObjectAnimator.ofFloat(ivSmallHouse, "alpha", 0f, 1f);
         oaFadeSmall.setInterpolator(new DecelerateInterpolator(1.5f));
-        oaFadeSmall.setDuration(800).setStartDelay(1000);
+        oaFadeSmall.setDuration(400).setStartDelay(500);
         oaFadeSmall.start();
 
         ObjectAnimator oaEnterSmallX = ObjectAnimator.ofFloat(ivSmallHouse, "scaleX", 0f, 0.25f);
         ObjectAnimator oaEnterSmallY = ObjectAnimator.ofFloat(ivSmallHouse, "scaleY", 0f, 0.25f);
         oaEnterSmallX.setInterpolator(new OvershootInterpolator(8));
         oaEnterSmallY.setInterpolator(new OvershootInterpolator(8));
-        oaEnterSmallX.setDuration(400).setStartDelay(1100);
-        oaEnterSmallY.setDuration(400).setStartDelay(1100);
+        oaEnterSmallX.setDuration(200).setStartDelay(550);
+        oaEnterSmallY.setDuration(200).setStartDelay(550);
         oaEnterSmallX.start(); oaEnterSmallY.start();
 
         ObjectAnimator oaRotateSmall = ObjectAnimator.ofFloat(ivSmallHouse, "rotation", 45f, 4365f);
         oaRotateSmall.setInterpolator(new HesitateInterpolator());
-        oaRotateSmall.setDuration(8000).setStartDelay(1600);
+        oaRotateSmall.setDuration(4000).setStartDelay(800);
         oaRotateSmall.start();
 
         ObjectAnimator oaRotateSmall1 = ObjectAnimator.ofFloat(ivSmallHouse, "rotation", 45f, 360f);
         oaRotateSmall1.setInterpolator(new DecelerateInterpolator());
-        oaRotateSmall1.setDuration(2000).setStartDelay(9600);
+        oaRotateSmall1.setDuration(1000).setStartDelay(4800);
         oaRotateSmall1.start();
 
         ObjectAnimator oaBounceLarge = ObjectAnimator.ofFloat(ivLargeHouse, "rotation", 270f, 315f);
         oaBounceLarge.setInterpolator(new BounceInterpolator());
-        oaBounceLarge.setDuration(2000).setStartDelay(2600);
+        oaBounceLarge.setDuration(1000).setStartDelay(1300);
         oaBounceLarge.start();
 
         ObjectAnimator oaBounceLarge1 = ObjectAnimator.ofFloat(ivLargeHouse, "rotation", 315f, 360f);
         oaBounceLarge1.setInterpolator(new BounceInterpolator());
-        oaBounceLarge1.setDuration(2000).setStartDelay(8000);
+        oaBounceLarge1.setDuration(1000).setStartDelay(4000);
         oaBounceLarge1.start();
 
         ObjectAnimator oaScaleSmall3 = ObjectAnimator.ofFloat(ivLargeHouse, "scaleX", 1f, 0.25f).setDuration(4000);
-        oaScaleSmall3.setStartDelay(11600); oaScaleSmall3.start();
+        oaScaleSmall3.setStartDelay(5800); oaScaleSmall3.start();
 //
         ObjectAnimator oaScaleSmall4 = ObjectAnimator.ofFloat(ivLargeHouse, "scaleY", 1f, 0.25f).setDuration(4000);
-        oaScaleSmall4.setStartDelay(11600); oaScaleSmall4.start();
+        oaScaleSmall4.setStartDelay(5800); oaScaleSmall4.start();
 
         ObjectAnimator oaScaleSmall = ObjectAnimator.ofFloat(ivSmallHouse, "scaleX", 0.25f, 0.05f).setDuration(4000);
-        oaScaleSmall.setStartDelay(11600); oaScaleSmall.start();
+        oaScaleSmall.setStartDelay(5800); oaScaleSmall.start();
 //
         ObjectAnimator oaScaleSmall1 = ObjectAnimator.ofFloat(ivSmallHouse, "scaleY", 0.25f, 0.05f).setDuration(4000);
-        oaScaleSmall1.setStartDelay(11600); oaScaleSmall1.start();
+        oaScaleSmall1.setStartDelay(5800); oaScaleSmall1.start();
 
 
 //        ObjectAnimator oaMoveSmallX = ObjectAnimator.ofFloat(ivSmallHouse, "translationX", -600, 0);
 //        ObjectAnimator oaMoveSmallY = ObjectAnimator.ofFloat(ivSmallHouse, "translationY", 600, 0);
 
-        ivAHome.animate().alpha(1).setStartDelay(12000).setDuration(5000).setInterpolator(new AccelerateInterpolator(2));
-        ivWithin.animate().alpha(1).setStartDelay(12000).setDuration(5000).setInterpolator(new AccelerateInterpolator(2));
+        ivAHome.animate().alpha(1).setStartDelay(6000).setDuration(2500).setInterpolator(new AccelerateInterpolator(2));
+        ivWithin.animate().alpha(1).setStartDelay(6000).setDuration(2500).setInterpolator(new AccelerateInterpolator(2));
 
     }
 

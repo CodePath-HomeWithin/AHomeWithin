@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentTransaction;
@@ -173,8 +172,8 @@ public class MapMarkers {
         markerMap.put(marker.getId(), user);
     }
 
-    private static final int MAP_MARKER_X = 86;
-    private static final int MAP_MARKER_Y = 105;
+    private static final int MAP_MARKER_X = 146;
+    private static final int MAP_MARKER_Y = 179;
 
     private void highlightMarker(Marker marker, User user) {
         if ((marker != null) && (user != null)) {

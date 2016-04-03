@@ -142,7 +142,7 @@
 
     <style name="MapInfoWindow.Body">
         <item name="android:textSize">@dimen/conv_text_regular</item>
-        <item name="fontPath">fonts/RobotoMedium.ttf</item>
+        <item name="fontPath">fonts/RobotoCondensed-Light.ttf</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
@@ -152,6 +152,7 @@
     <style name="MapInfoWindow.Button">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">6dp</item>
         <item name="android:paddingRight">@dimen/map_popup_margin</item>
         <item name="android:tint">@color/colorAccent</item>
         <item name="android:visibility">invisible</item>
