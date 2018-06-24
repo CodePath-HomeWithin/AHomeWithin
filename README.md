@@ -4,7 +4,7 @@ CodePath.com Android Team Project, Winter 2016
 
 
 # Team Members and email:
-Xiangyang Xiao <ilikedeal@gmail.com>
+Xiangyang Xiao <xnxkypku@gmail.com>
 Jose Luis Martín <joseluismartin@gmail.com>
 Barbara Raitz <braitz@gmail.com>
 
