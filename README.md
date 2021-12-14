@@ -5,7 +5,7 @@ CodePath.com Android Team Project, Winter 2016
 
 # Team Members and email:
 Xiangyang Xiao <xnxkypku@gmail.com>
-Jose Luis Martín <joseluismartin@gmail.com>
+Chelu Martin <https://github.com/Chezlui>
 Barbara Raitz <braitz@gmail.com>
 
 # Project Description and Proposed Features:
